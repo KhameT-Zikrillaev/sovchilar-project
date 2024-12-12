@@ -1,0 +1,224 @@
+{
+  "navbar": {
+    "search": "Qidiruv",
+    "profiles": "Anketalar",
+    "stories": "Hikoyalar",
+    "createProfile": "Anketa yaratish"
+  },
+  "home": {
+    "FirstIntroPage": {
+      "title": "Professional tanishuv xizmati",
+      "subtitle": "O'z ikkinchi yarmingizni toping",
+      "description": "Biz jiddiy insonlarga o'zaro hurmat va islomiy qadriyatlarga asoslangan mustahkam oila qurishga yordam beramiz",
+      "search": {
+        "men": "Turmush o'rtoq qidiryapman",
+        "women": "Umr yo'ldosh qidiryapman"
+      },
+      "createProfile": "Anketa yaratish",
+      "stats": {
+        "weddings": "To'ylar",
+        "profiles": "Anketalar",
+        "halal": "Halol"
+      },
+      "features": {
+        "serious": {
+          "title": "Jiddiy niyatlar",
+          "description": "Faqat nikoh uchun samimiy intilganlar"
+        },
+        "matchmakers": {
+          "title": "Sovchilar yordami",
+          "description": "Tajribali mutaxassislar ideal juftlikni topishga yordam beradi"
+        },
+        "islamic": {
+          "title": "Islomiy qadriyatlar",
+          "description": "Tanishuvda shariat me'yorlariga rioya qilish"
+        }
+      },
+      "callToAction": {
+        "title": "Baxtli oila qurish yo'liga tayormisiz?",
+        "description": "Bizning yordamimiz bilan o'z ikkinchi yarmini topgan minglab insonlarga qo'shiling",
+        "button": "Hoziroq boshlash"
+      }
+    },
+    "SecondHomePageSearch": {
+      "title": "O'z juftingizni toping",
+      "description": "Bizning diqqat bilan tanlangan potentsial nomzodlar ro'yxatimizni ko'rib chiqing va o'z qadriyatlaringiz va intilishlaringizni baham ko'radigan insonni toping",
+      "resetButton": "Tozalash",
+      "filters": {
+        "all": "Hammasi",
+        "men": "Erkaklar",
+        "women": "Ayollar"
+      },
+      "form": {
+        "gender": {
+          "label": "Jinsi",
+          "male": "Erkak",
+          "female": "Ayol"
+        },
+        "age": {
+          "label": "Yosh",
+          "from": "Dan",
+          "to": "Gacha"
+        },
+        "city": {
+          "label": "Shahar",
+          "options": {
+            "all": "Barcha shaharlar",
+            "Tashkent": "Toshkent",
+            "Andijan": "Andijon",
+            "Bukhara": "Buxoro",
+            "Fergana": "Farg'ona",
+            "Jizzakh": "Jizzax",
+            "Xorazm": "Xorazm",
+            "Namangan": "Namangan",
+            "Navoiy": "Navoiy",
+            "Qashqadaryo": "Qashqadaryo",
+            "Samarkand": "Samarqand",
+            "Sirdaryo": "Sirdaryo",
+            "Surxondaryo": "Surxondaryo",
+            "Karakalpakstan": "Qoraqalpog'iston"
+          }
+        },
+        "maritalStatus": {
+          "label": "Oilaviy holati",
+          "male": {
+            "all": "Hammasi",
+            "single": "Uylanmagan",
+            "divorced": "Ajrashgan",
+            "widowed": "Beva",
+            "married_second": "Ikkinchi turmush qidiryapti"
+          },
+          "female": {
+            "all": "Hammasi",
+            "single": "Turmushga chiqmagan",
+            "divorced": "Ajrashgan",
+            "widowed": "Beva"
+          }
+        },
+        "search": "Qidirish",
+        "ageError": "Iltimos, to'g'ri yosh oralig'ini kiriting"
+      }
+    }
+  },
+  "footer": {
+    "description": "Mustahkam musulmon oila qurish uchun professional tanishuv xizmati. Biz islomiy an'analarga muvofiq ikkinchi yarmingizni topishga yordam beramiz.",
+    "social": {
+      "telegram": "Bizning Telegram",
+      "phone": "Qo'ng'iroq qilish",
+      "email": "Xat yozish"
+    },
+    "navigation": {
+      "title": "Navigatsiya",
+      "search": "Anketa qidirish",
+      "profiles": "Anketalar",
+      "successStories": "Muvaffaqiyat tarixi"
+    },
+    "forUsers": {
+      "title": "Foydalanuvchilar uchun",
+      "createProfile": "Anketa yaratish",
+      "faq": "Ko'p so'raladigan savollar",
+      "rules": "Xizmat qoidalari",
+      "contact": "Biz bilan bog'lanish"
+    },
+    "copyright": "Barcha huquqlar himoyalangan",
+    "privacy": "Maxfiylik siyosati",
+    "terms": "Foydalanish shartlari",
+    "love": "Musulmon oilalarga mehr bilan"
+  },
+  "auth": {
+    "FormOne": {
+      "formTitle": "Anketa yaratish",
+      "formDescription": "O'zingiz haqida ma'lumot bering",
+      "firstNameLabel": "Ism",
+      "lastNameLabel": "Familiya",
+      "phoneLabel": "Telefon raqami",
+      "formatPhone": "Format: +998 XX XXX XX XX",
+      "ageLabel": "Yosh",
+      "agePlaceholder": "Yoshni kiriting",
+      "genderLabel": "Jins",
+      "addressLabel": "Manzil",
+      "firstNameRequired": "Ismni to'ldirish shart",
+      "lastNameRequired": "Familiya to'ldirish shart",
+      "phoneRequired": "Telefon raqami to'ldirish shart",
+      "phoneInvalid": "Noto'g'ri raqam formati. Iltimos, formatni bunday ishlating: +998 XX XXX XX XX",
+      "ageMin": "Yosh 18 dan kam bo'lmasligi kerak",
+      "ageMax": "Yosh 100 dan oshmasligi kerak",
+      "genderRequired": "Iltimos, jinsni tanlang",
+      "genderMale": "Erkak",
+      "genderFemale": "Ayol",
+      "genderInvalid": "To'g'ri jins qiymatini tanlang",
+      "addressRequired": "Iltimos, shaharni tanlang",
+      "addressInvalid": "Ro'yxatdan shaharni tanlang",
+      "submit":"Davom etish",
+      "selectCity": {
+         "select":"Shaharni tanlang",
+         "Tashkent":"Toshkent",
+         "Andijan":"Andijon",
+         "Bukhara":"Buxoro",
+         "Fergana":"Farg'ona",
+         "Jizzakh":"Jizzax",
+         "Xorazm":"Xorazm",
+         "Namangan":"Namangan",
+         "Navoiy":"Navoiy",
+         "Qashqadaryo":"Qashqadaryo",
+         "Samarkand":"Samarqand",
+         "Sirdaryo":"Sirdaryo",
+         "Surxondaryo":"Surxondaryo",
+         "Karakalpakstan":"Qoraqalpog'iston"
+      },
+      "Validation": {
+        "firstName": {
+          "required": "Ismni kiritish majburiy",
+          "maxLength": "Ism uzunligi 50 belgidan oshmasligi kerak"
+        },
+        "lastName": {
+          "required": "Familiyani kiritish majburiy",
+          "maxLength": "Familiya uzunligi 50 belgidan oshmasligi kerak"
+        },
+        "phone": {
+          "required": "Telefon raqamini kiritish majburiy",
+          "invalid": "Noto'g'ri raqam formati. Format: +998 XX XXX XX XX bo'lishi kerak"
+        },
+        "age": {
+          "required": "Yoshingizni yozish majburiy",
+          "min": "Yosh 18 dan kichik bo'lmasligi kerak",
+          "max": "Yosh 100 dan katta bo'lmasligi kerak"
+        },
+        "gender": {
+          "required": "Iltimos, jinsni tanlang",
+          "invalid": "Iltimos, to'g'ri jinsni tanlang"
+        },
+        "address": {
+          "required": "Iltimos, shaharni tanlang",
+          "invalid": "Shahar ro'yxatdan tanlangan bo'lishi kerak"
+        }
+      }
+    },
+    "FormTwo": {
+      "formTitle": "Qo'shimcha ma'lumotlar",
+      "education": "Ta'lim",
+      "selectEducation": "Ta'limni tanlang",
+      "qualification": {
+        "middle": "O'rta",
+        "specialized": "O'rta maxsus",
+        "incompleteHigher": "Noto'g'ri",
+        "higher": "Oliy",
+        "master": "Magistr",
+        "doctorate": "Doktorantura"
+      },
+      "maritalStatus": "Oilaviy holat",
+      "selectMaritalStatus": "Oilaviy holatni tanlang",
+      "jobTitle": "Kasb",
+      "jobTitlePlaceholder": "Masalan: Dasturchi",
+      "nationality": "Millat",
+      "selectNationality": "Millatni tanlang",
+      "aboutYourself": "O'zingiz haqida",
+      "aboutYourselfPlaceholder": "O'zingiz haqida biroz yozing...",
+      "profilePicture": "Profil rasmi",
+      "uploadPhoto": "Rasm yuklash",
+      "photoNotice": "Rasmingiz faqat moderatsiyadan o'tgandan keyin ko'rinadi",
+      "back": "Orqaga",
+      "createProfile": "Profil yaratish"
+    }
+  }
+}
