@@ -44,6 +44,8 @@
       "title": "O'z juftingizni toping",
       "description": "Bizning diqqat bilan tanlangan potentsial nomzodlar ro'yxatimizni ko'rib chiqing va o'z qadriyatlaringiz va intilishlaringizni baham ko'radigan insonni toping",
       "resetButton": "Tozalash",
+      "ShowMore": "Ko‘proq ko‘rsat",
+      "Anketa": "аnketa",
       "filters": {
         "all": "Hammasi",
         "men": "Erkaklar",
