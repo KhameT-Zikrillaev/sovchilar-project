@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 const SuccessModal = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -23,17 +24,16 @@ const SuccessModal = ({ isOpen, onClose }) => {
             </svg>
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-2">
-            Спасибо!
+            {t('auth.SuccessModal.title')}
           </h3>
           <p className="text-gray-600 mb-6">
-            Ваша анкета успешно создана и отправлена на модерацию. 
-            Мы уведомим вас, когда она будет опубликована.
+            {t('auth.SuccessModal.message')}
           </p>
           <button
             onClick={onClose}
             className="w-full bg-rose-500 text-white px-6 py-3 rounded-xl hover:bg-rose-600 transition-colors duration-300"
           >
-            Хорошо
+            {t('auth.SuccessModal.buttonText')}
           </button>
         </div>
       </div>

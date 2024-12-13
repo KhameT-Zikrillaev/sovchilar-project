@@ -252,6 +252,11 @@
       },
       "back": "Orqaga",
       "createProfile": "Profil yaratish"
+    },
+    "SuccessModal": {
+      "title": "Rahmat!",
+      "message": "Sizning anketangiz muvaffaqiyatli yaratildi va moderatsiyaga yuborildi. Anketa nashr etilganda sizga xabar beramiz.",
+      "buttonText": "Yaxshi"
     }
   },
   "rules": {
