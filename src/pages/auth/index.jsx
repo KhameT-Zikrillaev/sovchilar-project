@@ -56,16 +56,17 @@ export default function Auth() {
     nationality: '', 
     maritalStatus: '',
     description: '',
+    terms: null,
     imageUrL: null
   })
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, type, value, checked } = e.target; // Получаем checked для чекбоксов
     setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value // Если это чекбокс, используем checked
+    }));
+};
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -121,6 +122,7 @@ export default function Auth() {
               ) : (
                 <AdditionalInfoForm
                   formData={formData}
+                  gender={formData.gender}
                   onInputChange={handleInputChange}
                   onImageChange={handleImageChange}
                   onPrevStep={handlePrevStep}

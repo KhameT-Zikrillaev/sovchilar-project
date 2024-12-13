@@ -208,19 +208,69 @@
         "master": "Magistr",
         "doctorate": "Doktorantura"
       },
-      "maritalStatus": "Oilaviy holat",
-      "selectMaritalStatus": "Oilaviy holatni tanlang",
+     "maritalStatus": {
+  "label": "Oilaviy holati",
+  "male": {
+    "single": "Uylanmagan",
+    "divorced": "Ajrashgan",
+    "widowed": "Beva erkak",
+    "married_second": "Ikkinchi xotin qidirmoqda"
+  },
+  "female": {
+    "single": "Turmushga chiqmagan",
+    "divorced": "Ajrashgan",
+    "widowed": "Beva ayol"
+  }
+},
       "jobTitle": "Kasb",
       "jobTitlePlaceholder": "Masalan: Dasturchi",
       "nationality": "Millat",
-      "selectNationality": "Millatni tanlang",
+        
+
+
+     "selectNationality": {
+  "select": "Millatni tanlang",
+  "Uzbek": "O'zbek",
+  "Russian": "Rus",
+  "Kazakh": "Qozog'istonlik",
+  "Kyrgyz": "Qirg'iz",
+  "Tajik": "Tojik",
+  "Turkmen": "Turkman",
+  "Tatar": "Tatar",
+  "Other": "Boshqa"
+},
       "aboutYourself": "O'zingiz haqida",
       "aboutYourselfPlaceholder": "O'zingiz haqida biroz yozing...",
       "profilePicture": "Profil rasmi",
       "uploadPhoto": "Rasm yuklash",
       "photoNotice": "Rasmingiz faqat moderatsiyadan o'tgandan keyin ko'rinadi",
+      "terms": {
+        "label": "Men qoidalar bilan roziman",
+        "button": {
+          "text": "Qoidalar bilan tanishish!"
+        }
+      },
       "back": "Orqaga",
       "createProfile": "Profil yaratish"
     }
+  },
+  "rules": {
+    "title": "Qoidalar va shartlar",
+    "siteUsageRules": "Sovchilar saytidan foydalanishga oid qoidalar.",
+    "terms": "Ishlatiladigan atamalar:",
+    "administration": "Ma’muriyat",
+    "siteStaff": "sayt hodimlari hamda tegishli ravishda resurslarni boshqarishga vakolatli shaxs.",
+    "services": "Servislar",
+    "softwareCollection": "Dasturiy ta'minotlar majmui, saytdan foydalanishda foydalanuvchilarga ko’rsatiladigan xizmatlar majmui.",
+    "user": "Foydalanuvchi",
+    "personOver18": "resurslardan foydalanishni istagan, 18 yoshdan oshgan shaxslar.",
+    "login": "Login",
+    "chosenLogin": "foydalanuvchi ro’yxatdan o’tayotganda tanlagan va saytdan foydalanish jarayonida foydalanadigan ism.",
+    "password": "Parol",
+    "chosenPassword": "foydalanuvchi tomonidan mustaqil tanlangan resursdan foydalanishda va login bilan uning identifikatsiya uyg’unligini ta’minlaydigan kombinatsiya ramzi.",
+    "generalRules": "Umumiy qoidalar:",
+    "rulesExplanation": "Ushbu qoidalar Foydalanuvchilarning saytdan foydalanish, shuningdek, saytdan va servisdan foydalanish jarayonida paydo bo’ladigan o’zaro munosabartlar tartibini yo’lga qo’yadi.",
+    "confidentialInfo": "Maxfiy axborot:",
+    "confidentialDefinition": "Maxfiy axborot deb saytning foydalanuvchidan, ularning saytga kirgan vaqtda olingan va/yoki servislardan foydalangandagi identifikatsiyalashgan axborotlarga aytiladi."
   }
 }

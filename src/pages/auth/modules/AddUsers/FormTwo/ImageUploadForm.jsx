@@ -1,10 +1,11 @@
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 const ImageUploadForm = ({ onImageChange, preview }) => {
+  const { t } = useTranslation();
   return (
     <div className="space-y-6">
       <label className="block text-sm font-medium text-gray-700">
-        Фотография профиля
+        {t('auth.FormTwo.profilePicture')}
       </label>
       <div className="flex flex-col items-center">
         {preview ? (
@@ -46,7 +47,7 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
                 </svg>
                 <div className="flex text-sm text-gray-600">
                   <label className="relative cursor-pointer rounded-md font-medium text-rose-600 hover:text-rose-500 focus-within:outline-none">
-                    <span>Загрузить фото</span>
+                    <span>{t('auth.FormTwo.uploadPhoto')}</span>
                     <input
                       type="file"
                       className="hidden"
@@ -61,7 +62,7 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
         )}
       </div>
       <p className="text-sm text-gray-500 text-center">
-        Ваша фотография будет видна только после модерации
+        {t('auth.FormTwo.photoNotice')}
       </p>
     </div>
   );
