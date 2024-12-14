@@ -1,17 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import useAddImages from '../../../hooks/useImageUser';
+import Loading from '../../../../../components/Loading/index';
+
 const ImageUploadForm = ({ onImageChange, preview }) => {
   const { t } = useTranslation();
+  const { addImages, isLoading } = useAddImages();
+  const [localPreview, setLocalPreview] = useState(preview);
+
+  const handleImageChange = async (event) => {
+    const file = event.target?.files?.[0];
+    if (file) {
+      console.log(file);
+
+      const previewUrl = URL.createObjectURL(file);
+      setLocalPreview(previewUrl);
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await addImages(formData);
+        console.log(response?.data?.path);
+
+        if (response?.data?.path) {
+          onImageChange(response.data.path);
+        }
+      } catch (error) {
+        console.error('Ошибка при отправке изображения:', error.response?.data || error.message);
+      }
+    }
+  };
+
   return (
     <div className="space-y-6">
+      {isLoading && <Loading />}
       <label className="block text-sm font-medium text-gray-700">
         {t('auth.FormTwo.profilePicture')}
       </label>
       <div className="flex flex-col items-center">
-        {preview ? (
+        {localPreview ? (
           <div className="relative w-32 h-32 mb-4">
             <img
-              src={preview}
+              src={localPreview}
               alt="Preview"
               className="w-full h-full object-cover rounded-full border-4 border-rose-200"
             />
@@ -22,7 +53,8 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
                   type="file"
                   className="hidden"
                   accept="image/*"
-                  onChange={onImageChange}
+                  onChange={handleImageChange}
+                  disabled={isLoading}
                 />
               </label>
             </div>
@@ -52,7 +84,8 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
                       type="file"
                       className="hidden"
                       accept="image/*"
-                      onChange={onImageChange}
+                      onChange={handleImageChange}
+                      disabled={isLoading}
                     />
                   </label>
                 </div>

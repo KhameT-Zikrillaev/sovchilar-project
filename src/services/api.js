@@ -1,17 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://sovchilar.limsa.uz/api/',
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    baseURL: 'https://sovchilar.limsa.uz/api/',  // Ваш базовый URL
 });
 
-// Response interceptor for handling errors globally
+// Response interceptor для обработки ошибок
 api.interceptors.response.use(
-    (response) => response,
+    (response) => response,  // Если ответ успешный, просто возвращаем его
     (error) => {
-        // Handle errors here
+        // Обработка ошибок
         return Promise.reject(error);
     }
 );

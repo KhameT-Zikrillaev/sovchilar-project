@@ -1,90 +1,89 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { userData } from '../../../../services/userData'
-import UserCard from '../../../../components/userCard'
-import Loading from '../../../../components/Loading'
-import SecondHomeSearchForm from './modules/SecondHomeSearchForm'
-import { handleSearch } from './helpers/searchHelpers'
-import { loadMore } from './helpers/loadMoreHelper'
-import { useTranslation } from 'react-i18next'
+import React, { useState, useEffect, useRef } from 'react';
+import UserCard from '../../../../components/userCard';
+import Loading from '../../../../components/Loading';
+import SecondHomeSearchForm from './modules/SecondHomeSearchForm';
+import { useTranslation } from 'react-i18next';
+import { useRecentUser } from '../SecondHomePageSearch/hooks/useRecentUser';
+
 export default function SecondHomePageSearch() {
-  const [activeFilter, setActiveFilter] = useState('all')
-  const [allUsers, setAllUsers] = useState([])
-  const [displayedUsers, setDisplayedUsers] = useState([])
-  const [visibleCount, setVisibleCount] = useState(8)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSearchActive, setIsSearchActive] = useState(false)
-  const formRef = useRef()
   const { t } = useTranslation();
+  const { getRecentUser } = useRecentUser();
+  const [isSearchActive, setIsSearchActive] = useState(false)
+  const [allUsers, setAllUsers] = useState([]); // Все пользователи
+  const [visibleCount, setVisibleCount] = useState(8); // Количество отображаемых пользователей
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeFilter, setActiveFilter] = useState(''); // Фильтр по умолчанию
+
+  // Функция для выполнения API-запроса
+  const fetchUser = async (gender, ageFrom, ageTo, address, maritalStatus) => {
+    console.log(gender, ageFrom, ageTo, address, maritalStatus);  
+    setIsLoading(true); // Показываем индикатор загрузки
+    try {
+      const user = await getRecentUser(gender, ageFrom, ageTo, address, maritalStatus);
+      console.log('Fetched user:', user?.data?.items);
+
+      setAllUsers(user?.data?.items || []); // Устанавливаем пользователей
+      setVisibleCount(8); // Сбрасываем счетчик отображаемых пользователей
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    } finally {
+      setIsLoading(false); // Скрываем индикатор загрузки
+    }
+  };
+
   useEffect(() => {
-    // При первой загрузке показываем всех пользователей
-    setAllUsers(userData)
-    setDisplayedUsers(userData.slice(0, visibleCount))
-  }, [])
+    // При загрузке страницы выполняем запрос с фильтром "all"
+    fetchUser('', 18, 100, '', '');
+  }, []);
 
-  // Обработчик поиска через форму
-  const onSearch = (searchParams) => {
-    // Устанавливаем isSearchActive только если это не фильтрация
-    if (!searchParams.activeFilter) {
-      setIsSearchActive(true)
-    }
-    
-    handleSearch({
-      activeFilter: searchParams.activeFilter,
-      searchParams,
-      setIsLoading,
-      setAllUsers,
-      setDisplayedUsers,
-      setVisibleCount
-    })
-    if (searchParams.activeFilter) {
-      setActiveFilter(searchParams.activeFilter)
-    }
-  }
+  // Обработчик клика на кнопки фильтров
+  const onFilterClick = (filter) => {
+    setActiveFilter(filter);
+    fetchUser(filter, 18, 100, '', ''); // передаем выбранный фильтр в запрос
+  };
 
-  // Обработчик сброса
-  const handleReset = () => {
-    setIsSearchActive(false)
-    setActiveFilter('all')
-    setAllUsers(userData)
-    setDisplayedUsers(userData.slice(0, 8))
-    setVisibleCount(8)
-    if (formRef.current && formRef.current.resetForm) {
-      formRef.current.resetForm()
-    }
-  }
-
-  // Обработчик загрузки дополнительных анкет
+  // Функция для загрузки дополнительных пользователей
   const onLoadMore = () => {
-    loadMore({
-      visibleCount,
-      allUsers,
-      setVisibleCount,
-      setDisplayedUsers
-    })
-  }
+    setVisibleCount((prevCount) => prevCount + 4); // Увеличиваем количество отображаемых пользователей
+  };
 
+  const formRef = useRef();
+
+  
+  const handleReset = () => {
+    setIsSearchActive(false);
+    setActiveFilter('');
+    fetchUser('', 18, 100, '', ''); // Сбрасываем фильтр и выполняем запрос на API
+    setVisibleCount(8); // Сбрасываем количество отображаемых пользователей
+    if (formRef.current) {
+      formRef.current.resetForm(); // Сбрасываем форму через реф
+    }
+  };
+
+
+
+  
   return (
     <section className="py-16 px-4 bg-gray-50" id="search">
       {isLoading && <Loading type="default" size="large" color="rose" overlay />}
       <div className="container mx-auto py-[64px]">
         <div className="flex flex-col items-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('home.SecondHomePageSearch.title')}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('home.SecondHomePageSearch.title')}</h1>
           <p className="text-xl text-gray-600 text-center max-w-2xl">
-          {t('home.SecondHomePageSearch.description')}  
+            {t('home.SecondHomePageSearch.description')}
           </p>
         </div>
 
-        {/* Форма поиска */}
-        <SecondHomeSearchForm ref={formRef} onSearch={onSearch} />
+        {/* Передаем fetchUser как проп */}
+        <SecondHomeSearchForm onSearch={fetchUser} ref={formRef}  setIsSearchActive={setIsSearchActive} />
 
-        {/* Filter Buttons */}
-        <div className="flex justify-center gap-4 mb-8 pt-[64px]" id="ankets">
+<div className="   flex flex-col sm:flex-row justify-center gap-4 mb-8 pt-[64px]" id="ankets">
           {!isSearchActive ? (
             <>
               <button
-                onClick={() => onSearch({ activeFilter: 'all' })}
+              onClick={() => onFilterClick('')}
                 className={`px-6 py-2 rounded-full ${
-                  activeFilter === 'all'
+                  activeFilter === ''
                     ? 'bg-rose-500 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 } transition-colors duration-300`}
@@ -92,9 +91,9 @@ export default function SecondHomePageSearch() {
                {t('home.SecondHomePageSearch.filters.all')}
               </button>
               <button
-                onClick={() => onSearch({ activeFilter: 'men' })}
+                onClick={() => onFilterClick('gender=MALE')}
                 className={`px-6 py-2 rounded-full ${
-                  activeFilter === 'men'
+                  activeFilter === 'gender=MALE'
                     ? 'bg-rose-500 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 } transition-colors duration-300`}
@@ -102,9 +101,9 @@ export default function SecondHomePageSearch() {
                 {t('home.SecondHomePageSearch.filters.men')}
               </button>
               <button
-                onClick={() => onSearch({ activeFilter: 'women' })}
+              onClick={() => onFilterClick('gender=FEMALE')}
                 className={`px-6 py-2 rounded-full ${
-                  activeFilter === 'women'
+                  activeFilter === 'gender=FEMALE'
                     ? 'bg-rose-500 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 } transition-colors duration-300`}
@@ -122,14 +121,21 @@ export default function SecondHomePageSearch() {
           )}
         </div>
 
-        {/* User Cards Grid */}
+
+
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {displayedUsers.map(user => (
-            <UserCard key={user.id} user={user} />
-          ))}
+          {allUsers.length === 0 ? (
+            <div className="col-span-full text-center text-lg text-gray-500">
+              {t('home.SecondHomePageSearch.noUsersMessage')}
+            </div>
+          ) : (
+            allUsers.slice(0, visibleCount).map((user) => (
+              <UserCard key={user.id} user={user} />
+            ))
+          )}
         </div>
 
-        {/* Load More Button */}
         {allUsers.length > visibleCount && (
           <div className="mt-12 text-center">
             <button
@@ -145,5 +151,5 @@ export default function SecondHomePageSearch() {
         )}
       </div>
     </section>
-  )
+  );
 }

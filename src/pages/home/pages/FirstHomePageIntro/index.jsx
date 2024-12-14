@@ -165,10 +165,10 @@ export default function FirstHomePageIntro() {
             <p className="text-xl text-gray-200 mb-8 leading-relaxed">
               {t('home.FirstIntroPage.callToAction.description')}
             </p>
-            <button  className="bg-rose-500 hover:bg-rose-600 text-white px-10 py-5 rounded-full text-xl font-semibold transition duration-300 transform hover:scale-105 group flex items-center mx-auto">
+            {/* <button  className="bg-rose-500 hover:bg-rose-600 text-white px-10 py-5 rounded-full text-xl font-semibold transition duration-300 transform hover:scale-105 group flex items-center mx-auto">
               {t('home.FirstIntroPage.callToAction.button')}
               <span className="ml-2 transform transition-all duration-300 group-hover:translate-x-2">🚀</span>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -5,6 +5,8 @@ import AdditionalInfoForm from './modules/AddUsers/FormTwo/AdditionalInfoForm'
 import SuccessModal from './modules/SuccessModal'
 import SiteLoading from '../../components/SiteLoading/SiteLoading'
 import { useTranslation } from 'react-i18next'
+import useAddUser from './hooks/useAddUser';
+
 const StepIndicator = ({ currentStep }) => (
   <div className="flex items-center justify-center mb-8">
     <div className="flex items-center">
@@ -26,10 +28,13 @@ const StepIndicator = ({ currentStep }) => (
 )
 
 export default function Auth() {
+  const { addNewUsers, isLoading } = useAddUser()
   const navigate = useNavigate()
   const location = useLocation()
   const [step, setStep] = useState(1)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+  const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(true)
   const { t } = useTranslation();
   // Получаем параметр gender из URL
@@ -52,30 +57,28 @@ export default function Auth() {
     gender: genderFromUrl || '', 
     address: '',
     qualification: '',
-    JobTitle: '',
+    jobTitle: '',
     nationality: '', 
     maritalStatus: '',
     description: '',
-    terms: null,
-    imageUrL: null
+    // terms: null,
+    imageUrL: ""
   })
 
   const handleInputChange = (e) => {
-    const { name, type, value, checked } = e.target; // Получаем checked для чекбоксов
-    setFormData(prev => ({
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value // Если это чекбокс, используем checked
+    const { name, type, value, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'age' ? (isNaN(value) ? prev.age : Number(value)) : type === 'checkbox' ? checked : value, // Проверка на числовое значение для age
     }));
-};
+  };
 
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData(prev => ({
-        ...prev,
-        imageUrL: URL.createObjectURL(e.target.files[0])
-      }))
-    }
-  }
+const handleImageChange = (imageUrl) => {
+  setFormData((prev) => ({
+    ...prev,
+    imageUrL: imageUrl, // Обновляем состояние с URL изображения
+  }));
+};
 
   const handleNextStep = () => {
     setStep(2)
@@ -85,17 +88,76 @@ export default function Auth() {
     setStep(1)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(formData)
-    setIsModalOpen(true)
-  }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   const userData = {
+  //     firstName: formData.firstName,
+  //     lastName: formData.lastName,
+  //     phone: formData.phone,
+  //     age: formData.age,
+  //     gender: formData.gender, 
+  //     address: formData.address,
+  //     qualification: formData.qualification,
+  //     jobTitle: formData.jobTitle,
+  //     nationality: formData.nationality, 
+  //     maritalStatus: formData.maritalStatus,
+  //     description: formData.description,
+  //     imageUrl: formData.imageUrL
+  //   };
+  //   try {
+  //     await addNewUsers(userData);
+  //     console.log(userData)
+  //   } catch (error) {
+  //     console.error("Error adding teacher:", error);
+  //   }
+   
+  //   console.log(formData)
+  //   setIsModalOpen(true)
+  // }
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` ishlidi`
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const userData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      age: formData.age,
+      gender: formData.gender.toUpperCase(),
+      address: formData.address.toUpperCase(),
+      qualification: formData.qualification,
+      jobTitle: formData.jobTitle,
+      nationality: formData.nationality,
+      maritalStatus: formData.maritalStatus.toUpperCase(),
+      description: formData.description,
+      imageUrl: formData.imageUrL
+    };
+  
+    try {
+      const response = await addNewUsers(userData);
+  
+      console.log("Data sent:", userData);
+  
+      if (response?.statusCode === 201 && response?.message === "User created successfully") {
+        setIsError(false); // Успех
+      } else if (response?.message === "User already exists with this phone number") {
+        setIsError(true); // Неожиданная ошибка
+      }
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("Error adding user:", error);
+      setIsError(true); // Ошибка
+      setIsModalOpen(true);
+    }
+  };
+ 
 
   const handleModalClose = () => {
     setIsModalOpen(false)
     navigate('/')
+    setIsError(false);
+   
   }
-
   return (
     <>
       {loading ? (
@@ -131,7 +193,13 @@ export default function Auth() {
               )}
             </div>
           </div>
-          <SuccessModal isOpen={isModalOpen} onClose={handleModalClose} />
+          <SuccessModal
+  isOpen={isModalOpen}
+  onClose={handleModalClose}
+  isError={isError}
+  errorMessage={errorMessage} // Добавьте это свойство
+/>
+
         </div>
       )}
     </>

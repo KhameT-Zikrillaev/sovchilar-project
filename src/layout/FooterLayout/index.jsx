@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/images/logo.png';
-
+import Modal from '../../components/customModal/Modal';
 export default function FooterLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleScrollTo = (id) => {
     if (location.pathname !== '/') {
       navigate('/');
@@ -126,10 +126,7 @@ export default function FooterLayout() {
                   </button>
                 </li>
                 <li>
-                  <Link to="/success-stories" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
-                    <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
-                    {t('footer.navigation.successStories')}
-                  </Link>
+               
                 </li>
               </ul>
             </div>
@@ -139,7 +136,7 @@ export default function FooterLayout() {
               <h3 className="text-xl font-bold mb-6 text-white">{t('footer.forUsers.title')}</h3>
               <ul className="space-y-4">
                 <li>
-                  <Link to="/create-profile" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <Link to="/auth" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.createProfile')}
                   </Link>
@@ -151,16 +148,16 @@ export default function FooterLayout() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/rules" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <button onClick={() => setIsModalOpen(true)} className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.rules')}
-                  </Link>
+                  </button>
                 </li>
                 <li>
-                  <Link to="/contact" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <a href=' tel: +998991234567'  className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.contact')}
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -177,12 +174,12 @@ export default function FooterLayout() {
                 </span>
               </p>
               <div className="flex gap-8">
-                <Link to="/privacy" className="text-gray-300 hover:text-rose-400 transition-all duration-300">
+                <button  className="text-gray-300 hover:text-rose-400 transition-all duration-300">
                   {t('footer.privacy')}
-                </Link>
-                <Link to="/terms" className="text-gray-300 hover:text-rose-400 transition-all duration-300">
+                </button>
+                <button  className="text-gray-300 hover:text-rose-400 transition-all duration-300">
                   {t('footer.terms')}
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -191,6 +188,10 @@ export default function FooterLayout() {
         {/* Нижняя декоративная полоса */}
         <div className="h-px bg-gradient-to-r from-transparent via-rose-500/50 to-transparent"></div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)} 
+      />
     </footer>
   );
 }

@@ -56,6 +56,7 @@ export default function Navbar() {
   const { t } = useTranslation();
 
   const handleScrollTo = (id) => {
+    setIsOpen(false);
     if (location.pathname !== '/') {
       navigate('/');
       // Даем время на переход на главную
@@ -72,7 +73,14 @@ export default function Navbar() {
       }
     }
   };
-
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // плавная прокрутка
+    });
+    setIsOpen(false);
+  }
+  
   return (
     <nav className="bg-white shadow-md fixed w-full top-0 z-50">
       <div className="container mx-auto px-4">
@@ -142,17 +150,18 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-2">
-              <Link to="/search" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg flex items-center gap-2">
+              <button  onClick={() => handleScrollTo('search')} className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg flex items-center gap-2">
                 <span>{t('navbar.search')}</span>
                 <AnimatedHeart />
-              </Link>
-              <Link to="/profiles" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
+              </button>
+              <button  onClick={() => handleScrollTo('ankets')} className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
                 {t('navbar.profiles')}
-              </Link>
-              <Link to="/success-stories" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
+              </button>
+              <button onClick={() => handleScrollTo('ankets')} className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
                 {t('navbar.stories')}
-              </Link>
+              </button>
               <Link 
+                onClick={scrollToTop}
                 to="/auth" 
                 className="px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
               >

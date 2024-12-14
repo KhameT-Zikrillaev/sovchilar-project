@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep, onSubmit }) => {
   const { t } = useTranslation();
   const labelClasses = "block text-sm font-medium text-gray-700 mb-2"
+  console.log(formData.gender)
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
@@ -40,34 +41,35 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
             </div>
           </div>
         </div>
-
+ {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~maritalStatus */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
            {t('auth.FormTwo.maritalStatus.label')}
           </label>
           <div className="relative">
-            <select
-              name="maritalStatus"
-              value={formData.maritalStatus}
-              onChange={onInputChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white"
-            >
-              {formData.gender === 'male' ? (
-                <>
-                  <option value="single">{t('auth.FormTwo.maritalStatus.male.single')}</option>
-                  <option value="divorced">{t('auth.FormTwo.maritalStatus.male.divorced')}</option>
-                  <option value="widowed">{t('auth.FormTwo.maritalStatus.male.widowed')}</option>
-                  <option value="married_second">{t('auth.FormTwo.maritalStatus.male.married_second')}</option>
-                </>
-              ) : (
-                <>
-                  <option value="single">{t('auth.FormTwo.maritalStatus.female.single')}</option>
-                  <option value="divorced">{t('auth.FormTwo.maritalStatus.female.divorced')}</option>
-                  <option value="widowed">{t('auth.FormTwo.maritalStatus.female.widowed')}</option>
-                </>
-              )}
-            </select>
+          <select
+  name="maritalStatus"
+  value={formData.maritalStatus}
+  onChange={onInputChange}
+  required
+  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white"
+>
+  <option value="">{t('auth.FormTwo.maritalStatus.default')}</option> {/* Добавлено значение по умолчанию */}
+  {formData.gender === 'male' ? (
+    <>
+      <option value="single">{t('auth.FormTwo.maritalStatus.male.single')}</option>
+      <option value="divorced">{t('auth.FormTwo.maritalStatus.male.divorced')}</option>
+      <option value="widowed">{t('auth.FormTwo.maritalStatus.male.widowed')}</option>
+      <option value="married_second">{t('auth.FormTwo.maritalStatus.male.married_second')}</option>
+    </>
+  ) : (
+    <>
+      <option value="single">{t('auth.FormTwo.maritalStatus.female.single')}</option>
+      <option value="divorced">{t('auth.FormTwo.maritalStatus.female.divorced')}</option>
+      <option value="widowed">{t('auth.FormTwo.maritalStatus.female.widowed')}</option>
+    </>
+  )}
+</select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
               <svg className="h-4 w-4" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                 <path d="M19 9l-7 7-7-7"></path>
@@ -75,6 +77,24 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
             </div>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -85,9 +105,9 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
           </label>
           <input
             type="text"
-            id="JobTitle"
-            name="JobTitle"
-            value={formData.JobTitle}
+            id="jobTitle"
+            name="jobTitle"
+            value={formData.jobTitle}
             onChange={onInputChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
             required

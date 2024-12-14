@@ -44,6 +44,7 @@
       "title": "O'z juftingizni toping",
       "description": "Bizning diqqat bilan tanlangan potentsial nomzodlar ro'yxatimizni ko'rib chiqing va o'z qadriyatlaringiz va intilishlaringizni baham ko'radigan insonni toping",
       "resetButton": "Tozalash",
+      "noUsersMessage":"Bunday foydalanuvchilar topilmadi",
       "ShowMore": "Ko‘proq ko‘rsat",
       "Anketa": "аnketa",
       "filters": {
@@ -210,6 +211,7 @@
       },
      "maritalStatus": {
   "label": "Oilaviy holati",
+  "default": "Tanlang",
   "male": {
     "single": "Uylanmagan",
     "divorced": "Ajrashgan",
@@ -253,10 +255,15 @@
       "back": "Orqaga",
       "createProfile": "Profil yaratish"
     },
-    "SuccessModal": {
-      "title": "Rahmat!",
-      "message": "Sizning anketangiz muvaffaqiyatli yaratildi va moderatsiyaga yuborildi. Anketa nashr etilganda sizga xabar beramiz.",
-      "buttonText": "Yaxshi"
+   "SuccessModal": {
+      "title": "Muvaffaqiyat!",
+      "message": "Ma'lumotlaringiz muvaffaqiyatli yuborildi. Tez orada administratorlar siz bilan bog'lanadi!",
+      "buttonText": "Yopish"
+    },
+    "ErrorModal": {
+      "title": "Xatolik!",
+      "message": "Bunday raqam allaqachon mavjud yoki nimadir xato ketdi. Kechirasiz, keyinroq yoki qayta urinib ko'ring.",
+      "buttonText": "Yopish"
     }
   },
   "rules": {
@@ -277,5 +284,85 @@
     "rulesExplanation": "Ushbu qoidalar Foydalanuvchilarning saytdan foydalanish, shuningdek, saytdan va servisdan foydalanish jarayonida paydo bo’ladigan o’zaro munosabartlar tartibini yo’lga qo’yadi.",
     "confidentialInfo": "Maxfiy axborot:",
     "confidentialDefinition": "Maxfiy axborot deb saytning foydalanuvchidan, ularning saytga kirgan vaqtda olingan va/yoki servislardan foydalangandagi identifikatsiyalashgan axborotlarga aytiladi."
+  },
+  "userCard": {
+    "single": {
+      "male": "Uylanmagan",
+      "female": "Turmushga chiqmagan"
+    },
+    "divorced": {
+      "male": "Ajrashgan, xotin izlamoqda",
+      "female": "Ajrashgan"
+    },
+    "widowed": {
+      "male": "Beva erkak",
+      "female": "Beva ayol"
+    },
+    "City": {
+      "TOSHKENT": "Toshkent",
+      "ANDIJAN": "Andijon",
+      "BUKHARA": "Buxoro",
+      "FERGANA": "Farg‘ona",
+      "JIZZAK": "Jizzax",
+      "XORAZM": "Xorazm",
+      "NAMANGAN": "Namangan",
+      "NAVOIY": "Navoiy",
+      "QASHQADARYO": "Qashqadaryo",
+      "SAMARKAND": "Samarqand",
+      "SIRDARYO": "Sirdaryo",
+      "SURXONDARYO": "Surxondaryo",
+      "KARAKALPAKSTAN": "Qoraqalpog‘iston"
+    },
+    "marriedSecond": "Ikkinchi xotin izlamoqda",
+    "nationality": "Millati",
+    "education": "Ma'lumoti",
+    "description": "Tavsif",
+    "moreDetails": "Batafsil"
+  },
+  "UserDetails": {
+    "userNotFound": "Foydalanuvchi topilmadi",
+    "returnHome": "Bosh sahifaga qaytish",
+    "back": "Orqaga",
+    "aboutMe": "O'zim haqimda",
+    "mainInfo": "Asosiy ma'lumot",
+    "age": "Yoshi",
+    "years": "yosh",
+    "education": "Ta'lim",
+    "location": "Yashash manzili",
+    "work": "Kasbi",
+    "phone": "Telefon",
+    "status": "Holati",
+    "active": "Faol",
+    "inactive": "Faol emas",
+    "nationality": "Millati",
+    "activeStatus": "Faol",
+    "qualification": {
+      "middle": "O'rta",
+      "specialized": "O'rta maxsus",
+      "incompleteHigher": "Noto'g'ri",
+      "higher": "Oliy",
+      "master": "Magistr",
+      "doctorate": "Doktorantura"
+    },
+    "City": {
+    "TOSHKENT": "Toshkent",
+    "ANDIJAN": "Andijon",
+    "BUKHARA": "Buxoro",
+    "FERGANA": "Farg‘ona",
+    "JIZZAK": "Jizzax",
+    "XORAZM": "Xorazm",
+    "NAMANGAN": "Namangan",
+    "NAVOIY": "Navoiy",
+    "QASHQADARYO": "Qashqadaryo",
+    "SAMARKAND": "Samarqand",
+    "SIRDARYO": "Sirdaryo",
+    "SURXONDARYO": "Surxondaryo",
+    "KARAKALPAKSTAN": "Qoraqalpog‘iston"
+  }
+  },
+  "notFound": {
+    "title": "Упс! Sahifa topilmadi",
+    "message": "Ko'rinishidan, siz boshqa yo'nalishga boribsiz. Keling, bosh sahifaga qaytaylik!",
+    "link": "Bosh sahifaga"
   }
 }

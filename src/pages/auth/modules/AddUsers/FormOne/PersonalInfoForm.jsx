@@ -5,10 +5,17 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
   const selectClasses = "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white"
   const labelClasses = "block text-sm font-medium text-gray-700 mb-2"
   const { t } = useTranslation();
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // плавная прокрутка
+    });
+  
+  }
   return (
-    <div className="min-h-screen bg-white py-4 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-4 px-1 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl p-8 md:p-12">
+        <div className="bg-white rounded-2xl p-1 sm:p-8 md:p-12">
           <form onSubmit={(e) => {
             e.preventDefault();
             onSubmit();
@@ -118,7 +125,7 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
                   className={selectClasses}
                 >
                   <option value="">{t('auth.FormOne.selectCity.select')}</option>
-                  <option value="Tashkent">{t('auth.FormOne.selectCity.Tashkent')}</option>
+                  <option value="Toshkent">{t('auth.FormOne.selectCity.Tashkent')}</option>
                   <option value="Andijan">{t('auth.FormOne.selectCity.Andijan')}</option>
                   <option value="Bukhara">{t('auth.FormOne.selectCity.Bukhara')}</option>
                   <option value="Fergana">{t('auth.FormOne.selectCity.Fergana')}</option>
@@ -142,6 +149,7 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
 
             <div className="pt-4">
               <button
+              onClick={scrollToTop}
                 type="submit"
                 className="w-full bg-rose-500 text-white px-6 py-3 rounded-xl hover:bg-rose-600 transition-colors duration-300 flex items-center justify-center gap-2 group"
               >
