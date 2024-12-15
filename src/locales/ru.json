@@ -313,6 +313,14 @@
    "SURXONDARYO": "Сурхандарья",
    "KARAKALPAKSTAN": "Каракалпакстан"
       },
+    "qualification": {
+        "middle": "Среднее",
+        "specialized": "Среднее специальное",
+        "incompleteHigher": "Неоконченное высшее",
+        "higher": "Высшее",
+        "master": "Магистратура",
+        "doctorate": "Докторантура"
+      },
     "marriedSecond": "Ищет вторую жену",
     "nationality": "Национальность",
     "education": "Образование",

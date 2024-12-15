@@ -116,7 +116,7 @@ const getStatusText = () => {
           </div>
           <div className="flex items-center gap-1 border-b border-gray-100 pb-1">
             <span className="text-gray-500 font-medium">{t('userCard.education')}</span>
-            <span className="font-semibold text-gray-800">{user.maritalStatus}</span>
+            <span className="font-semibold text-gray-800">{user.maritalStatus}{t(`userCard.qualification.${user?.qualification}`, { defaultValue: user?.qualification })}</span>
           </div>
           <div className="flex items-center gap-1 border-b border-gray-100 pb-1">
             <span className="text-gray-500 font-medium">{t('userCard.description')}</span>

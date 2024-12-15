@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SiteLoading from '../SiteLoading/SiteLoading';
 import logo from '../../assets/images/logo.png';
+
 const NavbarLogo = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

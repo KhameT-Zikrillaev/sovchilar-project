@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import NavbarLogo from './NavbarLogo'
-
+import flaguz from '../../assets/images/flag-uzb.jpg';
+import flagru from '../../assets/images/flag-rus.png';
 // Анимированная иконка сердца
 const AnimatedHeart = () => (
   <div className="relative w-8 h-8 flex items-center justify-center">
@@ -30,7 +31,7 @@ const LanguageSelector = () => {
         className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === 'ru' ? 'border-rose-500' : 'border-transparent'}`}
       >
         <img
-          src="https://flagcdn.com/w40/ru.png"
+          src={flagru}
           alt="RU"
           className="w-full h-full object-cover"
         />
@@ -40,7 +41,7 @@ const LanguageSelector = () => {
         className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === 'uz' ? 'border-rose-500' : 'border-transparent'}`}
       >
         <img
-          src="https://flagcdn.com/w40/uz.png"
+          src={flaguz}
           alt="UZ"
           className="w-full h-full object-cover"
         />

@@ -313,6 +313,14 @@
       "SURXONDARYO": "Surxondaryo",
       "KARAKALPAKSTAN": "Qoraqalpog‘iston"
     },
+    "qualification": {
+      "middle": "O'rta",
+      "specialized": "O'rta maxsus",
+      "incompleteHigher": "Noto'g'ri",
+      "higher": "Oliy",
+      "master": "Magistr",
+      "doctorate": "Doktorantura"
+    },
     "marriedSecond": "Ikkinchi xotin izlamoqda",
     "nationality": "Millati",
     "education": "Ma'lumoti",
