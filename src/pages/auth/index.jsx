@@ -116,7 +116,7 @@ const handleImageChange = (imageUrl) => {
   // }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` ishlidi`
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
   
     const userData = {
       firstName: formData.firstName,
@@ -128,6 +128,7 @@ const handleImageChange = (imageUrl) => {
       qualification: formData.qualification,
       jobTitle: formData.jobTitle,
       nationality: formData.nationality,
+      status: "INACTIVE",
       maritalStatus: formData.maritalStatus.toUpperCase(),
       description: formData.description,
       imageUrl: formData.imageUrL

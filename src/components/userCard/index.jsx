@@ -37,7 +37,7 @@ const getStatusText = () => {
         return 'bg-gray-500'
     }
   }
-
+console.log(user.imageUrl)
   return (
     <div 
       className={`
@@ -57,7 +57,7 @@ const getStatusText = () => {
     >
       <div className="relative h-80 overflow-hidden group">
         <img 
-          src={user.image} 
+          src={user.imageUrl} 
           alt={user.lastName} 
           className={`
             w-full h-full object-cover
@@ -112,11 +112,11 @@ const getStatusText = () => {
          
           <div className="flex items-center gap-1 border-b border-gray-100 pb-1">
             <span className="text-gray-500 font-medium">{t('userCard.nationality')}</span>
-            <span className="font-semibold text-gray-800">{user.nationality}</span>
+            <span className="font-semibold text-gray-800">{t(`userCard.selectNationality.${user.nationality}`)}</span>
           </div>
           <div className="flex items-center gap-1 border-b border-gray-100 pb-1">
             <span className="text-gray-500 font-medium">{t('userCard.education')}</span>
-            <span className="font-semibold text-gray-800">{user.maritalStatus}{t(`userCard.qualification.${user?.qualification}`, { defaultValue: user?.qualification })}</span>
+            <span className="font-semibold text-gray-800">{t(`userCard.qualification.${user?.qualification}`, { defaultValue: user?.qualification })}</span>
           </div>
           <div className="flex items-center gap-1 border-b border-gray-100 pb-1">
             <span className="text-gray-500 font-medium">{t('userCard.description')}</span>

@@ -155,45 +155,45 @@
       "submit":"Davom etish",
       "selectCity": {
          "select":"Shaharni tanlang",
-         "Tashkent":"Toshkent",
-         "Andijan":"Andijon",
-         "Bukhara":"Buxoro",
-         "Fergana":"Farg'ona",
-         "Jizzakh":"Jizzax",
+         "Toshkent":"Toshkent",
+         "Andijon":"Andijon",
+         "Buxoro":"Buxoro",
+         "Fargona":"Farg'ona",
+         "Jizzax":"Jizzax",
          "Xorazm":"Xorazm",
          "Namangan":"Namangan",
          "Navoiy":"Navoiy",
          "Qashqadaryo":"Qashqadaryo",
-         "Samarkand":"Samarqand",
+         "Samarqand":"Samarqand",
          "Sirdaryo":"Sirdaryo",
          "Surxondaryo":"Surxondaryo",
-         "Karakalpakstan":"Qoraqalpog'iston"
+         "Qoraqalpogiston":"Qoraqalpog'iston"
       },
       "Validation": {
         "firstName": {
           "required": "Ismni kiritish majburiy",
-          "maxLength": "Ism uzunligi 50 belgidan oshmasligi kerak"
+          "max": "Ism uzunligi 50 ta belgidan oshmasligi kerak"
         },
         "lastName": {
           "required": "Familiyani kiritish majburiy",
-          "maxLength": "Familiya uzunligi 50 belgidan oshmasligi kerak"
+          "max": "Familiya uzunligi 50 ta belgidan oshmasligi kerak"
         },
         "phone": {
           "required": "Telefon raqamini kiritish majburiy",
-          "invalid": "Noto'g'ri raqam formati. Format: +998 XX XXX XX XX bo'lishi kerak"
+          "invalid": "Telefon raqami noto‘g‘ri formatda. Format: +998 XX XXX XX XX"
         },
         "age": {
-          "required": "Yoshingizni yozish majburiy",
-          "min": "Yosh 18 dan kichik bo'lmasligi kerak",
-          "max": "Yosh 100 dan katta bo'lmasligi kerak"
+          "required": "Yosh maydonini to‘ldiring",
+          "min": "Yosh 18 dan kam bo‘lmasligi kerak",
+          "max": "Yosh 100 dan oshmasligi kerak"
         },
         "gender": {
           "required": "Iltimos, jinsni tanlang",
-          "invalid": "Iltimos, to'g'ri jinsni tanlang"
+          "invalid": "To‘g‘ri jinsni tanlang"
         },
         "address": {
           "required": "Iltimos, shaharni tanlang",
-          "invalid": "Shahar ro'yxatdan tanlangan bo'lishi kerak"
+          "invalid": "Ro‘yxatdagi shaharni tanlang"
         }
       }
     },
@@ -227,9 +227,6 @@
       "jobTitle": "Kasb",
       "jobTitlePlaceholder": "Masalan: Dasturchi",
       "nationality": "Millat",
-        
-
-
      "selectNationality": {
   "select": "Millatni tanlang",
   "Uzbek": "O'zbek",
@@ -253,7 +250,36 @@
         }
       },
       "back": "Orqaga",
-      "createProfile": "Profil yaratish"
+      "createProfile": "Profil yaratish",
+      "Validation": {
+        "qualification": {
+          "required": "Iltimos, ta'lim darajasini tanlang",
+          "invalid": "To‘g‘ri ta'lim darajasini tanlang"
+        },
+        "maritalStatus": {
+          "required": "Iltimos, oilaviy holatni tanlang",
+          "invalid": "To‘g‘ri oilaviy holatni tanlang"
+        },
+        "jobTitle": {
+          "required": "Kasbingizni kiriting",
+          "max": "Kasb nomi 100 ta belgidan oshmasligi kerak"
+        },
+        "nationality": {
+          "required": "Iltimos, millatingizni tanlang",
+          "invalid": "To‘g‘ri millatni tanlang"
+        },
+        "description": {
+          "min": "O‘zingiz haqingizda batafsilroq yozing (kamida 20 ta belgi)",
+          "max": "Tavsif uzunligi 500 ta belgidan oshmasligi kerak"
+        },
+        "image": {
+          "invalidFormat": "Rasm faqat JPG, JPEG yoki PNG formatida bo‘lishi kerak",
+          "maxSize": "Fayl hajmi 5MB dan oshmasligi kerak"
+        },
+        "terms": {
+          "required": "Вы должны согласиться с условиями"
+        }
+      }
     },
    "SuccessModal": {
       "title": "Muvaffaqiyat!",
@@ -300,18 +326,18 @@
     },
     "City": {
       "TOSHKENT": "Toshkent",
-      "ANDIJAN": "Andijon",
-      "BUKHARA": "Buxoro",
-      "FERGANA": "Farg‘ona",
-      "JIZZAK": "Jizzax",
+      "ANDIJON": "Andijon",
+      "BUXORO": "Buxoro",
+      "FERGONA": "Farg‘ona",
+      "JIZZAX": "Jizzax",
       "XORAZM": "Xorazm",
       "NAMANGAN": "Namangan",
       "NAVOIY": "Navoiy",
       "QASHQADARYO": "Qashqadaryo",
-      "SAMARKAND": "Samarqand",
+      "SAMARQAND": "Samarqand",
       "SIRDARYO": "Sirdaryo",
       "SURXONDARYO": "Surxondaryo",
-      "KARAKALPAKSTAN": "Qoraqalpog‘iston"
+      "QORAQALPOGISTON": "Qoraqalpog‘iston"
     },
     "qualification": {
       "middle": "O'rta",
@@ -320,6 +346,16 @@
       "higher": "Oliy",
       "master": "Magistr",
       "doctorate": "Doktorantura"
+    },
+    "selectNationality":{
+      "Uzbek": "O'zbek",
+      "Russian": "Rus",
+      "Kazakh": "Qozog'istonlik",
+      "Kyrgyz": "Qirg'iz",
+      "Tajik": "Tojik",
+      "Turkmen": "Turkman",
+      "Tatar": "Tatar",
+      "Other": "Boshqa"
     },
     "marriedSecond": "Ikkinchi xotin izlamoqda",
     "nationality": "Millati",
@@ -354,18 +390,28 @@
     },
     "City": {
     "TOSHKENT": "Toshkent",
-    "ANDIJAN": "Andijon",
-    "BUKHARA": "Buxoro",
-    "FERGANA": "Farg‘ona",
-    "JIZZAK": "Jizzax",
+    "ANDIJON": "Andijon",
+    "BUXORO": "Buxoro",
+    "FERGONA": "Farg‘ona",
+    "JIZZAX": "Jizzax",
     "XORAZM": "Xorazm",
     "NAMANGAN": "Namangan",
     "NAVOIY": "Navoiy",
     "QASHQADARYO": "Qashqadaryo",
-    "SAMARKAND": "Samarqand",
+    "SAMARQAND": "Samarqand",
     "SIRDARYO": "Sirdaryo",
     "SURXONDARYO": "Surxondaryo",
-    "KARAKALPAKSTAN": "Qoraqalpog‘iston"
+    "QORAQALPOGISTON": "Qoraqalpog‘iston"
+  },
+  "selectNationality":{
+    "Uzbek": "O'zbek",
+    "Russian": "Rus",
+    "Kazakh": "Qozog'istonlik",
+    "Kyrgyz": "Qirg'iz",
+    "Tajik": "Tojik",
+    "Turkmen": "Turkman",
+    "Tatar": "Tatar",
+    "Other": "Boshqa"
   }
   },
   "notFound": {

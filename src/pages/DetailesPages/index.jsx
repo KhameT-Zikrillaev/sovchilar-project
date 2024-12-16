@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {useSingleUser} from './hooks/useSingleuser';
-
+import Loading from '../../components/Loading/index';
 function UserDetails() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -29,12 +29,13 @@ useEffect(() => {
   if (!userData) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 mt-[64px]">
-        <div className="text-center">
+        <Loading />
+        {/* <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800">{t('UserDetails.userNotFound')}</h2>
           <Link to="/" className="mt-4 inline-block text-blue-500 hover:text-blue-600">
             {t('UserDetails.returnHome')}
           </Link>
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -118,7 +119,7 @@ useEffect(() => {
                       </div>
                       <div className="ml-4">
                         <h3 className="text-sm font-medium text-gray-500">{t('UserDetails.location')}</h3>
-                        <p className="text-lg font-semibold text-gray-800">{userData?.address}</p>
+                        <p className="text-lg font-semibold text-gray-800">{t(`UserDetails.City.${userData?.address}`, { defaultValue: userData?.address })}</p>
                       </div>
                     </div>
                     
@@ -172,7 +173,7 @@ useEffect(() => {
       </div>
       <div className="ml-4">
         <h3 className="text-sm font-medium text-gray-500">{t('UserDetails.nationality')}</h3>
-        <p className="text-lg font-semibold text-gray-800">{userData?.nationality}</p>
+        <p className="text-lg font-semibold text-gray-800">{t(`UserDetails.selectNationality.${userData?.nationality}`)}</p>
       </div>
     </div>
     {/* Телефон */}
@@ -183,10 +184,10 @@ useEffect(() => {
 </svg>
 
       </div>
-      <div className="ml-4">
+      <a href={`tel:${userData?.phone}`} className="ml-4">
         <h3 className="text-sm font-medium text-gray-500">{t('UserDetails.phone')}</h3>
         <p className="text-lg font-semibold text-gray-800">{userData?.phone}</p>
-      </div>
+      </a>
     </div>
 
     {/* Статус */}

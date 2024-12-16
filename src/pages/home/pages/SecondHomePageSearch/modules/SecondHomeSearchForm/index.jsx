@@ -31,7 +31,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
     resetForm: () => {
       setGender('');
       setMinAge(18);
-      setMaxAge(40);
+      setMaxAge(90);
       setLocation('');
       setMaritalStatus('');
     },
@@ -39,18 +39,18 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
   const cities = [
     { value: '', label: t('home.SecondHomePageSearch.form.city.options.all') },
     { value: '&address=TOSHKENT', label: t('home.SecondHomePageSearch.form.city.options.Tashkent') },
-    { value: '&address=ANDIJAN', label: t('home.SecondHomePageSearch.form.city.options.Andijan') },
-    { value: '&address=BUKHARA', label: t('home.SecondHomePageSearch.form.city.options.Bukhara') },
-    { value: '&address=FERGANA', label: t('home.SecondHomePageSearch.form.city.options.Fergana') },
-    { value: '&address=JIZZAKH', label: t('home.SecondHomePageSearch.form.city.options.Jizzakh') },
+    { value: '&address=ANDIJON', label: t('home.SecondHomePageSearch.form.city.options.Andijan') },
+    { value: '&address=BUXORO', label: t('home.SecondHomePageSearch.form.city.options.Bukhara') },
+    { value: '&address=FARGONA', label: t('home.SecondHomePageSearch.form.city.options.Fergana') },
+    { value: '&address=JIZZAX', label: t('home.SecondHomePageSearch.form.city.options.Jizzakh') },
     { value: '&address=XORAZM', label: t('home.SecondHomePageSearch.form.city.options.Xorazm') },
     { value: '&address=NAMANGAN', label: t('home.SecondHomePageSearch.form.city.options.Namangan') },
     { value: '&address=NAVOIY', label: t('home.SecondHomePageSearch.form.city.options.Navoiy') },
     { value: '&address=QASHQADARYO', label: t('home.SecondHomePageSearch.form.city.options.Qashqadaryo') },
-    { value: '&address=SAMARKAND', label: t('home.SecondHomePageSearch.form.city.options.Samarkand') },
+    { value: '&address=SAMARQAND', label: t('home.SecondHomePageSearch.form.city.options.Samarkand') },
     { value: '&address=SIRDARYO', label: t('home.SecondHomePageSearch.form.city.options.Sirdaryo') },
     { value: '&address=SURXONDARYO', label: t('home.SecondHomePageSearch.form.city.options.Surxondaryo') },
-    { value: '&address=KARAKALPAKSTAN', label: t('home.SecondHomePageSearch.form.city.options.Karakalpakstan') },
+    { value: '&address=QORAQALPOGISTON', label: t('home.SecondHomePageSearch.form.city.options.Karakalpakstan') },
   ];
 
   const maleMaritalStatuses = [
@@ -132,7 +132,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
             <input
               type="number"
               min="18"
-              max="100"
+              max="90"
               value={minAge}
               onChange={(e) => setMinAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -141,7 +141,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
             <input
               type="number"
               min="18"
-              max="100"
+              max="90"
               value={maxAge}
               onChange={(e) => setMaxAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
