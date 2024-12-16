@@ -3,7 +3,8 @@ import HeaderLayout from './layout/HeaderLayout'
 import MainLayout from './layout/MainLayout'
 import FooterLayout from './layout/FooterLayout'
 import SiteLoading from './components/SiteLoading/SiteLoading';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -14,7 +15,9 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
-
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true }); // once: true - анимация срабатывает только один раз
+  }, []);
   return (
     <>
       {loading ? (

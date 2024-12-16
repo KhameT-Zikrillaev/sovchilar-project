@@ -64,11 +64,11 @@ export default function SecondHomePageSearch() {
 
   
   return (
-    <section className="py-16 px-4 bg-gray-50" id="search">
+    <section className="py-16 px-4 bg-gray-50 overflow-hidden" id="search">
       {isLoading && <Loading type="default" size="large" color="rose" overlay />}
       <div className="container mx-auto py-[64px]">
         <div className="flex flex-col items-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('home.SecondHomePageSearch.title')}</h1>
+          <h1 data-aos="fade-up" data-aos-offset="50" className="text-4xl font-bold text-gray-900 mb-4">{t('home.SecondHomePageSearch.title')}</h1>
           <p className="text-xl text-gray-600 text-center max-w-2xl">
             {t('home.SecondHomePageSearch.description')}
           </p>
