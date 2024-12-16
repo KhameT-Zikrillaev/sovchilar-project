@@ -68,8 +68,8 @@ export default function SecondHomePageSearch() {
       {isLoading && <Loading type="default" size="large" color="rose" overlay />}
       <div className="container mx-auto py-[64px]">
         <div className="flex flex-col items-center mb-12">
-          <h1 data-aos="fade-up" data-aos-offset="50" className="text-4xl font-bold text-gray-900 mb-4">{t('home.SecondHomePageSearch.title')}</h1>
-          <p className="text-xl text-gray-600 text-center max-w-2xl">
+          <h1 data-aos="fade-down" data-aos-offset="50" className="text-4xl font-bold text-gray-900 mb-4">{t('home.SecondHomePageSearch.title')}</h1>
+          <p  data-aos="fade-up" data-aos-offset="50" className="text-xl text-gray-600 text-center max-w-2xl">
             {t('home.SecondHomePageSearch.description')}
           </p>
         </div>
@@ -77,10 +77,10 @@ export default function SecondHomePageSearch() {
         {/* Передаем fetchUser как проп */}
         <SecondHomeSearchForm onSearch={fetchUser} ref={formRef}  setIsSearchActive={setIsSearchActive} />
 
-<div className="   flex flex-col sm:flex-row justify-center gap-4 mb-8 pt-[64px]" id="ankets">
+<div  className="   flex flex-col sm:flex-row justify-center gap-4 mb-8 pt-[64px]" id="ankets">
           {!isSearchActive ? (
             <>
-              <button
+              <button  data-aos="fade-right" data-aos-offset="50"
               onClick={() => onFilterClick('')}
                 className={`px-6 py-2 rounded-full ${
                   activeFilter === ''
@@ -90,7 +90,7 @@ export default function SecondHomePageSearch() {
               >
                {t('home.SecondHomePageSearch.filters.all')}
               </button>
-              <button
+              <button data-aos="fade-up" data-aos-offset="50"
                 onClick={() => onFilterClick('gender=MALE')}
                 className={`px-6 py-2 rounded-full ${
                   activeFilter === 'gender=MALE'
@@ -100,7 +100,7 @@ export default function SecondHomePageSearch() {
               >
                 {t('home.SecondHomePageSearch.filters.men')}
               </button>
-              <button
+              <button data-aos="fade-left" data-aos-offset="50"
               onClick={() => onFilterClick('gender=FEMALE')}
                 className={`px-6 py-2 rounded-full ${
                   activeFilter === 'gender=FEMALE'

@@ -72,9 +72,9 @@ export default function FooterLayout() {
           {/* Основной контент */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
             {/* Лого и описание */}
-            <div className="col-span-1 md:col-span-5 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
-              <Link to="/" className="flex items-center gap-3 text-4xl mb-6 group">
-                <span className="flex items-center text-3xl transform transition-all duration-300 group-hover:scale-110">
+            <div  className="col-span-1 md:col-span-5 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
+              <Link to="/" data-aos="zoom-out-up" data-aos-offset="50" className="flex items-center gap-3 text-4xl mb-6 group">
+                <span  className="flex items-center text-3xl transform transition-all duration-300 group-hover:scale-110">
                  <img className='w-16 h-16' src={logo} alt="" />
                   <span className="text-yellow-500 -ml-1 animate-pulse">✨</span>
                 </span>
@@ -82,17 +82,17 @@ export default function FooterLayout() {
                   Sovchilar.net
                 </span>
               </Link>
-              <p className="text-lg text-gray-200 mb-8 leading-relaxed">
+              <p data-aos="fade-right" data-aos-offset="50" className="text-lg text-gray-200 mb-8 leading-relaxed">
                 {t('footer.description')}
               </p>
               <div className="flex gap-6">
-                <a href="#" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
+                <a href="#" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
                   <span className="text-2xl" title={t('footer.social.telegram')}>📱</span>
                 </a>
-                <a href="#" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
+                <a href="#" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
                   <span className="text-2xl" title={t('footer.social.phone')}>📞</span>
                 </a>
-                <a href="#" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
+                <a href="#" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
                   <span className="text-2xl" title={t('footer.social.email')}>✉️</span>
                 </a>
               </div>
@@ -105,9 +105,9 @@ export default function FooterLayout() {
 
             {/* Навигация */}
             <div className="col-span-1 md:col-span-3 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
-              <h3 className="text-xl font-bold mb-6 text-white">{t('footer.navigation.title')}</h3>
+              <h3 data-aos="fade-right" data-aos-offset="50" className="text-xl font-bold mb-6 text-white">{t('footer.navigation.title')}</h3>
               <ul className="space-y-4">
-                <li>
+                <li data-aos="fade-right" data-aos-offset="50">
                   <button 
                     onClick={() => handleScrollTo('search')}
                     className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group"
@@ -116,7 +116,7 @@ export default function FooterLayout() {
                     {t('footer.navigation.search')}
                   </button>
                 </li>
-                <li>
+                <li data-aos="fade-right" data-aos-offset="50">
                   <button 
                     onClick={() => handleScrollTo('ankets')}
                     className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group"
@@ -133,27 +133,27 @@ export default function FooterLayout() {
 
             {/* Для пользователей */}
             <div className="col-span-1 md:col-span-3 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
-              <h3 className="text-xl font-bold mb-6 text-white">{t('footer.forUsers.title')}</h3>
+              <h3 data-aos="fade-left" data-aos-offset="50" className="text-xl font-bold mb-6 text-white">{t('footer.forUsers.title')}</h3>
               <ul className="space-y-4">
-                <li>
+                <li data-aos="fade-left" data-aos-offset="50">
                   <Link to="/auth" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.createProfile')}
                   </Link>
                 </li>
-                <li>
+                <li data-aos="fade-left" data-aos-offset="50">
                   <Link to="/faq" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.faq')}
                   </Link>
                 </li>
-                <li>
+                <li data-aos="fade-left" data-aos-offset="50">
                   <button onClick={() => setIsModalOpen(true)} className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.rules')}
                   </button>
                 </li>
-                <li>
+                <li data-aos="fade-left" data-aos-offset="50">
                   <a href=' tel: +998991234567'  className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.contact')}
@@ -166,7 +166,7 @@ export default function FooterLayout() {
           {/* Нижняя часть */}
           <div className="border-t border-white/10 pt-8 backdrop-blur-sm bg-black/20 rounded-3xl p-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <p className="text-gray-300 text-center md:text-left">
+              <p className="text-gray-300 text-center md:text-left" data-aos="fade-up" data-aos-offset="50">
                 &copy; 2024 SovchiUz. {t('footer.copyright')}
                 <span className="block md:inline md:ml-2">
                   {t('footer.love')}
@@ -174,10 +174,10 @@ export default function FooterLayout() {
                 </span>
               </p>
               <div className="flex gap-8">
-                <button  className="text-gray-300 hover:text-rose-400 transition-all duration-300">
+                <button  data-aos="fade-up" data-aos-offset="50" className="text-gray-300 hover:text-rose-400 transition-all duration-300">
                   {t('footer.privacy')}
                 </button>
-                <button  className="text-gray-300 hover:text-rose-400 transition-all duration-300">
+                <button data-aos="fade-up" data-aos-offset="50"  className="text-gray-300 hover:text-rose-400 transition-all duration-300">
                   {t('footer.terms')}
                 </button>
               </div>

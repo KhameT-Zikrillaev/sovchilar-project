@@ -90,10 +90,10 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8">
+    <form  data-aos="flip-up" data-aos-offset="50" onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Gender Selection */}
-        <div>
+        <div data-aos-delay="500" data-aos="fade-right" data-aos-offset="50">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             {t('home.SecondHomePageSearch.form.gender.label')}
           </label>
@@ -124,7 +124,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
         </div>
 
         {/* Age Range */}
-        <div>
+        <div data-aos-delay="500" data-aos="fade-left" data-aos-offset="50">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             {t('home.SecondHomePageSearch.form.age.label')}
           </label>
@@ -150,9 +150,9 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <div  className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {/* Location */}
-        <div>
+        <div data-aos-delay="500" data-aos="fade-right" data-aos-offset="50">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             {t('home.SecondHomePageSearch.form.city.label')}
           </label>
@@ -170,7 +170,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
         </div>
 
         {/* Marital Status */}
-        <div>
+        <div data-aos-delay="500" data-aos="fade-left" data-aos-offset="50">
           <label className="block text-gray-700 text-sm font-bold mb-2">
             {t('home.SecondHomePageSearch.form.maritalStatus.label')}
           </label>
@@ -188,7 +188,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
         </div>
       </div>
 
-      <div className="mt-6 text-center">
+      <div className="mt-6 text-center" data-aos-delay="500" data-aos="flip-down" data-aos-offset="50">
         <button
           type="submit"
           className="bg-rose-500 text-white px-8 py-3 rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center justify-center gap-2 mx-auto"

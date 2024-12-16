@@ -39,7 +39,7 @@ const getStatusText = () => {
   }
 console.log(user.imageUrl)
   return (
-    <div 
+    <div  data-aos="zoom-out-up" data-aos-offset="50"
       className={`
         bg-white rounded-2xl overflow-hidden
         transition-all duration-500 ease-out
