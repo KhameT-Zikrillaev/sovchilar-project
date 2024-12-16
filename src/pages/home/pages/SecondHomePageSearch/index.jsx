@@ -80,7 +80,7 @@ export default function SecondHomePageSearch() {
 <div  className="   flex flex-col sm:flex-row justify-center gap-4 mb-8 pt-[64px]" id="ankets">
           {!isSearchActive ? (
             <>
-              <button  data-aos="fade-right" data-aos-offset="50"
+              <button 
               onClick={() => onFilterClick('')}
                 className={`px-6 py-2 rounded-full ${
                   activeFilter === ''
@@ -90,7 +90,7 @@ export default function SecondHomePageSearch() {
               >
                {t('home.SecondHomePageSearch.filters.all')}
               </button>
-              <button data-aos="fade-up" data-aos-offset="50"
+              <button
                 onClick={() => onFilterClick('gender=MALE')}
                 className={`px-6 py-2 rounded-full ${
                   activeFilter === 'gender=MALE'
@@ -100,7 +100,7 @@ export default function SecondHomePageSearch() {
               >
                 {t('home.SecondHomePageSearch.filters.men')}
               </button>
-              <button data-aos="fade-left" data-aos-offset="50"
+              <button 
               onClick={() => onFilterClick('gender=FEMALE')}
                 className={`px-6 py-2 rounded-full ${
                   activeFilter === 'gender=FEMALE'

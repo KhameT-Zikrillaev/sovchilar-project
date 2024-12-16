@@ -65,7 +65,7 @@ export default function FirstHomePageIntro() {
               </div>
 
               {/* Поиск */}
-              <div data-aos="fade-up" data-aos-offset="50" data-aos-delay="500" className="bg-white/10 backdrop-blur-lg p-2 rounded-full mb-10 flex items-center">
+              <div data-aos="fade-up"  data-aos-delay="500" className="bg-white/10 backdrop-blur-lg p-2 rounded-full mb-10 flex items-center">
                 <button 
                   className={"flex-1 px-6  py-3 rounded-full text-base font-medium transition duration-200 " + 
                     (activeTab === 'men' ? 'bg-rose-500 text-white' : 'text-gray-200 hover:text-white hover:bg-white/10')}
@@ -76,7 +76,7 @@ export default function FirstHomePageIntro() {
                 >
                   {t('home.FirstIntroPage.search.men')}
                 </button>
-                <button  data-aos="fade-up" data-aos-offset="50" data-aos-delay="500"
+                <button  
                   className={"flex-1 px-6 py-3 rounded-full text-base font-medium transition duration-200 " + 
                     (activeTab === 'women' ? 'bg-rose-500 text-white' : 'text-gray-200 hover:text-white hover:bg-white/10')}
                   onClick={() => {
@@ -107,7 +107,7 @@ export default function FirstHomePageIntro() {
               {/* Статистика */}
               <div className="grid grid-cols-3 gap-4">
                 {stats.map((stat, index) => (
-                  <div data-aos="zoom-in" data-aos-offset="50" data-aos-delay="500" key={index} className="text-center px-4 py-6 rounded-2xl bg-white/10 hover:bg-white/20 transition duration-200">
+                  <div data-aos="zoom-in"  data-aos-delay="500" key={index} className="text-center px-4 py-6 rounded-2xl bg-white/10 hover:bg-white/20 transition duration-200">
                     <div className="text-3xl mb-2">{stat.icon}</div>
                     <div className="text-2xl font-bold text-white mb-1">{stat.number}</div>
                     <div className="text-base text-gray-200">{stat.label}</div>
