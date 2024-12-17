@@ -76,7 +76,7 @@ useEffect(() => {
                   <span className="text-gray-700">{t(`UserDetails.City.${userData?.address}`, { defaultValue: userData?.address })}</span>
                 </div>
                 <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-                <span className="text-gray-700">{userData?.nationality}</span>
+                <span className="text-gray-700">{t(`UserDetails.selectNationality.${userData?.nationality}`)}</span>
               </div>
                           </div>
           </div>
