@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useAddImages from '../../../hooks/useImageUser';
 import Loading from '../../../../../components/Loading/index';
@@ -7,6 +7,10 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
   const { t } = useTranslation();
   const { addImages, isLoading } = useAddImages();
   const [localPreview, setLocalPreview] = useState(preview);
+  
+  // Ссылка на инпут
+  const fileInputRef = useRef(null);  
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleImageChange = async (event) => {
     const file = event.target?.files?.[0];
@@ -32,15 +36,23 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
     }
   };
 
+  // Функция для открытия инпута
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" >  {/* Кликаем по контейнеру, чтобы открыть инпут */}
       {isLoading && <Loading />}
       <label className="block text-sm font-medium text-gray-700">
         {t('auth.FormTwo.profilePicture')}
       </label>
-      <div className="flex flex-col items-center">
+
+      <div className="flex flex-col items-center" onClick={handleClick}>
         {localPreview ? (
-          <div className="relative w-32 h-32 mb-4">
+          <div className="relative w-32 h-32 mb-4" >
             <img
               src={localPreview}
               alt="Preview"
@@ -55,6 +67,7 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
                   accept="image/*"
                   onChange={handleImageChange}
                   disabled={isLoading}
+                  ref={fileInputRef} // Ссылка на инпут
                 />
               </label>
             </div>
@@ -86,6 +99,7 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
                       accept="image/*"
                       onChange={handleImageChange}
                       disabled={isLoading}
+                      ref={fileInputRef} // Ссылка на инпут
                     />
                   </label>
                 </div>
@@ -94,6 +108,7 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
           </div>
         )}
       </div>
+
       <p className="text-sm text-gray-500 text-center">
         {t('auth.FormTwo.photoNotice')}
       </p>

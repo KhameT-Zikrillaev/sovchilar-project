@@ -44,7 +44,6 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
                 <option value="">{t('auth.FormTwo.selectEducation')}</option>
                 <option value="middle">{t('auth.FormTwo.qualification.middle')}</option>
                 <option value="specialized">{t('auth.FormTwo.qualification.specialized')}</option>
-                <option value="incompleteHigher">{t('auth.FormTwo.qualification.incompleteHigher')}</option>
                 <option value="higher">{t('auth.FormTwo.qualification.higher')}</option>
                 <option value="master">{t('auth.FormTwo.qualification.master')}</option>
                 <option value="doctorate">{t('auth.FormTwo.qualification.doctorate')}</option>
@@ -70,7 +69,7 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
                   <>
                     <option value="single">{t('auth.FormTwo.maritalStatus.male.single')}</option>
                     <option value="divorced">{t('auth.FormTwo.maritalStatus.male.divorced')}</option>
-                    <option value="widowed">{t('auth.FormTwo.maritalStatus.male.widowed')}</option>
+                    
                     <option value="married_second">{t('auth.FormTwo.maritalStatus.male.married_second')}</option>
                   </>
                 ) : (
