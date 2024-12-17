@@ -68,15 +68,14 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
                 {formData.gender === 'male' ? (
                   <>
                     <option value="single">{t('auth.FormTwo.maritalStatus.male.single')}</option>
-                    <option value="divorced">{t('auth.FormTwo.maritalStatus.male.divorced')}</option>
-                    
+                    <option value="divorced">{t('auth.FormTwo.maritalStatus.male.divorced')}</option> 
                     <option value="married_second">{t('auth.FormTwo.maritalStatus.male.married_second')}</option>
                   </>
                 ) : (
                   <>
                     <option value="single">{t('auth.FormTwo.maritalStatus.female.single')}</option>
                     <option value="divorced">{t('auth.FormTwo.maritalStatus.female.divorced')}</option>
-                    <option value="widowed">{t('auth.FormTwo.maritalStatus.female.widowed')}</option>
+                  
                   </>
                 )}
               </select>
@@ -128,7 +127,7 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
             {errors.nationality && <p className="text-red-500 text-sm">{errors.nationality.message}</p>}
           </div>
         </div>
-
+  
         {/* Описание */}
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">

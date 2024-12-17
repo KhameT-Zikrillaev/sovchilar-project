@@ -120,7 +120,7 @@ console.log(user.imageUrl)
           </div>
           <div className="flex items-center gap-1 border-b border-gray-100 pb-1">
             <span className="text-gray-500 font-medium">{t('userCard.description')}</span>
-            <span className="font-semibold text-gray-800">{user.description}</span>
+            <span className="truncate  font-semibold text-gray-800">{user.description}</span>
           </div>
         </div>
         
