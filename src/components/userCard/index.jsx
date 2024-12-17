@@ -90,7 +90,7 @@ console.log(user.imageUrl)
         `}>
           <div>
             <h3 className="text-white text-2xl font-bold mb-2 tracking-wide drop-shadow-lg">
-              {user.lastName}, {user.age}
+              {user.firstName}, {user.age}
             </h3>
             <div className="flex items-center gap-3 text-gray-100">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

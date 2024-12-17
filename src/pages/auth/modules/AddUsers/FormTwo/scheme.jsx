@@ -35,14 +35,14 @@ export const scheme = z.object({
     .min(1, i18n.t("auth.FormTwo.Validation.nationality.required"))
     .refine(
       (value) => [
-        "uzbek",
-        "russian",
-        "kazakh",
-        "kyrgyz",
-        "tajik",
-        "turkmen",
-        "tatar",
-        "other"
+        "Uzbek",
+        "Russian",
+        "Kazakh",
+        "Kyrgyz",
+        "Tajik",
+        "Turkmen",
+        "Tatar",
+        "Other"
       ].includes(value),
       i18n.t("auth.FormTwo.Validation.nationality.invalid")
     ),

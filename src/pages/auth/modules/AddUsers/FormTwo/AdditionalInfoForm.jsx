@@ -116,14 +116,14 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
             >
               <option value="">{t('auth.FormTwo.selectNationality.select')}</option>
-              <option value="uzbek">{t('auth.FormTwo.selectNationality.Uzbek')}</option>
-              <option value="russian">{t('auth.FormTwo.selectNationality.Russian')}</option>
-              <option value="kazakh">{t('auth.FormTwo.selectNationality.Kazakh')}</option>
-              <option value="kyrgyz">{t('auth.FormTwo.selectNationality.Kyrgyz')}</option>
-              <option value="tajik">{t('auth.FormTwo.selectNationality.Tajik')}</option>
-              <option value="turkmen">{t('auth.FormTwo.selectNationality.Turkmen')}</option>
-              <option value="tatar">{t('auth.FormTwo.selectNationality.Tatar')}</option>
-              <option value="other">{t('auth.FormTwo.selectNationality.Other')}</option>
+              <option value="Uzbek">{t('auth.FormTwo.selectNationality.Uzbek')}</option>
+              <option value="Russian">{t('auth.FormTwo.selectNationality.Russian')}</option>
+              <option value="Kazakh">{t('auth.FormTwo.selectNationality.Kazakh')}</option>
+              <option value="Kyrgyz">{t('auth.FormTwo.selectNationality.Kyrgyz')}</option>
+              <option value="Tajik">{t('auth.FormTwo.selectNationality.Tajik')}</option>
+              <option value="Turkmen">{t('auth.FormTwo.selectNationality.Turkmen')}</option>
+              <option value="Tatar">{t('auth.FormTwo.selectNationality.Tatar')}</option>
+              <option value="Other">{t('auth.FormTwo.selectNationality.Other')}</option>
             </select>
             {errors.nationality && <p className="text-red-500 text-sm">{errors.nationality.message}</p>}
           </div>
