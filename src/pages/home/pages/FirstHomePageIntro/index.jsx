@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Modal from '../../../../components/customModal/Modal';
 import leftbg from '../../../../assets/images/left-bg.jpg';
 import rightbg from '../../../../assets/images/right-bg.jpg';
-
+import centerbg from '../../../../assets/images/center-bg.jpeg';
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState('men');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -124,7 +124,7 @@ export default function FirstHomePageIntro() {
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2" data-aos="fade-down" data-aos-offset="50">
                 <img 
-                  src="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=2940" 
+                  src={centerbg} 
                   alt="Islamic Wedding" 
                   className="w-full h-80 object-cover rounded-2xl shadow-xl hover-scale"
                 />
