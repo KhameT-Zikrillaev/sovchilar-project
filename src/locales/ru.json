@@ -320,7 +320,7 @@
       "female": "Не замужем"
     },
     "divorced": {
-      "male": "В разводе, ищу жену",
+      "male": "В разводе",
       "female": "В разводе"
     },
     "widowed": {
@@ -331,7 +331,7 @@
       "TOSHKENT": "Ташкент",
       "ANDIJON": "Андижан",
       "BUXORO": "Бухара",
-   "FERGONA": "Фергана",
+   "FARGONA": "Фергана",
    "JIZZAX": "Джизак",
    "XORAZM": "Хорезм",
    "NAMANGAN": "Наманган",
@@ -363,14 +363,14 @@
     "marriedSecond": "Ищет вторую жену",
     "nationality": "Национальность",
     "education": "Образование",
-    "description": "Описание",
+    "description": "Требование",
     "moreDetails": "Подробнее"
   },
   "UserDetails": {
     "userNotFound": "Пользователь не найден",
     "returnHome": "Вернуться на главную",
     "back": "Назад",
-    "aboutMe": "О себе",
+    "aboutMe": "Требование",
     "mainInfo": "Основная информация",
     "age": "Возраст",
     "years": "лет",

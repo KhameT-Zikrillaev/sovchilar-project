@@ -317,7 +317,7 @@
       "female": "Turmushga chiqmagan"
     },
     "divorced": {
-      "male": "Ajrashgan, xotin izlamoqda",
+      "male": "Ajrashgan",
       "female": "Ajrashgan"
     },
     "widowed": {
@@ -328,7 +328,7 @@
       "TOSHKENT": "Toshkent",
       "ANDIJON": "Andijon",
       "BUXORO": "Buxoro",
-      "FERGONA": "Farg‘ona",
+      "FARGONA": "Farg‘ona",
       "JIZZAX": "Jizzax",
       "XORAZM": "Xorazm",
       "NAMANGAN": "Namangan",
@@ -360,14 +360,14 @@
     "marriedSecond": "Ikkinchi xotin izlamoqda",
     "nationality": "Millati",
     "education": "Ma'lumoti",
-    "description": "Tavsif",
+    "description": "Talablar:",
     "moreDetails": "Batafsil"
   },
   "UserDetails": {
     "userNotFound": "Foydalanuvchi topilmadi",
     "returnHome": "Bosh sahifaga qaytish",
     "back": "Orqaga",
-    "aboutMe": "O'zim haqimda",
+    "aboutMe": "Talablar",
     "mainInfo": "Asosiy ma'lumot",
     "age": "Yoshi",
     "years": "yosh",
