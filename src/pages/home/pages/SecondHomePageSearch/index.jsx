@@ -131,7 +131,7 @@ export default function SecondHomePageSearch() {
             </div>
           ) : (
             allUsers.slice(0, visibleCount).map((user) => (
-              <UserCard key={user.id} user={user} />
+              <UserCard key={user.id} user={user} gender={user.gender} />
             ))
           )}
         </div>

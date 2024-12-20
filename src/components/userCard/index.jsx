@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-export default function UserCard({ user }) {
+import Female from "../../assets/images/Female.jpeg";
+import Male from "../../assets/images/Male.jpg";
+export default function UserCard({ user, gender}) {
   const [isHovered, setIsHovered] = useState(false);
  const { t } = useTranslation();  
 
@@ -57,7 +59,7 @@ console.log(user.imageUrl)
     >
       <div className="relative h-80 overflow-hidden group">
         <img 
-          src={user.imageUrl} 
+          src={user.imageUrl || (gender === 'MALE' ? Male : Female)} 
           alt={user.lastName} 
           className={`
             w-full h-full object-cover

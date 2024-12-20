@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {useSingleUser} from './hooks/useSingleuser';
 import Loading from '../../components/Loading/index';
+import Female from "../../assets/images/Female.jpeg";
+import Male from "../../assets/images/Male.jpg";
 function UserDetails() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -59,8 +61,8 @@ useEffect(() => {
             <div className="relative flex items-center justify-center">
               <div className="w-[400px] h-[400px] overflow-hidden rounded-xl shadow-lg">
                 <img 
-                  src={userData?.imageUrl} 
-                  alt={userData?.firstName} 
+                  src={userData?.imageUrl || (userData?.gender === 'MALE' ? Male : Female)} 
+                   alt={userData?.lastName} 
                   className="w-full h-full object-cover"
                 />
               </div>
