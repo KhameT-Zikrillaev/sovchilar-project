@@ -2,7 +2,7 @@
   "navbar": {
     "search": "Поиск",
     "profiles": "Анкеты",
-    "stories": "Истории",
+     "contact": "Контакт",
     "createProfile": "Создать анкету"
   },
   "home": {

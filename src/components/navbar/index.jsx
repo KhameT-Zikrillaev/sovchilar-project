@@ -104,9 +104,9 @@ export default function Navbar() {
             >
               {t('navbar.profiles')}
             </button>
-            <Link to="/success-stories" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all">
-              {t('navbar.stories')}
-            </Link>
+            <a href="tel:+998999999999" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all">
+              {t('navbar.contact')}
+            </a>
             <Link 
               to="/auth" 
               className="px-6 py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
@@ -158,9 +158,9 @@ export default function Navbar() {
               <button  onClick={() => handleScrollTo('ankets')} className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
                 {t('navbar.profiles')}
               </button>
-              <button onClick={() => handleScrollTo('ankets')} className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
-                {t('navbar.stories')}
-              </button>
+              <a href="tel:+998999999999" onClick={() => setIsOpen(false)}  className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
+                {t('navbar.contact')}
+              </a>
               <Link 
                 onClick={scrollToTop}
                 to="/auth" 
