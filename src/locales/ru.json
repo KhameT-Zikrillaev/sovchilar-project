@@ -381,6 +381,7 @@
     "status": "Статус",
     "active": "Активный",
     "inactive": "Неактивный",
+     "telegram":"Телеграм",
     "nationality": "Национальность",
     "activeStatus": "Активный",
     "qualification": {
