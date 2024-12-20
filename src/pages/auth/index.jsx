@@ -164,7 +164,7 @@ const handleImageChange = (imageUrl) => {
       {loading ? (
         <SiteLoading />
       ) : (
-        <div className="min-h-screen bg-white  px-4 sm:px-6 lg:px-8 mt-[64px]">
+        <div className="min-h-screen bg-white  px-4 sm:px-6 lg:px-8 mt-[99px]">
           <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-2xl p-8 md:p-8">
               <div className="text-center mb-8">

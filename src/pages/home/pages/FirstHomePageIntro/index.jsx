@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Modal from '../../../../components/customModal/Modal';
+import leftbg from '../../../../assets/images/left-bg.jpg';
+import rightbg from '../../../../assets/images/right-bg.jpg';
 
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState('men');
@@ -129,14 +131,14 @@ export default function FirstHomePageIntro() {
               </div>
               <div className="relative" data-aos="fade-right" data-aos-offset="50">
                 <img 
-                  src="https://images.unsplash.com/photo-1600055882386-5d18b02a0d51?q=80&w=2940" 
+                  src={leftbg}
                   alt="Muslim Family" 
                   className="w-full h-48 object-cover rounded-2xl shadow-xl hover-scale"
                 />
               </div>
               <div className="relative" data-aos="fade-left" data-aos-delay="500" data-aos-offset="50">
                 <img 
-                  src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=2942" 
+                  src={rightbg} 
                   alt="Happy Family" 
                   className="w-full h-48 object-cover rounded-2xl shadow-xl hover-scale"
                 />

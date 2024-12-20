@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://sovchilar.limsa.uz/api/',  // Ваш базовый URL
+    baseURL: 'https://back.sovchilar.net/api',  // Ваш базовый URL
 });
 
 // Response interceptor для обработки ошибок

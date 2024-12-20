@@ -1,0 +1,64 @@
+/* .reklama {
+    background-color: white; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    font-weight: 600;
+    overflow: hidden;
+  } */
+  .reklama {
+    background: linear-gradient(90deg, rgba(133, 57, 95, 0.8), rgba(16, 12, 65, 0.8));
+    backdrop-filter: blur(5px); /* эффект размытия фона */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* добавление тени для глубины */
+  }
+  @keyframes gradientAnimationTEXTREK {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .animate-text-bged {
+    background: linear-gradient(90deg, #ff007f, #ff4500, #ffd700, #00ff7f);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientAnimationTEXTREK 3s infinite;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Пульсирующий эффект для иконок */
+  @keyframes pulseREKLAMA {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+  }
+  
+  .animatepulseicon {
+    animation: pulseREKLAMA 1.5s infinite;
+  }
+  
+  .moving {
+    animation: move 5s linear infinite;
+  }
+
+  @keyframes move {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }

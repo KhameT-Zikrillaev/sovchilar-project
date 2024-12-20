@@ -3,11 +3,13 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logo from '../../assets/images/logo.png';
 import Modal from '../../components/customModal/Modal';
+import ModalSertified from '../../components/sertficatedmodal';
 export default function FooterLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalSetifiedOpen, setIsModalSetifiedOpen] = useState(false);
   const handleScrollTo = (id) => {
     if (location.pathname !== '/') {
       navigate('/');
@@ -142,10 +144,10 @@ export default function FooterLayout() {
                   </Link>
                 </li>
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <Link to="/faq" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <button onClick={() => setIsModalSetifiedOpen(true)} to="/faq" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
-                    {t('footer.forUsers.faq')}
-                  </Link>
+                    {t('footer.forUsers.sertified')}
+                  </button>
                 </li>
                 <li data-aos="fade-left" data-aos-offset="50">
                   <button onClick={() => setIsModalOpen(true)} className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
@@ -191,6 +193,10 @@ export default function FooterLayout() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)} 
+      />
+       <ModalSertified
+        isOpen={isModalSetifiedOpen}
+        onClose={() => setIsModalSetifiedOpen(false)} 
       />
     </footer>
   );

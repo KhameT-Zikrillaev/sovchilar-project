@@ -5,7 +5,7 @@ export default function NotFound() {
   const { t } = useTranslation();
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-cover bg-center p-2" 
+    <div className="w-full min-h-screen flex justify-center items-center bg-cover bg-center p-2 mt-[64px]" 
          style={{
            backgroundImage: `url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=3432')`,
            backgroundPosition: '100% 25%',

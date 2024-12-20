@@ -5,6 +5,7 @@ import FooterLayout from './layout/FooterLayout'
 import SiteLoading from './components/SiteLoading/SiteLoading';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Reklama from './components/Reklama2';
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -24,6 +25,7 @@ function App() {
         <SiteLoading />
       ) : (
         <div className="wrapper">
+          <Reklama />
           <HeaderLayout />
           <MainLayout />
           <FooterLayout />
