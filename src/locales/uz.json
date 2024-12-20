@@ -414,6 +414,10 @@
     "Other": "Boshqa"
   }
   },
+  "reklama":{
+    "text1": "Haqiqiy sevgingizni toping va baxtli oila quring!",
+    "text2": "Sevgi va oila topish imkoniyati – bu yerda."
+  },
   "notFound": {
     "title": "Упс! Sahifa topilmadi",
     "message": "Ko'rinishidan, siz boshqa yo'nalishga boribsiz. Keling, bosh sahifaga qaytaylik!",
