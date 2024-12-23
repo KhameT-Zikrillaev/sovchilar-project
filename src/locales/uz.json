@@ -283,7 +283,7 @@
     },
    "SuccessModal": {
       "title": "Muvaffaqiyat!",
-      "message": "Ma'lumotlaringiz muvaffaqiyatli yuborildi. Tez orada administratorlar siz bilan bog'lanadi!",
+      "message": "Ma'lumotlaringiz muvaffaqiyatli yuborildi. Sizning anketangiz 1 kun ichida ko‘rib chiqiladi va tasdiqlangandan so‘ng qo‘shiladi",
       "buttonText": "Yopish"
     },
     "ErrorModal": {

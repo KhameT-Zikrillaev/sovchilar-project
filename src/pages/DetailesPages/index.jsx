@@ -186,9 +186,9 @@ useEffect(() => {
 </svg>
 
       </div>
-      <a href={`https://t.me/behruzbek_nazarov`} className="ml-4">
+      <a href={`tel:${userData?.phone}`} className="ml-4">
         <h3 className="text-sm font-medium text-gray-500">{t('UserDetails.telegram')}</h3>
-        <p className="text-lg font-semibold text-gray-800">t.me/telegram</p>
+        <p className="text-lg font-semibold text-gray-800">{userData?.phone}</p>
       </a>
     </div>
 
