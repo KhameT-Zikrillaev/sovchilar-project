@@ -57,7 +57,6 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
     { value: '', label: t('home.SecondHomePageSearch.form.maritalStatus.male.all') },
     { value: '&maritalStatus=SINGLE', label: t('home.SecondHomePageSearch.form.maritalStatus.male.single') },
     { value: '&maritalStatus=DIVORCED', label: t('home.SecondHomePageSearch.form.maritalStatus.male.divorced') },
-    { value: '&maritalStatus=WIDOWED', label: t('home.SecondHomePageSearch.form.maritalStatus.male.widowed') },
     { value: '&maritalStatus=MARRIED_SECOND', label: t('home.SecondHomePageSearch.form.maritalStatus.male.married_second') },
   ];
 
@@ -65,7 +64,6 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
     { value: '', label: t('home.SecondHomePageSearch.form.maritalStatus.female.all') },
     { value: '&maritalStatus=SINGLE', label: t('home.SecondHomePageSearch.form.maritalStatus.female.single') },
     { value: '&maritalStatus=DIVORCED', label: t('home.SecondHomePageSearch.form.maritalStatus.female.divorced') },
-    { value: '&maritalStatus=WIDOWED', label: t('home.SecondHomePageSearch.form.maritalStatus.female.widowed') },
   ];
 
   const getMaritalStatusOptions = () => (gender === 'gender=MALE' ? maleMaritalStatuses : femaleMaritalStatuses);
@@ -131,18 +129,34 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
           <div className="flex gap-4 items-center">
             <input
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               min="18"
               max="90"
               value={minAge}
+              maxLength={2}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
               onChange={(e) => setMinAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
             <span>-</span>
             <input
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               min="18"
               max="90"
+              maxLength={2}
               value={maxAge}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
               onChange={(e) => setMaxAge(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
