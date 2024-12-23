@@ -20,13 +20,14 @@ const SearchIcon = () => (
   </svg>
 );
 
-const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) => {
+const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmitted, setIsSubmitted, isSubmittedAge, setIsSubmittedAge }, ref) => {
   const { t } = useTranslation();
   const [gender, setGender] = useState('');
   const [minAge, setMinAge] = useState(18);
-  const [maxAge, setMaxAge] = useState(40);
+  const [maxAge, setMaxAge] = useState(90);
   const [location, setLocation] = useState('');
   const [maritalStatus, setMaritalStatus] = useState('');
+
   useImperativeHandle(ref, () => ({
     resetForm: () => {
       setGender('');
@@ -36,6 +37,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
       setMaritalStatus('');
     },
   }));
+
   const cities = [
     { value: '', label: t('home.SecondHomePageSearch.form.city.options.all') },
     { value: '&address=TOSHKENT', label: t('home.SecondHomePageSearch.form.city.options.Tashkent') },
@@ -73,27 +75,32 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
     setMaritalStatus('');
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
+    setIsSubmittedAge(true);
+    
+    // Проверяем, выбран ли пол
+    if (!gender) {
+      return;
+    }
 
-    if (!minAge || !maxAge || minAge > maxAge) {
-      alert(t('home.SecondHomePageSearch.form.ageError'));
+    if (!minAge || !maxAge || minAge > maxAge || minAge < 18 || maxAge > 90) {
       return;
     }
        
     // Вызываем функцию поиска, переданную из родителя
     onSearch(gender, minAge, maxAge, location, maritalStatus);
-    setIsSearchActive(true)
+    setIsSearchActive(true);
   };
 
   return (
-    <form  data-aos="flip-up" data-aos-offset="50" onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8">
+    <form data-aos="flip-up" data-aos-offset="50" onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Gender Selection */}
         <div data-aos-delay="500" data-aos="fade-right" data-aos-offset="50">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            {t('home.SecondHomePageSearch.form.gender.label')}
+            {t('home.SecondHomePageSearch.form.gender.label')} <span className="text-rose-500">*</span>
           </label>
           <div className="flex gap-4">
             <button
@@ -119,6 +126,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
               {t('home.SecondHomePageSearch.form.gender.female')}
             </button>
           </div>
+          {isSubmitted && !gender && <p className="text-sm text-rose-500 text-center mt-2">{t('auth.FormOne.Validation.gender.required')}</p>}
         </div>
 
         {/* Age Range */}
@@ -161,6 +169,9 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
+          {isSubmittedAge && (!minAge || !maxAge || minAge > maxAge || minAge < 18 || maxAge > 99) && (
+            <p className="text-sm text-rose-500 text-center mt-2">{t('auth.FormOne.Validation.age.default')}</p>
+          )}
         </div>
       </div>
 

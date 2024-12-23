@@ -14,6 +14,9 @@ export default function SecondHomePageSearch() {
   const { visibleCardCount, updateVisibleCardCount } = useCardContext();
   const [isLoading, setIsLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState(''); // Фильтр по умолчанию
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmittedAge, setIsSubmittedAge] = useState(false);
+  const formRef = useRef();
 
   // Функция для выполнения API-запроса
   const fetchUser = async (gender, ageFrom, ageTo, address, maritalStatus) => {
@@ -49,13 +52,13 @@ export default function SecondHomePageSearch() {
     updateVisibleCardCount(visibleCardCount + 4);
   };
 
-  const formRef = useRef();
-
   const handleReset = () => {
     setIsSearchActive(false);
     setActiveFilter('');
     fetchUser('', 18, 100, '', ''); // Сбрасываем фильтр и выполняем запрос на API
     updateVisibleCardCount(8); // Сбрасываем количество отображаемых пользователей
+    setIsSubmitted(false);
+    setIsSubmittedAge(false);
     if (formRef.current) {
       formRef.current.resetForm(); // Сбрасываем форму через реф
     }
@@ -72,7 +75,15 @@ export default function SecondHomePageSearch() {
           </p>
         </div>
 
-        <SecondHomeSearchForm onSearch={fetchUser} ref={formRef} setIsSearchActive={setIsSearchActive} />
+        <SecondHomeSearchForm 
+          onSearch={fetchUser} 
+          ref={formRef} 
+          setIsSearchActive={setIsSearchActive}
+          isSubmitted={isSubmitted}
+          isSubmittedAge={isSubmittedAge}
+          setIsSubmitted={setIsSubmitted}
+          setIsSubmittedAge={setIsSubmittedAge}
+        />
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8 pt-[64px]" id="ankets">
           {!isSearchActive && (

@@ -184,6 +184,7 @@
         },
         "age": {
           "required": "Yosh maydonini to‘ldiring",
+          "default": "Yoshni to'g'ri kiriting! 18-99",
           "min": "Yosh 18 dan kam bo‘lmasligi kerak",
           "max": "Yosh 100 dan oshmasligi kerak"
         },
