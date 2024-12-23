@@ -130,7 +130,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
           </label>
           <div className="flex gap-4 items-center">
             <input
-              type="number"
+              type="text"
               min="18"
               max="90"
               value={minAge}
@@ -139,7 +139,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive }, ref) =
             />
             <span>-</span>
             <input
-              type="number"
+              type="text"
               min="18"
               max="90"
               value={maxAge}

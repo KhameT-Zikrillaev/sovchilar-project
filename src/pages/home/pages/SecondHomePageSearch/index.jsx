@@ -109,6 +109,16 @@ export default function SecondHomePageSearch() {
               </button>
             </>
           )}
+           {isSearchActive && allUsers?.length > 0 && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={handleReset}
+              className="px-6 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors duration-300"
+            >
+              {t('home.SecondHomePageSearch.resetButton')}
+            </button>
+          </div>
+        )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -137,16 +147,7 @@ export default function SecondHomePageSearch() {
           </div>
         )}
 
-        {isSearchActive && allUsers?.length > 0 && (
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={handleReset}
-              className="px-6 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors duration-300"
-            >
-              {t('home.SecondHomePageSearch.resetSearch')}
-            </button>
-          </div>
-        )}
+       
       </div>
     </section>
   );
