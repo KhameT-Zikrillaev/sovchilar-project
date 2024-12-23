@@ -3,7 +3,7 @@
     "search": "Qidiruv",
     "profiles": "Anketalar",
     "contact": "Aloqa",
-    "contactmobile":"Aloqa +(99) 999 99 99",
+    "contactmobile":"Aloqa +(50) 719 33 33",
     "createProfile": "Anketa yaratish"
   },
   "home": {
@@ -200,7 +200,7 @@
         },
         "telegram": {
           "required": "Iltimos, Telegramingizni yozing",
-          "invalid": "To‘g‘ri Telegramdan foydalaning",
+          "invalid": "To‘g‘ri Telegramdan foydalaning ->Xamidulla99",
           "max": "Telegram uzunligi 50 ta belgidan oshmasligi kerak"
         }
       }

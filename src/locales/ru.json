@@ -3,7 +3,7 @@
     "search": "Поиск",
     "profiles": "Анкеты",
      "contact": "Контакт",
-     "contactmobile":"Контакт +(99) 999 99 99",
+     "contactmobile":"Контакт +(50) 719 33 33",
     "createProfile": "Создать анкету"
   },
   "home": {
@@ -201,7 +201,7 @@
         },
         "telegram": {
           "required": "Пожалуйста, введите Telegram",
-          "invalid": "Неверный формат Telegram",
+          "invalid": "Неверный формат Telegram ->Xamidulla99",
           "max": "Telegram должен быть не более 50 символов"
         }
       }

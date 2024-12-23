@@ -23,6 +23,13 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
     onInputChange(e);
   };
 
+  const handleNameInput = (e) => {
+    // Заменяем все цифры и специальные символы на пустую строку
+    const value = e.target.value.replace(/[^A-Za-zА-Яа-яЁёҲҳҚқҒғЎўЪъ\s-]/g, '');
+    e.target.value = value;
+    onInputChange(e);
+  };
+
   const inputClasses = "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300";
   const selectClasses = "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white";
   const labelClasses = "block text-sm font-medium text-gray-700 mb-2";
@@ -45,7 +52,7 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
                 id="firstName"
                 name="firstName"
                 {...register('firstName')}
-                onChange={onInputChange} // Оставляем onInputChange
+                onChange={handleNameInput}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
               />
               {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
@@ -60,7 +67,7 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
                 id="lastName"
                 name="lastName"
                 {...register('lastName')}
-                onChange={onInputChange} // Оставляем onInputChange
+                onChange={handleNameInput}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
               />
               {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}

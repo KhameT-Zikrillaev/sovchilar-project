@@ -89,39 +89,18 @@ const handleImageChange = (imageUrl) => {
     setStep(1)
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   const userData = {
-  //     firstName: formData.firstName,
-  //     lastName: formData.lastName,
-  //     phone: formData.phone,
-  //     age: formData.age,
-  //     gender: formData.gender, 
-  //     address: formData.address,
-  //     qualification: formData.qualification,
-  //     jobTitle: formData.jobTitle,
-  //     nationality: formData.nationality, 
-  //     maritalStatus: formData.maritalStatus,
-  //     description: formData.description,
-  //     imageUrl: formData.imageUrL
-  //   };
-  //   try {
-  //     await addNewUsers(userData);
-  //     console.log(userData)
-  //   } catch (error) {
-  //     console.error("Error adding teacher:", error);
-  //   }
-   
-  //   console.log(formData)
-  //   setIsModalOpen(true)
-  // }
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~` ishlidi`
-  const handleSubmit = async (e) => {
-    // e.preventDefault();
-  
+  const handleSubmit = async () => {
+    const capitalizeFirstLetter = (str) => {
+      if (!str) return str;
+      // Если первая буква уже заглавная, оставляем как есть
+      if (str[0] === str[0].toUpperCase()) return str;
+      // Иначе делаем первую букву заглавной
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
     const userData = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
+      firstName: capitalizeFirstLetter(formData.firstName),
+      lastName: capitalizeFirstLetter(formData.lastName),
       phone: formData.phone,
       age: formData.age,
       gender: formData.gender.toUpperCase(),

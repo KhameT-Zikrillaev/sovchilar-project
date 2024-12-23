@@ -104,7 +104,7 @@ export default function Navbar() {
             >
               {t('navbar.profiles')}
             </button>
-            <a href="tel:+998999999999" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all">
+            <a href="tel:+998507193333" className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all">
               {t('navbar.contact')}
             </a>
             <Link 
@@ -158,7 +158,7 @@ export default function Navbar() {
               <button  onClick={() => handleScrollTo('ankets')} className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
                 {t('navbar.profiles')}
               </button>
-              <a href="tel:+998999999999" onClick={() => setIsOpen(false)}  className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
+              <a href="tel:+998507193333" onClick={() => setIsOpen(false)}  className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
                 {t('navbar.contactmobile')}
               </a>
               <Link 
