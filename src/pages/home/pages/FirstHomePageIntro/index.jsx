@@ -52,7 +52,7 @@ export default function FirstHomePageIntro() {
         {/* Главный контент */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="lg:w-1/2">
-            <div className="backdrop-blur-md rounded-[40px] p-14 bg-gradient-to-br from-black/80 to-black/60">
+            <div className="backdrop-blur-md rounded-[40px] px-4 sm:px-14 py-10 bg-gradient-to-br from-black/80 to-black/60">
               {/* Заголовок с подзаголовком */}
               <div className="mb-12">
                 <div data-aos="zoom-out-up" data-aos-offset="50" data-aos-delay="500" className="inline-block px-6 py-2 rounded-full bg-rose-500/30 text-rose-200 text-sm font-medium mb-6">
@@ -110,8 +110,8 @@ export default function FirstHomePageIntro() {
               <div className="grid grid-cols-3 gap-4">
                 {stats.map((stat, index) => (
                   <div data-aos="zoom-in"  data-aos-delay="500" key={index} className="text-center px-4 py-6 rounded-2xl bg-white/10 hover:bg-white/20 transition duration-200">
-                    <div className="text-3xl mb-2">{stat.icon}</div>
-                    <div className="text-2xl font-bold text-white mb-1">{stat.number}</div>
+                    <div className=" text-2xl  sm:text-3xl mb-2">{stat.icon}</div>
+                    <div className=" text-xl  sm:text-2xl font-bold text-white mb-1">{stat.number}</div>
                     <div className="text-base text-gray-200">{stat.label}</div>
                   </div>
                 ))}

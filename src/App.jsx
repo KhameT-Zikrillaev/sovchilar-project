@@ -6,6 +6,8 @@ import SiteLoading from './components/SiteLoading/SiteLoading';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Reklama from './components/Reklama2';
+import { CardProvider } from './context/CardContext';
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +22,7 @@ function App() {
     AOS.init({ duration: 1000, once: true }); // once: true - анимация срабатывает только один раз
   }, []);
   return (
-    <>
+    <CardProvider>
       {loading ? (
         <SiteLoading />
       ) : (
@@ -31,7 +33,7 @@ function App() {
           <FooterLayout />
         </div>
       )}
-    </>
+    </CardProvider>
   );
 }
 

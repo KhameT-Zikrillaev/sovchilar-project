@@ -57,7 +57,7 @@ useEffect(() => {
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* Верхняя секция с фото и основной информацией */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-2 sm:p-8">
             <div className="relative flex items-center justify-center">
               <div className="w-[400px] h-[400px] overflow-hidden rounded-xl shadow-lg">
                 <img 
@@ -84,12 +84,12 @@ useEffect(() => {
           </div>
 
           {/* Основная информация */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8 bg-gray-50">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-1 sm:p-8 bg-gray-50">
             <div className="lg:col-span-2 space-y-8">
               {/* О себе */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">{t('UserDetails.aboutMe')}</h2>
-                <p className="text-gray-600 leading-relaxed">{userData?.description}</p>
+                <h2 className="text-2xl font-bold text-gray-800 p-2 mb-4">{t('UserDetails.aboutMe')}</h2>
+                <p className="text-gray-600 p-2 leading-relaxed">{userData?.description}</p>
               </section>
 
               {/* Основная информация */}
@@ -189,7 +189,7 @@ useEffect(() => {
       </div>
       <a href={`tel:${userData?.phone}`} className="ml-4">
         <h3 className="text-sm font-medium text-gray-500">{t('UserDetails.phone')}</h3>
-        <p className="text-lg font-semibold text-gray-800">{userData?.phone}</p>
+        <p className=" text-sm   sm:text-lg font-semibold text-gray-800">{userData?.phone}</p>
       </a>
     </div>
 

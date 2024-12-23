@@ -6,9 +6,9 @@ const Modal = ({ isOpen, onClose }) => {
 
     return (
         <div className="fixed z-50 inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 bg-opacity-70 flex justify-center items-center">
-            <div className="bg-white p-10 rounded-xl shadow-2xl relative w-4/5 max-h-[85vh] overflow-y-auto border-4 border-indigo-600">
+            <div className="bg-white mx-2 p-10 rounded-xl shadow-2xl relative sm:w-4/5 max-h-[85vh] overflow-y-auto border-4 border-indigo-600">
                 <button
-                    className="absolute top-4 right-4 text-3xl font-bold text-gray-600 hover:text-red-600 transition-transform transform hover:scale-110 focus:outline-none"
+                    className="fixed top-4 right-4 sm:right-8 text-4xl font-bold text-white hover:text-red-600 transition-transform transform hover:scale-110 focus:outline-none"
                     onClick={onClose}
                 >
                     &times;
