@@ -1,12 +1,16 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const CardContext = createContext();
 
 export function CardProvider({ children }) {
-  const [visibleCardCount, setVisibleCardCount] = useState(8);
+  const [visibleCardCount, setVisibleCardCount] = useState(() => {
+    const savedCount = localStorage.getItem('visibleCardCount');
+    return savedCount ? parseInt(savedCount) : 8;
+  });
 
   const updateVisibleCardCount = (count) => {
     setVisibleCardCount(count);
+    localStorage.setItem('visibleCardCount', count.toString());
   };
 
   return (

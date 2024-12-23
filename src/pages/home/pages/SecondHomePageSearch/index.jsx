@@ -9,11 +9,19 @@ import { useCardContext } from '../../../../context/CardContext';
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
   const { getRecentUser } = useRecentUser();
-  const [isSearchActive, setIsSearchActive] = useState(false)
-  const [allUsers, setAllUsers] = useState([]); // Все пользователи
+  const [isSearchActive, setIsSearchActive] = useState(() => {
+    return localStorage.getItem('isSearchActive') === 'true';
+  });
+  const [allUsers, setAllUsers] = useState(() => {
+    // Пытаемся получить сохраненных пользователей из localStorage
+    const savedUsers = localStorage.getItem('searchUsers');
+    return savedUsers ? JSON.parse(savedUsers) : [];
+  });
   const { visibleCardCount, updateVisibleCardCount } = useCardContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [activeFilter, setActiveFilter] = useState(''); // Фильтр по умолчанию
+  const [activeFilter, setActiveFilter] = useState(() => {
+    return localStorage.getItem('activeFilter') || '';
+  });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmittedAge, setIsSubmittedAge] = useState(false);
   const formRef = useRef();
@@ -21,25 +29,105 @@ export default function SecondHomePageSearch() {
   // Функция для выполнения API-запроса
   const fetchUser = async (gender, ageFrom, ageTo, address, maritalStatus) => {
     console.log(gender, ageFrom, ageTo, address, maritalStatus);  
-    setIsLoading(true); // Показываем индикатор загрузки
+    setIsLoading(true);
     try {
       const user = await getRecentUser(gender, ageFrom, ageTo, address, maritalStatus);
       console.log('Fetched user:', user?.data?.items);
-      setAllUsers(user?.data?.items || []); // Устанавливаем пользователей
-      if (isSearchActive) {
-        updateVisibleCardCount(8);
-      }
+      const newUsers = user?.data?.items || [];
+      setAllUsers(newUsers);
+      // Сохраняем результаты поиска и параметры
+      localStorage.setItem('searchUsers', JSON.stringify(newUsers));
+      localStorage.setItem('isSearchActive', 'true');
+      localStorage.setItem('activeFilter', gender || '');
+      localStorage.setItem('searchParams', JSON.stringify({
+        gender,
+        ageFrom,
+        ageTo,
+        address,
+        maritalStatus
+      }));
     } catch (error) {
       console.error('Error fetching user:', error);
     } finally {
-      setIsLoading(false); // Скрываем индикатор загрузки
+      setIsLoading(false);
     }
   };
 
+  // Очищаем localStorage и сбрасываем форму при закрытии/обновлении страницы
   useEffect(() => {
-    // При загрузке страницы выполняем запрос с фильтром "all"
-    fetchUser('', 18, 100, '', '');
+    const handleBeforeUnload = () => {
+      localStorage.removeItem('visibleCardCount');
+      localStorage.removeItem('searchUsers');
+      localStorage.removeItem('isSearchActive');
+      localStorage.removeItem('activeFilter');
+      localStorage.removeItem('searchParams');
+      
+      // Сбрасываем состояния
+      setIsSearchActive(false);
+      setActiveFilter('');
+      setIsSubmitted(false);
+      setIsSubmittedAge(false);
+      updateVisibleCardCount(8);
+      
+      // Сбрасываем форму
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
+
+  useEffect(() => {
+    // Проверяем, есть ли сохраненные параметры поиска
+    const savedParams = localStorage.getItem('searchParams');
+    const activeFilterValue = localStorage.getItem('activeFilter');
+
+    if (savedParams && activeFilterValue) {
+      // Если есть активный фильтр, восстанавливаем параметры поиска
+      const params = JSON.parse(savedParams);
+      fetchUser(params.gender, params.ageFrom, params.ageTo, params.address, params.maritalStatus);
+    } else {
+      // Если нет активного фильтра, сбрасываем форму и делаем начальный запрос
+      if (formRef.current) {
+        formRef.current.resetForm();
+      }
+      fetchUser('', 18, 100, '', '');
+    }
+  }, []);
+
+  // Функция для сброса поиска
+  const resetSearch = () => {
+    localStorage.removeItem('searchUsers');
+    localStorage.removeItem('isSearchActive');
+    localStorage.removeItem('activeFilter');
+    localStorage.removeItem('searchParams');
+    localStorage.removeItem('searchFormGender');
+    localStorage.removeItem('searchFormMinAge');
+    localStorage.removeItem('searchFormMaxAge');
+    localStorage.removeItem('searchFormLocation');
+    localStorage.removeItem('searchFormMaritalStatus');
+    setIsSearchActive(false);
+    setActiveFilter('');
+    if (formRef.current) {
+      formRef.current.resetForm();
+    }
+    updateVisibleCardCount(8);
+    fetchUser('', 18, 100, '', '');
+  };
+
+  const handleReset = () => {
+    resetSearch();
+    setIsSubmitted(false);
+    setIsSubmittedAge(false);
+    if (formRef.current) {
+      formRef.current.resetForm(); // Сбрасываем форму через реф
+    }
+  };
 
   // Обработчик клика на кнопки фильтров
   const onFilterClick = (filter) => {
@@ -49,19 +137,8 @@ export default function SecondHomePageSearch() {
 
   // Функция для загрузки дополнительных пользователей
   const onLoadMore = () => {
-    updateVisibleCardCount(visibleCardCount + 4);
-  };
-
-  const handleReset = () => {
-    setIsSearchActive(false);
-    setActiveFilter('');
-    fetchUser('', 18, 100, '', ''); // Сбрасываем фильтр и выполняем запрос на API
-    updateVisibleCardCount(8); // Сбрасываем количество отображаемых пользователей
-    setIsSubmitted(false);
-    setIsSubmittedAge(false);
-    if (formRef.current) {
-      formRef.current.resetForm(); // Сбрасываем форму через реф
-    }
+    const newCount = visibleCardCount + 4;
+    updateVisibleCardCount(newCount);
   };
 
   return (

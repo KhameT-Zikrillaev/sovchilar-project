@@ -19,6 +19,10 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
     defaultValues: formData,
   });
 
+  const handleTelegramChange = (e) => {
+    onInputChange(e);
+  };
+
   const inputClasses = "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300";
   const selectClasses = "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white";
   const labelClasses = "block text-sm font-medium text-gray-700 mb-2";
@@ -62,21 +66,38 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
               {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                {t('auth.FormOne.phoneLabel')}
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                {...register('phone')}
-                placeholder="+998 __ ___ __ __"
-                onChange={onInputChange} // Оставляем onInputChange
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
-              />
-              {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
-              <p className="mt-1 text-sm text-gray-500">{t('auth.FormOne.formatPhone')}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('auth.FormOne.phoneLabel')}
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  {...register('phone')}
+                  placeholder="+998 __ ___ __ __"
+                  onChange={onInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
+                />
+                {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+                <p className="mt-1 text-sm text-gray-500">{t('auth.FormOne.formatPhone')}</p>
+              </div>
+
+              <div>
+                <label htmlFor="telegram" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('auth.FormOne.telegramLabel')}
+                </label>
+                <input
+                  type="text"
+                  id="telegram"
+                  name="telegram"
+                  {...register('telegram')}
+                  onChange={handleTelegramChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-rose-500"
+                />
+                {errors.telegram && <p className="text-red-500 text-sm">{errors.telegram.message}</p>}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -118,20 +139,20 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
                 onChange={onInputChange} // Оставляем onInputChange
                 className={selectClasses}
               >
-             <option value="">{t('auth.FormOne.selectCity.select')}</option>
-                  <option value="Toshkent">{t('auth.FormOne.selectCity.Toshkent')}</option>
-                  <option value="Andijon">{t('auth.FormOne.selectCity.Andijon')}</option>
-                  <option value="Buxoro">{t('auth.FormOne.selectCity.Buxoro')}</option>
-                  <option value="Fargona">{t('auth.FormOne.selectCity.Fargona')}</option>
-                  <option value="Jizzax">{t('auth.FormOne.selectCity.Jizzax')}</option>
-                  <option value="Xorazm">{t('auth.FormOne.selectCity.Xorazm')}</option>
-                  <option value="Namangan">{t('auth.FormOne.selectCity.Namangan')}</option>
-                  <option value="Navoiy">{t('auth.FormOne.selectCity.Navoiy')}</option>
-                  <option value="Qashqadaryo">{t('auth.FormOne.selectCity.Qashqadaryo')}</option>
-                  <option value="Samarqand">{t('auth.FormOne.selectCity.Samarqand')}</option>
-                  <option value="Sirdaryo">{t('auth.FormOne.selectCity.Sirdaryo')}</option>
-                  <option value="Surxondaryo">{t('auth.FormOne.selectCity.Surxondaryo')}</option>
-                  <option value="Qoraqalpogiston">{t('auth.FormOne.selectCity.Qoraqalpogiston')}</option>
+                <option value="">{t('auth.FormOne.selectCity.select')}</option>
+                <option value="Toshkent">{t('auth.FormOne.selectCity.Toshkent')}</option>
+                <option value="Andijon">{t('auth.FormOne.selectCity.Andijon')}</option>
+                <option value="Buxoro">{t('auth.FormOne.selectCity.Buxoro')}</option>
+                <option value="Fargona">{t('auth.FormOne.selectCity.Fargona')}</option>
+                <option value="Jizzax">{t('auth.FormOne.selectCity.Jizzax')}</option>
+                <option value="Xorazm">{t('auth.FormOne.selectCity.Xorazm')}</option>
+                <option value="Namangan">{t('auth.FormOne.selectCity.Namangan')}</option>
+                <option value="Navoiy">{t('auth.FormOne.selectCity.Navoiy')}</option>
+                <option value="Qashqadaryo">{t('auth.FormOne.selectCity.Qashqadaryo')}</option>
+                <option value="Samarqand">{t('auth.FormOne.selectCity.Samarqand')}</option>
+                <option value="Sirdaryo">{t('auth.FormOne.selectCity.Sirdaryo')}</option>
+                <option value="Surxondaryo">{t('auth.FormOne.selectCity.Surxondaryo')}</option>
+                <option value="Qoraqalpogiston">{t('auth.FormOne.selectCity.Qoraqalpogiston')}</option>
               </select>
               {errors.address && <p className="text-red-500 text-sm">{errors.address.message}</p>}
             </div>

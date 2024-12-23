@@ -61,6 +61,7 @@ export default function Auth() {
     nationality: '', 
     maritalStatus: '',
     description: '',
+    telegram: '',
     // terms: null,
     imageUrL: ""
   })
@@ -129,6 +130,7 @@ const handleImageChange = (imageUrl) => {
       jobTitle: formData.jobTitle,
       nationality: formData.nationality,
       status: "INACTIVE",
+      telegram: formData.telegram ? (formData.telegram.includes('t.me/') ? formData.telegram : `t.me/${formData.telegram}`) : '',
       maritalStatus: formData.maritalStatus.toUpperCase(),
       description: formData.description,
       imageUrl: formData.imageUrL

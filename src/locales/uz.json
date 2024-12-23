@@ -3,6 +3,7 @@
     "search": "Qidiruv",
     "profiles": "Anketalar",
     "contact": "Aloqa",
+    "contactmobile":"Aloqa +(99) 999 99 99",
     "createProfile": "Anketa yaratish"
   },
   "home": {
@@ -140,6 +141,7 @@
       "agePlaceholder": "Yoshni kiriting",
       "genderLabel": "Jins",
       "addressLabel": "Manzil",
+      "telegramLabel": "Telegram",
       "firstNameRequired": "Ismni to'ldirish shart",
       "lastNameRequired": "Familiya to'ldirish shart",
       "phoneRequired": "Telefon raqami to'ldirish shart",
@@ -195,6 +197,11 @@
         "address": {
           "required": "Iltimos, shaharni tanlang",
           "invalid": "Ro‘yxatdagi shaharni tanlang"
+        },
+        "telegram": {
+          "required": "Iltimos, Telegramingizni yozing",
+          "invalid": "To‘g‘ri Telegramdan foydalaning",
+          "max": "Telegram uzunligi 50 ta belgidan oshmasligi kerak"
         }
       }
     },

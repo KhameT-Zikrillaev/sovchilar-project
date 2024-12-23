@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -22,11 +22,40 @@ const SearchIcon = () => (
 
 const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmitted, setIsSubmitted, isSubmittedAge, setIsSubmittedAge }, ref) => {
   const { t } = useTranslation();
-  const [gender, setGender] = useState('');
-  const [minAge, setMinAge] = useState(18);
-  const [maxAge, setMaxAge] = useState(90);
-  const [location, setLocation] = useState('');
-  const [maritalStatus, setMaritalStatus] = useState('');
+  const [gender, setGender] = useState(() => {
+    return localStorage.getItem('searchFormGender') || '';
+  });
+  const [minAge, setMinAge] = useState(() => {
+    return parseInt(localStorage.getItem('searchFormMinAge')) || 18;
+  });
+  const [maxAge, setMaxAge] = useState(() => {
+    return parseInt(localStorage.getItem('searchFormMaxAge')) || 90;
+  });
+  const [location, setLocation] = useState(() => {
+    return localStorage.getItem('searchFormLocation') || '';
+  });
+  const [maritalStatus, setMaritalStatus] = useState(() => {
+    return localStorage.getItem('searchFormMaritalStatus') || '';
+  });
+
+  // Очищаем localStorage только при закрытии вкладки/сайта
+  useEffect(() => {
+    const handleUnload = () => {
+      // Проверяем, что это действительно закрытие, а не обновление
+      if (!window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
+        localStorage.removeItem('searchFormGender');
+        localStorage.removeItem('searchFormMinAge');
+        localStorage.removeItem('searchFormMaxAge');
+        localStorage.removeItem('searchFormLocation');
+        localStorage.removeItem('searchFormMaritalStatus');
+      }
+    };
+
+    window.addEventListener('unload', handleUnload);
+    return () => {
+      window.removeEventListener('unload', handleUnload);
+    };
+  }, []);
 
   useImperativeHandle(ref, () => ({
     resetForm: () => {
@@ -35,8 +64,40 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
       setMaxAge(90);
       setLocation('');
       setMaritalStatus('');
+      // Очищаем localStorage при сбросе
+      localStorage.removeItem('searchFormGender');
+      localStorage.removeItem('searchFormMinAge');
+      localStorage.removeItem('searchFormMaxAge');
+      localStorage.removeItem('searchFormLocation');
+      localStorage.removeItem('searchFormMaritalStatus');
     },
   }));
+
+  // Сохраняем значения в localStorage при изменении
+  const handleGenderChange = (newGender) => {
+    setGender(newGender);
+    localStorage.setItem('searchFormGender', newGender);
+  };
+
+  const handleMinAgeChange = (value) => {
+    setMinAge(value);
+    localStorage.setItem('searchFormMinAge', value);
+  };
+
+  const handleMaxAgeChange = (value) => {
+    setMaxAge(value);
+    localStorage.setItem('searchFormMaxAge', value);
+  };
+
+  const handleLocationChange = (value) => {
+    setLocation(value);
+    localStorage.setItem('searchFormLocation', value);
+  };
+
+  const handleMaritalStatusChange = (value) => {
+    setMaritalStatus(value);
+    localStorage.setItem('searchFormMaritalStatus', value);
+  };
 
   const cities = [
     { value: '', label: t('home.SecondHomePageSearch.form.city.options.all') },
@@ -69,11 +130,6 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
   ];
 
   const getMaritalStatusOptions = () => (gender === 'gender=MALE' ? maleMaritalStatuses : femaleMaritalStatuses);
-
-  const handleGenderChange = (newGender) => {
-    setGender(newGender);
-    setMaritalStatus('');
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -148,7 +204,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
                   e.preventDefault();
                 }
               }}
-              onChange={(e) => setMinAge(Number(e.target.value))}
+              onChange={(e) => handleMinAgeChange(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
             <span>-</span>
@@ -165,7 +221,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
                   e.preventDefault();
                 }
               }}
-              onChange={(e) => setMaxAge(Number(e.target.value))}
+              onChange={(e) => handleMaxAgeChange(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
@@ -183,7 +239,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
           </label>
           <select
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={(e) => handleLocationChange(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
           >
             {cities.map((city) => (
@@ -201,7 +257,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
           </label>
           <select
             value={maritalStatus}
-            onChange={(e) => setMaritalStatus(e.target.value)}
+            onChange={(e) => handleMaritalStatusChange(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
           >
             {getMaritalStatusOptions().map((status) => (

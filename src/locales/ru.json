@@ -3,6 +3,7 @@
     "search": "Поиск",
     "profiles": "Анкеты",
      "contact": "Контакт",
+     "contactmobile":"Контакт +(99) 999 99 99",
     "createProfile": "Создать анкету"
   },
   "home": {
@@ -140,6 +141,7 @@
       "agePlaceholder": "Введите возраст",
       "genderLabel": "Пол",
       "addressLabel": "Адрес",
+      "telegramLabel": "Телеграм",
       "firstNameRequired": "Имя обязательно для заполнения",
       "lastNameRequired": "Фамилия обязательна для заполнения",
       "phoneRequired": "Номер телефона обязателен для заполнения",
@@ -196,6 +198,11 @@
         "address": {
           "required": "Пожалуйста, выберите город",
           "invalid": "Выберите город из списка"
+        },
+        "telegram": {
+          "required": "Пожалуйста, введите Telegram",
+          "invalid": "Неверный формат Telegram",
+          "max": "Telegram должен быть не более 50 символов"
         }
       }
 

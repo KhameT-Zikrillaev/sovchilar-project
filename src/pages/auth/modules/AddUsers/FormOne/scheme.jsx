@@ -14,8 +14,10 @@ export const scheme = z.object({
   
   phone: z
     .string()
-    .min(1, i18n.t("auth.FormOne.Validation.phone.required"))
-    .regex(/^\+998[0-9]{9}$/, i18n.t("auth.FormOne.Validation.phone.invalid")),
+    .optional()
+    .refine(val => !val || /^\+998[0-9]{9}$/.test(val), {
+      message: i18n.t("auth.FormOne.Validation.phone.invalid")
+    }),
   
   age: z
     .preprocess(
@@ -43,5 +45,11 @@ export const scheme = z.object({
       "Sirdaryo", "Surxondaryo", "Qoraqalpogiston"
     ].includes(value), {
       message: i18n.t("auth.FormOne.Validation.address.invalid")
-    })
+    }),
+    
+  telegram: z
+    .string()
+    .min(1, i18n.t("auth.FormOne.Validation.telegram.required"))
+    .max(50, i18n.t("auth.FormOne.Validation.telegram.max"))
+    .regex(/^[a-zA-Z0-9_]{5,32}$/, i18n.t("auth.FormOne.Validation.telegram.invalid"))
 });

@@ -159,7 +159,7 @@ export default function Navbar() {
                 {t('navbar.profiles')}
               </button>
               <a href="tel:+998999999999" onClick={() => setIsOpen(false)}  className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg">
-                {t('navbar.contact')}
+                {t('navbar.contactmobile')}
               </a>
               <Link 
                 onClick={scrollToTop}
