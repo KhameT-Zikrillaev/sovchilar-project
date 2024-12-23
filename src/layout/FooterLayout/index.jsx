@@ -72,7 +72,7 @@ export default function FooterLayout() {
 
         <div className="max-w-7xl mx-auto px-4 py-20">
           {/* Основной контент */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-12 mb-16">
             {/* Лого и описание */}
             <div  className="col-span-1 md:col-span-5 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
               <Link to="/" data-aos="zoom-out-up" data-aos-offset="50" className="flex items-center gap-3 text-4xl mb-6 group">
@@ -106,13 +106,13 @@ export default function FooterLayout() {
             </div>
 
             {/* Навигация */}
-            <div className="col-span-1 md:col-span-3 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
+            <div className="col-span-1 text-center md:text-left md:col-span-3 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
               <h3 data-aos="fade-right" data-aos-offset="50" className="text-xl font-bold mb-6 text-white">{t('footer.navigation.title')}</h3>
               <ul className="space-y-4">
-                <li data-aos="fade-right" data-aos-offset="50">
+                <li  data-aos="fade-right" data-aos-offset="50">
                   <button 
                     onClick={() => handleScrollTo('search')}
-                    className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group"
+                    className="text-gray-200  hover:text-rose-400 transition-all duration-300 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.navigation.search')}
@@ -134,30 +134,30 @@ export default function FooterLayout() {
             </div>
 
             {/* Для пользователей */}
-            <div className="col-span-1 md:col-span-3 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
+            <div className="col-span-1 text-center md:text-left md:col-span-3 backdrop-blur-sm bg-black/20 p-8 rounded-3xl">
               <h3 data-aos="fade-left" data-aos-offset="50" className="text-xl font-bold mb-6 text-white">{t('footer.forUsers.title')}</h3>
-              <ul className="space-y-4">
+              <ul className="space-y-4 ">
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <Link to="/auth" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
-                    <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
+                  <Link to="/auth" className="text-gray-200   hover:text-rose-400 transition-all duration-300 flex items-center group">
+                    <span className="w-2   h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.createProfile')}
                   </Link>
                 </li>
                 <li data-aos="fade-left" data-aos-offset="50">
                   <button onClick={() => setIsModalSetifiedOpen(true)} to="/faq" className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
-                    <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
+                    <span className="w-2  h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.sertified')}
                   </button>
                 </li>
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <button onClick={() => setIsModalOpen(true)} className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <button onClick={() => setIsModalOpen(true)} className="text-gray-200 text-center md:text-left  hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.rules')}
                   </button>
                 </li>
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <a href='tel:+998507193333'  className="text-gray-200 hover:text-rose-400 transition-all duration-300 flex items-center group">
-                    <span className="w-2 h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
+                  <a href='tel:+998507193333'  className="text-gray-200 hover:text-rose-400 transition-all duration-300  flex items-center  group">
+                    <span className="w-2 h-2  bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.contact')}
                   </a>
                 </li>
