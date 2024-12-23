@@ -246,8 +246,8 @@
   "Tatar": "Tatar",
   "Other": "Boshqa"
 },
-      "aboutYourself": "O'zingiz haqida",
-      "aboutYourselfPlaceholder": "O'zingiz haqida biroz yozing...",
+      "aboutYourself": "Talabingiz",
+      "aboutYourselfPlaceholder": "Talabingizni qisqacha yozing...",
       "profilePicture": "Profil rasmi",
       "uploadPhoto": "Rasm yuklash",
       "photoNotice": "Rasmingiz faqat moderatsiyadan o'tgandan keyin ko'rinadi",
@@ -431,5 +431,8 @@
     "title": "Упс! Sahifa topilmadi",
     "message": "Ko'rinishidan, siz boshqa yo'nalishga boribsiz. Keling, bosh sahifaga qaytaylik!",
     "link": "Bosh sahifaga"
+  },
+  "loading":{
+    "text":"Yuklanmoqda..."
   }
 }

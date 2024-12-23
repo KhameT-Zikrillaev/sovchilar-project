@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles.css';
-
+import { useTranslation } from 'react-i18next'
 const Loading = ({ type = 'default', size = 'medium', color = 'rose', overlay = false }) => {
+  const { t } = useTranslation(); 
   const getSize = () => {
     switch (size) {
       case 'small':
@@ -50,7 +51,7 @@ const Loading = ({ type = 'default', size = 'medium', color = 'rose', overlay = 
   const content = (
     <div className="text-center">
       {renderLoader()}
-      {overlay && <p className="mt-4 text-gray-600 font-medium">Loading...</p>}
+      {overlay && <p className="mt-4 text-gray-600 font-medium">{t('loading.text')}</p>}
     </div>
   );
 
