@@ -9,9 +9,7 @@ import { useCardContext } from '../../../../context/CardContext';
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
   const { getRecentUser } = useRecentUser();
-  const [isSearchActive, setIsSearchActive] = useState(() => {
-    return localStorage.getItem('isSearchActive') === 'true';
-  });
+  const [isSearchActive, setIsSearchActive] = useState(false);
   const [allUsers, setAllUsers] = useState(() => {
     // Пытаемся получить сохраненных пользователей из localStorage
     const savedUsers = localStorage.getItem('searchUsers');
@@ -35,9 +33,15 @@ export default function SecondHomePageSearch() {
       console.log('Fetched user:', user?.data?.items);
       const newUsers = user?.data?.items || [];
       setAllUsers(newUsers);
-      // Сохраняем результаты поиска и параметры
-      localStorage.setItem('searchUsers', JSON.stringify(newUsers));
-      localStorage.setItem('isSearchActive', 'true');
+      // Сохраняем результаты поиска и параметры только если это поиск из формы
+      if (ageFrom !== 18 || ageTo !== 100 || address || maritalStatus) {
+        localStorage.setItem('searchUsers', JSON.stringify(newUsers));
+        localStorage.setItem('isSearchActive', 'true');
+        setIsSearchActive(true);
+      } else {
+        localStorage.removeItem('isSearchActive');
+        setIsSearchActive(false);
+      }
       localStorage.setItem('activeFilter', gender || '');
       localStorage.setItem('searchParams', JSON.stringify({
         gender,
