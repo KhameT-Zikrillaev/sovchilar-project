@@ -26,7 +26,7 @@ const AdditionalInfoForm = ({ formData, onInputChange, onImageChange, onPrevStep
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-
+       
         {/* Образование и маритальный статус */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>

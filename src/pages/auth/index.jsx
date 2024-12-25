@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import useAddUser from './hooks/useAddUser';
 
 const StepIndicator = ({ currentStep }) => (
-  <div className="flex items-center justify-center mb-8">
+  <div className="flex items-center justify-center mb-2">
     <div className="flex items-center">
       <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
         currentStep === 1 ? 'bg-rose-500 text-white' : 'bg-rose-100 text-rose-500'
@@ -153,6 +153,7 @@ const handleImageChange = (imageUrl) => {
                 <p className="text-lg text-gray-600">
                 {step === 1 ? t('auth.FormOne.formDescription') : t('auth.FormTwo.formTitle')}
                 </p>
+                  <span className="text-md mt-2 text-blue-600">{t('auth.FormOne.formPravile')}</span>
               </div>
 
               <StepIndicator currentStep={step} />

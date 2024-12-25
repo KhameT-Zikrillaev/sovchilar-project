@@ -133,6 +133,7 @@
     "FormOne": {
       "formTitle": "Anketa yaratish",
       "formDescription": "O'zingiz haqida ma'lumot bering",
+      "formPravile":"Iltimos, anketalarni to'g'ri va batafsil to'ldiring. Agar noto'g'ri ma'lumot kiritilsa, anketangiz saytga chiqarilmaydi!",
       "firstNameLabel": "Ism",
       "lastNameLabel": "Familiya",
       "phoneLabel": "Telefon raqami",

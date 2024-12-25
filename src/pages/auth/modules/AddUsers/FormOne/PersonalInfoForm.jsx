@@ -39,9 +39,9 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
   }
 
   return (
-    <div className="min-h-screen bg-white py-4 px-1 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-2 px-1 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl p-1 sm:p-8 md:p-12">
+        <div className="bg-white rounded-2xl p-1 sm:p-4 md:p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="mb-4">
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
