@@ -109,7 +109,7 @@ export default function Navbar() {
             </a>
             <Link 
               to="/auth" 
-              className="px-6 py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
+              className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
               <span>{t('navbar.createProfile')}</span>
               <svg 

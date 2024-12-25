@@ -15,6 +15,7 @@ export default function SecondHomePageSearch() {
     const savedUsers = localStorage.getItem('searchUsers');
     return savedUsers ? JSON.parse(savedUsers) : [];
   });
+  const [dublickAllUsers, setDublickAllUsers] = useState([]);
   const { visibleCardCount, updateVisibleCardCount } = useCardContext();
   const [isLoading, setIsLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState(() => {
@@ -56,8 +57,60 @@ export default function SecondHomePageSearch() {
       setIsLoading(false);
     }
   };
+  // const fetchUser = async (gender, ageFrom, ageTo, address, maritalStatus) => {
+  
+  //   setIsLoading(true);
+  //   try {
+  //     const user = await getRecentUser(gender, ageFrom, ageTo, address, maritalStatus);
+  //     console.log('Fetched user:', user?.data?.items);
+  //     const newUsers = user?.data?.items || [];
+  //     setAllUsers(newUsers);
+  
+  //     // Проверка на дублирующиеся номера телефонов
+  //     const phoneCounts = newUsers.reduce((acc, user) => {
+  //       acc[user.phone] = (acc[user.phone] || 0) + 1;
+  //       return acc;
+  //     }, {});
+  
+  //     const duplicatePhones = Object.keys(phoneCounts).filter((phone) => phoneCounts[phone] > 1);
+  //     const duplicateUsers = newUsers.filter((user) => duplicatePhones.includes(user.phone));
+  
+  //     // Сохраняем пользователей с дублирующимися номерами в состояние и выводим в консоль
+  //     setDublickAllUsers(duplicateUsers);
+  //     console.log('Пользователи с повторяющимися номерами:', duplicateUsers);
+  
+  //     // Сохраняем результаты поиска и параметры только если это поиск из формы
+  //     if (ageFrom !== 18 || ageTo !== 100 || address || maritalStatus) {
+  //       localStorage.setItem('searchUsers', JSON.stringify(newUsers));
+  //       localStorage.setItem('isSearchActive', 'true');
+  //       setIsSearchActive(true);
+  //     } else {
+  //       localStorage.removeItem('isSearchActive');
+  //       setIsSearchActive(false);
+  //     }
+  //     localStorage.setItem('activeFilter', gender || '');
+  //     localStorage.setItem('searchParams', JSON.stringify({
+  //       gender,
+  //       ageFrom,
+  //       ageTo,
+  //       address,
+  //       maritalStatus
+  //     }));
+  //   } catch (error) {
+  //     console.error('Error fetching user:', error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  
 
   // Очищаем localStorage и сбрасываем форму при закрытии/обновлении страницы
+  
+  
+  
+  
+  
+  
   useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.removeItem('visibleCardCount');
@@ -71,7 +124,7 @@ export default function SecondHomePageSearch() {
       setActiveFilter('');
       setIsSubmitted(false);
       setIsSubmittedAge(false);
-      updateVisibleCardCount(8);
+      updateVisibleCardCount(12);
       
       // Сбрасываем форму
       if (formRef.current) {
@@ -120,7 +173,7 @@ export default function SecondHomePageSearch() {
     if (formRef.current) {
       formRef.current.resetForm();
     }
-    updateVisibleCardCount(8);
+    updateVisibleCardCount(12);
     fetchUser('', 18, 100, '', '');
   };
 
@@ -141,7 +194,7 @@ export default function SecondHomePageSearch() {
 
   // Функция для загрузки дополнительных пользователей
   const onLoadMore = () => {
-    const newCount = visibleCardCount + 4;
+    const newCount = visibleCardCount + 12;
     updateVisibleCardCount(newCount);
   };
 
@@ -234,7 +287,7 @@ export default function SecondHomePageSearch() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-              {t('home.SecondHomePageSearch.ShowMore')} {Math.min(4, allUsers.length - visibleCardCount)} {t('home.SecondHomePageSearch.Anketa')}
+              {t('home.SecondHomePageSearch.ShowMore')} {Math.min(12, allUsers.length - visibleCardCount)} {t('home.SecondHomePageSearch.Anketa')}
             </button>
           </div>
         )}

@@ -39,7 +39,7 @@ const getStatusText = () => {
         return 'bg-gray-500'
     }
   }
-console.log(user.imageUrl)
+
   return (
     <div  
       className={`
