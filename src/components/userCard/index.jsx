@@ -1,29 +1,31 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Female from "../../assets/images/Female.jpeg";
 import Male from "../../assets/images/Male.jpg";
+
 export default function UserCard({ user, gender}) {
   const [isHovered, setIsHovered] = useState(false);
- const { t } = useTranslation();  
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-const getStatusText = () => {
-  if (user.maritalStatus === 'SINGLE') {
-    return user.gender === 'MALE' 
-      ? t('userCard.single.male') 
-      : t('userCard.single.female');
-  } else if (user.maritalStatus === 'DIVORCED') {
-    return user.gender === 'MALE' 
-      ? t('userCard.divorced.male') 
-      : t('userCard.divorced.female');
-  } else if (user.maritalStatus === 'WIDOWED') {
-    return user.gender === 'MALE' 
-      ? t('userCard.widowed.male') 
-      : t('userCard.widowed.female');
-  } else if (user.maritalStatus === 'MARRIED_SECOND') {
-    return t('userCard.marriedSecond');
-  }
-};
+  const getStatusText = () => {
+    if (user.maritalStatus === 'SINGLE') {
+      return user.gender === 'MALE' 
+        ? t('userCard.single.male') 
+        : t('userCard.single.female');
+    } else if (user.maritalStatus === 'DIVORCED') {
+      return user.gender === 'MALE' 
+        ? t('userCard.divorced.male') 
+        : t('userCard.divorced.female');
+    } else if (user.maritalStatus === 'WIDOWED') {
+      return user.gender === 'MALE' 
+        ? t('userCard.widowed.male') 
+        : t('userCard.widowed.female');
+    } else if (user.maritalStatus === 'MARRIED_SECOND') {
+      return t('userCard.marriedSecond');
+    }
+  };
 
   const getStatusColor = () => {
     switch (user.maritalStatus) {
@@ -40,8 +42,16 @@ const getStatusText = () => {
     }
   }
 
+  const handleDetailsClick = () => {
+    // Сохраняем id карточки вместо позиции скролла
+    localStorage.setItem('lastViewedCardId', user.id.toString());
+    // Переходим на страницу деталей
+    navigate(`/user/${user.id}`);
+  };
+
   return (
     <div  
+      id={`user-card-${user.id}`} // Добавляем id для карточки
       className={`
         bg-white rounded-2xl overflow-hidden
         transition-all duration-500 ease-out
@@ -126,8 +136,8 @@ const getStatusText = () => {
           </div>
         </div>
         
-        <Link
-          to={`/user/${user.id}`}
+        <div 
+          onClick={handleDetailsClick}
           className={`
           mt-6 w-full py-1.5 rounded-xl font-semibold text-white
           transform transition-all duration-300 block cursor-pointer
@@ -146,7 +156,7 @@ const getStatusText = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           {t('userCard.moreDetails')}
-        </Link>
+        </div>
       </div>
     </div>
   )

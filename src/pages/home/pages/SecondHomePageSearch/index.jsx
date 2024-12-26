@@ -5,6 +5,7 @@ import SecondHomeSearchForm from './modules/SecondHomeSearchForm';
 import { useTranslation } from 'react-i18next';
 import { useRecentUser } from '../SecondHomePageSearch/hooks/useRecentUser';
 import { useCardContext } from '../../../../context/CardContext';
+import { useLocation } from 'react-router-dom';
 
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
@@ -57,52 +58,57 @@ export default function SecondHomePageSearch() {
       setIsLoading(false);
     }
   };
-  // const fetchUser = async (gender, ageFrom, ageTo, address, maritalStatus) => {
-  
-  //   setIsLoading(true);
-  //   try {
-  //     const user = await getRecentUser(gender, ageFrom, ageTo, address, maritalStatus);
-  //     console.log('Fetched user:', user?.data?.items);
-  //     const newUsers = user?.data?.items || [];
-  //     setAllUsers(newUsers);
-  
-  //     // Проверка на дублирующиеся номера телефонов
-  //     const phoneCounts = newUsers.reduce((acc, user) => {
-  //       acc[user.phone] = (acc[user.phone] || 0) + 1;
-  //       return acc;
-  //     }, {});
-  
-  //     const duplicatePhones = Object.keys(phoneCounts).filter((phone) => phoneCounts[phone] > 1);
-  //     const duplicateUsers = newUsers.filter((user) => duplicatePhones.includes(user.phone));
-  
-  //     // Сохраняем пользователей с дублирующимися номерами в состояние и выводим в консоль
-  //     setDublickAllUsers(duplicateUsers);
-  //     console.log('Пользователи с повторяющимися номерами:', duplicateUsers);
-  
-  //     // Сохраняем результаты поиска и параметры только если это поиск из формы
-  //     if (ageFrom !== 18 || ageTo !== 100 || address || maritalStatus) {
-  //       localStorage.setItem('searchUsers', JSON.stringify(newUsers));
-  //       localStorage.setItem('isSearchActive', 'true');
-  //       setIsSearchActive(true);
-  //     } else {
-  //       localStorage.removeItem('isSearchActive');
-  //       setIsSearchActive(false);
-  //     }
-  //     localStorage.setItem('activeFilter', gender || '');
-  //     localStorage.setItem('searchParams', JSON.stringify({
-  //       gender,
-  //       ageFrom,
-  //       ageTo,
-  //       address,
-  //       maritalStatus
-  //     }));
-  //   } catch (error) {
-  //     console.error('Error fetching user:', error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-  
+
+  useEffect(() => {
+    // Проверяем, есть ли сохраненные параметры поиска
+    const savedParams = localStorage.getItem('searchParams');
+    const activeFilterValue = localStorage.getItem('activeFilter');
+
+    if (savedParams && activeFilterValue) {
+      // Если есть активный фильтр, восстанавливаем параметры поиска
+      const params = JSON.parse(savedParams);
+      fetchUser(params.gender, params.ageFrom, params.ageTo, params.address, params.maritalStatus).then(() => {
+        scrollToLastViewedCard();
+      });
+    } else {
+      // Если нет активного фильтра, сбрасываем форму и делаем начальный запрос
+      if (formRef.current) {
+        formRef.current.resetForm();
+      }
+      fetchUser('', 18, 100, '', '').then(() => {
+        scrollToLastViewedCard();
+      });
+    }
+  }, []);
+
+  // Функция для прокрутки к последней просмотренной карточке
+  const scrollToLastViewedCard = () => {
+    const lastViewedCardId = localStorage.getItem('lastViewedCardId');
+    if (lastViewedCardId) {
+      setTimeout(() => {
+        const cardElement = document.getElementById(`user-card-${lastViewedCardId}`);
+        if (cardElement) {
+          cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Добавляем временное выделение карточки
+          cardElement.style.transition = 'all 0.5s ease';
+          cardElement.style.boxShadow = '0 0 20px rgba(8, 112, 184, 0.7)';
+          setTimeout(() => {
+            cardElement.style.boxShadow = '';
+          }, 2000);
+        }
+        // Очищаем сохраненный id
+        localStorage.removeItem('lastViewedCardId');
+      }, 100); // Небольшая задержка для уверенности, что контент загрузился
+    }
+  };
+
+  // Функция для загрузки дополнительных пользователей
+  const onLoadMore = () => {
+    const newCount = visibleCardCount + 12;
+    updateVisibleCardCount(newCount);
+    // После загрузки дополнительных карточек проверяем, нужно ли прокрутить к определенной
+    scrollToLastViewedCard();
+  };
 
   // Очищаем localStorage и сбрасываем форму при закрытии/обновлении страницы
   
@@ -140,20 +146,17 @@ export default function SecondHomePageSearch() {
   }, []);
 
   useEffect(() => {
-    // Проверяем, есть ли сохраненные параметры поиска
-    const savedParams = localStorage.getItem('searchParams');
-    const activeFilterValue = localStorage.getItem('activeFilter');
-
-    if (savedParams && activeFilterValue) {
-      // Если есть активный фильтр, восстанавливаем параметры поиска
-      const params = JSON.parse(savedParams);
-      fetchUser(params.gender, params.ageFrom, params.ageTo, params.address, params.maritalStatus);
-    } else {
-      // Если нет активного фильтра, сбрасываем форму и делаем начальный запрос
-      if (formRef.current) {
-        formRef.current.resetForm();
-      }
-      fetchUser('', 18, 100, '', '');
+    // Восстанавливаем позицию скролла
+    const savedScrollPosition = localStorage.getItem('scrollPosition');
+    if (savedScrollPosition) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: parseInt(savedScrollPosition),
+          behavior: 'smooth'
+        });
+        // Очищаем сохраненную позицию
+        localStorage.removeItem('scrollPosition');
+      }, 100); // Небольшая задержка для уверенности, что контент загрузился
     }
   }, []);
 
@@ -190,12 +193,6 @@ export default function SecondHomePageSearch() {
   const onFilterClick = (filter) => {
     setActiveFilter(filter);
     fetchUser(filter, 18, 100, '', ''); // передаем выбранный фильтр в запрос
-  };
-
-  // Функция для загрузки дополнительных пользователей
-  const onLoadMore = () => {
-    const newCount = visibleCardCount + 12;
-    updateVisibleCardCount(newCount);
   };
 
   return (
