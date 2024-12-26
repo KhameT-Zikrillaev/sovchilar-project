@@ -176,9 +176,9 @@ export default function FooterLayout() {
                 </span>
               </p>
               <div className="flex gap-8">
-                <button  data-aos="fade-up" data-aos-offset="50" className="text-gray-300 hover:text-rose-400 transition-all duration-300">
-                  {t('footer.privacy')}
-                </button>
+                <a href="https://www.limsa.uz/" data-aos="fade-up" data-aos-offset="50" className="text-gray-300 hover:text-rose-400 transition-all duration-300">
+                Created by Limsa
+                </a>
           
               </div>
             </div>
