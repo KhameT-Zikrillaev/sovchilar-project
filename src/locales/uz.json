@@ -155,6 +155,7 @@
       "genderInvalid": "To'g'ri jins qiymatini tanlang",
       "addressRequired": "Iltimos, shaharni tanlang",
       "addressInvalid": "Ro'yxatdan shaharni tanlang",
+      "telphoneNo":"Nomer yozish majburiy emas",
       "submit":"Davom etish",
       "selectCity": {
          "select":"Shaharni tanlang",

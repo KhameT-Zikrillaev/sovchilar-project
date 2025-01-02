@@ -89,6 +89,7 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
                 />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
                 <p className="mt-1 text-sm text-gray-500">{t('auth.FormOne.formatPhone')}</p>
+                <p>{t('auth.FormOne.telphoneNo')}</p>
               </div>
 
               <div>
@@ -106,7 +107,7 @@ const PersonalInfoForm = ({ formData, onInputChange, onSubmit }) => {
                 {errors.telegram && <p className="text-red-500 text-sm">{errors.telegram.message}</p>}
               </div>
             </div>
-
+          
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className={labelClasses}>{t('auth.FormOne.ageLabel')}</label>
