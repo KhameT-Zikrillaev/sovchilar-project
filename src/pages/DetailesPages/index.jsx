@@ -382,16 +382,18 @@ function UserDetails() {
         </div>
       </div>
       {isImg && (
-        <div className="bg-black z-50 p-10 fixed top-0 left-0 bg-opacity-80 w-[100vw] h-[100vh] flex justify-center items-center">
-          <ImCancelCircle
-            onClick={() => setIsImg(false)}
-            className="text-white text-[40px] absolute top-8 right-8 cursor-pointer"
-          />
-          <img
-            src={userData?.imageUrl}
-            alt={userData?.firstName}
-            className="h-full rounded"
-          />
+        <div className="hidden lg:block">
+          <div className=" bg-black z-50 p-10 fixed top-0 left-0 bg-opacity-80 w-[100vw] h-[100vh] flex justify-center items-center">
+            <ImCancelCircle
+              onClick={() => setIsImg(false)}
+              className="text-white text-[40px] absolute top-8 right-8 cursor-pointer"
+            />
+            <img
+              src={userData?.imageUrl}
+              alt={userData?.firstName}
+              className="h-full rounded"
+            />
+          </div>
         </div>
       )}
     </>
