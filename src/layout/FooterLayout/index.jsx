@@ -91,7 +91,7 @@ export default function FooterLayout() {
                 <a href="" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
                   <span className="text-2xl" title={t('footer.social.telegram')}>📱</span>
                 </a>
-                <a href="" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
+                <a href="https://t.me/sovchilarnet_admin" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
                   <span className="text-2xl" title={t('footer.social.phone')}>📞</span>
                 </a>
                 <a href="" data-aos="flip-up" data-aos-offset="50" className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110">
@@ -156,7 +156,7 @@ export default function FooterLayout() {
                   </button>
                 </li>
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <a href='#'  className="text-gray-200 hover:text-rose-400 transition-all duration-300  flex items-center  group">
+                  <a href='https://t.me/sovchilarnet_admin'  className="text-gray-200 hover:text-rose-400 transition-all duration-300  flex items-center  group">
                     <span className="w-2 h-2  bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.contact')}
                   </a>

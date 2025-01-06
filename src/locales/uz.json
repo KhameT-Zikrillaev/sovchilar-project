@@ -140,7 +140,7 @@
       "formatPhone": "Format: +998 XX XXX XX XX",
       "ageLabel": "Yosh",
       "agePlaceholder": "Yoshni kiriting",
-      "genderLabel": "Jins",
+      "genderLabel": "Jinsingiz",
       "addressLabel": "Manzil",
       "telegramLabel": "Telegram",
       "firstNameRequired": "Ismni to'ldirish shart",
@@ -149,7 +149,7 @@
       "phoneInvalid": "Noto'g'ri raqam formati. Iltimos, formatni bunday ishlating: +998 XX XXX XX XX",
       "ageMin": "Yosh 18 dan kam bo'lmasligi kerak",
       "ageMax": "Yosh 100 dan oshmasligi kerak",
-      "genderRequired": "Iltimos, jinsni tanlang",
+      "genderRequired": "Iltimos o'z jinsingizni tanlang",
       "genderMale": "Erkak",
       "genderFemale": "Ayol",
       "genderInvalid": "To'g'ri jins qiymatini tanlang",
@@ -193,7 +193,7 @@
           "max": "Yosh 100 dan oshmasligi kerak"
         },
         "gender": {
-          "required": "Iltimos, jinsni tanlang",
+          "required": "Iltimos o'z jinsingizni tanlang",
           "invalid": "To‘g‘ri jinsni tanlang"
         },
         "address": {
