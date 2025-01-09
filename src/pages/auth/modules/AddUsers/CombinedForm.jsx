@@ -12,7 +12,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
   });
   const [previewImage, setPreviewImage] = useState(formData?.avatar || null);
   const [showRules, setShowRules] = useState(false);
-  const acceptRules = watch('acceptRules');
+  const [acceptRules, setAcceptRules] = useState(false);
 
   const handleNameInput = (e) => {
     const value = e.target.value.replace(/[^A-Za-zА-Яа-яЁёҲҳҚқҒғЎўЪъ\s-]/g, '');
@@ -84,7 +84,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="firstName" className={labelClasses}>
-              Ism
+            {t('auth.FormOne.firstNameLabel')}
             </label>
             <input
               type="text"
@@ -99,7 +99,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
 
           <div>
             <label htmlFor="lastName" className={labelClasses}>
-              Familiya
+            {t('auth.FormOne.lastNameLabel')}
             </label>
             <input
               type="text"
@@ -113,22 +113,22 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
           </div>
 
           <div>
-            <label htmlFor="telegramUsername" className={labelClasses}>
-              Telegram username
+            <label htmlFor="telegram" className={labelClasses}>
+            {t('auth.FormOne.telegramLabel')}
             </label>
             <input
               type="text"
-              id="telegramUsername"
-              {...register('telegramUsername', { required: "Telegram username kiritish majburiy" })}
+              id="telegram"
+              {...register('telegram', { required: "Telegram username kiritish majburiy" })}
               className={inputClasses}
               placeholder="@username"
             />
-            {errors.telegramUsername && <p className="mt-1 text-sm text-rose-500">{errors.telegramUsername.message}</p>}
+            {errors.telegram && <p className="mt-1 text-sm text-rose-500">{errors.telegram.message}</p>}
           </div>
 
           <div>
             <label htmlFor="age" className={labelClasses}>
-              Yosh
+            {t('auth.FormOne.ageLabel')}
             </label>
             <input
               type="number"
@@ -139,14 +139,14 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
                 max: { value: 100, message: "Yosh 100 dan kichik bo'lishi kerak" }
               })}
               className={inputClasses}
-              placeholder="Yoshingiz"
+              placeholder={t('auth.FormOne.agePlaceholder')}
             />
             {errors.age && <p className="mt-1 text-sm text-rose-500">{errors.age.message}</p>}
           </div>
 
           <div>
             <label htmlFor="gender" className={labelClasses}>
-              Jinsi
+            {t('auth.FormOne.genderLabel')}
             </label>
             <select
               id="gender"
@@ -162,38 +162,38 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
 
           <div>
             <label htmlFor="city" className={labelClasses}>
-              Viloyat
+             {t('auth.FormOne.addressRequired')}
             </label>
             <select
               id="city"
-              {...register('city', { required: "Shaharni tanlash majburiy" })}
+              {...register('address', { required: "Shaharni tanlash majburiy" })}
               className={selectClasses}
             >
-              <option value="">Tanlang</option>
-              <option value="Toshkent">Toshkent</option>
-              <option value="Andijon">Andijon</option>
-              <option value="Buxoro">Buxoro</option>
-              <option value="Farg'ona">Farg'ona</option>
-              <option value="Jizzax">Jizzax</option>
-              <option value="Namangan">Namangan</option>
-              <option value="Navoiy">Navoiy</option>
-              <option value="Qashqadaryo">Qashqadaryo</option>
-              <option value="Samarqand">Samarqand</option>
-              <option value="Sirdaryo">Sirdaryo</option>
-              <option value="Surxondaryo">Surxondaryo</option>
-              <option value="Xorazm">Xorazm</option>
-              <option value="Qoraqalpog'iston">Qoraqalpog'iston</option>
+              <option value="">{t('auth.FormOne.selectCity.select')}</option>
+                <option value="Toshkent">{t('auth.FormOne.selectCity.Toshkent')}</option>
+                <option value="Andijon">{t('auth.FormOne.selectCity.Andijon')}</option>
+                <option value="Buxoro">{t('auth.FormOne.selectCity.Buxoro')}</option>
+                <option value="Fargona">{t('auth.FormOne.selectCity.Fargona')}</option>
+                <option value="Jizzax">{t('auth.FormOne.selectCity.Jizzax')}</option>
+                <option value="Xorazm">{t('auth.FormOne.selectCity.Xorazm')}</option>
+                <option value="Namangan">{t('auth.FormOne.selectCity.Namangan')}</option>
+                <option value="Navoiy">{t('auth.FormOne.selectCity.Navoiy')}</option>
+                <option value="Qashqadaryo">{t('auth.FormOne.selectCity.Qashqadaryo')}</option>
+                <option value="Samarqand">{t('auth.FormOne.selectCity.Samarqand')}</option>
+                <option value="Sirdaryo">{t('auth.FormOne.selectCity.Sirdaryo')}</option>
+                <option value="Surxondaryo">{t('auth.FormOne.selectCity.Surxondaryo')}</option>
+                <option value="Qoraqalpogiston">{t('auth.FormOne.selectCity.Qoraqalpogiston')}</option>
             </select>
-            {errors.city && <p className="mt-1 text-sm text-rose-500">{errors.city.message}</p>}
+            {errors.address && <p className="mt-1 text-sm text-rose-500">{errors.address.message}</p>}
           </div>
 
           <div>
-            <label htmlFor="education" className={labelClasses}>
-              Ta'lim
+            <label htmlFor="qualification" className={labelClasses}>
+            {t('auth.FormTwo.education')}
             </label>
             <select
-              id="education"
-              {...register('education', { required: "Ta'limni tanlash majburiy" })}
+              id="qualification"
+              {...register('qualification', { required: "Ta'limni tanlash majburiy" })}
               className={selectClasses}
             >
               <option value="">{t('auth.FormTwo.selectEducation')}</option>
@@ -203,12 +203,12 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
                 <option value="master">{t('auth.FormTwo.qualification.master')}</option>
                 <option value="doctorate">{t('auth.FormTwo.qualification.doctorate')}</option>
             </select>
-            {errors.education && <p className="mt-1 text-sm text-rose-500">{errors.education.message}</p>}
+            {errors.qualification && <p className="mt-1 text-sm text-rose-500">{errors.qualification.message}</p>}
           </div>
 
           <div>
             <label htmlFor="maritalStatus" className={labelClasses}>
-              Oilaviy holati
+            {t('auth.FormTwo.maritalStatus.label')}
             </label>
             <select
               id="maritalStatus"
@@ -234,7 +234,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
 
           <div>
             <label htmlFor="job" className={labelClasses}>
-              Kasbi
+            {t('auth.FormTwo.jobTitle')}
             </label>
             <input
               type="text"
@@ -248,7 +248,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
 
           <div>
             <label htmlFor="nationality" className={labelClasses}>
-              Millati
+            {t('auth.FormTwo.nationality')}
             </label>
             <select
               id="nationality"
@@ -272,12 +272,12 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
         </div>
 
         <div>
-          <label htmlFor="requirements" className={labelClasses}>
-            Talablar
+          <label htmlFor="description" className={labelClasses}>
+          {t('auth.FormTwo.aboutYourself')}
           </label>
           <textarea
-            id="requirements"
-            {...register('requirements', { 
+            id="description"
+            {...register('description', { 
               required: "Talablarni kiritish majburiy",
               minLength: { value: 50, message: "Talablar kamida 50 ta belgidan iborat bo'lishi kerak" }
             })}
@@ -285,7 +285,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
             className={inputClasses}
             placeholder="O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing..."
           />
-          {errors.requirements && <p className="mt-1 text-sm text-rose-500">{errors.requirements.message}</p>}
+          {errors.description && <p className="mt-1 text-sm text-rose-500">{errors.description.message}</p>}
         </div>
 
         {/* Rules Checkbox and Button */}
@@ -294,14 +294,14 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
             <input
               type="checkbox"
               id="acceptRules"
-              {...register('acceptRules', { required: "Qoidalarga rozilik bildirish majburiy" })}
+              checked={acceptRules}
+              onChange={(e) => setAcceptRules(e.target.checked)}
               className="w-4 h-4 text-rose-500 border-gray-300 rounded focus:ring-rose-500"
             />
             <label htmlFor="acceptRules" className="text-sm text-gray-700">
-              Qoidalarga roziman
+            {t('auth.FormTwo.terms.label')}
             </label>
           </div>
-          {errors.acceptRules && <p className="text-sm text-rose-500">{errors.acceptRules.message}</p>}
           
           <button
             type="button"
@@ -309,7 +309,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
             className="flex items-center space-x-2 text-rose-500 hover:text-rose-600 transition-colors duration-300"
           >
             <FiBook size={20} />
-            <span>Qoidalar bilan tanishish</span>
+            <span>{t('auth.FormTwo.terms.button.text')}</span>
           </button>
         </div>
       </div>
@@ -324,7 +324,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
         >
-          Yuborish
+          {t('auth.FormTwo.createProfile')}
         </button>
       </div>
 
