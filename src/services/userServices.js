@@ -3,7 +3,9 @@ import api from "./api";
 class UserServices {
   async getAll(gender, ageFrom, ageTo, address, maritalStatus) {
     // console.log(gender, ageFrom, ageTo, address, maritalStatus);
-    const response = await api.get(`/users-uz?${gender}&ageFrom=${ageFrom}&ageTo=${ageTo}${address}${maritalStatus}&status=ACTIVE`);
+    const response = await api.get(
+      `/users-uz?${gender}&ageFrom=${ageFrom}&ageTo=${ageTo}${address}${maritalStatus}&status=ACTIVE`
+    );
     return response.data;
   }
   async add(data) {
@@ -16,6 +18,22 @@ class UserServices {
   }
   async getSingle(id) {
     const response = await api.get(`/users-uz/${id}`);
+    return response.data;
+  }
+  async postItem(data, url) {
+    const response = await api.post(url, data);
+    return response.data;
+  }
+  async getPhone(url) {
+    const response = await api.get(url);
+    return response.data;
+  }
+  async editUser(url, data) {
+    const response = await api.put(url, data);
+    return response.data;
+  }
+  async loginUser(url, data) {
+    const response = await api.post(url, data);
     return response.data;
   }
 }
