@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { useGetPhone } from "./hooks/useGetPhone";
 import { useEditUser } from "./hooks/useEditUser";
 import { useTranslation } from "react-i18next";
+import { useStore } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -20,6 +22,8 @@ const Register = () => {
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
   const { EditUser } = useEditUser();
+  const {setUser, user} = useStore()
+  const navigate = useNavigate()
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
@@ -87,10 +91,8 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 201) {
-          localStorage.setItem("accessToken", res.data.tokens.accessToken);
-          localStorage.setItem("refreshToken", res.data.tokens.refeshToken);
-          localStorage.setItem("firstName", res.data.user.firstName);
-          console.log(res);
+          setUser(res.data)
+          navigate("/")
           toast.success("Muvaffaqiyatli");
         } else {
           toast.error("Bunday raqamli foydalanuvchi bor");
@@ -102,10 +104,8 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 200) {
-          console.log(res);
-          localStorage.setItem("accessToken", res.data.tokens.accessToken);
-          localStorage.setItem("refreshToken", res.data.tokens.refeshToken);
-          localStorage.setItem("firstName", res.data.user.firstName);
+          setUser(res.data)
+          navigate("/")
           toast.success("Muvaffaqiyatli");
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");

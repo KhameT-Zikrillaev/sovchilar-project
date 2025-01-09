@@ -42,6 +42,7 @@ export const scheme = z.object({
         "Tajik",
         "Turkmen",
         "Tatar",
+        "Karakalpak",
         "Other"
       ].includes(value),
       i18n.t("auth.FormTwo.Validation.nationality.invalid")

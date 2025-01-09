@@ -100,7 +100,8 @@
           }
         },
         "search": "Qidirish",
-        "ageError": "Iltimos, to'g'ri yosh oralig'ini kiriting"
+        "ageError": "Iltimos, to'g'ri yosh oralig'ini kiriting",
+        "genderError": "Iltimos qidirilayotgan jinsni tanlang"
       }
     }
   },

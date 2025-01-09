@@ -107,10 +107,10 @@ export default function Navbar() {
               {t("navbar.contact")}
             </a>
             <Link
-              to="/auth"
+              to="/profile"
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
-              <span>{t("navbar.createProfile")}</span>
+              <span>Kirish</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
