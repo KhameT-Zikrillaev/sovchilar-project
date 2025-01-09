@@ -182,7 +182,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
               {t('home.SecondHomePageSearch.form.gender.female')}
             </button>
           </div>
-          {isSubmitted && !gender && <p className="text-sm text-rose-500 text-center mt-2">{t('auth.FormOne.Validation.gender.required')}</p>}
+          {isSubmitted && !gender && <p className="text-sm text-rose-500 text-center mt-2">{t('home.SecondHomePageSearch.form.genderError')}</p>}
         </div>
 
         {/* Age Range */}
