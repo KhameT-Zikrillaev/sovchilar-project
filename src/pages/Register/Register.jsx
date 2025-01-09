@@ -6,7 +6,7 @@ import { useGetPhone } from "./hooks/useGetPhone";
 import { useEditUser } from "./hooks/useEditUser";
 import { useTranslation } from "react-i18next";
 import { useStore } from "../../store/store";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -22,8 +22,8 @@ const Register = () => {
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
   const { EditUser } = useEditUser();
-  const {setUser, user} = useStore()
-  const navigate = useNavigate()
+  const { setUser, user } = useStore();
+  const navigate = useNavigate();
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
@@ -91,8 +91,8 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 201) {
-          setUser(res.data)
-          navigate("/")
+          setUser(res.data);
+          navigate("/");
           toast.success("Muvaffaqiyatli");
         } else {
           toast.error("Bunday raqamli foydalanuvchi bor");
@@ -104,8 +104,8 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 200) {
-          setUser(res.data)
-          navigate("/")
+          setUser(res.data);
+          navigate("/");
           toast.success("Muvaffaqiyatli");
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
@@ -212,6 +212,15 @@ const Register = () => {
                   : t("register.button.password"))}
             </button>
           </form>
+          <div className="text-center mt-5">
+            Profilingiz bormi?{" "}
+            <NavLink
+              to="/login"
+              className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
+            >
+              Kirish qiling.
+            </NavLink>
+          </div>
         </div>
       </div>
     </>

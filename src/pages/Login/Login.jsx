@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "./hooks/useLogin";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
@@ -92,6 +93,16 @@ const Login = () => {
             {isLoading ? "Kirish..." : "Kirish"}
           </button>
         </form>
+
+        <div className="text-center mt-5">
+          Profilingiz yo'qmi?{" "}
+          <NavLink
+            to="/register"
+            className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
+          >
+            Ro'yxatdan o'ting.
+          </NavLink>
+        </div>
       </div>
     </div>
   );
