@@ -4,6 +4,7 @@ import Home from '../../pages/home';
 import Auth from '../../pages/auth';
 import UserDetails from '../../pages/DetailesPages';
 import NotFound from '../../pages/NotFound';
+import Profile from '../../pages/profile/Profile';
 
 export const routes = [
   {
@@ -17,6 +18,10 @@ export const routes = [
   {
     path: '/user/:id',
     element: <UserDetails />
+  },
+  {
+    path: '/profile',
+    element: <Profile />
   }
 ];
 
