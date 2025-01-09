@@ -3,7 +3,7 @@
     "search": "Qidiruv",
     "profiles": "Anketalar",
     "contact": "Aloqa",
-    "contactmobile":"Aloqa +(50) 719 33 33",
+    "contactmobile": "Aloqa +(50) 719 33 33",
     "createProfile": "Anketa yaratish"
   },
   "home": {
@@ -45,7 +45,7 @@
       "title": "O'z juftingizni toping",
       "description": "Bizning diqqat bilan tanlangan potentsial nomzodlar ro'yxatimizni ko'rib chiqing va o'z qadriyatlaringiz va intilishlaringizni baham ko'radigan insonni toping",
       "resetButton": "Tozalash",
-      "noUsersMessage":"Bunday foydalanuvchilar topilmadi",
+      "noUsersMessage": "Bunday foydalanuvchilar topilmadi",
       "ShowMore": "Ko‘proq ko‘rsat",
       "Anketa": "аnketa",
       "filters": {
@@ -133,7 +133,7 @@
     "FormOne": {
       "formTitle": "Anketa yaratish",
       "formDescription": "O'zingiz haqida ma'lumot bering",
-      "formPravile":"Iltimos, anketalarni to'g'ri va batafsil to'ldiring. Agar noto'g'ri ma'lumot kiritilsa, anketangiz saytga chiqarilmaydi!",
+      "formPravile": "Iltimos, anketalarni to'g'ri va batafsil to'ldiring. Agar noto'g'ri ma'lumot kiritilsa, anketangiz saytga chiqarilmaydi!",
       "firstNameLabel": "Ism",
       "lastNameLabel": "Familiya",
       "phoneLabel": "Telefon raqami",
@@ -155,23 +155,23 @@
       "genderInvalid": "To'g'ri jins qiymatini tanlang",
       "addressRequired": "Iltimos, shaharni tanlang",
       "addressInvalid": "Ro'yxatdan shaharni tanlang",
-      "telphoneNo":"Nomer yozish majburiy emas",
-      "submit":"Davom etish",
+      "telphoneNo": "Nomer yozish majburiy emas",
+      "submit": "Davom etish",
       "selectCity": {
-         "select":"Shaharni tanlang",
-         "Toshkent":"Toshkent",
-         "Andijon":"Andijon",
-         "Buxoro":"Buxoro",
-         "Fargona":"Farg'ona",
-         "Jizzax":"Jizzax",
-         "Xorazm":"Xorazm",
-         "Namangan":"Namangan",
-         "Navoiy":"Navoiy",
-         "Qashqadaryo":"Qashqadaryo",
-         "Samarqand":"Samarqand",
-         "Sirdaryo":"Sirdaryo",
-         "Surxondaryo":"Surxondaryo",
-         "Qoraqalpogiston":"Qoraqalpog'iston"
+        "select": "Shaharni tanlang",
+        "Toshkent": "Toshkent",
+        "Andijon": "Andijon",
+        "Buxoro": "Buxoro",
+        "Fargona": "Farg'ona",
+        "Jizzax": "Jizzax",
+        "Xorazm": "Xorazm",
+        "Namangan": "Namangan",
+        "Navoiy": "Navoiy",
+        "Qashqadaryo": "Qashqadaryo",
+        "Samarqand": "Samarqand",
+        "Sirdaryo": "Sirdaryo",
+        "Surxondaryo": "Surxondaryo",
+        "Qoraqalpogiston": "Qoraqalpog'iston"
       },
       "Validation": {
         "firstName": {
@@ -219,35 +219,35 @@
         "master": "Magistr",
         "doctorate": "Doktorantura"
       },
-     "maritalStatus": {
-  "label": "Oilaviy holati",
-  "default": "Tanlang",
-  "male": {
-    "single": "Uylanmagan",
-    "divorced": "Ajrashgan",
-    "widowed": "Beva erkak",
-    "married_second": "Ikkinchi xotin qidirmoqda"
-  },
-  "female": {
-    "single": "Turmushga chiqmagan",
-    "divorced": "Ajrashgan",
-    "widowed": "Beva ayol"
-  }
-},
+      "maritalStatus": {
+        "label": "Oilaviy holati",
+        "default": "Tanlang",
+        "male": {
+          "single": "Uylanmagan",
+          "divorced": "Ajrashgan",
+          "widowed": "Beva erkak",
+          "married_second": "Ikkinchi xotin qidirmoqda"
+        },
+        "female": {
+          "single": "Turmushga chiqmagan",
+          "divorced": "Ajrashgan",
+          "widowed": "Beva ayol"
+        }
+      },
       "jobTitle": "Kasb",
       "jobTitlePlaceholder": "Masalan: Dasturchi",
       "nationality": "Millat",
-     "selectNationality": {
-  "select": "Millatni tanlang",
-  "Uzbek": "O'zbek",
-  "Russian": "Rus",
-  "Kazakh": "Qozog'istonlik",
-  "Kyrgyz": "Qirg'iz",
-  "Tajik": "Tojik",
-  "Turkmen": "Turkman",
-  "Tatar": "Tatar",
-  "Other": "Boshqa"
-},
+      "selectNationality": {
+        "select": "Millatni tanlang",
+        "Uzbek": "O'zbek",
+        "Russian": "Rus",
+        "Kazakh": "Qozog'istonlik",
+        "Kyrgyz": "Qirg'iz",
+        "Tajik": "Tojik",
+        "Turkmen": "Turkman",
+        "Tatar": "Tatar",
+        "Other": "Boshqa"
+      },
       "aboutYourself": "Talabingiz",
       "aboutYourselfPlaceholder": "Talabingizni qisqacha yozing...",
       "profilePicture": "Profil rasmi",
@@ -291,7 +291,7 @@
         }
       }
     },
-   "SuccessModal": {
+    "SuccessModal": {
       "title": "Muvaffaqiyat!",
       "message": "Ma'lumotlaringiz muvaffaqiyatli yuborildi. Sizning anketangiz 1 kun ichida ko‘rib chiqiladi va tasdiqlangandan so‘ng qo‘shiladi",
       "buttonText": "Yopish"
@@ -357,7 +357,7 @@
       "master": "Magistr",
       "doctorate": "Doktorantura"
     },
-    "selectNationality":{
+    "selectNationality": {
       "Uzbek": "O'zbek",
       "Russian": "Rus",
       "Kazakh": "Qozog'istonlik",
@@ -400,32 +400,32 @@
       "doctorate": "Doktorantura"
     },
     "City": {
-    "TOSHKENT": "Toshkent",
-    "ANDIJON": "Andijon",
-    "BUXORO": "Buxoro",
-    "FERGONA": "Farg‘ona",
-    "JIZZAX": "Jizzax",
-    "XORAZM": "Xorazm",
-    "NAMANGAN": "Namangan",
-    "NAVOIY": "Navoiy",
-    "QASHQADARYO": "Qashqadaryo",
-    "SAMARQAND": "Samarqand",
-    "SIRDARYO": "Sirdaryo",
-    "SURXONDARYO": "Surxondaryo",
-    "QORAQALPOGISTON": "Qoraqalpog‘iston"
+      "TOSHKENT": "Toshkent",
+      "ANDIJON": "Andijon",
+      "BUXORO": "Buxoro",
+      "FERGONA": "Farg‘ona",
+      "JIZZAX": "Jizzax",
+      "XORAZM": "Xorazm",
+      "NAMANGAN": "Namangan",
+      "NAVOIY": "Navoiy",
+      "QASHQADARYO": "Qashqadaryo",
+      "SAMARQAND": "Samarqand",
+      "SIRDARYO": "Sirdaryo",
+      "SURXONDARYO": "Surxondaryo",
+      "QORAQALPOGISTON": "Qoraqalpog‘iston"
+    },
+    "selectNationality": {
+      "Uzbek": "O'zbek",
+      "Russian": "Rus",
+      "Kazakh": "Qozog'istonlik",
+      "Kyrgyz": "Qirg'iz",
+      "Tajik": "Tojik",
+      "Turkmen": "Turkman",
+      "Tatar": "Tatar",
+      "Other": "Boshqa"
+    }
   },
-  "selectNationality":{
-    "Uzbek": "O'zbek",
-    "Russian": "Rus",
-    "Kazakh": "Qozog'istonlik",
-    "Kyrgyz": "Qirg'iz",
-    "Tajik": "Tojik",
-    "Turkmen": "Turkman",
-    "Tatar": "Tatar",
-    "Other": "Boshqa"
-  }
-  },
-  "reklama":{
+  "reklama": {
     "text1": "Haqiqiy sevgingizni toping va baxtli oila quring!",
     "text2": "Sevgi va oila topish imkoniyati – bu yerda."
   },
@@ -434,7 +434,21 @@
     "message": "Ko'rinishidan, siz boshqa yo'nalishga boribsiz. Keling, bosh sahifaga qaytaylik!",
     "link": "Bosh sahifaga"
   },
-  "loading":{
-    "text":"Yuklanmoqda..."
+  "loading": {
+    "text": "Yuklanmoqda..."
+  },
+  "register": {
+    "title": {
+      "number": "Telefon raqamingizni kiriting",
+      "smsCode": "Tasdiqlash kodini kiriting"
+    },
+    "firstName": "",
+    "button": {
+      "number": "Tasdiqlash kodini yuborish",
+      "smsCode": "Tasdiqlash kodini kiriting",
+      "loading": {
+        "number": "SMS yuborilmoqda..."
+      }
+    }
   }
 }

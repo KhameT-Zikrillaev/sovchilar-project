@@ -1,23 +1,33 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from '../../pages/home';
-import Auth from '../../pages/auth';
-import UserDetails from '../../pages/DetailesPages';
-import NotFound from '../../pages/NotFound';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "../../pages/home";
+import Auth from "../../pages/auth";
+import UserDetails from "../../pages/DetailesPages";
+import NotFound from "../../pages/NotFound";
+import Register from "../../pages/Register/Register";
+import Login from "../../pages/Login/Login";
 
 export const routes = [
   {
-    path: '/',
-    element: <Home />
+    path: "/",
+    element: <Home />,
   },
   {
-    path: '/auth',
-    element: <Auth />
+    path: "/auth",
+    element: <Auth />,
   },
   {
-    path: '/user/:id',
-    element: <UserDetails />
-  }
+    path: "/user/:id",
+    element: <UserDetails />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
 ];
 
 function RootRoute() {
