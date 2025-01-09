@@ -122,8 +122,8 @@ const Register = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               {(step === 1 && t("register.title.number")) ||
                 (step === 2 && t("register.title.smsCode")) ||
-                (step === 3 && !oldUser && "Ro'yxatdan o'ting") ||
-                "Parol qo'ying"}
+                (step === 3 && !oldUser && t("register.title.signup")) ||
+                t("register.title.password")}
             </h2>
             {step === 1 && (
               <input
@@ -199,13 +199,17 @@ const Register = () => {
                   ? t("register.button.loading.number")
                   : t("register.button.number"))) ||
                 (step === 2 &&
-                  (isLoading ? "Tasdiqlanmoqda..." : "Tasdiqlash")) ||
+                  (isLoading
+                    ? t("register.button.loading.confirmation")
+                    : t("register.button.confirmation"))) ||
                 (step === 3 &&
                   !oldUser &&
                   (isLoading
-                    ? "Ro'yxatdan o'tilmoqda..."
-                    : "Ro'yxatdan o'tish")) ||
-                (isLoading ? "Parol qo'yilmoqda" : "Parol qo'yish")}
+                    ? t("register.button.loading.signup")
+                    : t("register.button.signup"))) ||
+                (isLoading
+                  ? t("register.button.loading.password")
+                  : t("register.button.password"))}
             </button>
           </form>
         </div>

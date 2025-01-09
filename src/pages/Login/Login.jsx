@@ -66,7 +66,7 @@ const Login = () => {
             onChange={handlePhoneChange}
             minLength={17}
             required
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <input
@@ -77,7 +77,7 @@ const Login = () => {
             minLength={5}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <button
@@ -86,7 +86,7 @@ const Login = () => {
             className={`w-full p-3 rounded-lg text-white font-semibold ${
               isLoading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600"
+                : "bg-red-500 hover:bg-red-600"
             }`}
           >
             {isLoading ? "Kirish..." : "Kirish"}
