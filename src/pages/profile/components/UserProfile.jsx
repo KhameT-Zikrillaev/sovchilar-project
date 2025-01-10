@@ -12,6 +12,7 @@ function UserProfile() {
   const [isImg, setIsImg] = useState(false);
 
   const { user } = useStore();
+
   if (!user) {
     return <Navigate to="/login" replace />;
   }
