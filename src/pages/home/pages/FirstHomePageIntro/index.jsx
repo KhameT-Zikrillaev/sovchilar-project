@@ -66,6 +66,21 @@ export default function FirstHomePageIntro() {
                 </p>
               </div>
 
+               {/* Кнопки */}
+              <div className="flex items-center gap-4 mb-12" data-aos="fade-right" data-aos-offset="50">
+                <Link 
+                  to={`/auth?gender=${activeTab === 'women' ? 'female' : 'male'}`}
+                  className="flex-1 text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200"
+                  onClick={() => console.log('Переход на форму с выбранным полом:', activeTab === 'women' ? 'female' : 'male')}
+                >
+                  {t('home.FirstIntroPage.createProfile')}
+                </Link>
+                <button className="w-14 h-14 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition duration-200"  onClick={() => setIsModalOpen(true)}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </button>
+              </div>
               {/* Поиск */}
               <div data-aos="fade-up"  data-aos-delay="500" className="bg-white/10 backdrop-blur-lg p-2 rounded-full mb-10 flex items-center">
                 <button 
@@ -90,21 +105,8 @@ export default function FirstHomePageIntro() {
                 </button>
               </div>
              
-              {/* Кнопки */}
-              <div className="flex items-center gap-4 mb-12" data-aos="fade-right" data-aos-offset="50">
-                <Link 
-                  to={`/auth?gender=${activeTab === 'women' ? 'female' : 'male'}`}
-                  className="flex-1 text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200"
-                  onClick={() => console.log('Переход на форму с выбранным полом:', activeTab === 'women' ? 'female' : 'male')}
-                >
-                  {t('home.FirstIntroPage.createProfile')}
-                </Link>
-                <button className="w-14 h-14 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition duration-200"  onClick={() => setIsModalOpen(true)}>
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </button>
-              </div>
+             
+            
 
               {/* Статистика */}
               <div className="grid grid-cols-3 gap-4">

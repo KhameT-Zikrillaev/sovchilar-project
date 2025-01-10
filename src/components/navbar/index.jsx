@@ -127,23 +127,26 @@ export default function Navbar() {
                 />
               </svg>
             </Link>
-            <LanguageSelector />
           </div>
 
-          {/* Мобильное меню */}
-          <div className="md:hidden">
-            <button 
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-rose-500 focus:outline-none"
-            >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+          {/* Переключатель языка - теперь всегда видимый */}
+          <div className="flex items-center">
+            <LanguageSelector />
+            {/* Мобильное меню */}
+            <div className="md:hidden ml-4">
+              <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-gray-600 hover:text-rose-500 focus:outline-none"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -182,9 +185,6 @@ export default function Navbar() {
                   />
                 </svg>
               </Link>
-              <div className="px-3 py-2">
-                <LanguageSelector />
-              </div>
             </div>
           </div>
         )}
