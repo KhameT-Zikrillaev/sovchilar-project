@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { IoMdCloudUpload } from "react-icons/io";
@@ -6,7 +6,6 @@ import { FiCamera } from "react-icons/fi";
 import { FiBook } from "react-icons/fi";
 import { useStore } from '../../../../store/store';
 import api from '../../../../services/api';
-import useAddUser from "../../hooks/useAddUser"
 import { toast } from 'react-toastify';
 import axios from 'axios';
 const CombinedForm = ({handleCloseModal}) => {
@@ -16,12 +15,43 @@ const CombinedForm = ({handleCloseModal}) => {
   const [showRules, setShowRules] = useState(false);
   const [acceptRules, setAcceptRules] = useState(false);
   const {user, accessToken, setUserSingle} = useStore()
+
+  const handleStatusInactive = async (id) => {
+    const newStatus = "INACTIVE";
+    try {
+      await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }});
+    } catch (error) {
+
+    }
+  };
   
   
   const handleNameInput = (e) => {
     const value = e.target.value.replace(/[^A-Za-zА-Яа-яЁёҲҳҚқҒғЎўЪъ\s-]/g, '');
     e.target.value = value;
   };
+
+  useEffect(()=>{
+    reset({
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      telegram: user.telegram || "",
+      age: user.age || "",
+      gender: user.gender || "",
+      address: user.address || "",
+      qualification: user.qualification || "",
+      maritalStatus: user.maritalStatus || "",
+      jobTitle: user.jobTitle || "",
+      description: user.description || "",
+      imageUrl: user.imageUrl || "",
+      nationality: user.nationality || "",
+    });
+    if (user.imageUrl) {
+      setPreviewImage(user.imageUrl); // agar imageUrl mavjud bo'lsa, previewImage'ni o'rnatish
+    }
+  }, [user])
 
 
   const handleImageChange = async (e) => {
@@ -56,10 +86,14 @@ const CombinedForm = ({handleCloseModal}) => {
           'Authorization': `Bearer ${accessToken}`
         }
       });
-      if(response.statusCode > 199 && response.statusCode < 300){
-        setUserSingle(response.data)
+      
+      if(response.status === 200 || response.status === 201){
+        setUserSingle(response.data.data)
         toast.success("Anketa muvaffaqiyatli yaratildi")
         handleCloseModal()
+        if(user?.status === "PENDING"){
+          handleStatusInactive(user?.id)
+        }
       }else{
         toast.success("Anketa yaratishda xatolik")
       }
@@ -67,6 +101,7 @@ const CombinedForm = ({handleCloseModal}) => {
       toast.success("Anketa yaratishda xatolik")
     }
   };
+
 
   const inputClasses = "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 text-sm";
   const selectClasses = "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white text-sm";

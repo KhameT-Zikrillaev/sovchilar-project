@@ -5,6 +5,7 @@ import CombinedForm from '../auth/modules/AddUsers/CombinedForm';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -14,6 +15,14 @@ const Profile = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleStatusDone = async (id) => {
+    const newStatus = "DONE";
+    try {
+      await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus });
+    } catch (error) {
+    }
   };
 
   return (

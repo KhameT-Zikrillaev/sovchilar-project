@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { ImCancelCircle } from "react-icons/im";
 
 import { useTranslation } from "react-i18next";
@@ -11,11 +10,10 @@ function UserProfile() {
   const { t } = useTranslation();
   const [isImg, setIsImg] = useState(false);
   
-
   const {user} = useStore()
 
+  console.log(user);
   
-console.log(user);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -32,7 +30,7 @@ console.log(user);
                 <div className="w-[300px] h-[300px] overflow-hidden rounded-xl shadow-lg">
                   <img
                     onClick={() => {
-                      user.imageUrl ? setIsImg(true) : setIsImg(false);
+                      user?.imageUrl ? setIsImg(true) : setIsImg(false);
                     }}
                     src={
                       user?.imageUrl ||
@@ -296,7 +294,7 @@ console.log(user);
                     </a>
 
                     {/* Telegram */}
-                    <a href={`https://${user?.telegram}`} className="block">
+                    <a href={`https://t.me/${user?.telegram}`} className="block">
                       <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02]">
                         <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg">
                           <svg

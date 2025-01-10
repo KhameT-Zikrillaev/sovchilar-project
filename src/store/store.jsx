@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from 'zustand/middleware';
+import { persist } from "zustand/middleware";
 
 export const useStore = create(
   persist(
@@ -16,28 +16,29 @@ export const useStore = create(
           refreshToken: data.tokens.refreshToken,
         }),
 
-        setUserSingle: (data) =>
-          set({
-            user: data,
-          }),
+      setUserSingle: (data) =>{
+        set({
+          user: data,
+        })
+      },
 
       // Tokenlarni yangilash
-    //   updateTokens: (newAccessToken, newRefreshToken) =>
-    //     set({
-    //       accessToken: newAccessToken,
-    //       refreshToken: newRefreshToken,
-    //     }),
+      //   updateTokens: (newAccessToken, newRefreshToken) =>
+      //     set({
+      //       accessToken: newAccessToken,
+      //       refreshToken: newRefreshToken,
+      //     }),
 
       // Hammasini tozalash
       clearUser: () =>
         set({
           accessToken: null,
           refreshToken: null,
-          user: null
+          user: null,
         }),
     }),
     {
-      name: 'user-sovchilar', // LocalStorage kaliti
+      name: "user-sovchilar", // LocalStorage kaliti
       getStorage: () => localStorage, // LocalStorage orqali saqlash
       partialize: (state) => ({
         user: state.user,
