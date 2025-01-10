@@ -91,9 +91,9 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 201) {
-          setUser(res.data)
-          navigate("/profile")
-          toast.success("Muvaffaqiyatli");
+          setUser(res.data);
+          navigate("/profile");
+          toast.success(t("register.toasts.success"));
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
         }
@@ -104,9 +104,9 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 200) {
-          setUser(res.data)
-          navigate("/profile")
-          toast.success("Muvaffaqiyatli");
+          setUser(res.data);
+          navigate("/profile");
+          toast.success(t("register.toasts.success"));
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
         }
