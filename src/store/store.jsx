@@ -16,6 +16,11 @@ export const useStore = create(
           refreshToken: data.tokens.refreshToken,
         }),
 
+        setUserSingle: (data) =>
+          set({
+            user: data,
+          }),
+
       // Tokenlarni yangilash
     //   updateTokens: (newAccessToken, newRefreshToken) =>
     //     set({

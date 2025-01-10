@@ -53,7 +53,7 @@ const Login = () => {
     });
     if (res?.statusCode === 200) {
       setUser(res.data);
-      navigate("/");
+      navigate("/profile");
       toast.success(t("register.toasts.success"));
     } else {
       // toast.error("Bunday raqamli foydalanuvchi bor");
