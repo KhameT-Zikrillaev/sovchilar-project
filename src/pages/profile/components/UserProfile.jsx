@@ -36,7 +36,7 @@ console.log(user);
                     }}
                     src={
                       user?.imageUrl ||
-                      (user?.gender !== "MALE" ? Male : Female)
+                      (user?.gender == "MALE" ? Male : Female)
                     }
                     alt={user?.lastName}
                     className="w-full h-full object-cover cursor-pointer"
