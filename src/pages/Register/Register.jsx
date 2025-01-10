@@ -36,23 +36,34 @@ const Register = () => {
     // Raqam va " " yoki "-" ni saqlash
     input = input.replace(/[^+0-9- ]/g, "");
 
+    const numbers = input.slice(5).replace(/-/g, ""); // +998 ni olib tashlab, faqat raqamlarni olish
+    let formatted = "+998 ";
+
     // Formatni saqlash (91-555-55-55)
-    if (input.length > 5) {
-      input = input.slice(0, 5) + input.slice(5);
+    if (numbers.length > 2) {
+      formatted += numbers.slice(0, 2) + "-";
+    } else {
+      formatted += numbers;
     }
-    if (input.length > 6 && input[7] !== "-") {
-      input = input.slice(0, 7) + "-" + input.slice(7);
+    if (numbers.length > 5) {
+      formatted += numbers.slice(2, 5) + "-";
+    } else if (numbers.length > 2) {
+      formatted += numbers.slice(2);
     }
-    if (input.length > 10 && input[11] !== "-") {
-      input = input.slice(0, 11) + "-" + input.slice(11);
+    if (numbers.length > 7) {
+      formatted += numbers.slice(5, 7) + "-";
+    } else if (numbers.length > 5) {
+      formatted += numbers.slice(5);
     }
-    if (input.length > 13 && input[14] !== "-") {
-      input = input.slice(0, 14) + "-" + input.slice(14);
+    if (numbers.length > 9) {
+      formatted += numbers.slice(7, 9);
+    } else if (numbers.length > 7) {
+      formatted += numbers.slice(7);
     }
 
     // Maksimal uzunlikni cheklash
-    if (input.length <= 17) {
-      setPhoneNumber(input);
+    if (formatted.length <= 17) {
+      setPhoneNumber(formatted);
     }
   };
 
@@ -91,9 +102,9 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 201) {
-          setUser(res.data)
-          navigate("/profile")
-          toast.success("Muvaffaqiyatli");
+          setUser(res.data);
+          navigate("/profile");
+          toast.success(t("register.toasts.success"));
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
         }
@@ -104,9 +115,9 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 200) {
-          setUser(res.data)
-          navigate("/profile")
-          toast.success("Muvaffaqiyatli");
+          setUser(res.data);
+          navigate("/profile");
+          toast.success(t("register.toasts.success"));
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
         }

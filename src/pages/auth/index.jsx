@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import PersonalInfoForm from "./modules/AddUsers/FormOne/PersonalInfoForm";
 import AdditionalInfoForm from "./modules/AddUsers/FormTwo/AdditionalInfoForm";
 import SuccessModal from "./modules/SuccessModal";
 import SiteLoading from "../../components/SiteLoading/SiteLoading";
 import { useTranslation } from "react-i18next";
 import useAddUser from "./hooks/useAddUser";
+import { useStore } from "../../store/store.jsx";
 
 const StepIndicator = ({ currentStep }) => (
   <div className="flex items-center justify-center mb-2">
@@ -47,9 +48,15 @@ export default function Auth() {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
+
+  const { user } = useStore();
   // Получаем параметр gender из URL
   const searchParams = new URLSearchParams(location.search);
   const genderFromUrl = searchParams.get("gender");
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {

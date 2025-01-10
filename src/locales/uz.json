@@ -441,7 +441,8 @@
   "register": {
     "toasts": {
       "success": "Muvaffaqiyatli",
-      "smsError": "Sms kod xato"
+      "smsError": "Sms kod xato",
+      "notUser": "Foydalanuvchi topilmadi"
     },
     "title": {
       "number": "Telefon raqamingizni kiriting",

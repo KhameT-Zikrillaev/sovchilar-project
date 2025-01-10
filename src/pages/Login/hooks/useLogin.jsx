@@ -12,7 +12,7 @@ export const useLogin = () => {
       //   console.log(response);
       return response;
     } catch (err) {
-      toast.error("Xato parol");
+      return err;
     } finally {
       setIsLoading(false);
     }
