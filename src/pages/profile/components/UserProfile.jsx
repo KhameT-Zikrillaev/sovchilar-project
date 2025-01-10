@@ -33,7 +33,7 @@ function UserProfile() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b  py-8 px-4 sm:px-6 lg:px-8 mt-[99px]">
+      <div className="min-h-screen bg-gradient-to-b  pb-8 px-4 sm:px-6 lg:px-8 mt-[30px]">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Верхняя секция с фото и основной информацией */}
@@ -268,7 +268,7 @@ function UserProfile() {
                     </div>
 
                     {/* Телефон*/}
-                    {/* {userData?.phone && (
+                    {userData?.phone && (
                       <a href={`tel:${userData?.phone}`} className="block">
                         <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:scale-[1.02]">
                           <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
@@ -291,7 +291,7 @@ function UserProfile() {
                           </div>
                         </div>
                       </a>
-                    )} */}
+                    )}
 
                     {/* Telegram */}
                     {userData?.telegram && (

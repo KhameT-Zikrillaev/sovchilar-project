@@ -92,7 +92,7 @@ const Register = () => {
         });
         if (res.statusCode === 201) {
           setUser(res.data)
-          navigate("/")
+          navigate("/profile")
           toast.success("Muvaffaqiyatli");
         } else {
           toast.error("Bunday raqamli foydalanuvchi bor");
@@ -105,7 +105,7 @@ const Register = () => {
         });
         if (res.statusCode === 200) {
           setUser(res.data)
-          navigate("/")
+          navigate("/profile")
           toast.success("Muvaffaqiyatli");
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
