@@ -54,7 +54,7 @@ const Login = () => {
     if (res?.statusCode === 200) {
       setUser(res.data);
       navigate("/");
-      toast.success("Muvaffaqiyatli");
+      toast.success(t("register.toasts.success"));
     } else {
       // toast.error("Bunday raqamli foydalanuvchi bor");
     }
@@ -96,7 +96,9 @@ const Login = () => {
                 : "bg-red-500 hover:bg-red-600"
             }`}
           >
-            {isLoading ? t() : t("login.button.loading.text")}
+            {isLoading
+              ? t("login.button.loading.text")
+              : t("login.button.text")}
           </button>
         </form>
 
