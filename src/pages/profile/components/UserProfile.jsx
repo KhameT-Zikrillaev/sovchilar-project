@@ -12,9 +12,6 @@ function UserProfile() {
   
   const {user} = useStore()
 
-  console.log(user);
-  
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
