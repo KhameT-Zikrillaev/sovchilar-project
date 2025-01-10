@@ -28,7 +28,7 @@ export default function SecondHomePageSearch() {
 
   // Функция для выполнения API-запроса
   const fetchUser = async (gender, ageFrom, ageTo, address, maritalStatus) => {
-    console.log(gender, ageFrom, ageTo, address, maritalStatus);
+    // console.log(gender, ageFrom, ageTo, address, maritalStatus);
     setIsLoading(true);
     try {
       const user = await getRecentUser(
@@ -38,7 +38,7 @@ export default function SecondHomePageSearch() {
         address,
         maritalStatus
       );
-      console.log("Fetched user:", user?.data?.items);
+      // console.log("Fetched user:", user?.data?.items);
       const newUsers = user?.data?.items || [];
       setAllUsers(newUsers);
       // Сохраняем результаты поиска и параметры только если это поиск из формы
@@ -62,7 +62,7 @@ export default function SecondHomePageSearch() {
         })
       );
     } catch (error) {
-      console.error("Error fetching user:", error);
+      // console.error("Error fetching user:", error);
     } finally {
       setIsLoading(false);
     }

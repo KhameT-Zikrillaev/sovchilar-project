@@ -439,17 +439,53 @@
     "text": "Yuklanmoqda..."
   },
   "register": {
+    "toasts": {
+      "success": "Muvaffaqiyatli",
+      "smsError": "Sms kod xato"
+    },
     "title": {
       "number": "Telefon raqamingizni kiriting",
-      "smsCode": "Tasdiqlash kodini kiriting"
+      "smsCode": "Tasdiqlash kodini kiriting",
+      "signup": "Ro'yxatdan o'ting",
+      "password": "Parol qo'ying"
     },
-    "firstName": "",
+    "placeholders": {
+      "codeText": "Tasdiqlash kodi",
+      "firstName": "Ismingizni kiriting",
+      "password": "Parol yarating"
+    },
     "button": {
       "number": "Tasdiqlash kodini yuborish",
       "smsCode": "Tasdiqlash kodini kiriting",
+      "confirmation": "Tasdiqlash",
+      "password": "Parol qo'yish",
+      "signup": "Ro'yxatdan o'tish",
       "loading": {
-        "number": "SMS yuborilmoqda..."
+        "number": "SMS yuborilmoqda...",
+        "confirmation": "Tasdiqlanmoqda...",
+        "password": "Parol qo'yilmoqda...",
+        "signup": "Ro'yxatdan o'tilmoqda..."
       }
+    },
+    "link": {
+      "text": "Profilingiz bormi?",
+      "link": "Kirish."
+    }
+  },
+  "login": {
+    "title": "Tizimga kirish",
+    "placeholders": {
+      "password": "Parolni kiriting"
+    },
+    "button": {
+      "text": "Kirish",
+      "loading": {
+        "text": "Kirish..."
+      }
+    },
+    "links": {
+      "text": "Profilingiz yo'qmi?",
+      "link": "Ro'yxatdan o'ting."
     }
   }
 }

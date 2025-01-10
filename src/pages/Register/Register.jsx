@@ -6,7 +6,7 @@ import { useGetPhone } from "./hooks/useGetPhone";
 import { useEditUser } from "./hooks/useEditUser";
 import { useTranslation } from "react-i18next";
 import { useStore } from "../../store/store";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -22,8 +22,8 @@ const Register = () => {
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
   const { EditUser } = useEditUser();
-  const {setUser, user} = useStore()
-  const navigate = useNavigate()
+  const { setUser, user } = useStore();
+  const navigate = useNavigate();
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
@@ -77,11 +77,11 @@ const Register = () => {
       setOldUser(res.data);
       if (response.statusCode === 200) {
         setStep(3);
-        toast.success("Muvaffaqiyatli");
+        toast.success(t("register.toasts.success"));
         setIsCode(true);
       } else {
         setIsCode(false);
-        toast.error("Sms kod xato");
+        toast.error(t("register.toasts.smsError"));
       }
     } else if (step === 3) {
       if (!oldUser) {
@@ -95,7 +95,7 @@ const Register = () => {
           navigate("/profile")
           toast.success("Muvaffaqiyatli");
         } else {
-          toast.error("Bunday raqamli foydalanuvchi bor");
+          // toast.error("Bunday raqamli foydalanuvchi bor");
         }
       } else {
         const res = await EditUser("/users-uz/register/" + oldUser.id, {
@@ -122,8 +122,8 @@ const Register = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               {(step === 1 && t("register.title.number")) ||
                 (step === 2 && t("register.title.smsCode")) ||
-                (step === 3 && !oldUser && "Ro'yxatdan o'ting") ||
-                "Parol qo'ying"}
+                (step === 3 && !oldUser && t("register.title.signup")) ||
+                t("register.title.password")}
             </h2>
             {step === 1 && (
               <input
@@ -138,7 +138,7 @@ const Register = () => {
             {step === 2 && (
               <input
                 type="text"
-                placeholder="Tasdiqlash kodi"
+                placeholder={t("register.placeholders.codeText")}
                 value={smsCode}
                 onChange={(e) => setSmsCode(e.target.value)}
                 minLength={6}
@@ -155,7 +155,7 @@ const Register = () => {
               <>
                 <input
                   type="text"
-                  placeholder="Ismingizni kiriting"
+                  placeholder={t("register.placeholders.firstName")}
                   value={firstName}
                   minLength={3}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -165,7 +165,7 @@ const Register = () => {
 
                 <input
                   type="password"
-                  placeholder="Password yarating"
+                  placeholder={t("register.placeholders.password")}
                   value={password}
                   minLength={5}
                   autoComplete="on"
@@ -199,15 +199,28 @@ const Register = () => {
                   ? t("register.button.loading.number")
                   : t("register.button.number"))) ||
                 (step === 2 &&
-                  (isLoading ? "Tasdiqlanmoqda..." : "Tasdiqlash")) ||
+                  (isLoading
+                    ? t("register.button.loading.confirmation")
+                    : t("register.button.confirmation"))) ||
                 (step === 3 &&
                   !oldUser &&
                   (isLoading
-                    ? "Ro'yxatdan o'tilmoqda..."
-                    : "Ro'yxatdan o'tish")) ||
-                (isLoading ? "Parol qo'yilmoqda" : "Parol qo'yish")}
+                    ? t("register.button.loading.signup")
+                    : t("register.button.signup"))) ||
+                (isLoading
+                  ? t("register.button.loading.password")
+                  : t("register.button.password"))}
             </button>
           </form>
+          <div className="text-center mt-5">
+            {t("register.link.text")}{" "}
+            <NavLink
+              to="/login"
+              className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
+            >
+              {t("register.link.link")}
+            </NavLink>
+          </div>
         </div>
       </div>
     </>

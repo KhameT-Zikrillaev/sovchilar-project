@@ -12,7 +12,7 @@ function useUser() {
       toast.success("User added successfully");
       return response;
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       toast.error(err.response?.data?.message || "Error adding user");
     } finally {
       setIsLoading(false);

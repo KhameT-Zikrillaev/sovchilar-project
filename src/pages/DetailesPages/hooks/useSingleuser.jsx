@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import UserServices from '../../../services/userServices';
-import { toast } from 'react-toastify';
+import { useState } from "react";
+import UserServices from "../../../services/userServices";
+import { toast } from "react-toastify";
 
 export const useSingleUser = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,8 +11,10 @@ export const useSingleUser = () => {
       const response = await UserServices.getSingle(id);
       return response; // Возвращаем только студентов
     } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "O'qituvchilarni olishda xato");
+      // console.error(err);
+      toast.error(
+        err.response?.data?.message || "O'qituvchilarni olishda xato"
+      );
     } finally {
       setIsLoading(false);
     }

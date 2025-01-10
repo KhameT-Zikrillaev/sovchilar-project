@@ -11,7 +11,7 @@ export const useRecentUser = () => {
       const response = await UserServices.getAll(gender, ageFrom, ageTo, address, maritalStatus);
       return response; // Возвращаем только студентов
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       toast.error(err.response?.data?.message || "O'qituvchilarni olishda xato");
     } finally {
       setIsLoading(false);
