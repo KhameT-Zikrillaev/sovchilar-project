@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import NavbarLogo from './NavbarLogo'
 import flaguz from '../../assets/images/flag-uzb.jpg';
 import flagru from '../../assets/images/flag-rus.png';
+import { useStore } from '../../store/store';
 // Анимированная иконка сердца
 const AnimatedHeart = () => (
   <div className="relative w-8 h-8 flex items-center justify-center">
@@ -55,6 +56,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
+  const {user} = useStore()
 
   const handleScrollTo = (id) => {
     setIsOpen(false);
@@ -108,10 +110,10 @@ export default function Navbar() {
               {t('navbar.contact')}
             </a>
             <Link 
-              to="/auth" 
+              to={user ? '/profile' : '/login'} 
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
-              <span>{t('navbar.createProfile')}</span>
+              <span>{user ? user.firstName : "Kirish"}</span>
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
