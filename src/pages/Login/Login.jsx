@@ -56,7 +56,7 @@ const Login = () => {
       navigate("/profile");
       toast.success(t("register.toasts.success"));
     } else {
-      // toast.error("Bunday raqamli foydalanuvchi bor");
+      toast.error(t("register.toasts.notUser"));
     }
   };
 
