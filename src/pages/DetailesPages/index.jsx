@@ -13,13 +13,13 @@ function UserDetails() {
   const [userData, setUserData] = useState(null);
   const { getSingleUser, isLoading } = useSingleUser();
   const [isImg, setIsImg] = useState(false);
-  console.log(id);
+  // console.log(id);
   const fetchUser = async () => {
     const user = await getSingleUser(id);
     setUserData(user?.data);
-    console.log(user.data.address);
+    // console.log(user.data.address);
   };
-  console.log(userData);
+  // console.log(userData);
 
   useEffect(() => {
     fetchUser();

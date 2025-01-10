@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useLogin } from "./hooks/useLogin";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useStore } from "../../store/store";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
   const [password, setPassword] = useState("");
+  const { setUser } = useStore();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { LoginUser, isLoading } = useLogin();
 
@@ -45,12 +51,13 @@ const Login = () => {
       phone: phoneNumber.replace(/[\s-]/g, ""),
       password: password,
     });
-    console.log(res);
-    // if (res.statusCode === 201) {
-    //   toast.success("Muvaffaqiyatli");
-    // } else {
-    //   toast.error("Bunday raqamli foydalanuvchi bor");
-    // }
+    if (res?.statusCode === 200) {
+      setUser(res.data);
+      navigate("/");
+      toast.success("Muvaffaqiyatli");
+    } else {
+      // toast.error("Bunday raqamli foydalanuvchi bor");
+    }
   };
 
   return (
@@ -58,12 +65,11 @@ const Login = () => {
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <form onSubmit={login}>
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            Login qilish
+            {t("login.title")}
           </h2>
           <input
             type="tel"
             value={phoneNumber}
-            placeholder="Login kiriting"
             onChange={handlePhoneChange}
             minLength={17}
             required
@@ -72,7 +78,7 @@ const Login = () => {
 
           <input
             type="password"
-            placeholder="Password kiriting"
+            placeholder={t("login.placeholders.password")}
             autoComplete="on"
             value={password}
             minLength={5}
@@ -90,17 +96,17 @@ const Login = () => {
                 : "bg-red-500 hover:bg-red-600"
             }`}
           >
-            {isLoading ? "Kirish..." : "Kirish"}
+            {isLoading ? t() : t("login.button.loading.text")}
           </button>
         </form>
 
         <div className="text-center mt-5">
-          Profilingiz yo'qmi?{" "}
+          {t("login.links.text")}{" "}
           <NavLink
             to="/register"
             className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
           >
-            Ro'yxatdan o'ting.
+            {t("login.links.link")}
           </NavLink>
         </div>
       </div>

@@ -77,11 +77,11 @@ const Register = () => {
       setOldUser(res.data);
       if (response.statusCode === 200) {
         setStep(3);
-        toast.success("Muvaffaqiyatli");
+        toast.success(t("register.toasts.success"));
         setIsCode(true);
       } else {
         setIsCode(false);
-        toast.error("Sms kod xato");
+        toast.error(t("register.toasts.smsError"));
       }
     } else if (step === 3) {
       if (!oldUser) {
@@ -95,7 +95,7 @@ const Register = () => {
           navigate("/");
           toast.success("Muvaffaqiyatli");
         } else {
-          toast.error("Bunday raqamli foydalanuvchi bor");
+          // toast.error("Bunday raqamli foydalanuvchi bor");
         }
       } else {
         const res = await EditUser("/users-uz/register/" + oldUser.id, {
@@ -138,7 +138,7 @@ const Register = () => {
             {step === 2 && (
               <input
                 type="text"
-                placeholder="Tasdiqlash kodi"
+                placeholder={t("register.placeholders.codeText")}
                 value={smsCode}
                 onChange={(e) => setSmsCode(e.target.value)}
                 minLength={6}
@@ -155,7 +155,7 @@ const Register = () => {
               <>
                 <input
                   type="text"
-                  placeholder="Ismingizni kiriting"
+                  placeholder={t("register.placeholders.firstName")}
                   value={firstName}
                   minLength={3}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -165,7 +165,7 @@ const Register = () => {
 
                 <input
                   type="password"
-                  placeholder="Password yarating"
+                  placeholder={t("register.placeholders.password")}
                   value={password}
                   minLength={5}
                   autoComplete="on"
@@ -213,12 +213,12 @@ const Register = () => {
             </button>
           </form>
           <div className="text-center mt-5">
-            Profilingiz bormi?{" "}
+            {t("register.link.text")}{" "}
             <NavLink
               to="/login"
               className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
             >
-              Kirish qiling.
+              {t("register.link.link")}
             </NavLink>
           </div>
         </div>

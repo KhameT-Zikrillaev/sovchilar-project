@@ -1,37 +1,37 @@
-import React, { useState, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import useAddImages from '../../../hooks/useImageUser';
-import Loading from '../../../../../components/Loading/index';
+import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import useAddImages from "../../../hooks/useImageUser";
+import Loading from "../../../../../components/Loading/index";
 
 const ImageUploadForm = ({ onImageChange, preview }) => {
   const { t } = useTranslation();
   const { addImages, isLoading } = useAddImages();
   const [localPreview, setLocalPreview] = useState(preview);
-  
+
   // Ссылка на инпут
-  const fileInputRef = useRef(null);  
+  const fileInputRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleImageChange = async (event) => {
     const file = event.target?.files?.[0];
     if (file) {
-      console.log(file);
+      // console.log(file);
 
       const previewUrl = URL.createObjectURL(file);
       setLocalPreview(previewUrl);
 
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
       try {
         const response = await addImages(formData);
-        console.log(response?.data?.path);
+        // console.log(response?.data?.path);
 
         if (response?.data?.path) {
           onImageChange(response.data.path);
         }
       } catch (error) {
-        console.error('Ошибка при отправке изображения:', error.response?.data || error.message);
+        // console.error('Ошибка при отправке изображения:', error.response?.data || error.message);
       }
     }
   };
@@ -44,15 +44,16 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
   };
 
   return (
-    <div className="space-y-6" >  {/* Кликаем по контейнеру, чтобы открыть инпут */}
+    <div className="space-y-6">
+      {" "}
+      {/* Кликаем по контейнеру, чтобы открыть инпут */}
       {isLoading && <Loading />}
       <label className="block text-sm font-medium text-gray-700">
-        {t('auth.FormTwo.profilePicture')}
+        {t("auth.FormTwo.profilePicture")}
       </label>
-
       <div className="flex flex-col items-center" onClick={handleClick}>
         {localPreview ? (
-          <div className="relative w-32 h-32 mb-4" >
+          <div className="relative w-32 h-32 mb-4">
             <img
               src={localPreview}
               alt="Preview"
@@ -92,7 +93,7 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
                 </svg>
                 <div className="flex text-sm text-gray-600">
                   <label className="relative cursor-pointer rounded-md font-medium text-rose-600 hover:text-rose-500 focus-within:outline-none">
-                    <span>{t('auth.FormTwo.uploadPhoto')}</span>
+                    <span>{t("auth.FormTwo.uploadPhoto")}</span>
                     <input
                       type="file"
                       className="hidden"
@@ -108,9 +109,8 @@ const ImageUploadForm = ({ onImageChange, preview }) => {
           </div>
         )}
       </div>
-
       <p className="text-sm text-gray-500 text-center">
-        {t('auth.FormTwo.photoNotice')}
+        {t("auth.FormTwo.photoNotice")}
       </p>
     </div>
   );
