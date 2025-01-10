@@ -128,6 +128,7 @@ export default function Navbar() {
                 />
               </svg>
             </Link>
+            <LanguageSelector />
           </div>
 
           {/* Мобильное меню */}
