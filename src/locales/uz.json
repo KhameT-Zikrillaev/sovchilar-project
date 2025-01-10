@@ -441,14 +441,22 @@
   "register": {
     "title": {
       "number": "Telefon raqamingizni kiriting",
-      "smsCode": "Tasdiqlash kodini kiriting"
+      "smsCode": "Tasdiqlash kodini kiriting",
+      "signup": "Ro'yxatdan o'ting",
+      "password": "Parol qo'ying"
     },
     "firstName": "",
     "button": {
       "number": "Tasdiqlash kodini yuborish",
       "smsCode": "Tasdiqlash kodini kiriting",
+      "confirmation": "Tasdiqlash",
+      "password": "Parol qo'yish",
+      "signup": "Ro'yxatdan o'tish",
       "loading": {
-        "number": "SMS yuborilmoqda..."
+        "number": "SMS yuborilmoqda...",
+        "confirmation": "Tasdiqlanmoqda...",
+        "password": "Parol qo'yilmoqda...",
+        "signup": "Ro'yxatdan o'tilmoqda..."
       }
     }
   }

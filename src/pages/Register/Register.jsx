@@ -6,7 +6,7 @@ import { useGetPhone } from "./hooks/useGetPhone";
 import { useEditUser } from "./hooks/useEditUser";
 import { useTranslation } from "react-i18next";
 import { useStore } from "../../store/store";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -22,8 +22,8 @@ const Register = () => {
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
   const { EditUser } = useEditUser();
-  const {setUser, user} = useStore()
-  const navigate = useNavigate()
+  const { setUser, user } = useStore();
+  const navigate = useNavigate();
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
@@ -91,8 +91,8 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 201) {
-          setUser(res.data)
-          navigate("/")
+          setUser(res.data);
+          navigate("/");
           toast.success("Muvaffaqiyatli");
         } else {
           toast.error("Bunday raqamli foydalanuvchi bor");
@@ -104,8 +104,8 @@ const Register = () => {
           password: password,
         });
         if (res.statusCode === 200) {
-          setUser(res.data)
-          navigate("/")
+          setUser(res.data);
+          navigate("/");
           toast.success("Muvaffaqiyatli");
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
@@ -122,8 +122,8 @@ const Register = () => {
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               {(step === 1 && t("register.title.number")) ||
                 (step === 2 && t("register.title.smsCode")) ||
-                (step === 3 && !oldUser && "Ro'yxatdan o'ting") ||
-                "Parol qo'ying"}
+                (step === 3 && !oldUser && t("register.title.signup")) ||
+                t("register.title.password")}
             </h2>
             {step === 1 && (
               <input
@@ -199,15 +199,28 @@ const Register = () => {
                   ? t("register.button.loading.number")
                   : t("register.button.number"))) ||
                 (step === 2 &&
-                  (isLoading ? "Tasdiqlanmoqda..." : "Tasdiqlash")) ||
+                  (isLoading
+                    ? t("register.button.loading.confirmation")
+                    : t("register.button.confirmation"))) ||
                 (step === 3 &&
                   !oldUser &&
                   (isLoading
-                    ? "Ro'yxatdan o'tilmoqda..."
-                    : "Ro'yxatdan o'tish")) ||
-                (isLoading ? "Parol qo'yilmoqda" : "Parol qo'yish")}
+                    ? t("register.button.loading.signup")
+                    : t("register.button.signup"))) ||
+                (isLoading
+                  ? t("register.button.loading.password")
+                  : t("register.button.password"))}
             </button>
           </form>
+          <div className="text-center mt-5">
+            Profilingiz bormi?{" "}
+            <NavLink
+              to="/login"
+              className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
+            >
+              Kirish qiling.
+            </NavLink>
+          </div>
         </div>
       </div>
     </>
