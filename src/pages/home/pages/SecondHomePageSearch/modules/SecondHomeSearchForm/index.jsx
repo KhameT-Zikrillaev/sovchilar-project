@@ -101,32 +101,32 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
 
   const cities = [
     { value: '', label: t('home.SecondHomePageSearch.form.city.options.all') },
-    { value: '&address=TOSHKENT', label: t('home.SecondHomePageSearch.form.city.options.Tashkent') },
-    { value: '&address=ANDIJON', label: t('home.SecondHomePageSearch.form.city.options.Andijan') },
-    { value: '&address=BUXORO', label: t('home.SecondHomePageSearch.form.city.options.Bukhara') },
-    { value: '&address=FARGONA', label: t('home.SecondHomePageSearch.form.city.options.Fergana') },
-    { value: '&address=JIZZAX', label: t('home.SecondHomePageSearch.form.city.options.Jizzakh') },
-    { value: '&address=XORAZM', label: t('home.SecondHomePageSearch.form.city.options.Xorazm') },
-    { value: '&address=NAMANGAN', label: t('home.SecondHomePageSearch.form.city.options.Namangan') },
-    { value: '&address=NAVOIY', label: t('home.SecondHomePageSearch.form.city.options.Navoiy') },
-    { value: '&address=QASHQADARYO', label: t('home.SecondHomePageSearch.form.city.options.Qashqadaryo') },
-    { value: '&address=SAMARQAND', label: t('home.SecondHomePageSearch.form.city.options.Samarkand') },
-    { value: '&address=SIRDARYO', label: t('home.SecondHomePageSearch.form.city.options.Sirdaryo') },
-    { value: '&address=SURXONDARYO', label: t('home.SecondHomePageSearch.form.city.options.Surxondaryo') },
-    { value: '&address=QORAQALPOGISTON', label: t('home.SecondHomePageSearch.form.city.options.Karakalpakstan') },
+    { value: 'TOSHKENT', label: t('home.SecondHomePageSearch.form.city.options.Tashkent') },
+    { value: 'ANDIJON', label: t('home.SecondHomePageSearch.form.city.options.Andijan') },
+    { value: 'BUXORO', label: t('home.SecondHomePageSearch.form.city.options.Bukhara') },
+    { value: 'FARGONA', label: t('home.SecondHomePageSearch.form.city.options.Fergana') },
+    { value: 'JIZZAX', label: t('home.SecondHomePageSearch.form.city.options.Jizzakh') },
+    { value: 'XORAZM', label: t('home.SecondHomePageSearch.form.city.options.Xorazm') },
+    { value: 'NAMANGAN', label: t('home.SecondHomePageSearch.form.city.options.Namangan') },
+    { value: 'NAVOIY', label: t('home.SecondHomePageSearch.form.city.options.Navoiy') },
+    { value: 'QASHQADARYO', label: t('home.SecondHomePageSearch.form.city.options.Qashqadaryo') },
+    { value: 'SAMARQAND', label: t('home.SecondHomePageSearch.form.city.options.Samarkand') },
+    { value: 'SIRDARYO', label: t('home.SecondHomePageSearch.form.city.options.Sirdaryo') },
+    { value: 'SURXONDARYO', label: t('home.SecondHomePageSearch.form.city.options.Surxondaryo') },
+    { value: 'QORAQALPOGISTON', label: t('home.SecondHomePageSearch.form.city.options.Karakalpakstan') },
   ];
 
   const maleMaritalStatuses = [
     { value: '', label: t('home.SecondHomePageSearch.form.maritalStatus.male.all') },
-    { value: '&maritalStatus=SINGLE', label: t('home.SecondHomePageSearch.form.maritalStatus.male.single') },
-    { value: '&maritalStatus=DIVORCED', label: t('home.SecondHomePageSearch.form.maritalStatus.male.divorced') },
-    { value: '&maritalStatus=MARRIED_SECOND', label: t('home.SecondHomePageSearch.form.maritalStatus.male.married_second') },
+    { value: 'SINGLE', label: t('home.SecondHomePageSearch.form.maritalStatus.male.single') },
+    { value: 'DIVORCED', label: t('home.SecondHomePageSearch.form.maritalStatus.male.divorced') },
+    { value: 'MARRIED_SECOND', label: t('home.SecondHomePageSearch.form.maritalStatus.male.married_second') },
   ];
 
   const femaleMaritalStatuses = [
     { value: '', label: t('home.SecondHomePageSearch.form.maritalStatus.female.all') },
-    { value: '&maritalStatus=SINGLE', label: t('home.SecondHomePageSearch.form.maritalStatus.female.single') },
-    { value: '&maritalStatus=DIVORCED', label: t('home.SecondHomePageSearch.form.maritalStatus.female.divorced') },
+    { value: 'SINGLE', label: t('home.SecondHomePageSearch.form.maritalStatus.female.single') },
+    { value: 'DIVORCED', label: t('home.SecondHomePageSearch.form.maritalStatus.female.divorced') },
   ];
 
   const getMaritalStatusOptions = () => (gender === 'gender=MALE' ? maleMaritalStatuses : femaleMaritalStatuses);
@@ -151,7 +151,7 @@ const SecondHomeSearchForm = forwardRef(({ onSearch, setIsSearchActive, isSubmit
   };
 
   return (
-    <form data-aos="flip-up" data-aos-offset="50" onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8">
+    <form data-aos="flip-up" data-aos-offset="50" onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8 ">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Gender Selection */}
         <div data-aos-delay="500" data-aos="fade-right" data-aos-offset="50">

@@ -49,6 +49,7 @@
       "resetButton": "Сбросить",
       "noUsersMessage": "такой пользователей не найдено",
       "ShowMore": "Показать еще",
+      "loading": "Загрузка...",
       "Anketa": "анкета",
       "filters": {
         "all": "Все",
