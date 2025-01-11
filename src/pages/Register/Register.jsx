@@ -13,7 +13,6 @@ const Register = () => {
   const [step, setStep] = useState(1); // 1: Telefon kiritish, 2: SMS tasdiqlash, 3:Ism familiya parol kiritish
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
   const [smsCode, setSmsCode] = useState("");
-  // const [isPassword, setIsPassword]= useState("")
   const [isCode, setIsCode] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
@@ -88,7 +87,6 @@ const Register = () => {
   const handlePhoneSubmit = async (e) => {
     e.preventDefault();
     if (step === 1) {
-      console.log(phoneNumber);
       const response = await postItem("/auth/send-sms", {
         phone: phoneNumber.replace(/[\s-]/g, ""),
       });
@@ -161,8 +159,8 @@ const Register = () => {
                 value={phoneNumber}
                 onChange={handlePhoneChange}
                 onInput={handleInput}
-                minLength={17}
                 required
+                minLength={17}
                 className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             )}
