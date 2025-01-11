@@ -317,7 +317,11 @@
       "ethnicityRequired": "Millatni tanlash majburiy",
       "requirementsRequired": "Talablarni kiritish majburiy",
       "requirementsMinLength": "Talablar kamida 10 ta belgidan iborat bo'lishi kerak",
-      "requirementsPlaceholder": "O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing..."
+      "requirementsPlaceholder": "O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing...",
+      "toastMessages": {
+        "profileCreatedSuccess": "Anketa muvaffaqiyatli yaratildi",
+        "profileCreationError": "Anketa yaratishda xatolik"
+      }
     },
     "SuccessModal": {
       "title": "Muvaffaqiyat!",

@@ -318,7 +318,11 @@
       "ethnicityRequired": "Выбор национальности обязателен",
       "requirementsRequired": "Указание требований обязательно",
       "requirementsMinLength": "Требования должны содержать минимум 10 символов",
-      "requirementsPlaceholder": "Напишите о себе и о том, какого супруга вы ищете..."
+      "requirementsPlaceholder": "Напишите о себе и о том, какого супруга вы ищете...",
+      "toastMessages": {
+        "profileCreatedSuccess": "Анкета успешно создана",
+        "profileCreationError": "Ошибка при создании анкеты"
+      }
     },
     "SuccessModal": {
       "title": "Успех!",

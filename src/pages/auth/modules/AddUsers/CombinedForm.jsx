@@ -8,7 +8,6 @@ import { useStore } from '../../../../store/store';
 import api from '../../../../services/api';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import Modal from '../../../../components/customModal/Modal';
 const CombinedForm = ({handleCloseModal}) => {
   const { t } = useTranslation();
   const { register, handleSubmit, formState: { errors }, watch, setValue, reset} = useForm();
@@ -98,16 +97,16 @@ const CombinedForm = ({handleCloseModal}) => {
       
       if(response.status === 200 || response.status === 201){
         setUserSingle(response.data.data)
-        toast.success("Anketa muvaffaqiyatli yaratildi")
+        toast.success(t('auth.CombinedForm.toastMessages.profileCreatedSuccess'))
         handleCloseModal()
         if(user?.status === "PENDING"){
           handleStatusInactive(user?.id)
         }
       }else{
-        toast.success("Anketa yaratishda xatolik")
+        toast.success(t('auth.CombinedForm.toastMessages.profileCreationError'))
       }
     } catch (error) {
-      toast.success("Anketa yaratishda xatolik")
+      toast.success(t('auth.CombinedForm.toastMessages.profileCreationError'))
     }
   };
 
@@ -407,13 +406,46 @@ const CombinedForm = ({handleCloseModal}) => {
       </div>
     </form>
 
-
-
-    {/* Rules Modal */}
-       <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)} 
-      />
+    {isModalOpen && (
+      <div className="fixed inset-0 z-[60] bg-black bg-opacity-75 flex items-center justify-center">
+        <div className="bg-white w-full h-full overflow-y-auto p-6 md:p-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">{t('rules.title')}</h2>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="text-gray-500 hover:text-gray-700 p-2"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="prose max-w-none">
+              <p>{t('rules.siteUsageRules')}</p>
+              <div className="mt-4">
+                <h3 className="font-semibold mb-2">{t('rules.terms')}</h3>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li><strong>{t('rules.administration')}</strong> – {t('rules.siteStaff')}</li>
+                  <li><strong>{t('rules.services')}</strong> – {t('rules.softwareCollection')}</li>
+                  <li><strong>{t('rules.user')}</strong> – {t('rules.personOver18')}</li>
+                  <li><strong>{t('rules.login')}</strong> – {t('rules.chosenLogin')}</li>
+                  <li><strong>{t('rules.password')}</strong> – {t('rules.chosenPassword')}</li>
+                </ul>
+              </div>
+              <div className="mt-6">
+                <h3 className="font-semibold mb-2">{t('rules.generalRules')}</h3>
+                <p>{t('rules.rulesExplanation')}</p>
+              </div>
+              <div className="mt-6">
+                <h3 className="font-semibold mb-2">{t('rules.confidentialInfo')}</h3>
+                <p>{t('rules.confidentialDefinition')}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
     </>
   );
 };
