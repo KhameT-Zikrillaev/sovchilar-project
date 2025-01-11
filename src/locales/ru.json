@@ -2,9 +2,10 @@
   "navbar": {
     "search": "Поиск",
     "profiles": "Анкеты",
-     "contact": "Контакт",
-     "contactmobile":"Контакт +(50) 719 33 33",
-    "createProfile": "Создать анкету"
+    "contact": "Контакт",
+    "contactmobile": "Контакт +(50) 719 33 33",
+    "createProfile": "Редактировать профиль",
+    "signIn": "Войти"
   },
   "home": {
     "FirstIntroPage": {
@@ -16,6 +17,7 @@
         "women": "Я ищу мужа"
       },
       "createProfile": "Создать анкету",
+      "signIn": "Войти",
       "stats": {
         "weddings": "Свадеб",
         "profiles": "Анкет",
@@ -45,8 +47,9 @@
       "title": "Найди свою пару",
       "description": "Просмотрите наш тщательно подобранный список потенциальных совпадений и найдите того, кто разделяет ваши ценности и устремления",
       "resetButton": "Сбросить",
-       "noUsersMessage":"такой пользователей не найдено",
+      "noUsersMessage": "такой пользователей не найдено",
       "ShowMore": "Показать еще",
+      "loading": "Загрузка...",
       "Anketa": "анкета",
       "filters": {
         "all": "Все",
@@ -156,26 +159,26 @@
       "genderInvalid": "Выберите корректное значение пола",
       "addressRequired": "Пожалуйста, выберите город",
       "addressInvalid": "Выберите город из списка",
-      "telphoneNo":"Номер телефона не обязателен",
-      "submit":"Продолжить",
-       "selectCity": {
-       "select": "Выберите город",
-       "Toshkent": "Ташкент",
-       "Andijon": "Андижан",
-       "Buxoro": "Бухара",
-    "Fargona": "Фергана",
-    "Jizzax": "Джизак",
-    "Xorazm": "Хорезм",
-    "Namangan": "Наманган",
-    "Navoiy": "Навои",
-    "Qashqadaryo": "Кашкадарья",
-    "Samarqand": "Самарканд",
-    "Sirdaryo": "Сырдарья",
-    "Surxondaryo": "Сурхандарья",
-    "Qoraqalpogiston": "Каракалпакстан"
-       },
-       
-       "Validation": {
+      "telphoneNo": "Номер телефона не обязателен",
+      "submit": "Продолжить",
+      "selectCity": {
+        "select": "Выберите город",
+        "Toshkent": "Ташкент",
+        "Andijon": "Андижан",
+        "Buxoro": "Бухара",
+        "Fargona": "Фергана",
+        "Jizzax": "Джизак",
+        "Xorazm": "Хорезм",
+        "Namangan": "Наманган",
+        "Navoiy": "Навои",
+        "Qashqadaryo": "Кашкадарья",
+        "Samarqand": "Самарканд",
+        "Sirdaryo": "Сырдарья",
+        "Surxondaryo": "Сурхандарья",
+        "Qoraqalpogiston": "Каракалпакстан"
+      },
+
+      "Validation": {
         "firstName": {
           "required": "Имя обязательно для заполнения",
           "max": "Имя не должно превышать 50 символов"
@@ -208,8 +211,6 @@
           "max": "Telegram должен быть не более 50 символов"
         }
       }
-
-
     },
     "FormTwo": {
       "formTitle": "Дополнительная информация",
@@ -242,27 +243,28 @@
       "jobTitlePlaceholder": "Например: Программист",
       "nationality": "Национальность",
       "selectNationality": {
-  "select": "Выберите национальность",
-  "Uzbek": "Узбек",
-  "Russian": "Русский",
-  "Kazakh": "Казах",
-  "Kyrgyz": "Киргиз",
-  "Tajik": "Таджик",
-  "Turkmen": "Туркмен",
-  "Tatar": "Татар",
-  "Other": "Другое"
-        },
+        "select": "Выберите национальность",
+        "Uzbek": "Узбек",
+        "Russian": "Русский",
+        "Kazakh": "Казах",
+        "Kyrgyz": "Киргиз",
+        "Tajik": "Таджик",
+        "Turkmen": "Туркмен",
+        "Tatar": "Татар",
+        "Karakalpak": "Каракалпак",
+        "Other": "Другое"
+      },
       "aboutYourself": "Требование",
       "aboutYourselfPlaceholder": "Кратко напишите Ваш запрос....",
       "profilePicture": "Фотография профиля",
       "uploadPhoto": "Загрузить фото",
       "photoNotice": "Ваша фотография будет видна только после модерации",
       "terms": {
-    "label": "Я согласен с правилами",
-    "button": {
-      "text": "О знакомиться с правилами!"
-    }
-  },
+        "label": "Я согласен с правилами",
+        "button": {
+          "text": "О знакомиться с правилами!"
+        }
+      },
       "back": "Назад",
       "createProfile": "Создать анкету",
       "Validation": {
@@ -295,7 +297,34 @@
         }
       }
     },
-   "SuccessModal": {
+    "CombinedForm": {
+      "firstNamePlaceholder": "Введите ваше имя",
+      "firstNameRequired": "Имя обязательно",
+      "lastNamePlaceholder": "Введите вашу фамилию",
+      "lastNameRequired": "Фамилия обязательна",
+      "telegramUsernameRequired": "Telegram username обязательно",
+      "ageRequired": "Возраст обязателен",
+      "ageMin": "Возраст должен быть старше 18 лет",
+      "ageMax": "Возраст должен быть младше 100 лет",
+      "genderRequired": "Выбор пола обязателен",
+      "genderSelect": "Выберите пол",
+      "genderMale": "Мужчина",
+      "genderFemale": "Женщина",
+      "cityRequired": "Выбор города обязателен",
+      "educationRequired": "Выбор образования обязателен",
+      "maritalStatusRequired": "Выбор семейного положения обязателен",
+      "occupationRequired": "Указание профессии обязательно",
+      "occupationPlaceholder": "Введите вашу профессию",
+      "ethnicityRequired": "Выбор национальности обязателен",
+      "requirementsRequired": "Указание требований обязательно",
+      "requirementsMinLength": "Требования должны содержать минимум 10 символов",
+      "requirementsPlaceholder": "Напишите о себе и о том, какого супруга вы ищете...",
+      "toastMessages": {
+        "profileCreatedSuccess": "Анкета успешно создана",
+        "profileCreationError": "Ошибка при создании анкеты"
+      }
+    },
+    "SuccessModal": {
       "title": "Успех!",
       "message": "Ваши данные успешно отправлены. Ваша анкета будет рассмотрена в течение 1 дня и добавлена после подтверждения.",
       "buttonText": "Закрыть"
@@ -342,35 +371,35 @@
       "TOSHKENT": "Ташкент",
       "ANDIJON": "Андижан",
       "BUXORO": "Бухара",
-   "FARGONA": "Фергана",
-   "JIZZAX": "Джизак",
-   "XORAZM": "Хорезм",
-   "NAMANGAN": "Наманган",
-   "NAVOIY": "Навои",
-   "QASHQADARYO": "Кашкадарья",
-   "SAMARQAND": "Самарканд",
-   "SIRDARYO": "Сырдарья",
-   "SURXONDARYO": "Сурхандарья",
-   "QORAQALPOGISTON": "Каракалпакстан"
-      },
+      "FARGONA": "Фергана",
+      "JIZZAX": "Джизак",
+      "XORAZM": "Хорезм",
+      "NAMANGAN": "Наманган",
+      "NAVOIY": "Навои",
+      "QASHQADARYO": "Кашкадарья",
+      "SAMARQAND": "Самарканд",
+      "SIRDARYO": "Сырдарья",
+      "SURXONDARYO": "Сурхандарья",
+      "QORAQALPOGISTON": "Каракалпакстан"
+    },
     "qualification": {
-        "middle": "Среднее",
-        "specialized": "Среднее специальное",
-        "incompleteHigher": "Неоконченное высшее",
-        "higher": "Высшее",
-        "master": "Магистратура",
-        "doctorate": "Докторантура"
-      },
-      "selectNationality":{
-        "Uzbek": "Узбек",
-        "Russian": "Русский",
-        "Kazakh": "Казах",
-        "Kyrgyz": "Киргиз",
-        "Tajik": "Таджик",
-        "Turkmen": "Туркмен",
-        "Tatar": "Татар",
-        "Other": "Другое"
-          },
+      "middle": "Среднее",
+      "specialized": "Среднее специальное",
+      "incompleteHigher": "Неоконченное высшее",
+      "higher": "Высшее",
+      "master": "Магистратура",
+      "doctorate": "Докторантура"
+    },
+    "selectNationality": {
+      "Uzbek": "Узбек",
+      "Russian": "Русский",
+      "Kazakh": "Казах",
+      "Kyrgyz": "Киргиз",
+      "Tajik": "Таджик",
+      "Turkmen": "Туркмен",
+      "Tatar": "Татар",
+      "Other": "Другое"
+    },
     "marriedSecond": "Ищет вторую жену",
     "nationality": "Национальность",
     "education": "Образование",
@@ -392,7 +421,7 @@
     "status": "Статус",
     "active": "Активный",
     "inactive": "Неактивный",
-     "telegram":"Телеграм",
+    "telegram": "Телеграм",
     "nationality": "Национальность",
     "activeStatus": "Активный",
     "qualification": {
@@ -407,29 +436,30 @@
       "TOSHKENT": "Ташкент",
       "ANDIJON": "Андижан",
       "BUXORO": "Бухара",
-   "FERGONA": "Фергана",
-   "JIZZAX": "Джизак",
-   "XORAZM": "Хорезм",
-   "NAMANGAN": "Наманган",
-   "NAVOIY": "Навои",
-   "QASHQADARYO": "Кашкадарья",
-   "SAMARQAND": "Самарканд",
-   "SIRDARYO": "Сырдарья",
-   "SURXONDARYO": "Сурхандарья",
-   "QORAQALPOGISTON": "Каракалпакстан"
-      },
-   "selectNationality":{
-    "Uzbek": "Узбек",
-    "Russian": "Русский",
-    "Kazakh": "Казах",
-    "Kyrgyz": "Киргиз",
-    "Tajik": "Таджик",
-    "Turkmen": "Туркмен",
-    "Tatar": "Татар",
-    "Other": "Другое"
-      }
+      "FERGONA": "Фергана",
+      "JIZZAX": "Джизак",
+      "XORAZM": "Хорезм",
+      "NAMANGAN": "Наманган",
+      "NAVOIY": "Навои",
+      "QASHQADARYO": "Кашкадарья",
+      "SAMARQAND": "Самарканд",
+      "SIRDARYO": "Сырдарья",
+      "SURXONDARYO": "Сурхандарья",
+      "QORAQALPOGISTON": "Каракалпакстан"
+    },
+    "selectNationality": {
+      "Uzbek": "Узбек",
+      "Russian": "Русский",
+      "Kazakh": "Казах",
+      "Kyrgyz": "Киргиз",
+      "Tajik": "Таджик",
+      "Turkmen": "Туркмен",
+      "Tatar": "Татар",
+      "Karakalpak": "Каракалпак",
+      "Other": "Другое"
+    }
   },
-  "reklama":{
+  "reklama": {
     "text1": "Найдите свою настоящую любовь и создайте счастливую семью!",
     "text2": "Возможность найти любовь и семью – здесь."
   },
@@ -438,7 +468,108 @@
     "message": "Похоже, вы ушли не в ту сторону. Давайте вернемся на главную!",
     "link": "На главную"
   },
-  "loading":{
-    "text":"Загрузка..."
+  "loading": {
+    "text": "Загрузка..."
+  },
+  "register": {
+    "toasts": {
+      "success": "Успешный",
+      "smsError": "Ошибка кода СМС",
+      "notUser": "Пользователь не найден",
+      "error": "Ошибка",
+      "numberError": "Ошибка при вводе номера"
+    },
+    "title": {
+      "number": "Введите ваш номер телефона",
+      "smsCode": "Введите код подтверждения",
+      "signup": "Зарегистрироваться",
+      "password": "Установить пароль"
+    },
+    "warning": {
+      "first": "Введите не менее",
+      "second": "символов. На данный момент в игре",
+      "third": "персонажа.",
+      "empty": "Пожалуйста, заполните это поле."
+    },
+    "placeholders": {
+      "codeText": "Код подтверждения",
+      "firstName": "Введите свое имя",
+      "password": "Создать пароль"
+    },
+    "button": {
+      "number": "Отправить код подтверждения",
+      "smsCode": "Введите код подтверждения",
+      "confirmation": "Подтверждение",
+      "password": "Установить пароль",
+      "signup": "Зарегистрироваться",
+      "loading": {
+        "number": "Отправка СМС...",
+        "confirmation": "Подтверждая...",
+        "password": "Установка пароля...",
+        "signup": "Регистрация..."
+      }
+    },
+    "link": {
+      "text": "У вас есть профиль?",
+      "link": "Авторизоваться."
+    }
+  },
+  "login": {
+    "title": "Авторизоваться",
+    "forgotPassword": "Забыли пароль?",
+    "placeholders": {
+      "password": "Введите пароль"
+    },
+    "button": {
+      "text": "Авторизоваться",
+      "loading": {
+        "text": "Авторизоваться..."
+      }
+    },
+    "links": {
+      "text": "У вас нет профиля?",
+      "link": "Зарегистрироваться."
+    }
+  },
+  "Profile": {
+    "form": {
+      "fill_out_form": "Заполнить анкету",
+      "confirm": "Подтвердить",
+      "cancel": "Отменить"
+    },
+    "btn": {
+      "add": "Заполнить анкету",
+      "success": "Я нашел свое счастье",
+      "logout": "Выйти из профиля"
+    },
+    "UserProfile": {
+      "deleteprofilesuccess": "Ваша анкета была удалена с нашего сайта",
+      "setPhoto": "Загрузите фото",
+      "fullName": "Имя и фамилия",
+      "city": "Город",
+      "nationality": "Национальность",
+      "comment": "Оставьте комментарий",
+      "age": "Введите ваш возраст",
+      "address": "Введите ваш адрес",
+      "education": "Введите ваш уровень образования",
+      "occupation": "Введите вашу профессию",
+      "ethnicity": "Введите вашу этническую принадлежность",
+      "phone": "Введите ваш номер телефона",
+      "telegram":"Введите ваш телеграмм"
+    },
+    "modal": {
+      "happiness_found": "Нашел свое счастье",
+      "happiness_title": "Счастье",
+      "happiness_message": "Если вы нашли свое счастье, сообщите нам об этом. После подтверждения ваша анкета будет удалена с нашего сайта."
+    },
+    "buttons": {
+      "logout": "Profildan chiqish"
+    },
+    "toast": {
+      "profile_removed": "Ankatengiz saytimizdan olib tashlandi"
+    }
+  },
+  "comment":{
+    "title":"Счастливчики"
   }
 }
