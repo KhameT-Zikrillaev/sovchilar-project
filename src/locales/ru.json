@@ -317,7 +317,7 @@
       "occupationPlaceholder": "Введите вашу профессию",
       "ethnicityRequired": "Выбор национальности обязателен",
       "requirementsRequired": "Указание требований обязательно",
-      "requirementsMinLength": "Требования должны содержать минимум 50 символов",
+      "requirementsMinLength": "Требования должны содержать минимум 10 символов",
       "requirementsPlaceholder": "Напишите о себе и о том, какого супруга вы ищете..."
     },
     "SuccessModal": {
@@ -541,7 +541,8 @@
       "education": "Введите ваш уровень образования",
       "occupation": "Введите вашу профессию",
       "ethnicity": "Введите вашу этническую принадлежность",
-      "phone": "Введите ваш номер телефона"
+      "phone": "Введите ваш номер телефона",
+      "telegram":"Введите ваш телеграмм"
     },
     "modal": {
       "happiness_found": "Нашел свое счастье",
@@ -554,5 +555,8 @@
     "toast": {
       "profile_removed": "Ankatengiz saytimizdan olib tashlandi"
     }
+  },
+  "comment":{
+    "title":"Счастливчики"
   }
 }

@@ -4,10 +4,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useStore } from "../../store/store";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useStore();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -107,17 +109,30 @@ const Login = () => {
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
-          <input
-            type="password"
-            placeholder={t("login.placeholders.password")}
-            autoComplete="on"
-            value={password}
-            onInput={handleInput}
-            minLength={5}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
+          <div className="relative mb-4">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder={t("login.placeholders.password")}
+              autoComplete="on"
+              value={password}
+              onInput={handleInput}
+              minLength={5}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
+            </button>
+          </div>
 
           <button
             type="submit"

@@ -316,7 +316,7 @@
       "occupationPlaceholder": "Kasbingizni kiriting",
       "ethnicityRequired": "Millatni tanlash majburiy",
       "requirementsRequired": "Talablarni kiritish majburiy",
-      "requirementsMinLength": "Talablar kamida 50 ta belgidan iborat bo'lishi kerak",
+      "requirementsMinLength": "Talablar kamida 10 ta belgidan iborat bo'lishi kerak",
       "requirementsPlaceholder": "O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing..."
     },
     "SuccessModal": {
@@ -540,7 +540,8 @@
       "education": "Ta'lim darajangizni kiriting",
       "occupation": "Kasbingizni kiriting",
       "ethnicity": "Millatingizni kiriting",
-      "phone": "Telefon raqamingizni kiriting"
+      "phone": "Telefon raqamingizni kiriting",
+      "telegram":"Telegramingizni kiriting"
     },
     "modal": {
       "happiness_found": "Baxtimni toptim",
@@ -553,5 +554,9 @@
     "toast": {
       "profile_removed": "Ваша анкета была удалена с нашего сайта"
     }
+  
+  },
+  "comment":{
+    "title":"Baxtini topganlar"
   }
 }

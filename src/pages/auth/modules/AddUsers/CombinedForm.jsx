@@ -357,7 +357,7 @@ const CombinedForm = ({handleCloseModal}) => {
             id="description"
             {...register('description', { 
               required:t('auth.CombinedForm.requirementsRequired') ,
-              minLength: { value: 50, message: t('auth.CombinedForm.requirementsMinLength') }
+              minLength: { value: 10, message: t('auth.CombinedForm.requirementsMinLength') }
             })}
             rows="4"
             className={inputClasses}
@@ -408,7 +408,7 @@ const CombinedForm = ({handleCloseModal}) => {
     </form>
 
 
-    
+
     {/* Rules Modal */}
        <Modal
         isOpen={isModalOpen}
