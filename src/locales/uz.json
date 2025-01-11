@@ -474,7 +474,9 @@
     "toasts": {
       "success": "Muvaffaqiyatli",
       "smsError": "Sms kod xato",
-      "notUser": "Foydalanuvchi topilmadi"
+      "notUser": "Foydalanuvchi topilmadi",
+      "error": "Xatolik",
+      "numberError":"Raqam kiritishda xatolik"
     },
     "title": {
       "number": "Telefon raqamingizni kiriting",
