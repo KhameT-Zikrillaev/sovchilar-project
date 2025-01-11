@@ -60,7 +60,7 @@ function App() {
         {loading ? (
           <SiteLoading />
         ) : (
-          <div className="wrapper">
+          <div className="wrapper overflow-x-hidden w-full">
             <Reklama />
             <HeaderLayout />
             <MainLayout />
