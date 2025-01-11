@@ -51,8 +51,9 @@ const Profile = () => {
               {t('Profile.btn.add')}
             </button>
             <button 
-              className=" border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
+              className={`border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px] disabled:border-amber-800 disabled:text-amber-800 disabled:cursor-not-allowed disabled:hover:bg-transparent`}
               onClick={openModal}
+              disabled={user?.status === "ACTIVE"}
             >
               
               {t('Profile.btn.success')}

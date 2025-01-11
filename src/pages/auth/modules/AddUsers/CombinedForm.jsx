@@ -103,10 +103,10 @@ const CombinedForm = ({handleCloseModal}) => {
           handleStatusInactive(user?.id)
         }
       }else{
-        toast.success(t('auth.CombinedForm.toastMessages.profileCreationError'))
+        toast.error(t('auth.CombinedForm.toastMessages.profileCreationError'))
       }
     } catch (error) {
-      toast.success(t('auth.CombinedForm.toastMessages.profileCreationError'))
+      toast.error(t('auth.CombinedForm.toastMessages.profileCreationError'))
     }
   };
 
