@@ -20,7 +20,7 @@ export default function FirstHomePageIntro() {
       icon: "👰",
     },
     {
-      number: "1000+",
+      number: "9500+",
       label: t("home.FirstIntroPage.stats.profiles"),
       icon: "📋",
     },
