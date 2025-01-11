@@ -46,7 +46,7 @@ function Comments() {
   };
   return (
     <div className="my-16">
-      <div className="mb-5 text-center font-bold text-[40px]">
+      <div className="mb-5 text-center font-bold text-[24px]  md:text-[30px]   lg:text-[40px]">
         {t('comment.title')}
       </div>
       <div className=" slider-container container overflow-hidden">
