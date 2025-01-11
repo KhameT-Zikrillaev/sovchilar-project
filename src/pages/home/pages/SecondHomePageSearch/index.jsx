@@ -4,14 +4,12 @@ import Loading from "../../../../components/Loading";
 import SecondHomeSearchForm from "./modules/SecondHomeSearchForm";
 import { useTranslation } from "react-i18next";
 import { useRecentUser } from "./hooks/useRecentUser";
-import { useCardContext } from "../../../../context/CardContext";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
   const { getRecentUser } = useRecentUser();
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const { visibleCardCount, updateVisibleCardCount } = useCardContext();
   const [activeFilter, setActiveFilter] = useState(() => {
     return localStorage.getItem("activeFilter") || "";
   });
@@ -28,7 +26,6 @@ export default function SecondHomePageSearch() {
 
   const fetchUserPage = async ({ pageParam = 1 }) => {
     try {
-      console.log('Fetching page:', pageParam, 'with params:', searchParams);
       
       // Remove the '&' prefix from address and maritalStatus if they exist
       const address = searchParams.address.startsWith('&') 
@@ -54,7 +51,6 @@ export default function SecondHomePageSearch() {
         12
       );
       
-      console.log('Page response:', response);
       
       const users = response?.data?.data?.items || [];
       return {
@@ -113,10 +109,8 @@ export default function SecondHomePageSearch() {
   }, []);
 
   const allUsers = data?.pages?.flatMap(page => page.users) || [];
-  console.log('Rendered users:', allUsers);
 
   if (isError) {
-    console.error('Query error:', error);
     return <div className="text-center text-red-500">Error loading users: {error.message}</div>;
   }
 
