@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePostData } from "./hooks/usePostData";
 
 import { toast } from "react-toastify";
@@ -13,7 +13,6 @@ const Register = () => {
   const [step, setStep] = useState(1); // 1: Telefon kiritish, 2: SMS tasdiqlash, 3:Ism familiya parol kiritish
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
   const [smsCode, setSmsCode] = useState("");
-  const [userID, setUserID] = useState(null);
   // const [isPassword, setIsPassword]= useState("")
   const [isCode, setIsCode] = useState(true);
   const [firstName, setFirstName] = useState("");
@@ -22,8 +21,12 @@ const Register = () => {
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
   const { EditUser } = useEditUser();
-  const { setUser, user } = useStore();
+  const { setUser } = useStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;

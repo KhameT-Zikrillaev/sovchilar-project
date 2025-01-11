@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "./hooks/useLogin";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useStore } from "../../store/store";
@@ -13,6 +13,10 @@ const Login = () => {
   const { t } = useTranslation();
 
   const { LoginUser, isLoading } = useLogin();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
@@ -82,8 +86,8 @@ const Login = () => {
             type="tel"
             value={phoneNumber}
             onChange={handlePhoneChange}
-            minLength={17}
             required
+            minLength={17}
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
