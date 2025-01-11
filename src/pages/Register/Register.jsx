@@ -28,6 +28,21 @@ const Register = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const handleInput = (e) => {
+    const input = e.target;
+    if (input.validity.valueMissing) {
+      input.setCustomValidity(t("register.warning.empty"));
+    } else if (input.validity.tooShort) {
+      input.setCustomValidity(
+        `${t("register.warning.first")} ${input.minLength} ${t(
+          "register.warning.second"
+        )} ${input.value.length} ${t("register.warning.third")}`
+      );
+    } else {
+      input.setCustomValidity(""); // Validatsiya xabarini tozalash
+    }
+  };
+
   const handlePhoneChange = (e) => {
     let input = e.target.value;
 
@@ -73,6 +88,7 @@ const Register = () => {
   const handlePhoneSubmit = async (e) => {
     e.preventDefault();
     if (step === 1) {
+      console.log(phoneNumber);
       const response = await postItem("/auth/send-sms", {
         phone: phoneNumber.replace(/[\s-]/g, ""),
       });
@@ -144,6 +160,7 @@ const Register = () => {
                 type="tel"
                 value={phoneNumber}
                 onChange={handlePhoneChange}
+                onInput={handleInput}
                 minLength={17}
                 required
                 className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -155,6 +172,7 @@ const Register = () => {
                 placeholder={t("register.placeholders.codeText")}
                 value={smsCode}
                 onChange={(e) => setSmsCode(e.target.value)}
+                onInput={handleInput}
                 minLength={6}
                 maxLength={6}
                 required
@@ -171,6 +189,7 @@ const Register = () => {
                   type="text"
                   placeholder={t("register.placeholders.firstName")}
                   value={firstName}
+                  onInput={handleInput}
                   minLength={3}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
@@ -180,6 +199,7 @@ const Register = () => {
                 <input
                   type="password"
                   placeholder={t("register.placeholders.password")}
+                  onInput={handleInput}
                   value={password}
                   minLength={5}
                   autoComplete="on"

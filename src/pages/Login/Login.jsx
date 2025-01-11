@@ -18,6 +18,21 @@ const Login = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const handleInput = (e) => {
+    const input = e.target;
+    if (input.validity.valueMissing) {
+      input.setCustomValidity(t("register.warning.empty"));
+    } else if (input.validity.tooShort) {
+      input.setCustomValidity(
+        `${t("register.warning.first")} ${input.minLength} ${t(
+          "register.warning.second"
+        )} ${input.value.length} ${t("register.warning.third")}`
+      );
+    } else {
+      input.setCustomValidity(""); // Validatsiya xabarini tozalash
+    }
+  };
+
   const handlePhoneChange = (e) => {
     let input = e.target.value;
 
@@ -87,6 +102,7 @@ const Login = () => {
             value={phoneNumber}
             onChange={handlePhoneChange}
             required
+            onInput={handleInput}
             minLength={17}
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
@@ -96,6 +112,7 @@ const Login = () => {
             placeholder={t("login.placeholders.password")}
             autoComplete="on"
             value={password}
+            onInput={handleInput}
             minLength={5}
             onChange={(e) => setPassword(e.target.value)}
             required
