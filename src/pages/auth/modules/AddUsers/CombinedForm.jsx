@@ -1,36 +1,107 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { IoMdCloudUpload } from "react-icons/io";
 import { FiCamera } from "react-icons/fi";
 import { FiBook } from "react-icons/fi";
-
-const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
+import { useStore } from '../../../../store/store';
+import api from '../../../../services/api';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+const CombinedForm = ({handleCloseModal}) => {
   const { t } = useTranslation();
-  const { register, handleSubmit, formState: { errors }, watch } = useForm({
-    defaultValues: formData,
-  });
-  const [previewImage, setPreviewImage] = useState(formData?.avatar || null);
+  const { register, handleSubmit, formState: { errors }, watch, setValue, reset} = useForm();
+  const [previewImage, setPreviewImage] = useState( null);
   const [showRules, setShowRules] = useState(false);
   const [acceptRules, setAcceptRules] = useState(false);
+  const {user, accessToken, setUserSingle} = useStore()
 
+  const handleStatusInactive = async (id) => {
+    const newStatus = "INACTIVE";
+    try {
+      await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }});
+    } catch (error) {
+
+    }
+  };
+  
+  
   const handleNameInput = (e) => {
     const value = e.target.value.replace(/[^A-Za-zА-Яа-яЁёҲҳҚқҒғЎўЪъ\s-]/g, '');
     e.target.value = value;
-    onInputChange(e);
   };
 
-  const handleImageChange = (e) => {
+  useEffect(()=>{
+    reset({
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      telegram: user.telegram || "",
+      age: user.age || "",
+      gender: user.gender || "",
+      address: user.address || "",
+      qualification: user.qualification || "",
+      maritalStatus: user.maritalStatus || "",
+      jobTitle: user.jobTitle || "",
+      description: user.description || "",
+      imageUrl: user.imageUrl || "",
+      nationality: user.nationality || "",
+    });
+    if (user.imageUrl) {
+      setPreviewImage(user.imageUrl); // agar imageUrl mavjud bo'lsa, previewImage'ni o'rnatish
+    }
+  }, [user])
+
+
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    const response = await api.post('/file/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Fayl yuborish uchun content type
+      },
+    });
+    if(response.status > 199 && response.status < 300){
+      setValue("imageUrl", response?.data?.data?.path)
+    }else{
+      setValue("imageUrl", "")
+    }
+
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewImage(reader.result);
       };
       reader.readAsDataURL(file);
-      onInputChange({ target: { name: 'avatar', value: file } });
     }
   };
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.put(`https://back.sovchilar.net/api/users-uz/${user?.id}`, data, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      
+      if(response.status === 200 || response.status === 201){
+        setUserSingle(response.data.data)
+        toast.success("Anketa muvaffaqiyatli yaratildi")
+        handleCloseModal()
+        if(user?.status === "PENDING"){
+          handleStatusInactive(user?.id)
+        }
+      }else{
+        toast.success("Anketa yaratishda xatolik")
+      }
+    } catch (error) {
+      toast.success("Anketa yaratishda xatolik")
+    }
+  };
+
 
   const inputClasses = "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 text-sm";
   const selectClasses = "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all duration-300 appearance-none bg-white text-sm";
@@ -46,7 +117,6 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
             id="avatar"
             accept="image/*"
             className="hidden"
-            {...register('avatar', { required: "Rasm tanlanishi shart" })}
             onChange={handleImageChange}
           />
           <label
@@ -74,9 +144,6 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
             </div>
           </label>
         </div>
-        {errors.avatar && (
-          <p className="text-rose-500 text-sm">{errors.avatar.message}</p>
-        )}
       </div>
 
       <div className="bg-gray-50 rounded-2xl space-y-6">
@@ -111,7 +178,6 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
             />
             {errors.lastName && <p className="mt-1 text-sm text-rose-500">{errors.lastName.message}</p>}
           </div>
-
           <div>
             <label htmlFor="telegram" className={labelClasses}>
             {t('auth.FormOne.telegramLabel')}
@@ -135,6 +201,7 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
               id="age"
               {...register('age', { 
                 required: "Yoshni kiritish majburiy",
+                valueAsNumber: true,
                 min: { value: 18, message: "Yosh 18 dan katta bo'lishi kerak" },
                 max: { value: 100, message: "Yosh 100 dan kichik bo'lishi kerak" }
               })}
@@ -170,19 +237,19 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
               className={selectClasses}
             >
               <option value="">{t('auth.FormOne.selectCity.select')}</option>
-                <option value="Toshkent">{t('auth.FormOne.selectCity.Toshkent')}</option>
-                <option value="Andijon">{t('auth.FormOne.selectCity.Andijon')}</option>
-                <option value="Buxoro">{t('auth.FormOne.selectCity.Buxoro')}</option>
-                <option value="Fargona">{t('auth.FormOne.selectCity.Fargona')}</option>
-                <option value="Jizzax">{t('auth.FormOne.selectCity.Jizzax')}</option>
-                <option value="Xorazm">{t('auth.FormOne.selectCity.Xorazm')}</option>
-                <option value="Namangan">{t('auth.FormOne.selectCity.Namangan')}</option>
-                <option value="Navoiy">{t('auth.FormOne.selectCity.Navoiy')}</option>
-                <option value="Qashqadaryo">{t('auth.FormOne.selectCity.Qashqadaryo')}</option>
-                <option value="Samarqand">{t('auth.FormOne.selectCity.Samarqand')}</option>
-                <option value="Sirdaryo">{t('auth.FormOne.selectCity.Sirdaryo')}</option>
-                <option value="Surxondaryo">{t('auth.FormOne.selectCity.Surxondaryo')}</option>
-                <option value="Qoraqalpogiston">{t('auth.FormOne.selectCity.Qoraqalpogiston')}</option>
+                <option value="TOSHKENT">{t('auth.FormOne.selectCity.Toshkent')}</option>
+                <option value="ANDIJON">{t('auth.FormOne.selectCity.Andijon')}</option>
+                <option value="BUXORO">{t('auth.FormOne.selectCity.Buxoro')}</option>
+                <option value="FARGONA">{t('auth.FormOne.selectCity.Fargona')}</option>
+                <option value="JIZZAX">{t('auth.FormOne.selectCity.Jizzax')}</option>
+                <option value="XORAZM">{t('auth.FormOne.selectCity.Xorazm')}</option>
+                <option value="NAMANGAN">{t('auth.FormOne.selectCity.Namangan')}</option>
+                <option value="NAVOIY">{t('auth.FormOne.selectCity.Navoiy')}</option>
+                <option value="QASHQADARYO">{t('auth.FormOne.selectCity.Qashqadaryo')}</option>
+                <option value="SAMARQAND">{t('auth.FormOne.selectCity.Samarqand')}</option>
+                <option value="SIRDARYO">{t('auth.FormOne.selectCity.Sirdaryo')}</option>
+                <option value="SURXONDARYO">{t('auth.FormOne.selectCity.Surxondaryo')}</option>
+                <option value="QORAQALPOGISTON">{t('auth.FormOne.selectCity.Qoraqalpogiston')}</option>
             </select>
             {errors.address && <p className="mt-1 text-sm text-rose-500">{errors.address.message}</p>}
           </div>
@@ -218,14 +285,14 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
               <option value="">{t('auth.FormTwo.maritalStatus.default')}</option>
                 {watch('gender') === 'MALE' ? (
                   <>
-                    <option value="single">{t('auth.FormTwo.maritalStatus.male.single')}</option>
-                    <option value="divorced">{t('auth.FormTwo.maritalStatus.male.divorced')}</option> 
-                    <option value="married_second">{t('auth.FormTwo.maritalStatus.male.married_second')}</option>
+                    <option value="SINGLE">{t('auth.FormTwo.maritalStatus.male.single')}</option>
+                    <option value="DIVORCED">{t('auth.FormTwo.maritalStatus.male.divorced')}</option> 
+                    <option value="MARRIED_SECOND">{t('auth.FormTwo.maritalStatus.male.married_second')}</option>
                   </>
                 ) : watch('gender') === 'FEMALE' ? (
                   <>
-                    <option value="single">{t('auth.FormTwo.maritalStatus.female.single')}</option>
-                    <option value="divorced">{t('auth.FormTwo.maritalStatus.female.divorced')}</option>
+                    <option value="SINGLE">{t('auth.FormTwo.maritalStatus.female.single')}</option>
+                    <option value="DIVORCED">{t('auth.FormTwo.maritalStatus.female.divorced')}</option>
                   </>
                 ) : null}
             </select>
@@ -233,13 +300,13 @@ const CombinedForm = ({ formData, onInputChange, onSubmit }) => {
           </div>
 
           <div>
-            <label htmlFor="job" className={labelClasses}>
+            <label htmlFor="jobTitle" className={labelClasses}>
             {t('auth.FormTwo.jobTitle')}
             </label>
             <input
               type="text"
-              id="job"
-              {...register('job', { required: "Kasbni kiritish majburiy" })}
+              id="jobTitle"
+              {...register('jobTitle', { required: "Kasbni kiritish majburiy" })}
               className={inputClasses}
               placeholder="Kasbingizni kiriting"
             />

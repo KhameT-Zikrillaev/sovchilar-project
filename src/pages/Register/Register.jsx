@@ -36,23 +36,34 @@ const Register = () => {
     // Raqam va " " yoki "-" ni saqlash
     input = input.replace(/[^+0-9- ]/g, "");
 
+    const numbers = input.slice(5).replace(/-/g, ""); // +998 ni olib tashlab, faqat raqamlarni olish
+    let formatted = "+998 ";
+
     // Formatni saqlash (91-555-55-55)
-    if (input.length > 5) {
-      input = input.slice(0, 5) + input.slice(5);
+    if (numbers.length > 2) {
+      formatted += numbers.slice(0, 2) + "-";
+    } else {
+      formatted += numbers;
     }
-    if (input.length > 6 && input[7] !== "-") {
-      input = input.slice(0, 7) + "-" + input.slice(7);
+    if (numbers.length > 5) {
+      formatted += numbers.slice(2, 5) + "-";
+    } else if (numbers.length > 2) {
+      formatted += numbers.slice(2);
     }
-    if (input.length > 10 && input[11] !== "-") {
-      input = input.slice(0, 11) + "-" + input.slice(11);
+    if (numbers.length > 7) {
+      formatted += numbers.slice(5, 7) + "-";
+    } else if (numbers.length > 5) {
+      formatted += numbers.slice(5);
     }
-    if (input.length > 13 && input[14] !== "-") {
-      input = input.slice(0, 14) + "-" + input.slice(14);
+    if (numbers.length > 9) {
+      formatted += numbers.slice(7, 9);
+    } else if (numbers.length > 7) {
+      formatted += numbers.slice(7);
     }
 
     // Maksimal uzunlikni cheklash
-    if (input.length <= 17) {
-      setPhoneNumber(input);
+    if (formatted.length <= 17) {
+      setPhoneNumber(formatted);
     }
   };
 
@@ -77,11 +88,11 @@ const Register = () => {
       setOldUser(res.data);
       if (response.statusCode === 200) {
         setStep(3);
-        toast.success("Muvaffaqiyatli");
+        toast.success(t("register.toasts.success"));
         setIsCode(true);
       } else {
         setIsCode(false);
-        toast.error("Sms kod xato");
+        toast.error(t("register.toasts.smsError"));
       }
     } else if (step === 3) {
       if (!oldUser) {
@@ -92,10 +103,10 @@ const Register = () => {
         });
         if (res.statusCode === 201) {
           setUser(res.data);
-          navigate("/");
-          toast.success("Muvaffaqiyatli");
+          navigate("/profile");
+          toast.success(t("register.toasts.success"));
         } else {
-          toast.error("Bunday raqamli foydalanuvchi bor");
+          // toast.error("Bunday raqamli foydalanuvchi bor");
         }
       } else {
         const res = await EditUser("/users-uz/register/" + oldUser.id, {
@@ -105,8 +116,8 @@ const Register = () => {
         });
         if (res.statusCode === 200) {
           setUser(res.data);
-          navigate("/");
-          toast.success("Muvaffaqiyatli");
+          navigate("/profile");
+          toast.success(t("register.toasts.success"));
         } else {
           // toast.error("Bunday raqamli foydalanuvchi bor");
         }
@@ -138,7 +149,7 @@ const Register = () => {
             {step === 2 && (
               <input
                 type="text"
-                placeholder="Tasdiqlash kodi"
+                placeholder={t("register.placeholders.codeText")}
                 value={smsCode}
                 onChange={(e) => setSmsCode(e.target.value)}
                 minLength={6}
@@ -155,7 +166,7 @@ const Register = () => {
               <>
                 <input
                   type="text"
-                  placeholder="Ismingizni kiriting"
+                  placeholder={t("register.placeholders.firstName")}
                   value={firstName}
                   minLength={3}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -165,7 +176,7 @@ const Register = () => {
 
                 <input
                   type="password"
-                  placeholder="Password yarating"
+                  placeholder={t("register.placeholders.password")}
                   value={password}
                   minLength={5}
                   autoComplete="on"
@@ -213,12 +224,12 @@ const Register = () => {
             </button>
           </form>
           <div className="text-center mt-5">
-            Profilingiz bormi?{" "}
+            {t("register.link.text")}{" "}
             <NavLink
               to="/login"
               className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
             >
-              Kirish qiling.
+              {t("register.link.link")}
             </NavLink>
           </div>
         </div>

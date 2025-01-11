@@ -12,7 +12,7 @@ export const useLogin = () => {
       //   console.log(response);
       return response;
     } catch (err) {
-      toast.error(err.response?.data?.message || "Xatolik");
+      return err;
     } finally {
       setIsLoading(false);
     }

@@ -8,6 +8,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Reklama from "./components/Reklama2";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import { CardProvider } from "./context/CardContext";
 

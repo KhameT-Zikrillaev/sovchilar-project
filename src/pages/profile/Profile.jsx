@@ -3,63 +3,69 @@ import UserProfile from './components/UserProfile';
 import FormModal from '../../components/customModal/FormModal';
 import CombinedForm from '../auth/modules/AddUsers/CombinedForm';
 import { useTranslation } from 'react-i18next';
+import { useStore } from '../../store/store';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({});
+  const {clearUser, user, accessToken} = useStore();
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (data) => {
-    // Create FormData instance for file upload
-    const formDataToSend = new FormData();
-    
-    // Append all form fields
-    Object.keys(data).forEach(key => {
-      if (key === 'avatar' && data[key] instanceof File) {
-        formDataToSend.append('avatar', data[key]);
-      } else {
-        formDataToSend.append(key, data[key]);
-      }
-    });
-
-    try {
-      // Handle form submission with file upload
-      console.log('Form submitted:', formDataToSend);
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+ 
+
+  const handleStatusDone = async (id) => {
+    const newStatus = "DONE";
+    try {
+      await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      closeModal();
+      toast.success("Ankatengiz saytimizdan olib tashlandi")
+    } catch (error) {
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto pt-32">
+    <div className="container mx-auto px-4 ">
+      <div className="max-w-4xl mx-auto pt-32">
         <div className="flex flex-col items-center p-6">
           {/* Buttons */}
-          <div className="flex flex-col w-full gap-4">
+          <div className="flex flex-wrap gap-4">
             <button 
               onClick={() => setIsModalOpen(true)}
-              className="w-full bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition"
+              className=" bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
             >
               Anketa to'ldirish
             </button>
             <button 
-              className="w-full border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition"
+              className=" border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
+              onClick={openModal}
             >
-              Anketa tahrirlash
+              
+              Baxtimni toptim
             </button>
+            <button 
+              onClick={() => {
+                clearUser()
+                navigate("/")}}
+              className=" bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
+            >
+              Profildan chiqish
+            </button>
+            
           </div>
         </div>
       </div>
@@ -69,18 +75,43 @@ const Profile = () => {
       <FormModal 
         isOpen={isModalOpen} 
         onClose={handleCloseModal}
-        title={t('form.fillProfile')}
+        title={"Anketa to'ldirish"}
       >
-        <div className="py-4">
+        <div className="pb-4">
           <div className="max-w-3xl mx-auto">
-            <CombinedForm
-              formData={formData}
-              onInputChange={handleInputChange}
-              onSubmit={handleSubmit}
+            <CombinedForm handleCloseModal={handleCloseModal}
             />
           </div>
         </div>
       </FormModal>
+      {isOpen && (
+        <div onClick={closeModal} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div onClick={(e) => e.stopPropagation()} className="bg-white p-6 rounded-lg shadow-lg max-w-[400px]  border-[2px] border-rose-500">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+              Baxt
+            </h2>
+            <p className="text-gray-600 mb-6">
+            Agar o‘z baxtingizni topgan bo‘lsangiz, bu haqida bizga xabar bering. Tasdiqlaganingizdan so‘ng, anketangiz saytimizdan o‘chirib tashlanadi.
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={closeModal}
+                className="w-full border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition font-medium"
+              >
+                Bekor qilish
+              </button>
+              <button
+                onClick={() => {
+                  handleStatusDone(user.id)
+                }}
+                className="w-full bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium"
+              >
+                Tasdiqlash
+              </button>
+            </div>
+          </div>
+        </div>
+      )}             
     </div>
   );
 };
