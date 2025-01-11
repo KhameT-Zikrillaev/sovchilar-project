@@ -12,7 +12,7 @@ export const usePostData = () => {
       //   console.log(response);
       return response;
     } catch (err) {
-      toast.error(err.response?.data?.message || "Xatolik");
+      toast.error("Raqam kiritishda xatolik");
     } finally {
       setIsLoading(false);
     }

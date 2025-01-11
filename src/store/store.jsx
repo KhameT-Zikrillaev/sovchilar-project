@@ -16,10 +16,10 @@ export const useStore = create(
           refreshToken: data.tokens.refreshToken,
         }),
 
-      setUserSingle: (data) =>{
+      setUserSingle: (data) => {
         set({
           user: data,
-        })
+        });
       },
 
       // Tokenlarni yangilash
