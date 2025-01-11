@@ -1,8 +1,8 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 const Modal = ({ isOpen, onClose }) => {
-    const { t } = useTranslation(); 
-    if (!isOpen) return null;
+  const { t } = useTranslation();
+  if (!isOpen) return null;
 
     return (
         <div className="fixed z-50 inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 bg-opacity-70  flex justify-center items-center">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePostData } from "./hooks/usePostData";
 
 import { toast } from "react-toastify";
@@ -13,8 +13,6 @@ const Register = () => {
   const [step, setStep] = useState(1); // 1: Telefon kiritish, 2: SMS tasdiqlash, 3:Ism familiya parol kiritish
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
   const [smsCode, setSmsCode] = useState("");
-  const [userID, setUserID] = useState(null);
-  // const [isPassword, setIsPassword]= useState("")
   const [isCode, setIsCode] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
@@ -22,8 +20,27 @@ const Register = () => {
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
   const { EditUser } = useEditUser();
-  const { setUser, user } = useStore();
+  const { setUser } = useStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleInput = (e) => {
+    const input = e.target;
+    if (input.validity.valueMissing) {
+      input.setCustomValidity(t("register.warning.empty"));
+    } else if (input.validity.tooShort) {
+      input.setCustomValidity(
+        `${t("register.warning.first")} ${input.minLength} ${t(
+          "register.warning.second"
+        )} ${input.value.length} ${t("register.warning.third")}`
+      );
+    } else {
+      input.setCustomValidity(""); // Validatsiya xabarini tozalash
+    }
+  };
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
@@ -141,8 +158,9 @@ const Register = () => {
                 type="tel"
                 value={phoneNumber}
                 onChange={handlePhoneChange}
-                minLength={17}
+                onInput={handleInput}
                 required
+                minLength={17}
                 className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             )}
@@ -152,6 +170,7 @@ const Register = () => {
                 placeholder={t("register.placeholders.codeText")}
                 value={smsCode}
                 onChange={(e) => setSmsCode(e.target.value)}
+                onInput={handleInput}
                 minLength={6}
                 maxLength={6}
                 required
@@ -168,6 +187,7 @@ const Register = () => {
                   type="text"
                   placeholder={t("register.placeholders.firstName")}
                   value={firstName}
+                  onInput={handleInput}
                   minLength={3}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
@@ -177,6 +197,7 @@ const Register = () => {
                 <input
                   type="password"
                   placeholder={t("register.placeholders.password")}
+                  onInput={handleInput}
                   value={password}
                   minLength={5}
                   autoComplete="on"

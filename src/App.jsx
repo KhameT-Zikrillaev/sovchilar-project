@@ -8,8 +8,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Reklama from "./components/Reklama2";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { CardProvider } from "./context/CardContext";
 

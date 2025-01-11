@@ -478,6 +478,12 @@
       "signup": "Ro'yxatdan o'ting",
       "password": "Parol qo'ying"
     },
+    "warning": {
+      "first": "Iltimos, kamida",
+      "second": "ta belgi kiriting. Hozir",
+      "third": "ta belgi kiritilgan.",
+      "empty": "Iltimos, ushbu maydonni to‘ldiring."
+    },
     "placeholders": {
       "codeText": "Tasdiqlash kodi",
       "firstName": "Ismingizni kiriting",
