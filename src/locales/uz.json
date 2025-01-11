@@ -481,6 +481,7 @@
   },
   "login": {
     "title": "Tizimga kirish",
+    "forgotPassword": "Parolni unutdingizmi?",
     "placeholders": {
       "password": "Parolni kiriting"
     },

@@ -135,6 +135,14 @@ const Login = () => {
         </form>
 
         <div className="text-center mt-5">
+          <NavLink
+            to="/update-password"
+            className="text-red-500 hover:text-red-600 transition-all  duration-200 text-center"
+          >
+            {t("login.forgotPassword")}
+          </NavLink>
+        </div>
+        <div className="text-center mt-5">
           {t("login.links.text")}{" "}
           <NavLink
             to="/register"
