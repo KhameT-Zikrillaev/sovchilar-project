@@ -8,14 +8,15 @@ import { useStore } from '../../../../store/store';
 import api from '../../../../services/api';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Modal from '../../../../components/customModal/Modal';
 const CombinedForm = ({handleCloseModal}) => {
   const { t } = useTranslation();
   const { register, handleSubmit, formState: { errors }, watch, setValue, reset} = useForm();
   const [previewImage, setPreviewImage] = useState( null);
-  const [showRules, setShowRules] = useState(false);
+  // const [showRules, setShowRules] = useState(false);
   const [acceptRules, setAcceptRules] = useState(false);
   const {user, accessToken, setUserSingle} = useStore()
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleStatusInactive = async (id) => {
     const newStatus = "INACTIVE";
     try {
@@ -34,10 +35,11 @@ const CombinedForm = ({handleCloseModal}) => {
   };
 
   useEffect(()=>{
+    const telegramValue = user.telegram ? user.telegram.replace('t.me/', '') : "";
     reset({
       firstName: user.firstName || "",
       lastName: user.lastName || "",
-      telegram: user.telegram || "",
+      telegram: telegramValue,
       age: user.age || "",
       gender: user.gender || "",
       address: user.address || "",
@@ -79,8 +81,15 @@ const CombinedForm = ({handleCloseModal}) => {
       reader.readAsDataURL(file);
     }
   };
+
+
   const onSubmit = async (data) => {
     try {
+      // Проверяем и модифицируем telegram поле
+      if (data.telegram && !data.telegram.startsWith('t.me/')) {
+        data.telegram = `t.me/${data.telegram}`;
+      }
+      
       const response = await axios.put(`https://back.sovchilar.net/api/users-uz/${user?.id}`, data, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
@@ -108,6 +117,7 @@ const CombinedForm = ({handleCloseModal}) => {
   const labelClasses = "block text-xs font-medium text-gray-700 mb-1";
 
   return (
+    <>
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       {/* Image Upload */}
       <div className="flex flex-col items-center space-y-4">
@@ -156,10 +166,10 @@ const CombinedForm = ({handleCloseModal}) => {
             <input
               type="text"
               id="firstName"
-              {...register('firstName', { required: "Ism kiritish majburiy" })}
+              {...register('firstName', { required: t('auth.CombinedForm.firstNameRequired') })}
               onChange={handleNameInput}
               className={inputClasses}
-              placeholder="Ismingizni kiriting"
+              placeholder={t('auth.CombinedForm.firstNamePlaceholder')}
             />
             {errors.firstName && <p className="mt-1 text-sm text-rose-500">{errors.firstName.message}</p>}
           </div>
@@ -170,11 +180,11 @@ const CombinedForm = ({handleCloseModal}) => {
             </label>
             <input
               type="text"
-              id="lastName"
-              {...register('lastName', { required: "Familiya kiritish majburiy" })}
+              id="lastName"   hdadada
+              {...register('lastName', { required: t('auth.CombinedForm.lastNameRequired') })}
               onChange={handleNameInput}
               className={inputClasses}
-              placeholder="Familiyangizni kiriting"
+              placeholder={t('auth.CombinedForm.lastNamePlaceholder')}
             />
             {errors.lastName && <p className="mt-1 text-sm text-rose-500">{errors.lastName.message}</p>}
           </div>
@@ -185,10 +195,11 @@ const CombinedForm = ({handleCloseModal}) => {
             <input
               type="text"
               id="telegram"
-              {...register('telegram', { required: "Telegram username kiritish majburiy" })}
+              {...register('telegram', { required: t('auth.CombinedForm.telegramUsernameRequired') })}
               className={inputClasses}
               placeholder="@username"
             />
+          
             {errors.telegram && <p className="mt-1 text-sm text-rose-500">{errors.telegram.message}</p>}
           </div>
 
@@ -200,10 +211,10 @@ const CombinedForm = ({handleCloseModal}) => {
               type="number"
               id="age"
               {...register('age', { 
-                required: "Yoshni kiritish majburiy",
+                required: t('auth.CombinedForm.ageRequired'),
                 valueAsNumber: true,
-                min: { value: 18, message: "Yosh 18 dan katta bo'lishi kerak" },
-                max: { value: 100, message: "Yosh 100 dan kichik bo'lishi kerak" }
+                min: { value: 18, message: t('auth.CombinedForm.ageMin')},
+                max: { value: 100, message: t('auth.CombinedForm.ageMax') }
               })}
               className={inputClasses}
               placeholder={t('auth.FormOne.agePlaceholder')}
@@ -217,12 +228,12 @@ const CombinedForm = ({handleCloseModal}) => {
             </label>
             <select
               id="gender"
-              {...register('gender', { required: "Jinsini tanlash majburiy" })}
+              {...register('gender', { required: t('auth.CombinedForm.genderRequired') })}
               className={selectClasses}
             >
-              <option value="">Tanlang</option>
-              <option value="MALE">Erkak</option>
-              <option value="FEMALE">Ayol</option>
+              <option value="">{t('auth.CombinedForm.genderSelect')}</option>
+              <option value="MALE">{t('auth.CombinedForm.genderMale')}</option>
+              <option value="FEMALE">{t('auth.CombinedForm.genderFemale')}</option>
             </select>
             {errors.gender && <p className="mt-1 text-sm text-rose-500">{errors.gender.message}</p>}
           </div>
@@ -233,7 +244,7 @@ const CombinedForm = ({handleCloseModal}) => {
             </label>
             <select
               id="city"
-              {...register('address', { required: "Shaharni tanlash majburiy" })}
+              {...register('address', { required: t('auth.CombinedForm.cityRequired')})}
               className={selectClasses}
             >
               <option value="">{t('auth.FormOne.selectCity.select')}</option>
@@ -260,7 +271,7 @@ const CombinedForm = ({handleCloseModal}) => {
             </label>
             <select
               id="qualification"
-              {...register('qualification', { required: "Ta'limni tanlash majburiy" })}
+              {...register('qualification', { required: t('auth.CombinedForm.educationRequired') })}
               className={selectClasses}
             >
               <option value="">{t('auth.FormTwo.selectEducation')}</option>
@@ -279,7 +290,7 @@ const CombinedForm = ({handleCloseModal}) => {
             </label>
             <select
               id="maritalStatus"
-              {...register('maritalStatus', { required: "Oilaviy holatni tanlash majburiy" })}
+              {...register('maritalStatus', { required: t('auth.CombinedForm.maritalStatusRequired')})}
               className={selectClasses}
             >
               <option value="">{t('auth.FormTwo.maritalStatus.default')}</option>
@@ -306,9 +317,9 @@ const CombinedForm = ({handleCloseModal}) => {
             <input
               type="text"
               id="jobTitle"
-              {...register('jobTitle', { required: "Kasbni kiritish majburiy" })}
+              {...register('jobTitle', { required: t('auth.CombinedForm.occupationRequired')  })}
               className={inputClasses}
-              placeholder="Kasbingizni kiriting"
+              placeholder={t('auth.CombinedForm.occupationPlaceholder')}
             />
             {errors.job && <p className="mt-1 text-sm text-rose-500">{errors.job.message}</p>}
           </div>
@@ -319,7 +330,7 @@ const CombinedForm = ({handleCloseModal}) => {
             </label>
             <select
               id="nationality"
-              {...register('nationality', { required: "Millatni tanlash majburiy" })}
+              {...register('nationality', { required: t('auth.CombinedForm.ethnicityRequired')})}
               className={selectClasses}
             >
               <option value="">{t('auth.FormTwo.selectNationality.select')}</option>
@@ -330,7 +341,7 @@ const CombinedForm = ({handleCloseModal}) => {
               <option value="Tajik">{t('auth.FormTwo.selectNationality.Tajik')}</option>
               <option value="Turkmen">{t('auth.FormTwo.selectNationality.Turkmen')}</option>
               <option value="Tatar">{t('auth.FormTwo.selectNationality.Tatar')}</option>
-              <option value="Karakalpak">Qoraqalpoq</option>
+              <option value="Karakalpak">{t('auth.FormTwo.selectNationality.Karakalpak')}</option>
               <option value="Other">{t('auth.FormTwo.selectNationality.Other')}</option>
               
             </select>
@@ -345,12 +356,12 @@ const CombinedForm = ({handleCloseModal}) => {
           <textarea
             id="description"
             {...register('description', { 
-              required: "Talablarni kiritish majburiy",
-              minLength: { value: 50, message: "Talablar kamida 50 ta belgidan iborat bo'lishi kerak" }
+              required:t('auth.CombinedForm.requirementsRequired') ,
+              minLength: { value: 50, message: t('auth.CombinedForm.requirementsMinLength') }
             })}
             rows="4"
             className={inputClasses}
-            placeholder="O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing..."
+            placeholder={t('auth.CombinedForm.requirementsPlaceholder')}
           />
           {errors.description && <p className="mt-1 text-sm text-rose-500">{errors.description.message}</p>}
         </div>
@@ -372,7 +383,7 @@ const CombinedForm = ({handleCloseModal}) => {
           
           <button
             type="button"
-            onClick={() => setShowRules(true)}
+            onClick={() => setIsModalOpen(true)}
             className="flex items-center space-x-2 text-rose-500 hover:text-rose-600 transition-colors duration-300"
           >
             <FiBook size={20} />
@@ -394,29 +405,16 @@ const CombinedForm = ({handleCloseModal}) => {
           {t('auth.FormTwo.createProfile')}
         </button>
       </div>
-
-      {/* Rules Modal */}
-      {showRules && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-2xl max-w-2xl w-full m-4 space-y-4">
-            <h3 className="text-xl font-semibold">Qoidalar</h3>
-            <div className="prose">
-              {/* Add your rules content here */}
-              <p>1. Barcha ma'lumotlar to'g'ri va aniq bo'lishi shart.</p>
-              <p>2. Noto'g'ri ma'lumot berganlik uchun javobgarlik foydalanuvchining zimmasida.</p>
-              <p>3. Platforma faqat jiddiy munosabatlar uchun mo'ljallangan.</p>
-              {/* Add more rules as needed */}
-            </div>
-            <button
-              onClick={() => setShowRules(false)}
-              className="w-full px-4 py-2 bg-rose-500 text-white rounded-xl hover:bg-rose-600 transition-colors duration-300"
-            >
-              Yopish
-            </button>
-          </div>
-        </div>
-      )}
     </form>
+
+
+    
+    {/* Rules Modal */}
+       <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)} 
+      />
+    </>
   );
 };
 

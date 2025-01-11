@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Modal from '../../../../components/customModal/Modal';
-import leftbg from '../../../../assets/images/left-bg.jpg';
-import rightbg from '../../../../assets/images/right-bg.jpg';
-import centerbg from '../../../../assets/images/center-bg.jpeg';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useStore } from "../../../../store/store";
+import Modal from "../../../../components/customModal/Modal";
+import leftbg from "../../../../assets/images/left-bg.jpg";
+import rightbg from "../../../../assets/images/right-bg.jpg";
+import centerbg from "../../../../assets/images/center-bg.jpeg";
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState("men");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
-  
+  const accessToken = useStore((state) => state.accessToken);
+  const user = useStore((state) => state.user);
+
   const stats = [
     {
       number: "500+",
@@ -93,14 +96,13 @@ export default function FirstHomePageIntro() {
                 </p>
               </div>
 
-               {/* Кнопки */}
+              {/* Кнопки */}
               <div className="flex items-center gap-4 mb-12" data-aos="fade-right" data-aos-offset="50">
                 <Link 
-                  to={`/auth?gender=${activeTab === 'women' ? 'female' : 'male'}`}
+                  to={accessToken ? '/profile' : `/register`}
                   className="flex-1 text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200"
-                  onClick={() => console.log('Переход на форму с выбранным полом:', activeTab === 'women' ? 'female' : 'male')}
                 >
-                  {t('home.FirstIntroPage.createProfile')}
+                  {accessToken ? `${t('home.FirstIntroPage.signIn')} (${user?.firstName})` : t('home.FirstIntroPage.createProfile')}
                 </Link>
                 <button className="w-14 h-14 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition duration-200"  onClick={() => setIsModalOpen(true)}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,31 +111,42 @@ export default function FirstHomePageIntro() {
                 </button>
               </div>
               {/* Поиск */}
-              <div data-aos="fade-up"  data-aos-delay="500" className="bg-white/10 backdrop-blur-lg p-2 rounded-full mb-10 flex items-center">
-                <button 
-                  className={"flex-1 px-6  py-3 rounded-full text-base font-medium transition duration-200 " + 
-                    (activeTab === 'men' ? 'bg-rose-500 text-white' : 'text-gray-200 hover:text-white hover:bg-white/10')}
-                  onClick={() => {
-                    setActiveTab('men')
-                    console.log('Выбрано: Я ищу жену')
-                  }}
+              {!accessToken && (
+                <div
+                  data-aos="fade-up"
+                  data-aos-delay="500"
+                  className="bg-white/10 backdrop-blur-lg p-2 rounded-full mb-10 flex items-center"
                 >
-                  {t('home.FirstIntroPage.search.men')}
-                </button>
-                <button  
-                  className={"flex-1 px-6 py-3 rounded-full text-base font-medium transition duration-200 " + 
-                    (activeTab === 'women' ? 'bg-rose-500 text-white' : 'text-gray-200 hover:text-white hover:bg-white/10')}
-                  onClick={() => {
-                    setActiveTab('women')
-                    console.log('Выбрано: Я ищу мужа')
-                  }}
-                >
-                  {t('home.FirstIntroPage.search.women')}
-                </button>
-              </div>
-             
-             
-            
+                  <button
+                    className={
+                      "flex-1 px-6  py-3 rounded-full text-base font-medium transition duration-200 " +
+                      (activeTab === "men"
+                        ? "bg-rose-500 text-white"
+                        : "text-gray-200 hover:text-white hover:bg-white/10")
+                    }
+                    onClick={() => {
+                      setActiveTab("men");
+                    }}
+                  >
+                    {t("home.FirstIntroPage.search.men")}
+                  </button>
+                  <button
+                    className={
+                      "flex-1 px-6 py-3 rounded-full text-base font-medium transition duration-200 " +
+                      (activeTab === "women"
+                        ? "bg-rose-500 text-white"
+                        : "text-gray-200 hover:text-white hover:bg-white/10")
+                    }
+                    onClick={() => {
+                      setActiveTab("women");
+                    }}
+                  >
+                    {t("home.FirstIntroPage.search.women")}
+                  </button>
+                </div>
+              )}
+              {/* Кнопки */}
+              
 
               {/* Статистика */}
               <div className="grid grid-cols-3 gap-4">

@@ -12,7 +12,7 @@ function UserProfile() {
   const [isImg, setIsImg] = useState(false);
 
   const { user } = useStore();
-
+ console.log(user);
   if (!user) {
     return <Navigate to="/login" replace />;
   }
@@ -30,17 +30,27 @@ function UserProfile() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-2 sm:p-8">
                 <div className="relative flex items-center justify-center">
                   <div className="w-[300px] h-[300px] overflow-hidden rounded-xl shadow-lg">
-                    <img
-                      onClick={() => {
-                        user.imageUrl ? setIsImg(true) : setIsImg(false);
-                      }}
-                      src={
-                        user?.imageUrl ||
-                        (user?.gender == "MALE" ? Male : Female)
-                      }
-                      alt={user?.lastName}
-                      className="w-full h-full object-cover cursor-pointer"
-                    />
+                    {!user?.gender ? (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-center p-4">
+                        {t('Profile.UserProfile.setPhoto')}
+                      </div>
+                    ) : (
+                      <img
+                        onClick={() => {
+                          user.imageUrl ? setIsImg(true) : setIsImg(false);
+                        }}
+                        src={
+                          user?.imageUrl || 
+                          (user?.gender === "MALE" 
+                            ? Male 
+                            : user?.gender === "FEMALE" 
+                              ? Female 
+                              : null)
+                        }
+                        alt={user?.lastName}
+                        className="w-full h-full object-cover cursor-pointer"
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -50,7 +60,7 @@ function UserProfile() {
                       ? `${user?.firstName} ${
                           user?.lastName ? user?.lastName : ""
                         }`
-                      : "Ism familiya"}
+                      : t('Profile.UserProfile.fullName')}
                   </h1>
                   <div className="flex flex-col mb-6">
                     <div className="flex items-center mb-5 gap-2">
@@ -71,7 +81,7 @@ function UserProfile() {
                             ? t(`UserDetails.City.${user?.address}`, {
                                 defaultValue: user?.address,
                               })
-                            : "City"}
+                            : t('Profile.UserProfile.city')}
                         </span>
                       </div>
                       <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
@@ -80,7 +90,7 @@ function UserProfile() {
                           ? t(
                               `UserDetails.selectNationality.${user?.nationality}`
                             )
-                          : "Nationality"}
+                          : t('Profile.UserProfile.nationality')}
                       </span>
                     </div>
                     <div>
@@ -90,7 +100,7 @@ function UserProfile() {
                       <p className="text-gray-600 leading-relaxed">
                         {user?.description
                           ? user?.description
-                          : "Izoh qoldiring"}
+                          : t('Profile.UserProfile.comment')}
                       </p>
                     </div>
                   </div>
@@ -134,7 +144,7 @@ function UserProfile() {
                             <p className="text-lg font-semibold text-gray-800">
                               {user?.age
                                 ? `${user.age} ${t("UserDetails.years")}`
-                                : "Yoshingizni kiriting"}
+                                : t('Profile.UserProfile.age')}
                             </p>
                           </div>
                         </div>
@@ -164,7 +174,7 @@ function UserProfile() {
                                 ? t(`UserDetails.City.${user?.address}`, {
                                     defaultValue: user?.address,
                                   })
-                                : "Yashash manzilingizni kiriting"}
+                                : t('Profile.UserProfile.address')}
                             </p>
                           </div>
                         </div>
@@ -200,7 +210,7 @@ function UserProfile() {
                                       defaultValue: user?.qualification,
                                     }
                                   )
-                                : "Ta'lim darajangizni kiriting"}
+                                : t('Profile.UserProfile.education')}
                             </p>
                           </div>
                         </div>
@@ -229,7 +239,7 @@ function UserProfile() {
                             <p className="text-lg font-semibold text-gray-800">
                               {user?.jobTitle
                                 ? user?.jobTitle
-                                : "Kasbingizni kiriting"}
+                                : t('Profile.UserProfile.occupation')}
                             </p>
                           </div>
                         </div>
@@ -268,7 +278,7 @@ function UserProfile() {
                               ? t(
                                   `UserDetails.selectNationality.${user?.nationality}`
                                 )
-                              : "Millatingizni kiriting"}
+                              : t('Profile.UserProfile.ethnicity')}
                           </p>
                         </div>
                       </div>
@@ -299,7 +309,7 @@ function UserProfile() {
                       </a>
 
                       {/* Telegram */}
-                      <a href={`https://${user?.telegram}`} className="block">
+                      <a href={`https://t.me/${user?.telegram}`} className="block">
                         <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02]">
                           <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg">
                             <svg
@@ -317,7 +327,7 @@ function UserProfile() {
                             <p className="text-sm sm:text-lg font-semibold text-gray-800">
                               {user?.telegram
                                 ? user?.telegram
-                                : "Telegramingizni kiriting"}
+                                : t('Profile.UserProfile.phone')}
                             </p>
                           </div>
                         </div>
