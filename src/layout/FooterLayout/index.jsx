@@ -138,7 +138,7 @@ export default function FooterLayout() {
               <h3 data-aos="fade-left" data-aos-offset="50" className="text-xl font-bold mb-6 text-white">{t('footer.forUsers.title')}</h3>
               <ul className="space-y-4 ">
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <Link to="/auth" className="text-gray-200   hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <Link to="/profile" className="text-gray-200   hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2   h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.createProfile')}
                   </Link>
