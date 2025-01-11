@@ -45,7 +45,7 @@ function Comments() {
     ],
   };
   return (
-    <div className="mt-16">
+    <div className="my-16">
       <div className="mb-5 text-center font-bold text-[40px]">
         {t('comment.title')}
       </div>

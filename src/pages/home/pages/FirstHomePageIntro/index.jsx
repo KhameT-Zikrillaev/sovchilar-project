@@ -100,9 +100,27 @@ export default function FirstHomePageIntro() {
               <div className="flex items-center gap-4 mb-12" data-aos="fade-right" data-aos-offset="50">
                 <Link 
                   to={accessToken ? '/profile' : `/register`}
-                  className="flex-1 text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200"
+                  className="flex-1 text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200 flex items-center justify-center gap-2"
                 >
-                  {accessToken ? `${t('home.FirstIntroPage.signIn')} (${user?.firstName})` : t('home.FirstIntroPage.createProfile')}
+                  <span>
+                    {accessToken ? `${t('home.FirstIntroPage.signIn')} (${user?.firstName})` : t('home.FirstIntroPage.createProfile')}
+                  </span>
+                  {!accessToken && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
+                    </svg>
+                  )}
                 </Link>
                 <button className="w-14 h-14 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition duration-200"  onClick={() => setIsModalOpen(true)}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

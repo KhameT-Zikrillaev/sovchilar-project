@@ -124,7 +124,10 @@ export default function Navbar() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
+                  d={user 
+                    ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
+                    : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                  }
                 />
               </svg>
             </Link>
@@ -206,7 +209,10 @@ export default function Navbar() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
+                    d={user 
+                      ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
+                      : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                    }
                   />
                 </svg>
               </Link>
