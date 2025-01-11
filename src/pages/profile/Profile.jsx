@@ -33,7 +33,7 @@ const Profile = () => {
         }
       });
       closeModal();
-      toast.success("Ankatengiz saytimizdan olib tashlandi")
+      toast.success(t('Profile.UserProfile.deleteprofilesuccess'))
     } catch (error) {
     }
   };
@@ -48,14 +48,14 @@ const Profile = () => {
               onClick={() => setIsModalOpen(true)}
               className=" bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
             >
-              {t('Profile.form.fill_out_form')}
+              {t('Profile.btn.add')}
             </button>
             <button 
               className=" border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
               onClick={openModal}
             >
               
-              {t('Profile.modal.happiness_found')}
+              {t('Profile.btn.success')}
             </button>
             <button 
               onClick={() => {
@@ -63,7 +63,7 @@ const Profile = () => {
                 navigate("/")}}
               className=" bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
             >
-             {t('Profile.buttons.logout')}
+             {t('Profile.btn.logout')}
             </button>
             
           </div>

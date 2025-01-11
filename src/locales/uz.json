@@ -529,7 +529,13 @@
       "confirm": "Tasdiqlash",
       "cancel": "Bekor qilish"
     },
+    "btn":{
+     "add":"Anketa to'ldirish",
+     "success":"Bahtimni toptim",
+     "logout":"profildan chiqish"
+    },
     "UserProfile": {
+      "deleteprofilesuccess":"Ankatengiz saytimizdan olib tashlandi",
      "setPhoto": "Fotosuratni qo'ying",
       "fullName": "Ism familiya",
       "city": "Shahar",
