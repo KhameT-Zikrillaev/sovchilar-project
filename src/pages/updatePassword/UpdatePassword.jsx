@@ -7,7 +7,6 @@ import { useUpdatePassword } from "./hooks/useUpdatePassword";
 import { useTranslation } from "react-i18next";
 
 import { NavLink, useNavigate } from "react-router-dom";
-import { useStore } from "../../store/store";
 
 const UpdatePassword = () => {
   const { t } = useTranslation();
@@ -101,6 +100,7 @@ const UpdatePassword = () => {
       const res = await getPhone(
         "/users-uz/phone/" + phoneNumber.replace(/[\s-]/g, "")
       );
+      console.log(res);
       setOldUser(res.data);
       if (response.statusCode === 200) {
         setStep(3);
