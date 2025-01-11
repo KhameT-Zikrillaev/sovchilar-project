@@ -514,6 +514,7 @@
   },
   "login": {
     "title": "Авторизоваться",
+    "forgotPassword": "Забыли пароль?",
     "placeholders": {
       "password": "Введите пароль"
     },

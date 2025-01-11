@@ -32,6 +32,10 @@ class UserServices {
     const response = await api.put(url, data);
     return response.data;
   }
+  async updatePassword(url, data) {
+    const response = await api.put(url, data);
+    return response.data;
+  }
   async loginUser(url, data) {
     const response = await api.post(url, data);
     return response.data;

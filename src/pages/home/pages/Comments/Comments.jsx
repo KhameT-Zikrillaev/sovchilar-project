@@ -56,6 +56,17 @@ function Comments() {
               key={index}
               className="flex justify-center gap-0 md:gap-8 items-center p-1 "
             >
+              {/* <div className="flex gap-5">
+                <img
+                  className="w-[40px] h-[40px] rounded-full border border-black"
+                  src="https://via.placeholder.com/1200x600"
+                  alt="alt"
+                />
+                <div>
+                  <p className="font-bold">Salima Sheraliyeva</p>
+                  <p>★★★★★</p>
+                </div>
+              </div> */}
               <img
                 onClick={() => {
                   setIsImg(true);
@@ -65,6 +76,12 @@ function Comments() {
                 src={item}
                 alt="123"
               />
+              {/* <div className="slider-content">
+                <p className="max-w-[400px]">
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolorem, sunt!"
+                </p>
+              </div> */}
             </div>
           ))}
         </Slider>
