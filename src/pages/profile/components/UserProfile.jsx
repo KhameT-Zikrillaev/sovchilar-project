@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Navigate} from "react-router-dom";
 import { ImCancelCircle } from "react-icons/im";
+import FormModal from '../../../components/customModal/FormModal';
+import CombinedForm from '../../auth/modules/AddUsers/CombinedForm';
 
 import { useTranslation } from "react-i18next";
 // import Loading from "../../components/Loading/index";
@@ -10,9 +12,16 @@ import { useStore } from "../../../store/store";
 function UserProfile() {
   const { t } = useTranslation();
   const [isImg, setIsImg] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useStore();
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+ console.log(user);
   if (!user) {
     return <Navigate to="/login" replace />;
   }
@@ -30,17 +39,27 @@ function UserProfile() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-2 sm:p-8">
                 <div className="relative flex items-center justify-center">
                   <div className="w-[300px] h-[300px] overflow-hidden rounded-xl shadow-lg">
-                    <img
-                      onClick={() => {
-                        user.imageUrl ? setIsImg(true) : setIsImg(false);
-                      }}
-                      src={
-                        user?.imageUrl ||
-                        (user?.gender == "MALE" ? Male : Female)
-                      }
-                      alt={user?.lastName}
-                      className="w-full h-full object-cover cursor-pointer"
-                    />
+                    {!user?.gender ? (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-center p-4">
+                        {t('Profile.UserProfile.setPhoto')}
+                      </div>
+                    ) : (
+                      <img
+                        onClick={() => {
+                          user.imageUrl ? setIsImg(true) : setIsImg(false);
+                        }}
+                        src={
+                          user?.imageUrl || 
+                          (user?.gender === "MALE" 
+                            ? Male 
+                            : user?.gender === "FEMALE" 
+                              ? Female 
+                              : null)
+                        }
+                        alt={user?.lastName}
+                        className="w-full h-full object-cover cursor-pointer"
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -50,7 +69,7 @@ function UserProfile() {
                       ? `${user?.firstName} ${
                           user?.lastName ? user?.lastName : ""
                         }`
-                      : "Ism familiya"}
+                      : t('Profile.UserProfile.fullName')}
                   </h1>
                   <div className="flex flex-col mb-6">
                     <div className="flex items-center mb-5 gap-2">
@@ -71,7 +90,7 @@ function UserProfile() {
                             ? t(`UserDetails.City.${user?.address}`, {
                                 defaultValue: user?.address,
                               })
-                            : "City"}
+                            : t('Profile.UserProfile.city')}
                         </span>
                       </div>
                       <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
@@ -80,7 +99,7 @@ function UserProfile() {
                           ? t(
                               `UserDetails.selectNationality.${user?.nationality}`
                             )
-                          : "Nationality"}
+                          : t('Profile.UserProfile.nationality')}
                       </span>
                     </div>
                     <div>
@@ -90,7 +109,7 @@ function UserProfile() {
                       <p className="text-gray-600 leading-relaxed">
                         {user?.description
                           ? user?.description
-                          : "Izoh qoldiring"}
+                          : t('Profile.UserProfile.comment')}
                       </p>
                     </div>
                   </div>
@@ -134,7 +153,7 @@ function UserProfile() {
                             <p className="text-lg font-semibold text-gray-800">
                               {user?.age
                                 ? `${user.age} ${t("UserDetails.years")}`
-                                : "Yoshingizni kiriting"}
+                                : t('Profile.UserProfile.age')}
                             </p>
                           </div>
                         </div>
@@ -164,7 +183,7 @@ function UserProfile() {
                                 ? t(`UserDetails.City.${user?.address}`, {
                                     defaultValue: user?.address,
                                   })
-                                : "Yashash manzilingizni kiriting"}
+                                : t('Profile.UserProfile.address')}
                             </p>
                           </div>
                         </div>
@@ -200,7 +219,7 @@ function UserProfile() {
                                       defaultValue: user?.qualification,
                                     }
                                   )
-                                : "Ta'lim darajangizni kiriting"}
+                                : t('Profile.UserProfile.education')}
                             </p>
                           </div>
                         </div>
@@ -229,7 +248,7 @@ function UserProfile() {
                             <p className="text-lg font-semibold text-gray-800">
                               {user?.jobTitle
                                 ? user?.jobTitle
-                                : "Kasbingizni kiriting"}
+                                : t('Profile.UserProfile.occupation')}
                             </p>
                           </div>
                         </div>
@@ -268,60 +287,87 @@ function UserProfile() {
                               ? t(
                                   `UserDetails.selectNationality.${user?.nationality}`
                                 )
-                              : "Millatingizni kiriting"}
+                              : t('Profile.UserProfile.ethnicity')}
                           </p>
                         </div>
                       </div>
 
-                      <a href={`tel:${user?.phone}`} className="block">
-                        <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:scale-[1.02]">
-                          <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
-                            <svg
-                              className="w-6 h-6 text-red-500"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M20 10.999h2C22 5.869 18.127 2 12.99 2v2C17.052 4 20 6.943 20 10.999z" />
-                              <path d="M13 8c2.103 0 3 .897 3 3h2c0-3.225-1.775-5-5-5v2zm3.422 5.443a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.391L6.859 3.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 17.705 21c.202 0 .326-.006.359-.008a.992.992 0 0 0 .648-.291l1.862-2.17c.37-.43.319-1.07-.085-1.391l-2.263-1.86z" />
-                            </svg>
-                          </div>
-                          <div className="ml-4">
-                            <h3 className="text-sm font-medium text-gray-500">
-                              {t("UserDetails.phone")}
-                            </h3>
-                            <p className="text-sm sm:text-lg font-semibold text-gray-800">
-                              {user?.phone
-                                ? user?.phone
-                                : "Telefon raqamingizni kiriting"}
-                            </p>
-                          </div>
+                      {/* Phone */}
+                      <div 
+                        className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02] cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (user?.phone) {
+                            window.location.href = `tel:${user.phone}`;
+                          } else {
+                            setIsModalOpen(true);
+                          }
+                        }}
+                      >
+                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
+                          <svg
+                            className="w-6 h-6 text-blue-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                            />
+                          </svg>
                         </div>
-                      </a>
+                        <div className="ml-4">
+                          <h3 className="text-sm font-medium text-gray-500">
+                            {t("UserDetails.phone")}
+                          </h3>
+                          <p className="text-sm sm:text-lg font-semibold text-gray-800">
+                            {user?.phone || t('Profile.UserProfile.phone')}
+                          </p>
+                        </div>
+                      </div>
 
                       {/* Telegram */}
-                      <a href={`https://${user?.telegram}`} className="block">
-                        <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02]">
-                          <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg">
-                            <svg
-                              className="w-6 h-6 text-orange-500"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-                            </svg>
-                          </div>
-                          <div className="ml-4">
-                            <h3 className="text-sm font-medium text-gray-500">
-                              {t("UserDetails.telegram")}
-                            </h3>
-                            <p className="text-sm sm:text-lg font-semibold text-gray-800">
-                              {user?.telegram
-                                ? user?.telegram
-                                : "Telegramingizni kiriting"}
-                            </p>
-                          </div>
+                      <div 
+                        className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02] cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (user?.telegram) {
+                            window.open(`https://${user.telegram}`, '_blank');
+                          } else {
+                            setIsModalOpen(true);
+                          }
+                        }}
+                      >
+                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg">
+                          <svg
+                            className="w-6 h-6 text-orange-500"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                          </svg>
                         </div>
-                      </a>
+                        <div className="ml-4">
+                          <h3 className="text-sm font-medium text-gray-500">
+                            {t("UserDetails.telegram")}
+                          </h3>
+                          <p className="text-sm sm:text-lg font-semibold text-gray-800">
+                            {!user?.telegram ? (
+                              <span 
+                                className="cursor-pointer hover:text-rose-500"
+                                onClick={() => setIsModalOpen(true)}
+                              >
+                                {t('Profile.UserProfile.telegram')}
+                              </span>
+                            ) : (
+                              <span>{user?.telegram}</span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
 
                       {/* Статус */}
                       <div className="flex items-center p-4 bg-gray-50 rounded-lg">
@@ -373,7 +419,19 @@ function UserProfile() {
             </div>
           </div>
         )}
+
       </>
+      <FormModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal}
+        title={t('Profile.form.fill_out_form')}
+      >
+        <div className="pb-4">
+          <div className="max-w-3xl mx-auto">
+            <CombinedForm handleCloseModal={handleCloseModal} />
+          </div>
+        </div>
+      </FormModal>
     </>
   );
 }

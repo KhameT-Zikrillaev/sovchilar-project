@@ -49,6 +49,10 @@ function UserDetails() {
         <div className="max-w-7xl mx-auto">
           <Link
             to="/"
+            onClick={() => {
+              // Сохраняем флаг, что нужно прокрутить к карточке после возврата
+              localStorage.setItem('scrollToCard', 'true');
+            }}
             className="inline-flex items-center mb-8 text-gray-600 hover:text-gray-800 transition-colors"
           >
             <svg

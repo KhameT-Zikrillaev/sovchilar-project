@@ -4,7 +4,8 @@
     "profiles": "Анкеты",
     "contact": "Контакт",
     "contactmobile": "Контакт +(50) 719 33 33",
-    "createProfile": "Создать анкету"
+    "createProfile": "Редактировать профиль",
+    "signIn": "Войти"
   },
   "home": {
     "FirstIntroPage": {
@@ -16,6 +17,7 @@
         "women": "Я ищу мужа"
       },
       "createProfile": "Создать анкету",
+      "signIn": "Войти",
       "stats": {
         "weddings": "Свадеб",
         "profiles": "Анкет",
@@ -47,6 +49,7 @@
       "resetButton": "Сбросить",
       "noUsersMessage": "такой пользователей не найдено",
       "ShowMore": "Показать еще",
+      "loading": "Загрузка...",
       "Anketa": "анкета",
       "filters": {
         "all": "Все",
@@ -248,6 +251,7 @@
         "Tajik": "Таджик",
         "Turkmen": "Туркмен",
         "Tatar": "Татар",
+        "Karakalpak": "Каракалпак",
         "Other": "Другое"
       },
       "aboutYourself": "Требование",
@@ -291,6 +295,33 @@
         "terms": {
           "required": "Вы должны согласиться с условиями"
         }
+      }
+    },
+    "CombinedForm": {
+      "firstNamePlaceholder": "Введите ваше имя",
+      "firstNameRequired": "Имя обязательно",
+      "lastNamePlaceholder": "Введите вашу фамилию",
+      "lastNameRequired": "Фамилия обязательна",
+      "telegramUsernameRequired": "Telegram username обязательно",
+      "ageRequired": "Возраст обязателен",
+      "ageMin": "Возраст должен быть старше 18 лет",
+      "ageMax": "Возраст должен быть младше 100 лет",
+      "genderRequired": "Выбор пола обязателен",
+      "genderSelect": "Выберите пол",
+      "genderMale": "Мужчина",
+      "genderFemale": "Женщина",
+      "cityRequired": "Выбор города обязателен",
+      "educationRequired": "Выбор образования обязателен",
+      "maritalStatusRequired": "Выбор семейного положения обязателен",
+      "occupationRequired": "Указание профессии обязательно",
+      "occupationPlaceholder": "Введите вашу профессию",
+      "ethnicityRequired": "Выбор национальности обязателен",
+      "requirementsRequired": "Указание требований обязательно",
+      "requirementsMinLength": "Требования должны содержать минимум 10 символов",
+      "requirementsPlaceholder": "Напишите о себе и о том, какого супруга вы ищете...",
+      "toastMessages": {
+        "profileCreatedSuccess": "Анкета успешно создана",
+        "profileCreationError": "Ошибка при создании анкеты"
       }
     },
     "SuccessModal": {
@@ -424,6 +455,7 @@
       "Tajik": "Таджик",
       "Turkmen": "Туркмен",
       "Tatar": "Татар",
+      "Karakalpak": "Каракалпак",
       "Other": "Другое"
     }
   },
@@ -443,7 +475,9 @@
     "toasts": {
       "success": "Успешный",
       "smsError": "Ошибка кода СМС",
-      "notUser": "Пользователь не найден"
+      "notUser": "Пользователь не найден",
+      "error": "Ошибка",
+      "numberError": "Ошибка при вводе номера"
     },
     "title": {
       "number": "Введите ваш номер телефона",
@@ -497,5 +531,45 @@
       "link": "Зарегистрироваться."
     }
   },
-  "opinions": "Мнения"
+  "Profile": {
+    "form": {
+      "fill_out_form": "Заполнить анкету",
+      "confirm": "Подтвердить",
+      "cancel": "Отменить"
+    },
+    "btn": {
+      "add": "Заполнить анкету",
+      "success": "Я нашел свое счастье",
+      "logout": "Выйти из профиля"
+    },
+    "UserProfile": {
+      "deleteprofilesuccess": "Ваша анкета была удалена с нашего сайта",
+      "setPhoto": "Загрузите фото",
+      "fullName": "Имя и фамилия",
+      "city": "Город",
+      "nationality": "Национальность",
+      "comment": "Оставьте комментарий",
+      "age": "Введите ваш возраст",
+      "address": "Введите ваш адрес",
+      "education": "Введите ваш уровень образования",
+      "occupation": "Введите вашу профессию",
+      "ethnicity": "Введите вашу этническую принадлежность",
+      "phone": "Введите ваш номер телефона",
+      "telegram":"Введите ваш телеграмм"
+    },
+    "modal": {
+      "happiness_found": "Нашел свое счастье",
+      "happiness_title": "Счастье",
+      "happiness_message": "Если вы нашли свое счастье, сообщите нам об этом. После подтверждения ваша анкета будет удалена с нашего сайта."
+    },
+    "buttons": {
+      "logout": "Profildan chiqish"
+    },
+    "toast": {
+      "profile_removed": "Ankatengiz saytimizdan olib tashlandi"
+    }
+  },
+  "comment":{
+    "title":"Счастливчики"
+  }
 }

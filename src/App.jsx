@@ -13,9 +13,36 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { CardProvider } from "./context/CardContext";
+import { useNavigate } from "react-router-dom";
+import api from "./services/api";
+import { useStore } from "./store/store";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const {accessToken, clearUser} = useStore()
+  const navigate = useNavigate();
+
+  const token = async (token) => {
+    try {
+      const response = await api.post("/auth/verify", {
+        accessToken: token
+      });
+      
+      if (!response?.data) {
+        navigate("/");
+        clearUser();
+      } 
+    } catch (error) {
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      token(accessToken);
+    } else {
+      navigate("/");
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,7 +60,7 @@ function App() {
         {loading ? (
           <SiteLoading />
         ) : (
-          <div className="wrapper">
+          <div className="wrapper overflow-x-hidden w-full">
             <Reklama />
             <HeaderLayout />
             <MainLayout />

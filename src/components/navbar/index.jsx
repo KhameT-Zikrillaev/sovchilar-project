@@ -112,7 +112,7 @@ export default function Navbar() {
               to={user ? "/profile" : "/login"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
-              <span>{user ? user.firstName : "Kirish"}</span>
+              <span>{user ? user.firstName : t("navbar.signIn")}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -124,12 +124,17 @@ export default function Navbar() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
+                  d={user 
+                    ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
+                    : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                  }
                 />
               </svg>
             </Link>
-            <LanguageSelector />
           </div>
+
+          {/* Language Selector - теперь виден всегда */}
+          <LanguageSelector />
 
           {/* Мобильное меню */}
           <div className="md:hidden">
@@ -192,7 +197,7 @@ export default function Navbar() {
                 to="/profile"
                 className="px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
               >
-                <span>{user ? user.firstName : "Kirish"}</span>
+                <span>{user ? user.firstName : t("navbar.signIn")}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -204,13 +209,13 @@ export default function Navbar() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
+                    d={user 
+                      ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
+                      : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                    }
                   />
                 </svg>
               </Link>
-              <div className="px-3 py-2">
-                <LanguageSelector />
-              </div>
             </div>
           </div>
         )}
