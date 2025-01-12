@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { usePostData } from "./hooks/usePostData";
+import { usePostData } from "../Register/hooks/usePostData";
 
 import { toast } from "react-toastify";
-import { useGetPhone } from "./hooks/useGetPhone";
-import { useEditUser } from "./hooks/useEditUser";
+import { useGetPhone } from "../Register/hooks/useGetPhone";
+import { useUpdatePassword } from "./hooks/useUpdatePassword";
 import { useTranslation } from "react-i18next";
-import { useStore } from "../../store/store";
+
 import { NavLink, useNavigate } from "react-router-dom";
 
-const Register = () => {
+const UpdatePassword = () => {
   const { t } = useTranslation();
   const [step, setStep] = useState(1); // 1: Telefon kiritish, 2: SMS tasdiqlash, 3:Ism familiya parol kiritish
   const [phoneNumber, setPhoneNumber] = useState("+998 ");
   const [smsCode, setSmsCode] = useState("");
   const [isCode, setIsCode] = useState(true);
-  const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
   const [oldUser, setOldUser] = useState(null);
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
-  const { EditUser } = useEditUser();
-  const { setUser } = useStore();
+  const { UpdatePassword } = useUpdatePassword();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -102,6 +100,7 @@ const Register = () => {
       const res = await getPhone(
         "/users-uz/phone/" + phoneNumber.replace(/[\s-]/g, "")
       );
+      console.log(res);
       setOldUser(res.data);
       if (response.statusCode === 200) {
         setStep(3);
@@ -112,32 +111,18 @@ const Register = () => {
         toast.error(t("register.toasts.smsError"));
       }
     } else if (step === 3) {
-      if (!oldUser) {
-        const res = await postItem("/users-uz", {
+      const res = await UpdatePassword(
+        "/users-uz/update-password/" + oldUser.id,
+        {
           phone: phoneNumber.replace(/[\s-]/g, ""),
-          firstName: firstName,
           password: password,
-        });
-        if (res.statusCode === 201) {
-          setUser(res.data);
-          navigate("/profile");
-          toast.success(t("register.toasts.success"));
-        } else {
-          // toast.error("Bunday raqamli foydalanuvchi bor");
         }
+      );
+      if (res.statusCode === 200) {
+        navigate("/profile");
+        toast.success(t("register.toasts.success"));
       } else {
-        const res = await EditUser("/users-uz/register/" + oldUser.id, {
-          phone: phoneNumber.replace(/[\s-]/g, ""),
-          firstName: firstName,
-          password: password,
-        });
-        if (res.statusCode === 200) {
-          setUser(res.data);
-          navigate("/profile");
-          toast.success(t("register.toasts.success"));
-        } else {
-          // toast.error("Bunday raqamli foydalanuvchi bor");
-        }
+        // toast.error("Bunday raqamli foydalanuvchi bor");
       }
     }
   };
@@ -183,17 +168,6 @@ const Register = () => {
 
             {step === 3 && (
               <>
-                <input
-                  type="text"
-                  placeholder={t("register.placeholders.firstName")}
-                  value={firstName}
-                  onInput={handleInput}
-                  minLength={3}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  required
-                  className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                />
-
                 <input
                   type="password"
                   placeholder={t("register.placeholders.password")}
@@ -259,4 +233,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UpdatePassword;

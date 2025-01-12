@@ -1,24 +1,23 @@
 import { useState } from "react";
 import UserServices from "../../../services/userServices";
 import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
-export const usePostData = () => {
+
+export const useUpdatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { t } = useTranslation();
-  const postItem = async (url, data) => {
+
+  const UpdatePassword = async (url, data) => {
     setIsLoading(true);
     try {
-      const response = await UserServices.postItem(data, url);
-      //   console.log(response);
+      const response = await UserServices.updatePassword(url, data);
       return response;
     } catch (err) {
-      toast.error(t("register.toasts.numberError"));
+      toast.error(err.response?.data?.message || "Xatolik");
     } finally {
       setIsLoading(false);
     }
   };
   return {
-    postItem,
+    UpdatePassword,
     isLoading,
   };
 };

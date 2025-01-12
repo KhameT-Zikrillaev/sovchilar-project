@@ -108,6 +108,21 @@ export default function SecondHomePageSearch() {
     }
   }, []);
 
+  useEffect(() => {
+    const shouldScrollToCard = localStorage.getItem('scrollToCard');
+    const lastViewedCardId = localStorage.getItem('lastViewedCardId');
+    
+    if (shouldScrollToCard === 'true' && lastViewedCardId && !isLoading) {
+      const cardElement = document.getElementById(`user-card-${lastViewedCardId}`);
+      if (cardElement) {
+        cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Очищаем флаги после прокрутки
+        localStorage.removeItem('scrollToCard');
+        localStorage.removeItem('lastViewedCardId');
+      }
+    }
+  }, [isLoading, data]);
+
   const allUsers = data?.pages?.flatMap(page => page.users) || [];
 
   if (isError) {
@@ -128,7 +143,9 @@ export default function SecondHomePageSearch() {
       />
 
       {isLoading ? (
-        <div className="h-[300px] flex justify-center items-center"><Loading /></div>
+        <div className="flex justify-center items-center min-h-[400px]">
+          <Loading />
+        </div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

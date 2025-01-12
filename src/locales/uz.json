@@ -4,7 +4,8 @@
     "profiles": "Anketalar",
     "contact": "Aloqa",
     "contactmobile": "Aloqa +(50) 719 33 33",
-    "createProfile": "Anketa yaratish"
+    "createProfile": "Anketa yaratish",
+    "signIn": "Kirish"
   },
   "home": {
     "FirstIntroPage": {
@@ -16,6 +17,7 @@
         "women": "Umr yo'ldosh qidiryapman"
       },
       "createProfile": "Anketa yaratish",
+      "signIn": "Kirish",
       "stats": {
         "weddings": "To'ylar",
         "profiles": "Anketalar",
@@ -248,6 +250,7 @@
         "Tajik": "Tojik",
         "Turkmen": "Turkman",
         "Tatar": "Tatar",
+        "Karakalpak": "Qoraqalpog'istonlik",
         "Other": "Boshqa"
       },
       "aboutYourself": "Talabingiz",
@@ -262,7 +265,7 @@
         }
       },
       "back": "Orqaga",
-      "createProfile": "Profil yaratish",
+      "createProfile": "Faollashtirish",
       "Validation": {
         "qualification": {
           "required": "Iltimos, ta'lim darajasini tanlang",
@@ -291,6 +294,33 @@
         "terms": {
           "required": "Вы должны согласиться с условиями"
         }
+      }
+    },
+    "CombinedForm": {
+      "firstNamePlaceholder": "Ismingizni kiriting",
+      "firstNameRequired": "Ism kiritish majburiy",
+      "lastNamePlaceholder": "Familiyangizni kiriting",
+      "lastNameRequired": "Familiya kiritish majburiy",
+      "telegramUsernameRequired": "Telegram username kiritish majburiy",
+      "ageRequired": "Yoshni kiritish majburiy",
+      "ageMin": "Yosh 18 dan katta bo'lishi kerak",
+      "ageMax": "Yosh 100 dan kichik bo'lishi kerak",
+      "genderRequired": "Jinsni tanlash majburiy",
+      "genderSelect": "Jinsni tanlang",
+      "genderMale": "Erkak",
+      "genderFemale": "Ayol",
+      "cityRequired": "Shaharni tanlash majburiy",
+      "educationRequired": "Ta'limni tanlash majburiy",
+      "maritalStatusRequired": "Oilaviy holatni tanlash majburiy",
+      "occupationRequired": "Kasbni kiritish majburiy",
+      "occupationPlaceholder": "Kasbingizni kiriting",
+      "ethnicityRequired": "Millatni tanlash majburiy",
+      "requirementsRequired": "Talablarni kiritish majburiy",
+      "requirementsMinLength": "Talablar kamida 10 ta belgidan iborat bo'lishi kerak",
+      "requirementsPlaceholder": "O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing...",
+      "toastMessages": {
+        "profileCreatedSuccess": "Anketa muvaffaqiyatli yaratildi",
+        "profileCreationError": "Anketa yaratishda xatolik"
       }
     },
     "SuccessModal": {
@@ -367,6 +397,7 @@
       "Tajik": "Tojik",
       "Turkmen": "Turkman",
       "Tatar": "Tatar",
+      "Karakalpak": "Qoraqalpog'istonlik",
       "Other": "Boshqa"
     },
     "marriedSecond": "Ikkinchi xotin izlamoqda",
@@ -443,13 +474,21 @@
     "toasts": {
       "success": "Muvaffaqiyatli",
       "smsError": "Sms kod xato",
-      "notUser": "Foydalanuvchi topilmadi"
+      "notUser": "Foydalanuvchi topilmadi",
+      "error": "Xatolik",
+      "numberError":"Raqam kiritishda xatolik"
     },
     "title": {
       "number": "Telefon raqamingizni kiriting",
       "smsCode": "Tasdiqlash kodini kiriting",
       "signup": "Ro'yxatdan o'ting",
       "password": "Parol qo'ying"
+    },
+    "warning": {
+      "first": "Iltimos, kamida",
+      "second": "ta belgi kiriting. Hozir",
+      "third": "ta belgi kiritilgan.",
+      "empty": "Iltimos, ushbu maydonni to‘ldiring."
     },
     "placeholders": {
       "codeText": "Tasdiqlash kodi",
@@ -476,6 +515,7 @@
   },
   "login": {
     "title": "Tizimga kirish",
+    "forgotPassword": "Parolni unutdingizmi?",
     "placeholders": {
       "password": "Parolni kiriting"
     },
@@ -489,5 +529,48 @@
       "text": "Profilingiz yo'qmi?",
       "link": "Ro'yxatdan o'ting."
     }
+  },
+  "Profile": {
+    "form": {
+      "fill_out_form": "Anketa to'ldirish",
+      "confirm": "Tasdiqlash",
+      "cancel": "Bekor qilish"
+    },
+    "btn":{
+     "add":"Anketa to'ldirish",
+     "edit":"Anketa o'zgartirish",
+     "success":"Bahtimni toptim",
+     "logout":"profildan chiqish"
+    },
+    "UserProfile": {
+      "deleteprofilesuccess":"Ankatengiz saytimizdan olib tashlandi",
+     "setPhoto": "Fotosuratni qo'ying",
+      "fullName": "Ism familiya",
+      "city": "Shahar",
+      "nationality": "Millati",
+      "comment": "Izoh qoldiring",
+      "age": "Yoshingizni kiriting",
+      "address": "Yashash manzilingizni kiriting",
+      "education": "Ta'lim darajangizni kiriting",
+      "occupation": "Kasbingizni kiriting",
+      "ethnicity": "Millatingizni kiriting",
+      "phone": "Telefon raqamingizni kiriting",
+      "telegram":"Telegramingizni kiriting"
+    },
+    "modal": {
+      "happiness_found": "Baxtimni toptim",
+      "happiness_title": "Baxt",
+      "happiness_message": "Agar o‘z baxtingizni topgan bo‘lsangiz, bu haqida bizga xabar bering. Tasdiqlaganingizdan so‘ng, anketangiz saytimizdan o‘chirib tashlanadi."
+    },
+    "buttons": {
+      "logout": "Выйти из профиля"
+    },
+    "toast": {
+      "profile_removed": "Ваша анкета была удалена с нашего сайта"
+    }
+  
+  },
+  "comment":{
+    "title":"Baxtini topganlar"
   }
 }
