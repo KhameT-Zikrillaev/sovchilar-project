@@ -8,7 +8,9 @@ import { useStore } from "../../../../store/store";
 import api from "../../../../services/api";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const CombinedForm = ({ handleCloseModal }) => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const {
     register,
@@ -113,6 +115,7 @@ const CombinedForm = ({ handleCloseModal }) => {
         toast.success(
           t("auth.CombinedForm.toastMessages.profileCreatedSuccess")
         );
+        navigate("/");
         handleCloseModal();
         if (user?.status === "PENDING") {
           handleStatusInactive(user?.id);
