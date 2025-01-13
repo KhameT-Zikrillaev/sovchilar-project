@@ -42,7 +42,7 @@ function UserDetails() {
       </div>
     );
   }
-
+ console.log(userData);
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8 mt-[99px]">
