@@ -93,15 +93,16 @@ export default function Navbar() {
               onClick={() => handleScrollTo("search")}
               className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
             >
-              <span>{t("navbar.search")}</span>
+              <a href="#search">{t("navbar.search")}</a>
               <AnimatedHeart />
             </button>
-            <button
+            <a
+              href="#anketa"
               onClick={() => handleScrollTo("ankets")}
               className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.profiles")}
-            </button>
+            </a>
             <a
               href="https://t.me/sovchilarnet_admin"
               className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
@@ -124,9 +125,10 @@ export default function Navbar() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d={user 
-                    ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
-                    : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                  d={
+                    user
+                      ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                      : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                   }
                 />
               </svg>
@@ -209,9 +211,10 @@ export default function Navbar() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d={user 
-                      ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
-                      : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                    d={
+                      user
+                        ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                        : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                     }
                   />
                 </svg>
