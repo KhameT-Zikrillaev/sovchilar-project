@@ -11,7 +11,7 @@
     "FirstIntroPage": {
       "title": "Professional tanishuv xizmati",
       "subtitle": "O'z ikkinchi yarmingizni toping",
-      "description": "Biz jiddiy insonlarga o'zaro hurmat va islomiy qadriyatlarga asoslangan mustahkam oila qurishga yordam beramiz",
+      "description": "Jiddiy munosabatlarni istovchi insonlar saytimiz orqali o‘ziga munosib juftni topib, baxtli oila qurishlari mumkin.",
       "search": {
         "men": "Turmush o'rtoq qidiryapman",
         "women": "Umr yo'ldosh qidiryapman"
@@ -476,7 +476,7 @@
       "smsError": "Sms kod xato",
       "notUser": "Foydalanuvchi topilmadi",
       "error": "Xatolik",
-      "numberError":"Raqam kiritishda xatolik"
+      "numberError": "Raqam kiritishda xatolik"
     },
     "title": {
       "number": "Telefon raqamingizni kiriting",
@@ -536,14 +536,14 @@
       "confirm": "Tasdiqlash",
       "cancel": "Bekor qilish"
     },
-    "btn":{
-     "add":"Anketa to'ldirish",
-     "success":"Bahtimni toptim",
-     "logout":"profildan chiqish"
+    "btn": {
+      "add": "Anketa to'ldirish",
+      "success": "Bahtimni toptim",
+      "logout": "profildan chiqish"
     },
     "UserProfile": {
-      "deleteprofilesuccess":"Ankatengiz saytimizdan olib tashlandi",
-     "setPhoto": "Fotosuratni qo'ying",
+      "deleteprofilesuccess": "Ankatengiz saytimizdan olib tashlandi",
+      "setPhoto": "Fotosuratni qo'ying",
       "fullName": "Ism familiya",
       "city": "Shahar",
       "nationality": "Millati",
@@ -554,7 +554,7 @@
       "occupation": "Kasbingizni kiriting",
       "ethnicity": "Millatingizni kiriting",
       "phone": "Telefon raqamingizni kiriting",
-      "telegram":"Telegramingizni kiriting"
+      "telegram": "Telegramingizni kiriting"
     },
     "modal": {
       "happiness_found": "Baxtimni toptim",
@@ -567,9 +567,8 @@
     "toast": {
       "profile_removed": "Ваша анкета была удалена с нашего сайта"
     }
-  
   },
-  "comment":{
-    "title":"Baxtini topganlar"
+  "comment": {
+    "title": "Baxtini topganlar"
   }
 }
