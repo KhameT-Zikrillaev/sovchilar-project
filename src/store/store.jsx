@@ -1,3 +1,4 @@
+import axios from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -21,6 +22,34 @@ export const useStore = create(
           user: data,
         });
       },
+
+      setUserSingleReload: async () => {
+        const storedUser = JSON.parse(localStorage.getItem("user-sovchilar"))?.state;
+        if (storedUser) {
+          try {
+            const response = await axios.get(`https://back.sovchilar.net/api/users-uz/${storedUser?.user?.id}`, {
+              headers: {
+                Authorization: `Bearer ${storedUser?.accessToken}`,
+              },
+            });
+            set({
+              user: response?.data?.data,
+            });
+          } catch (error) {
+            set({
+              user: null,
+            });
+          }
+        }
+      },
+
+      updateUserField: (key, value) =>
+        set((state) => ({
+          user: {
+            ...state.user,
+            [key]: value,
+          },
+        })),
 
       // Tokenlarni yangilash
       //   updateTokens: (newAccessToken, newRefreshToken) =>

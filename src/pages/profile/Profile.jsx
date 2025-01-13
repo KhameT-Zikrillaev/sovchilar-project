@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 const Profile = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {clearUser, user, accessToken} = useStore();
+  const {clearUser, user, accessToken, setUserSingle} = useStore();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,11 +27,12 @@ const Profile = () => {
   const handleStatusDone = async (id) => {
     const newStatus = "DONE";
     try {
-      await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {
+      const response = await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
       });
+      setUserSingle(response?.data?.data);
       closeModal();
       toast.success(t('Profile.UserProfile.deleteprofilesuccess'))
     } catch (error) {
@@ -48,14 +49,13 @@ const Profile = () => {
               onClick={() => setIsModalOpen(true)}
               className=" bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]"
             >
-              {t('Profile.btn.add')}
+              {user?.status === "PENDING" ? t('Profile.btn.add') : t('Profile.btn.edit')}
             </button>
             <button 
               className={`border border-rose-500 text-rose-500 px-6 py-3 rounded-lg hover:bg-rose-50 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px] disabled:border-amber-800 disabled:text-amber-800 disabled:cursor-not-allowed disabled:hover:bg-transparent`}
               onClick={openModal}
-              disabled={user?.status === "ACTIVE"}
+              disabled={user?.status !== "ACTIVE" ? true : false}
             >
-              
               {t('Profile.btn.success')}
             </button>
             <button 
@@ -90,7 +90,7 @@ const Profile = () => {
       <FormModal 
         isOpen={isModalOpen} 
         onClose={handleCloseModal}
-        title={t('Profile.form.fill_out_form')}
+        title={user?.status === "PENDING" ? t('Profile.form.fill_out_form') : t('Profile.btn.edit')}
       >
         <div className="pb-4">
           <div className="max-w-3xl mx-auto">

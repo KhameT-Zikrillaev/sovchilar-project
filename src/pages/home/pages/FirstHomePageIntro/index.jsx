@@ -24,25 +24,34 @@ export default function FirstHomePageIntro() {
       label: t("home.FirstIntroPage.stats.profiles"),
       icon: "📋",
     },
-    { number: "100%", label: t("home.FirstIntroPage.stats.halal"), icon: "🕌" },
+    // {
+    //   number: "100%",
+    //   label: t("home.FirstIntroPage.stats.halal"),
+    //   icon: "🕌",
+    // },
+    {
+      number: "100%",
+      label: t("home.FirstIntroPage.stats.serviceQuality"), 
+      icon: "😊",
+    },
   ];
 
   const features = [
     {
-      icon: "💑",
+      icon: "💍",  // обручальное кольцо для серьезных намерений
       title: t("home.FirstIntroPage.features.serious.title"),
       description: t("home.FirstIntroPage.features.serious.description"),
     },
     {
-      icon: "👩‍👩‍👦",
+      icon: "🔍",  // лупа для удобного поиска
       title: t("home.FirstIntroPage.features.matchmakers.title"),
       description: t("home.FirstIntroPage.features.matchmakers.description"),
     },
     {
-      icon: "🤝",
+      icon: "🤝",  // рукопожатие для ценностей доверия
       title: t("home.FirstIntroPage.features.islamic.title"),
       description: t("home.FirstIntroPage.features.islamic.description"),
-    },
+    }
   ];
 
   return (

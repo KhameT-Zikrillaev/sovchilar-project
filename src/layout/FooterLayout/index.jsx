@@ -138,7 +138,7 @@ export default function FooterLayout() {
               <h3 data-aos="fade-left" data-aos-offset="50" className="text-xl font-bold mb-6 text-white">{t('footer.forUsers.title')}</h3>
               <ul className="space-y-4 ">
                 <li data-aos="fade-left" data-aos-offset="50">
-                  <Link to="/auth" className="text-gray-200   hover:text-rose-400 transition-all duration-300 flex items-center group">
+                  <Link to="/profile" className="text-gray-200   hover:text-rose-400 transition-all duration-300 flex items-center group">
                     <span className="w-2   h-2 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
                     {t('footer.forUsers.createProfile')}
                   </Link>
@@ -169,7 +169,7 @@ export default function FooterLayout() {
           <div className="border-t border-white/10 pt-8 backdrop-blur-sm bg-black/20 rounded-3xl p-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <p className="text-gray-300 text-center md:text-left" data-aos="fade-up" data-aos-offset="50">
-                &copy; 2024 Sovchilar.net. {t('footer.copyright')}
+                &copy; 2024-2025 Sovchilar.net. {t('footer.copyright')}
                 <span className="block md:inline md:ml-2">
                   {t('footer.love')}
                   <span className="inline-block animate-pulse ml-1">💝</span>
