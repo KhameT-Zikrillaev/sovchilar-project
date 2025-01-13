@@ -169,7 +169,7 @@ export default function FooterLayout() {
           <div className="border-t border-white/10 pt-8 backdrop-blur-sm bg-black/20 rounded-3xl p-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <p className="text-gray-300 text-center md:text-left" data-aos="fade-up" data-aos-offset="50">
-                &copy; 2024 Sovchilar.net. {t('footer.copyright')}
+                &copy; 2024-2025 Sovchilar.net. {t('footer.copyright')}
                 <span className="block md:inline md:ml-2">
                   {t('footer.love')}
                   <span className="inline-block animate-pulse ml-1">💝</span>

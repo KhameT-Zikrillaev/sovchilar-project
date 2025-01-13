@@ -21,7 +21,7 @@
       "stats": {
         "weddings": "To'ylar",
         "profiles": "Anketalar",
-        "halal": "Halol"
+        "serviceQuality": "Sifat"
       },
       "features": {
         "serious": {
@@ -29,12 +29,12 @@
           "description": "Faqat nikoh uchun samimiy intilganlar"
         },
         "matchmakers": {
-          "title": "Sovchilar yordami",
-          "description": "Tajribali mutaxassislar ideal juftlikni topishga yordam beradi"
+          "title": "Qulay qidiruv",
+          "description": "Juftlik topishda samarali va qulay vositalar"
         },
         "islamic": {
-          "title": "Islomiy qadriyatlar",
-          "description": "Tanishuvda shariat me'yorlariga rioya qilish"
+          "title": "Ishonch qadriyatlari",
+          "description": "Har bir muloqot bosqichida ochiqlik va hurmat"
         }
       },
       "callToAction": {
@@ -109,14 +109,14 @@
     }
   },
   "footer": {
-    "description": "Mustahkam musulmon oila qurish uchun professional tanishuv xizmati. Biz islomiy an'analarga muvofiq ikkinchi yarmingizni topishga yordam beramiz.",
+    "description": "Mustahkam oila qurish uchun professional tanishuv xizmati. Biz o‘zaro hurmat va tushunish an'analari asosida ikkinchi yarmini topishga yordam beramiz.",
     "social": {
       "telegram": "Bizning Telegram",
       "phone": "Qo'ng'iroq qilish",
       "email": "Xat yozish"
     },
     "navigation": {
-      "title": "Navigatsiya",
+      "title": "Bo'limlar",
       "search": "Anketa qidirish",
       "profiles": "Anketalar",
       "successStories": "Muvaffaqiyat tarixi"
@@ -131,7 +131,7 @@
     "copyright": "Barcha huquqlar himoyalangan",
     "privacy": "Maxfiylik siyosati",
     "terms": "Foydalanish shartlari",
-    "love": "Musulmon oilalarga mehr bilan"
+    "love": "Oila qurganlarga baxt va tinchlik tilaymiz"
   },
   "auth": {
     "FormOne": {

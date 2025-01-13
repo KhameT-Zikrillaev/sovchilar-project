@@ -14,8 +14,7 @@ function UserProfile() {
   const [isImg, setIsImg] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useStore();
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
