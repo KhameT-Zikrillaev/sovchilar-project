@@ -86,13 +86,6 @@ export default function SecondHomePageSearch() {
     address,
     maritalStatus
   ) => {
-    console.log("Search params:", {
-      gender,
-      ageFrom,
-      ageTo,
-      address,
-      maritalStatus,
-    });
     setSearchParams({
       gender,
       ageFrom,

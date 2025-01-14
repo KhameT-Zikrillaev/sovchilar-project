@@ -5,7 +5,8 @@
     "contact": "Контакт",
     "contactmobile": "Контакт +(50) 719 33 33",
     "createProfile": "Редактировать профиль",
-    "signIn": "Войти"
+    "signIn": "Войти",
+    "favourite": "Избранное"
   },
   "home": {
     "FirstIntroPage": {
@@ -533,6 +534,7 @@
   },
   "Profile": {
     "form": {
+      "home": "Домашняя страница",
       "fill_out_form": "Заполнить анкету",
       "confirm": "Подтвердить",
       "cancel": "Отменить"

@@ -110,6 +110,12 @@ export default function Navbar() {
               {t("navbar.contact")}
             </a>
             <Link
+              to="/favourite"
+              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+            >
+              {t("navbar.favourite")}
+            </Link>
+            <Link
               to={user ? "/profile" : "/login"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
@@ -195,6 +201,13 @@ export default function Navbar() {
               >
                 {t("navbar.contactmobile")}
               </a>
+              <Link
+                to="/favourite"
+                onClick={scrollToTop}
+                className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+              >
+                {t("navbar.favourite")}
+              </Link>
               <Link
                 onClick={scrollToTop}
                 to="/profile"
