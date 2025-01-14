@@ -23,10 +23,8 @@ export const useRecentUser = () => {
       params.append('status', 'ACTIVE'); // Always add status=ACTIVE
 
       const response = await axios.get(`https://back.sovchilar.net/api/users-uz/filter?${params.toString()}`);
-      console.log('API Response:', response); // Debug log
       return response;
     } catch (error) {
-      console.error('Error fetching recent users:', error);
       throw error;
     }
   }, []);

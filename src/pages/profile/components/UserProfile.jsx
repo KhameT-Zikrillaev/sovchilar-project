@@ -14,14 +14,12 @@ function UserProfile() {
   const [isImg, setIsImg] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useStore();
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
- console.log(user);
   if (!user) {
     return <Navigate to="/login" replace />;
   }

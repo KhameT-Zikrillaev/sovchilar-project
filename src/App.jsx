@@ -19,7 +19,7 @@ import { useStore } from "./store/store";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const {accessToken, clearUser} = useStore()
+  const {accessToken, clearUser, setUserSingleReload} = useStore()
   const navigate = useNavigate();
 
   const token = async (token) => {
@@ -35,6 +35,7 @@ function App() {
     } catch (error) {
     }
   };
+
 
   useEffect(() => {
     if (accessToken) {
@@ -52,7 +53,8 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true }); // once: true - анимация срабатывает только один раз
+    AOS.init({ durationsetUserSingleReload: 1000, once: true }); // once: true - анимация срабатывает только один раз
+    setUserSingleReload()
   }, []);
   return (
     <>

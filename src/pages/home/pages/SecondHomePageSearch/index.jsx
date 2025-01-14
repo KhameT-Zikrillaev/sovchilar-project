@@ -4,14 +4,12 @@ import Loading from "../../../../components/Loading";
 import SecondHomeSearchForm from "./modules/SecondHomeSearchForm";
 import { useTranslation } from "react-i18next";
 import { useRecentUser } from "./hooks/useRecentUser";
-import { useCardContext } from "../../../../context/CardContext";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
   const { getRecentUser } = useRecentUser();
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const { visibleCardCount, updateVisibleCardCount } = useCardContext();
   const [activeFilter, setActiveFilter] = useState(() => {
     return localStorage.getItem("activeFilter") || "";
   });
@@ -28,20 +26,18 @@ export default function SecondHomePageSearch() {
 
   const fetchUserPage = async ({ pageParam = 1 }) => {
     try {
-      console.log('Fetching page:', pageParam, 'with params:', searchParams);
-      
       // Remove the '&' prefix from address and maritalStatus if they exist
-      const address = searchParams.address.startsWith('&') 
-        ? searchParams.address.substring(1) 
+      const address = searchParams.address.startsWith("&")
+        ? searchParams.address.substring(1)
         : searchParams.address;
-        
-      const maritalStatus = searchParams.maritalStatus.startsWith('&') 
-        ? searchParams.maritalStatus.substring(1) 
+
+      const maritalStatus = searchParams.maritalStatus.startsWith("&")
+        ? searchParams.maritalStatus.substring(1)
         : searchParams.maritalStatus;
 
       // Remove the 'gender=' prefix if it exists
-      const gender = searchParams.gender.startsWith('gender=') 
-        ? searchParams.gender.substring(7) 
+      const gender = searchParams.gender.startsWith("gender=")
+        ? searchParams.gender.substring(7)
         : searchParams.gender;
 
       const response = await getRecentUser(
@@ -53,9 +49,7 @@ export default function SecondHomePageSearch() {
         pageParam,
         12
       );
-      
-      console.log('Page response:', response);
-      
+
       const users = response?.data?.data?.items || [];
       return {
         users,
@@ -76,16 +70,29 @@ export default function SecondHomePageSearch() {
     isLoading,
     isError,
     error,
-    refetch
+    refetch,
   } = useInfiniteQuery({
-    queryKey: ['users', searchParams],
+    queryKey: ["users", searchParams],
     queryFn: fetchUserPage,
-    getNextPageParam: (lastPage) => lastPage.hasMore ? lastPage.nextPage : undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasMore ? lastPage.nextPage : undefined,
     initialPageParam: 1,
   });
 
-  const handleSearch = async (gender, ageFrom, ageTo, address, maritalStatus) => {
-    console.log('Search params:', { gender, ageFrom, ageTo, address, maritalStatus });
+  const handleSearch = async (
+    gender,
+    ageFrom,
+    ageTo,
+    address,
+    maritalStatus
+  ) => {
+    console.log("Search params:", {
+      gender,
+      ageFrom,
+      ageTo,
+      address,
+      maritalStatus,
+    });
     setSearchParams({
       gender,
       ageFrom,
@@ -113,26 +120,30 @@ export default function SecondHomePageSearch() {
   }, []);
 
   useEffect(() => {
-    const shouldScrollToCard = localStorage.getItem('scrollToCard');
-    const lastViewedCardId = localStorage.getItem('lastViewedCardId');
-    
-    if (shouldScrollToCard === 'true' && lastViewedCardId && !isLoading) {
-      const cardElement = document.getElementById(`user-card-${lastViewedCardId}`);
+    const shouldScrollToCard = localStorage.getItem("scrollToCard");
+    const lastViewedCardId = localStorage.getItem("lastViewedCardId");
+
+    if (shouldScrollToCard === "true" && lastViewedCardId && !isLoading) {
+      const cardElement = document.getElementById(
+        `user-card-${lastViewedCardId}`
+      );
       if (cardElement) {
-        cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        cardElement.scrollIntoView({ behavior: "smooth", block: "center" });
         // Очищаем флаги после прокрутки
-        localStorage.removeItem('scrollToCard');
-        localStorage.removeItem('lastViewedCardId');
+        localStorage.removeItem("scrollToCard");
+        localStorage.removeItem("lastViewedCardId");
       }
     }
   }, [isLoading, data]);
 
-  const allUsers = data?.pages?.flatMap(page => page.users) || [];
-  console.log('Rendered users:', allUsers);
+  const allUsers = data?.pages?.flatMap((page) => page.users) || [];
 
   if (isError) {
-    console.error('Query error:', error);
-    return <div className="text-center text-red-500">Error loading users: {error.message}</div>;
+    return (
+      <div className="text-center text-red-500">
+        Error loading users: {error.message}
+      </div>
+    );
   }
 
   return (
@@ -154,11 +165,14 @@ export default function SecondHomePageSearch() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div
+            id="anketa"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
             {allUsers.length > 0 ? (
               allUsers.map((user, index) => (
-                <UserCard 
-                  key={`${user.id}-${index}`} 
+                <UserCard
+                  key={`${user.id}-${index}`}
                   user={user}
                   gender={user.gender}
                 />
@@ -177,8 +191,8 @@ export default function SecondHomePageSearch() {
                 disabled={isFetchingNextPage}
                 className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
               >
-                {isFetchingNextPage 
-                  ? t("home.SecondHomePageSearch.loading") 
+                {isFetchingNextPage
+                  ? t("home.SecondHomePageSearch.loading")
                   : t("home.SecondHomePageSearch.ShowMore")}
               </button>
             </div>
