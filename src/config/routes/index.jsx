@@ -34,10 +34,10 @@ export const routes = [
     path: "/update-password",
     element: <UpdatePassword />,
   },
-  {
-    path: "/favourite",
-    element: <Favourite />,
-  },
+  // {
+  //   path: "/favourite",
+  //   element: <Favourite />,
+  // },
 ];
 
 function RootRoute() {

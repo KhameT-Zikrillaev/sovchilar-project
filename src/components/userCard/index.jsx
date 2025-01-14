@@ -73,9 +73,9 @@ export default function UserCard({ user, gender }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative h-80 overflow-hidden group">
-        <div className="absolute z-10 top-3 left-3">
+        {/* <div className="absolute z-10 top-3 left-3">
           <FaHeart className="text-[30px] text-white cursor-pointer" />
-        </div>
+        </div> */}
         <img
           src={user.imageUrl || (gender === "MALE" ? Male : Female)}
           alt={user.lastName}
