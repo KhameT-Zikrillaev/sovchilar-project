@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/images/logo.png";
 import Modal from "../../components/customModal/Modal";
+import { FaTelegramPlane } from "react-icons/fa";
 import ModalSertified from "../../components/sertficatedmodal";
 export default function FooterLayout() {
   const navigate = useNavigate();
@@ -101,7 +102,7 @@ export default function FooterLayout() {
               </p>
               <div className="flex gap-6">
                 <a
-                  href=""
+                  href="https://t.me/sovchilarnet_admin"
                   data-aos="flip-up"
                   data-aos-offset="50"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
@@ -110,11 +111,11 @@ export default function FooterLayout() {
                     className="text-2xl"
                     title={t("footer.social.telegram")}
                   >
-                    📱
+                    <FaTelegramPlane />
                   </span>
                 </a>
                 <a
-                  href="https://t.me/sovchilarnet_admin"
+                  href="tel:+998507193333"
                   data-aos="flip-up"
                   data-aos-offset="50"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
@@ -123,7 +124,7 @@ export default function FooterLayout() {
                     📞
                   </span>
                 </a>
-                <a
+                {/* <a
                   href=""
                   data-aos="flip-up"
                   data-aos-offset="50"
@@ -132,7 +133,7 @@ export default function FooterLayout() {
                   <span className="text-2xl" title={t("footer.social.email")}>
                     ✉️
                   </span>
-                </a>
+                </a> */}
               </div>
             </div>
 

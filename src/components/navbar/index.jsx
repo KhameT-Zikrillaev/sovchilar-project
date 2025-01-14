@@ -181,12 +181,13 @@ export default function Navbar() {
                 <span>{t("navbar.search")}</span>
                 <AnimatedHeart />
               </button>
-              <button
+              <a
+                href="#anketa"
                 onClick={() => handleScrollTo("ankets")}
                 className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
               >
                 {t("navbar.profiles")}
-              </button>
+              </a>
               <a
                 href="https://t.me/sovchilarnet_admin"
                 onClick={() => setIsOpen(false)}
