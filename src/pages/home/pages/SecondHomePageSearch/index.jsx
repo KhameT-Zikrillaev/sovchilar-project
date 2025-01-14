@@ -5,6 +5,8 @@ import SecondHomeSearchForm from "./modules/SecondHomeSearchForm";
 import { useTranslation } from "react-i18next";
 import { useRecentUser } from "./hooks/useRecentUser";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useFavoritesStore } from "../../../../store/favoritesStore";
+import { useStore } from "../../../../store/store";
 
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
@@ -13,6 +15,8 @@ export default function SecondHomePageSearch() {
   const [activeFilter, setActiveFilter] = useState(() => {
     return localStorage.getItem("activeFilter") || "";
   });
+
+  const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmittedAge, setIsSubmittedAge] = useState(false);
   const formRef = useRef();
@@ -23,6 +27,11 @@ export default function SecondHomePageSearch() {
     address: "",
     maritalStatus: "",
   });
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 1000);
+  }, []);
 
   const fetchUserPage = async ({ pageParam = 1 }) => {
     try {
@@ -100,6 +109,7 @@ export default function SecondHomePageSearch() {
 
   useEffect(() => {
     const savedParams = localStorage.getItem("searchParams");
+
     if (savedParams) {
       const params = JSON.parse(savedParams);
       handleSearch(
@@ -111,6 +121,16 @@ export default function SecondHomePageSearch() {
       );
     }
   }, []);
+
+  //Sevimlilar
+
+  const toggleFavorite = (card) => {
+    if (favorites.some((fav) => fav.id === card.id)) {
+      removeFavorite(card.id);
+    } else {
+      addFavorite(card);
+    }
+  };
 
   useEffect(() => {
     const shouldScrollToCard = localStorage.getItem("scrollToCard");
@@ -168,6 +188,8 @@ export default function SecondHomePageSearch() {
                   key={`${user.id}-${index}`}
                   user={user}
                   gender={user.gender}
+                  toggleFavorite={toggleFavorite}
+                  favorites={favorites}
                 />
               ))
             ) : (

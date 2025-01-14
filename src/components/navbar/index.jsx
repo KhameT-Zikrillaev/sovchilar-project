@@ -5,6 +5,7 @@ import NavbarLogo from "./NavbarLogo";
 import flaguz from "../../assets/images/flag-uzb.jpg";
 import flagru from "../../assets/images/flag-rus.png";
 import { useStore } from "../../store/store";
+import { useFavoritesStore } from "../../store/favoritesStore";
 // Анимированная иконка сердца
 const AnimatedHeart = () => (
   <div className="relative w-8 h-8 flex items-center justify-center">
@@ -53,7 +54,7 @@ export default function Navbar() {
   const location = useLocation();
   const { t } = useTranslation();
   const { user } = useStore();
-
+  const favorites = useFavoritesStore((state) => state.favorites);
   const handleScrollTo = (id) => {
     setIsOpen(false);
     if (location.pathname !== "/") {
@@ -88,10 +89,10 @@ export default function Navbar() {
           <NavbarLogo />
 
           {/* Основная навигация */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2">
             <button
               onClick={() => handleScrollTo("search")}
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
+              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
             >
               <a href="#search">{t("navbar.search")}</a>
               <AnimatedHeart />
@@ -99,21 +100,24 @@ export default function Navbar() {
             <a
               href="#anketa"
               onClick={() => handleScrollTo("ankets")}
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.profiles")}
             </a>
             <a
               href="https://t.me/sovchilarnet_admin"
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.contact")}
             </a>
             <Link
               to="/favourite"
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
             >
               {t("navbar.favourite")}
+              <span className="text-red-500 absolute top-0 right-0">
+                {favorites.length}
+              </span>
             </Link>
             <Link
               to={user ? "/profile" : "/login"}
@@ -206,7 +210,12 @@ export default function Navbar() {
                 onClick={scrollToTop}
                 className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
               >
-                {t("navbar.favourite")}
+                <span className="relative">
+                  {t("navbar.favourite")}
+                  <span className="text-red-500 absolute top-[-5px] right-[-15px]">
+                    {favorites.length}
+                  </span>
+                </span>
               </Link>
               <Link
                 onClick={scrollToTop}
