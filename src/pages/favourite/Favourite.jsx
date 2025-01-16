@@ -3,17 +3,58 @@ import UserCard from "../../components/userCard";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavoritesStore } from "../../store/favoritesStore";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import api from "../../services/api";
+import { useStore } from "../../store/store";
+import { usePostFavorite } from "../home/pages/SecondHomePageSearch/hooks/usePostFavorite";
 
 const Favourite = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { favorites, removeFavorite } = useFavoritesStore();
+  const { user, accessToken } = useStore();
+  const { postFavoriteUsers } = usePostFavorite();
+  const queryClient = useQueryClient();
+
+  const fetchFavoriteUsers = async () => {
+    const { data } = await api.get(`/user-favourite/user/${user?.id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Tokenni header'ga qo'shish
+        "Content-Type": "application/json", // JSON formatini belgilash
+      },
+    }); // Sevimli foydalanuvchilar API'si
+    return data;
+  };
+
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["favoriteUsers"],
+    queryFn: fetchFavoriteUsers,
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const toggleFavorite = (card) => {
+  const toggleFavorite = async (card) => {
+    const response = await postFavoriteUsers(
+      "/user-favourite",
+      {
+        user: user?.id,
+        favourite: card.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Tokenni header'ga qo'shish
+          "Content-Type": "application/json", // JSON formatini belgilash
+        },
+      }
+    );
+    queryClient.invalidateQueries(["favoriteUsers"]);
+
     removeFavorite(card.id);
   };
 
@@ -46,14 +87,14 @@ const Favourite = () => {
           id="anketa"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
-          {favorites.length > 0 ? (
-            favorites.map((user, index) => (
+          {users?.data.length > 0 ? (
+            users?.data.map((user, index) => (
               <UserCard
                 key={`${user.id}-${index}`}
-                user={user}
+                user={user.favourite}
                 gender={user.gender}
                 toggleFavorite={toggleFavorite}
-                favorites={favorites}
+                favorites={users.data}
               />
             ))
           ) : (

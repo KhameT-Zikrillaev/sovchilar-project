@@ -11,7 +11,7 @@
   "home": {
     "FirstIntroPage": {
       "title": "Professional tanishuv xizmati",
-      "subtitle": "O'z ikkinchi yarmingizni toping",
+      "subtitle": "O'z baxtingizni toping va baxtli hayot kechiring",
       "description": "Jiddiy munosabatlarni istovchi insonlar saytimiz orqali o‘ziga munosib juftni topib, baxtli oila qurishlari mumkin.",
       "search": {
         "men": "Turmush o'rtoq qidiryapman",
@@ -49,6 +49,7 @@
       "description": "Bizning diqqat bilan tanlangan potentsial nomzodlar ro'yxatimizni ko'rib chiqing va o'z qadriyatlaringiz va intilishlaringizni baham ko'radigan insonni toping",
       "resetButton": "Tozalash",
       "noUsersMessage": "Bunday foydalanuvchilar topilmadi",
+      "noAnketa": "Anketalarni ko'rish uchun ro'yxatdan o'ting",
       "noLikesUser": "Hech qanday sevimli foydalanuvchi mavjud emas",
       "ShowMore": "Ko‘proq ko‘rsatish",
       "loading": "Yuklanmoqda...",
@@ -114,7 +115,7 @@
     "description": "Mustahkam oila qurish uchun professional tanishuv xizmati. Biz o‘zaro hurmat va tushunish an'analari asosida ikkinchi yarmini topishga yordam beramiz.",
     "social": {
       "telegram": "Bizning Telegram",
-      "phone": "Qo'ng'iroq qilish",
+      "phone": "Bizning instagram",
       "email": "Xat yozish"
     },
     "navigation": {

@@ -16,6 +16,7 @@ const Register = () => {
   const [isCode, setIsCode] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
+  const [gender, setGender] = useState(null);
   const [oldUser, setOldUser] = useState(null);
   const { postItem, isLoading } = usePostData();
   const { getPhone } = useGetPhone();
@@ -111,13 +112,14 @@ const Register = () => {
         setIsCode(false);
         toast.error(t("register.toasts.smsError"));
       }
-    } else if (step === 3) {
+    } else if (step === 3 && gender) {
       if (!oldUser) {
         const res = await postItem("/users-uz", {
           phone: phoneNumber.replace(/[\s-]/g, ""),
           firstName: firstName,
           password: password,
         });
+        console.log(res);
         if (res.statusCode === 201) {
           setUser(res.data);
           navigate("/profile");
@@ -130,6 +132,7 @@ const Register = () => {
           phone: phoneNumber.replace(/[\s-]/g, ""),
           firstName: firstName,
           password: password,
+          gender: gender,
         });
         if (res.statusCode === 200) {
           setUser(res.data);
@@ -205,6 +208,18 @@ const Register = () => {
                   required
                   className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
+                <select
+                  defaultValue={gender}
+                  required
+                  onChange={(e) => setGender(e.target.value)}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                >
+                  <option selected disabled>
+                    Jinsingizni tanlang
+                  </option>
+                  <option value="MALE">Erkak</option>
+                  <option value="FEMALE">Ayol</option>
+                </select>
                 {/* <input
                   type="password"
                   placeholder="Passwordni tasdiqlang"

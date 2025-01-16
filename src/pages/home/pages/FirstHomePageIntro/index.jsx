@@ -20,7 +20,7 @@ export default function FirstHomePageIntro() {
       icon: "👰",
     },
     {
-      number: "9500+",
+      number: "10823",
       label: t("home.FirstIntroPage.stats.profiles"),
       icon: "📋",
     },
@@ -75,14 +75,14 @@ export default function FirstHomePageIntro() {
             <div className="backdrop-blur-md rounded-[40px] px-4 sm:px-14 py-10 bg-gradient-to-br from-black/80 to-black/60">
               {/* Заголовок с подзаголовком */}
               <div className="mb-12">
-                <div
+                {/* <div
                   data-aos="zoom-out-up"
                   data-aos-offset="50"
                   data-aos-delay="500"
                   className="inline-block px-6 py-2 rounded-full bg-rose-500/30 text-rose-200 text-sm font-medium mb-6"
                 >
                   {t("home.FirstIntroPage.title")}
-                </div>
+                </div> */}
                 <h1
                   data-duration="1000"
                   data-aos="fade-right"
@@ -94,7 +94,7 @@ export default function FirstHomePageIntro() {
                     {t("home.FirstIntroPage.subtitle")}
                   </span>
                 </h1>
-                <p
+                {/* <p
                   data-duration="1000"
                   data-aos="fade-left"
                   data-aos-offset="50"
@@ -102,7 +102,7 @@ export default function FirstHomePageIntro() {
                   className="text-xl text-gray-200 leading-relaxed"
                 >
                   {t("home.FirstIntroPage.description")}
-                </p>
+                </p> */}
               </div>
 
               {/* Кнопки */}
@@ -159,7 +159,7 @@ export default function FirstHomePageIntro() {
                 </button>
               </div>
               {/* Поиск */}
-              {!accessToken && (
+              {/* {!accessToken && (
                 <div
                   data-aos="fade-up"
                   data-aos-delay="500"
@@ -192,7 +192,7 @@ export default function FirstHomePageIntro() {
                     {t("home.FirstIntroPage.search.women")}
                   </button>
                 </div>
-              )}
+              )} */}
               {/* Кнопки */}
 
               {/* Статистика */}

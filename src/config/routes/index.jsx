@@ -8,8 +8,13 @@ import Login from "../../pages/Login/Login";
 import UpdatePassword from "../../pages/updatePassword/UpdatePassword";
 import Profile from "../../pages/profile/Profile";
 import Favourite from "../../pages/favourite/Favourite";
+import Language from "../../pages/language/Language";
 
 export const routes = [
+  {
+    path: "/language",
+    element: <Language />,
+  },
   {
     path: "/",
     element: <Home />,

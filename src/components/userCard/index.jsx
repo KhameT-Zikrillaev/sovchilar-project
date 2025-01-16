@@ -83,7 +83,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
                 toggleFavorite(user);
               }}
               className={`text-[30px] cursor-pointer ${
-                favorites.some((fav) => fav.id === user.id)
+                favorites.some((fav) => fav.favourite.id === user.id)
                   ? "text-red-500"
                   : "text-white"
               }`}

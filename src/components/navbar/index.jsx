@@ -90,35 +90,43 @@ export default function Navbar() {
 
           {/* Основная навигация */}
           <div className="hidden md:flex items-center space-x-2">
-            <button
-              onClick={() => handleScrollTo("search")}
-              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
-            >
-              <a href="#search">{t("navbar.search")}</a>
-              <AnimatedHeart />
-            </button>
-            <a
-              href="#anketa"
-              onClick={() => handleScrollTo("ankets")}
-              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
-            >
-              {t("navbar.profiles")}
-            </a>
+            {user && (
+              <>
+                <button
+                  onClick={() => handleScrollTo("search")}
+                  className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
+                >
+                  <a href="#search">{t("navbar.search")}</a>
+                  <AnimatedHeart />
+                </button>
+                <a
+                  href="#anketa"
+                  onClick={() => handleScrollTo("ankets")}
+                  className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+                >
+                  {t("navbar.profiles")}
+                </a>
+              </>
+            )}
+
             <a
               href="https://t.me/sovchilarnet_admin"
               className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.contact")}
             </a>
-            <Link
-              to="/favourite"
-              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
-            >
-              {t("navbar.favourite")}
-              <span className="text-red-500 absolute top-0 right-0">
-                {favorites.length}
-              </span>
-            </Link>
+            {user && (
+              <Link
+                to="/favourite"
+                className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+              >
+                {t("navbar.favourite")}
+                {/* <span className="text-red-500 absolute top-0 right-0">
+                  {favorites.length}
+                </span> */}
+              </Link>
+            )}
+
             <Link
               to={user ? "/profile" : "/login"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
@@ -212,9 +220,9 @@ export default function Navbar() {
               >
                 <span className="relative">
                   {t("navbar.favourite")}
-                  <span className="text-red-500 absolute top-[-5px] right-[-15px]">
+                  {/* <span className="text-red-500 absolute top-[-5px] right-[-15px]">
                     {favorites.length}
-                  </span>
+                  </span> */}
                 </span>
               </Link>
               <Link

@@ -5,6 +5,7 @@ import logo from "../../assets/images/logo.png";
 import Modal from "../../components/customModal/Modal";
 import { FaTelegramPlane } from "react-icons/fa";
 import ModalSertified from "../../components/sertficatedmodal";
+import { FaInstagram } from "react-icons/fa6";
 export default function FooterLayout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -93,15 +94,16 @@ export default function FooterLayout() {
                   Sovchilar.net
                 </span>
               </Link>
-              <p
+              {/* <p
                 data-aos="fade-right"
                 data-aos-offset="50"
                 className="text-lg text-gray-200 mb-8 leading-relaxed"
               >
                 {t("footer.description")}
-              </p>
+              </p> */}
               <div className="flex gap-6">
                 <a
+                  target="_blank"
                   href="https://t.me/sovchilarnet_admin"
                   data-aos="flip-up"
                   data-aos-offset="50"
@@ -115,13 +117,14 @@ export default function FooterLayout() {
                   </span>
                 </a>
                 <a
-                  href="tel:+998507193333"
+                  target="_blank"
+                  href="https://www.instagram.com/sovchilar.net_/"
                   data-aos="flip-up"
                   data-aos-offset="50"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
                   <span className="text-2xl" title={t("footer.social.phone")}>
-                    📞
+                    <FaInstagram />
                   </span>
                 </a>
                 {/* <a

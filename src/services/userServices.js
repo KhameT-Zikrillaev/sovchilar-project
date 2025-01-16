@@ -40,6 +40,11 @@ class UserServices {
     const response = await api.post(url, data);
     return response.data;
   }
+
+  async postFavorite(url, data, headers) {
+    const response = await api.post(url, data, headers);
+    return response.data;
+  }
 }
 
 export default new UserServices();
