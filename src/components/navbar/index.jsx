@@ -93,21 +93,28 @@ export default function Navbar() {
               onClick={() => handleScrollTo("search")}
               className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
             >
-              <span>{t("navbar.search")}</span>
+              <a href="#search">{t("navbar.search")}</a>
               <AnimatedHeart />
             </button>
-            <button
+            <a
+              href="#anketa"
               onClick={() => handleScrollTo("ankets")}
               className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.profiles")}
-            </button>
+            </a>
             <a
               href="https://t.me/sovchilarnet_admin"
               className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.contact")}
             </a>
+            {/* <Link
+              to="/favourite"
+              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+            >
+              {t("navbar.favourite")}
+            </Link> */}
             <Link
               to={user ? "/profile" : "/login"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
@@ -124,9 +131,10 @@ export default function Navbar() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d={user 
-                    ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
-                    : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                  d={
+                    user
+                      ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                      : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                   }
                 />
               </svg>
@@ -179,12 +187,13 @@ export default function Navbar() {
                 <span>{t("navbar.search")}</span>
                 <AnimatedHeart />
               </button>
-              <button
+              <a
+                href="#anketa"
                 onClick={() => handleScrollTo("ankets")}
                 className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
               >
                 {t("navbar.profiles")}
-              </button>
+              </a>
               <a
                 href="https://t.me/sovchilarnet_admin"
                 onClick={() => setIsOpen(false)}
@@ -192,6 +201,13 @@ export default function Navbar() {
               >
                 {t("navbar.contactmobile")}
               </a>
+              {/* <Link
+                to="/favourite"
+                onClick={scrollToTop}
+                className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+              >
+                {t("navbar.favourite")}
+              </Link> */}
               <Link
                 onClick={scrollToTop}
                 to="/profile"
@@ -209,9 +225,10 @@ export default function Navbar() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d={user 
-                      ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"  
-                      : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"  
+                    d={
+                      user
+                        ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                        : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                     }
                   />
                 </svg>

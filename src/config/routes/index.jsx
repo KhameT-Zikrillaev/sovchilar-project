@@ -7,6 +7,7 @@ import Register from "../../pages/Register/Register";
 import Login from "../../pages/Login/Login";
 import UpdatePassword from "../../pages/updatePassword/UpdatePassword";
 import Profile from "../../pages/profile/Profile";
+import Favourite from "../../pages/favourite/Favourite";
 
 export const routes = [
   {
@@ -33,6 +34,10 @@ export const routes = [
     path: "/update-password",
     element: <UpdatePassword />,
   },
+  // {
+  //   path: "/favourite",
+  //   element: <Favourite />,
+  // },
 ];
 
 function RootRoute() {

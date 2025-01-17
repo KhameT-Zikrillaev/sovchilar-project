@@ -1,119 +1,166 @@
-import React, { useEffect, useState } from "react";
-import { Navigate} from "react-router-dom";
-import { ImCancelCircle } from "react-icons/im";
-import FormModal from '../../../components/customModal/FormModal';
-import CombinedForm from '../../auth/modules/AddUsers/CombinedForm';
+  import React, { useEffect, useState } from "react";
+  import { Navigate } from "react-router-dom";
+  import { ImCancelCircle } from "react-icons/im";
+  import FormModal from "../../../components/customModal/FormModal";
+  import CombinedForm from "../../auth/modules/AddUsers/CombinedForm";
 
-import { useTranslation } from "react-i18next";
-// import Loading from "../../components/Loading/index";
-import Female from "../../../assets/images/Female.jpeg";
-import Male from "../../../assets/images/Male.jpg";
-import { useStore } from "../../../store/store";
-function UserProfile() {
-  const { t } = useTranslation();
-  const [isImg, setIsImg] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { user } = useStore();
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  import { useTranslation } from "react-i18next";
+  // import Loading from "../../components/Loading/index";
+  import Female from "../../../assets/images/Female.jpeg";
+  import Male from "../../../assets/images/Male.jpg";
+  import { useStore } from "../../../store/store";
+  import axios from "axios";
+  import { toast } from "react-toastify";
+  function UserProfile() {
+    const { t } = useTranslation();
+    const [isImg, setIsImg] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { user, accessToken, setUserSingle } = useStore();
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+    const handleStatusDone = async () => {
+      try {
+        const response = await axios.put(
+          `https://back.sovchilar.net/api/users-uz/${user?.id}`,
+          { numerIsVisible: !user?.numerIsVisible },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setUserSingle(response?.data?.data);
+        toast.success(response?.data?.data?.numerIsVisible ? t("Profile.UserProfile.hiddenMessage") : t("Profile.UserProfile.showMessage"));
+      } catch (error) {}
+    };
+    
+    const handleCloseModal = () => {
+      setIsModalOpen(false);
+    };
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+    if (!user) {
+      return <Navigate to="/login" replace />;
+    }
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
 
-  return (
-    <>
+    return (
       <>
-        <div className="min-h-screen bg-gradient-to-b  pb-8 px-4 sm:px-6 lg:px-8 mt-[30px]">
-          <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              {/* Верхняя секция с фото и основной информацией */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-2 sm:p-8">
-                <div className="relative flex items-center justify-center">
-                  <div className="w-[300px] h-[300px] overflow-hidden rounded-xl shadow-lg">
-                    {!user?.gender ? (
-                      <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-center p-4">
-                        {t('Profile.UserProfile.setPhoto')}
-                      </div>
-                    ) : (
-                      <img
-                        onClick={() => {
-                          user.imageUrl ? setIsImg(true) : setIsImg(false);
-                        }}
-                        src={
-                          user?.imageUrl || 
-                          (user?.gender === "MALE" 
-                            ? Male 
-                            : user?.gender === "FEMALE" 
-                              ? Female 
+        <>
+          <div className="min-h-screen bg-gradient-to-b  pb-8 px-4 sm:px-6 lg:px-8 mt-[30px]">
+            <div className="max-w-7xl mx-auto">
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+                {/* Верхняя секция с фото и основной информацией */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-2 sm:p-8">
+                  <div className="relative flex items-center justify-center">
+                    <div className="w-[300px] h-[300px] overflow-hidden rounded-xl shadow-lg">
+                      {!user?.gender ? (
+                        <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-center p-4">
+                          {t("Profile.UserProfile.setPhoto")}
+                        </div>
+                      ) : (
+                        <img
+                          onClick={() => {
+                            user.imageUrl ? setIsImg(true) : setIsImg(false);
+                          }}
+                          src={
+                            user?.imageUrl ||
+                            (user?.gender === "MALE"
+                              ? Male
+                              : user?.gender === "FEMALE"
+                              ? Female
                               : null)
-                        }
-                        alt={user?.lastName}
-                        className="w-full h-full object-cover cursor-pointer"
-                      />
-                    )}
+                          }
+                          alt={user?.lastName}
+                          className="w-full h-full object-cover cursor-pointer"
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex flex-col justify-center">
-                  <h1 className="text-4xl font-bold mb-4">
-                    {user
-                      ? `${user?.firstName} ${
-                          user?.lastName ? user?.lastName : ""
-                        }`
-                      : t('Profile.UserProfile.fullName')}
-                  </h1>
-                  <div className="flex flex-col mb-6">
-                    <div className="flex items-center mb-5 gap-2">
-                      <div className="flex items-center">
-                        <svg
-                          className="w-5 h-5 mr-2 text-gray-600"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        <span className="text-gray-700">
-                          {user?.address
-                            ? t(`UserDetails.City.${user?.address}`, {
-                                defaultValue: user?.address,
-                              })
-                            : t('Profile.UserProfile.city')}
-                        </span>
+                  <div>
+                    <div className="flex flex-col justify-center aa:items-stretch items-center">
+                      <div className="flex items-center justify-between mb-4 ">
+                        <h1 className="text-4xl font-bold">
+                          {user
+                            ? `${user?.firstName} ${
+                                user?.lastName ? user?.lastName : ""
+                              }`
+                            : t("Profile.UserProfile.fullName")}
+                        </h1>
                       </div>
-                      <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-                      <span className="text-gray-700">
-                        {user?.nationality
-                          ? t(
-                              `UserDetails.selectNationality.${user?.nationality}`
-                            )
-                          : t('Profile.UserProfile.nationality')}
-                      </span>
+                      <div className="flex flex-col mb-6 aa:items-stretch items-center">
+                        <div className="flex items-center mb-5 gap-2">
+                          <div className="flex items-center">
+                            <svg
+                              className="w-5 h-5 mr-2 text-gray-600"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <span className="text-gray-700">
+                              {user?.address
+                                ? t(`UserDetails.City.${user?.address}`, {
+                                    defaultValue: user?.address,
+                                  })
+                                : t("Profile.UserProfile.city")}
+                            </span>
+                          </div>
+                          <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                          <span className="text-gray-700">
+                            {user?.nationality
+                              ? t(
+                                  `UserDetails.selectNationality.${user?.nationality}`
+                                )
+                              : t("Profile.UserProfile.nationality")}
+                          </span>
+                        </div>
+                        <div>
+                          <h2 className="text-2xl font-bold text-gray-800 mb-1">
+                            {t("UserDetails.aboutMe")}
+                          </h2>
+                          <p className="text-gray-600 leading-relaxed">
+                            {user?.description
+                              ? user?.description
+                              : t("Profile.UserProfile.comment")}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-800 mb-1">
-                        {t("UserDetails.aboutMe")}
-                      </h2>
-                      <p className="text-gray-600 leading-relaxed">
-                        {user?.description
-                          ? user?.description
-                          : t('Profile.UserProfile.comment')}
-                      </p>
+                    <div className="flex aa:flex-row flex-col border-t pt-5 items-center">
+                      <div className="max-w-[200px] font-semibold">
+                        {!user?.numerIsVisible
+                          ? t("Profile.UserProfile.showPhone")
+                          : t("Profile.UserProfile.hiddenPhone")}
+                      </div>
+                      <button
+                        onClick={handleStatusDone}
+                        className="flex items-center space-x-2 px-3 py-2 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-all duration-200"
+                      >
+                        <span className="text-sm text-gray-600">
+                          {user?.numerIsVisible ? t("Profile.UserProfile.hidden") : t("Profile.UserProfile.show")}{" "}
+                          {t("UserDetails.phone")}
+                        </span>
+                        <div
+                          className={`w-16 h-9 rounded-full transition-all duration-200 ${
+                            user?.numerIsVisible ? "bg-green-500" : "bg-gray-300"
+                          } relative`}
+                        >
+                          <div
+                            className={`absolute w-8 h-8 bg-white rounded-full top-0.5 transition-all duration-200 ${
+                              user?.numerIsVisible ? "right-0.5" : "left-0.5"
+                            }`}
+                          ></div>
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
 
               {/* Основная информация */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-1 sm:p-6 bg-gray-50">
@@ -152,7 +199,7 @@ function UserProfile() {
                             <p className="text-lg font-semibold text-gray-800">
                               {user?.age
                                 ? `${user.age} ${t("UserDetails.years")}`
-                                : t('Profile.UserProfile.age')}
+                                : t("Profile.UserProfile.age")}
                             </p>
                           </div>
                         </div>
@@ -182,7 +229,7 @@ function UserProfile() {
                                 ? t(`UserDetails.City.${user?.address}`, {
                                     defaultValue: user?.address,
                                   })
-                                : t('Profile.UserProfile.address')}
+                                : t("Profile.UserProfile.address")}
                             </p>
                           </div>
                         </div>
@@ -218,7 +265,7 @@ function UserProfile() {
                                       defaultValue: user?.qualification,
                                     }
                                   )
-                                : t('Profile.UserProfile.education')}
+                                : t("Profile.UserProfile.education")}
                             </p>
                           </div>
                         </div>
@@ -247,7 +294,7 @@ function UserProfile() {
                             <p className="text-lg font-semibold text-gray-800">
                               {user?.jobTitle
                                 ? user?.jobTitle
-                                : t('Profile.UserProfile.occupation')}
+                                : t("Profile.UserProfile.occupation")}
                             </p>
                           </div>
                         </div>
@@ -286,55 +333,49 @@ function UserProfile() {
                               ? t(
                                   `UserDetails.selectNationality.${user?.nationality}`
                                 )
-                              : t('Profile.UserProfile.ethnicity')}
+                              : t("Profile.UserProfile.ethnicity")}
                           </p>
                         </div>
                       </div>
 
                       {/* Phone */}
-                      <div 
-                        className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02] cursor-pointer"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (user?.phone) {
-                            window.location.href = `tel:${user.phone}`;
-                          } else {
-                            setIsModalOpen(true);
-                          }
-                        }}
-                      >
-                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
-                          <svg
-                            className="w-6 h-6 text-blue-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                            />
-                          </svg>
-                        </div>
-                        <div className="ml-4">
-                          <h3 className="text-sm font-medium text-gray-500">
-                            {t("UserDetails.phone")}
-                          </h3>
-                          <p className="text-sm sm:text-lg font-semibold text-gray-800">
-                            {user?.phone || t('Profile.UserProfile.phone')}
-                          </p>
+                      <div className="flex flex-col space-y-2 p-4 bg-gray-50 rounded-lg">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-green-100 rounded-lg">
+                            <svg
+                              className="w-6 h-6 text-green-500"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-4">
+                            <h3 className="text-sm font-medium text-gray-500">
+                              {t("UserDetails.phone")}
+                            </h3>
+                            <p className="text-lg font-semibold text-gray-800">
+                              {!user?.numerIsVisible
+                                ? user?.phone || t("Profile.UserProfile.phone")
+                                : "*** ** *** ** **"}
+                            </p>
+                          </div>
                         </div>
                       </div>
 
                       {/* Telegram */}
-                      <div 
+                      <div
                         className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02] cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
                           if (user?.telegram) {
-                            window.open(`https://${user.telegram}`, '_blank');
+                            window.open(`https://${user.telegram}`, "_blank");
                           } else {
                             setIsModalOpen(true);
                           }
@@ -355,11 +396,11 @@ function UserProfile() {
                           </h3>
                           <p className="text-sm sm:text-lg font-semibold text-gray-800">
                             {!user?.telegram ? (
-                              <span 
+                              <span
                                 className="cursor-pointer hover:text-rose-500"
                                 onClick={() => setIsModalOpen(true)}
                               >
-                                {t('Profile.UserProfile.telegram')}
+                                {t("Profile.UserProfile.telegram")}
                               </span>
                             ) : (
                               <span>{user?.telegram}</span>
@@ -418,12 +459,11 @@ function UserProfile() {
             </div>
           </div>
         )}
-
       </>
-      <FormModal 
-        isOpen={isModalOpen} 
+      <FormModal
+        isOpen={isModalOpen}
         onClose={handleCloseModal}
-        title={t('Profile.form.fill_out_form')}
+        title={t("Profile.form.fill_out_form")}
       >
         <div className="pb-4">
           <div className="max-w-3xl mx-auto">

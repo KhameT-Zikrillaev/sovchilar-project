@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    
     extend: {
+      screens: {
+        aa: '476px',
+        
+      },
       keyframes: {
         float: {
           '0%': { transform: 'translate(0, 0) rotate(0deg) scale(1)' },

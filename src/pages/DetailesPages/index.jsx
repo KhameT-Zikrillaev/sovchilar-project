@@ -42,7 +42,7 @@ function UserDetails() {
       </div>
     );
   }
-
+ console.log(userData);
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8 mt-[99px]">
@@ -138,7 +138,7 @@ function UserDetails() {
 
                 {/* Основная информация */}
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                  <h2 className="text-2xl ml-4 font-bold text-gray-800 mb-4">
                     {t("UserDetails.mainInfo")}
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -297,7 +297,7 @@ function UserDetails() {
                     </div>
 
                     {/* Телефон*/}
-                    {userData?.phone && (
+                    {userData?.phone && !userData?.numerIsVisible && (
                       <a href={`tel:${userData?.phone}`} className="block">
                         <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:scale-[1.02]">
                           <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
