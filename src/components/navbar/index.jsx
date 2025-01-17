@@ -55,6 +55,7 @@ export default function Navbar() {
   const { t } = useTranslation();
   const { user } = useStore();
   const favorites = useFavoritesStore((state) => state.favorites);
+
   const handleScrollTo = (id) => {
     setIsOpen(false);
     if (location.pathname !== "/") {
@@ -121,9 +122,9 @@ export default function Navbar() {
                 className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
               >
                 {t("navbar.favourite")}
-                {/* <span className="text-red-500 absolute top-0 right-0">
+                <span className="text-red-500 absolute top-0 right-0">
                   {favorites.length}
-                </span> */}
+                </span>
               </Link>
             )}
 
@@ -220,9 +221,9 @@ export default function Navbar() {
               >
                 <span className="relative">
                   {t("navbar.favourite")}
-                  {/* <span className="text-red-500 absolute top-[-5px] right-[-15px]">
+                  <span className="text-red-500 absolute top-[-5px] right-[-15px]">
                     {favorites.length}
-                  </span> */}
+                  </span>
                 </span>
               </Link>
               <Link

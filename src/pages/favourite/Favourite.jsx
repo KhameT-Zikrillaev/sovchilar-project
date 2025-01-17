@@ -11,19 +11,21 @@ import { usePostFavorite } from "../home/pages/SecondHomePageSearch/hooks/usePos
 const Favourite = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { favorites, removeFavorite } = useFavoritesStore();
+  const { favorites, removeFavorite, addFavorite } = useFavoritesStore();
   const { user, accessToken } = useStore();
   const { postFavoriteUsers } = usePostFavorite();
   const queryClient = useQueryClient();
 
   const fetchFavoriteUsers = async () => {
-    const { data } = await api.get(`/user-favourite/user/${user?.id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`, // Tokenni header'ga qo'shish
-        "Content-Type": "application/json", // JSON formatini belgilash
-      },
-    }); // Sevimli foydalanuvchilar API'si
-    return data;
+    if (user) {
+      const { data } = await api.get(`/user-favourite/user/${user?.id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Tokenni header'ga qo'shish
+          "Content-Type": "application/json", // JSON formatini belgilash
+        },
+      }); // Sevimli foydalanuvchilar API'si
+      return data;
+    }
   };
 
   const {
@@ -34,12 +36,20 @@ const Favourite = () => {
     queryKey: ["favoriteUsers"],
     queryFn: fetchFavoriteUsers,
   });
+  if (users) {
+    localStorage.setItem("favoriteLength", users.data.length);
+  }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const toggleFavorite = async (card) => {
+    if (favorites.some((fav) => fav.id === card.id)) {
+      removeFavorite(card.id);
+    } else {
+      addFavorite(card);
+    }
     const response = await postFavoriteUsers(
       "/user-favourite",
       {

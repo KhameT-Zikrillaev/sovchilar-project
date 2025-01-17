@@ -38,6 +38,9 @@ export default function SecondHomePageSearch() {
     queryKey: ["favoriteUsers"],
     queryFn: fetchFavoriteUsers,
   });
+  if (users) {
+    localStorage.setItem("favoriteLength", users.data.length);
+  }
 
   const { postFavoriteUsers } = usePostFavorite();
 
@@ -48,7 +51,7 @@ export default function SecondHomePageSearch() {
   const [isSubmittedAge, setIsSubmittedAge] = useState(false);
   const formRef = useRef();
   const [searchParams, setSearchParams] = useState({
-    gender: user && (user.gender === "MALE" ? "FEMALE" : "MALE"),
+    gender: user && (user.gender === "FEMALE" ? "MALE" : "FEMALE"),
     ageFrom: 18,
     ageTo: 100,
     address: "",
@@ -75,7 +78,7 @@ export default function SecondHomePageSearch() {
       // Remove the 'gender=' prefix if it exists
 
       const gender =
-        (user && (user.gender === "MALE" ? "FEMALE" : "MALE")) ||
+        (user && (user.gender === "FEMALE" ? "MALE" : "FEMALE")) ||
         (searchParams.gender.startsWith("gender=")
           ? searchParams.gender.substring(7)
           : searchParams.gender);
