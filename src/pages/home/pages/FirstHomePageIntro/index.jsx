@@ -15,7 +15,7 @@ export default function FirstHomePageIntro() {
 
   const stats = [
     {
-      number: "500+",
+      number: "507",
       label: t("home.FirstIntroPage.stats.weddings"),
       icon: "👰",
     },

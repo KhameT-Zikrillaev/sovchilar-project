@@ -13,6 +13,7 @@ import { useFavoritesStore } from "../../../../store/favoritesStore";
 import { useStore } from "../../../../store/store";
 import { usePostFavorite } from "./hooks/usePostFavorite";
 import api from "../../../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export default function SecondHomePageSearch() {
   const { t } = useTranslation();
@@ -21,17 +22,21 @@ export default function SecondHomePageSearch() {
   const [activeFilter, setActiveFilter] = useState(() => {
     return localStorage.getItem("activeFilter") || "";
   });
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
+  const { user, accessToken } = useStore();
 
   const fetchFavoriteUsers = async () => {
-    const { data } = await api.get(`/user-favourite/user/${user?.id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`, // Tokenni header'ga qo'shish
-        "Content-Type": "application/json", // JSON formatini belgilash
-      },
-    }); // Sevimli foydalanuvchilar API'si
-    return data;
+    if (user) {
+      const { data } = await api.get(`/user-favourite/user/${user?.id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Tokenni header'ga qo'shish
+          "Content-Type": "application/json", // JSON formatini belgilash
+        },
+      }); // Sevimli foydalanuvchilar API'si
+      return data;
+    }
   };
 
   const { data: users } = useQuery({
@@ -43,8 +48,6 @@ export default function SecondHomePageSearch() {
   }
 
   const { postFavoriteUsers } = usePostFavorite();
-
-  const { user, accessToken } = useStore();
 
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -79,7 +82,7 @@ export default function SecondHomePageSearch() {
 
       const gender =
         (user && (user.gender === "FEMALE" ? "MALE" : "FEMALE")) ||
-        (searchParams.gender.startsWith("gender=")
+        (searchParams.gender && searchParams.gender.startsWith("gender=")
           ? searchParams.gender.substring(7)
           : searchParams.gender);
 
@@ -248,10 +251,14 @@ export default function SecondHomePageSearch() {
                   (user ? "text-gray-500" : "text-red-500")
                 }
               >
-                {user
-                  ? t("home.SecondHomePageSearch.noUsersMessage")
-                  : t("home.SecondHomePageSearch.noAnketa")}
-                {}
+                <button
+                  onClick={() => navigate("/register")}
+                  className="py-2 px-4 bg-red-500 text-white rounded-lg"
+                >
+                  {user
+                    ? t("home.SecondHomePageSearch.noUsersMessage")
+                    : t("home.SecondHomePageSearch.noAnketa")}
+                </button>
               </div>
             )}
           </div>

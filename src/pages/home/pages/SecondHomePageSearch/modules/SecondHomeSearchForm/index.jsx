@@ -261,11 +261,7 @@ const SecondHomeSearchForm = forwardRef(
                   <button
                     type="button"
                     onClick={() => handleGenderChange("gender=MALE")}
-                    className={`flex-1 py-2 px-4 rounded-full border ${
-                      gender === "gender=MALE"
-                        ? "bg-rose-500 text-white border-rose-500"
-                        : "bg-white text-gray-700 border-gray-300 hover:border-rose-500"
-                    } transition-colors duration-300`}
+                    className={`flex-1 py-2 px-4 rounded-full border ${"bg-rose-500 text-white border-rose-500"} transition-colors duration-300`}
                   >
                     {t("home.SecondHomePageSearch.form.gender.male")}
                   </button>
@@ -275,11 +271,7 @@ const SecondHomeSearchForm = forwardRef(
                   <button
                     type="button"
                     onClick={() => handleGenderChange("gender=FEMALE")}
-                    className={`flex-1 py-2 px-4 rounded-full border ${
-                      gender === "gender=FEMALE"
-                        ? "bg-rose-500 text-white border-rose-500"
-                        : "bg-white text-gray-700 border-gray-300 hover:border-rose-500"
-                    } transition-colors duration-300`}
+                    className={`flex-1 py-2 px-4 rounded-full border ${"bg-rose-500 text-white border-rose-500"} transition-colors duration-300`}
                   >
                     {t("home.SecondHomePageSearch.form.gender.female")}
                   </button>

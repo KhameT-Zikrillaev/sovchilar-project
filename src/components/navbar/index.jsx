@@ -129,7 +129,7 @@ export default function Navbar() {
             )}
 
             <Link
-              to={user ? "/profile" : "/login"}
+              to={user ? "/profile" : "/register"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
               <span>{user ? user.firstName : t("navbar.signIn")}</span>
