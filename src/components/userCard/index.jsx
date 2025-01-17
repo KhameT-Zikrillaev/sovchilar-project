@@ -4,11 +4,14 @@ import { useTranslation } from "react-i18next";
 import Female from "../../assets/images/Female.jpeg";
 import Male from "../../assets/images/Male.jpg";
 import { FaHeart } from "react-icons/fa";
+import { useStore } from "../../store/store";
 
-export default function UserCard({ user, gender }) {
+export default function UserCard({ user, gender, toggleFavorite, favorites }) {
   const [isHovered, setIsHovered] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const accessToken = useStore((state) => state.accessToken);
 
   const getStatusText = () => {
     if (user.maritalStatus === "SINGLE") {
@@ -73,12 +76,24 @@ export default function UserCard({ user, gender }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative h-80 overflow-hidden group">
-        {/* <div className="absolute z-10 top-3 left-3">
-          <FaHeart className="text-[30px] text-white cursor-pointer" />
-        </div> */}
+        {accessToken && (
+          <div className="absolute z-10 top-3 left-3">
+            <FaHeart
+              onClick={() => {
+                toggleFavorite(user);
+              }}
+              className={`text-[30px] cursor-pointer ${
+                favorites?.some((fav) => fav.favourite?.id === user?.id)
+                  ? "text-red-500"
+                  : "text-white"
+              }`}
+            />
+          </div>
+        )}
+
         <img
-          src={user.imageUrl || (gender === "MALE" ? Male : Female)}
-          alt={user.lastName}
+          src={user?.imageUrl || (gender === "MALE" ? Male : Female)}
+          alt={user?.lastName}
           className={`
             w-full h-full object-cover
             transition-all duration-700 ease-out

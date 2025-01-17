@@ -5,6 +5,7 @@ import NavbarLogo from "./NavbarLogo";
 import flaguz from "../../assets/images/flag-uzb.jpg";
 import flagru from "../../assets/images/flag-rus.png";
 import { useStore } from "../../store/store";
+import { useFavoritesStore } from "../../store/favoritesStore";
 // Анимированная иконка сердца
 const AnimatedHeart = () => (
   <div className="relative w-8 h-8 flex items-center justify-center">
@@ -53,6 +54,7 @@ export default function Navbar() {
   const location = useLocation();
   const { t } = useTranslation();
   const { user } = useStore();
+  const favorites = useFavoritesStore((state) => state.favorites);
 
   const handleScrollTo = (id) => {
     setIsOpen(false);
@@ -88,35 +90,48 @@ export default function Navbar() {
           <NavbarLogo />
 
           {/* Основная навигация */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button
-              onClick={() => handleScrollTo("search")}
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
-            >
-              <a href="#search">{t("navbar.search")}</a>
-              <AnimatedHeart />
-            </button>
-            <a
-              href="#anketa"
-              onClick={() => handleScrollTo("ankets")}
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
-            >
-              {t("navbar.profiles")}
-            </a>
+          <div className="hidden md:flex items-center space-x-2">
+            {user && (
+              <>
+                <button
+                  onClick={() => handleScrollTo("search")}
+                  className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all flex items-center gap-2"
+                >
+                  <a href="#search">{t("navbar.search")}</a>
+                  <AnimatedHeart />
+                </button>
+                <a
+                  href="#anketa"
+                  onClick={() => handleScrollTo("ankets")}
+                  className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+                >
+                  {t("navbar.profiles")}
+                </a>
+              </>
+            )}
+
             <a
               href="https://t.me/sovchilarnet_admin"
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
+              className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.contact")}
             </a>
-            {/* <Link
-              to="/favourite"
-              className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
-            >
-              {t("navbar.favourite")}
-            </Link> */}
+            {user && (
+              <Link
+                to="/favourite"
+                className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+              >
+                {t("navbar.favourite")}
+                {favorites.length > 0 && (
+                  <span className="text-red-500 absolute top-0 right-0 border rounded-[5px] px-1 flex items-center border-red-500">
+                  { favorites?.length}
+                </span>
+                )}
+              </Link>
+            )}
+
             <Link
-              to={user ? "/profile" : "/login"}
+              to={user ? "/profile" : "/register"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
             >
               <span>{user ? user.firstName : t("navbar.signIn")}</span>
@@ -201,13 +216,17 @@ export default function Navbar() {
               >
                 {t("navbar.contactmobile")}
               </a>
-              {/* <Link
+              <Link
                 to="/favourite"
                 onClick={scrollToTop}
-                className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+                className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg relative "
               >
                 {t("navbar.favourite")}
-              </Link> */}
+                {favorites.length > 0 && (
+                  <span className="text-red-500 absolute top-0 left-[90px] border rounded-[5px] px-1 flex items-center border-red-500">
+                  { favorites?.length}
+                </span>)}
+              </Link>
               <Link
                 onClick={scrollToTop}
                 to="/profile"

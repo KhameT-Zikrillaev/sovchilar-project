@@ -6,6 +6,7 @@ import React, {
 } from "react";
 
 import { useTranslation } from "react-i18next";
+import { useStore } from "../../../../../../store/store";
 
 // Иконка поиска
 const SearchIcon = () => (
@@ -53,6 +54,8 @@ const SecondHomeSearchForm = forwardRef(
     const [maritalStatus, setMaritalStatus] = useState(() => {
       return localStorage.getItem("searchFormMaritalStatus") || "";
     });
+
+    const { user } = useStore();
 
     // Очищаем localStorage только при закрытии вкладки/сайта
     useEffect(() => {
@@ -253,28 +256,27 @@ const SecondHomeSearchForm = forwardRef(
               <span className="text-rose-500">*</span>
             </label>
             <div className="flex gap-4">
-              <button
-                type="button"
-                onClick={() => handleGenderChange("gender=MALE")}
-                className={`flex-1 py-2 px-4 rounded-full border ${
-                  gender === "gender=MALE"
-                    ? "bg-rose-500 text-white border-rose-500"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-rose-500"
-                } transition-colors duration-300`}
-              >
-                {t("home.SecondHomePageSearch.form.gender.male")}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleGenderChange("gender=FEMALE")}
-                className={`flex-1 py-2 px-4 rounded-full border ${
-                  gender === "gender=FEMALE"
-                    ? "bg-rose-500 text-white border-rose-500"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-rose-500"
-                } transition-colors duration-300`}
-              >
-                {t("home.SecondHomePageSearch.form.gender.female")}
-              </button>
+              {user.gender === "FEMALE" ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => handleGenderChange("gender=MALE")}
+                    className={`flex-1 py-2 px-4 rounded-full border ${"bg-rose-500 text-white border-rose-500"} transition-colors duration-300`}
+                  >
+                    {t("home.SecondHomePageSearch.form.gender.male")}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => handleGenderChange("gender=FEMALE")}
+                    className={`flex-1 py-2 px-4 rounded-full border ${"bg-rose-500 text-white border-rose-500"} transition-colors duration-300`}
+                  >
+                    {t("home.SecondHomePageSearch.form.gender.female")}
+                  </button>
+                </>
+              )}
             </div>
             {isSubmitted && !gender && (
               <p className="text-sm text-rose-500 text-center mt-2">

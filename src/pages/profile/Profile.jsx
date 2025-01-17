@@ -7,6 +7,7 @@ import { useStore } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useFavoritesStore } from "../../store/favoritesStore";
 
 const Profile = () => {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ const Profile = () => {
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
+  const { clearFavorites } = useFavoritesStore();
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -86,6 +88,7 @@ const Profile = () => {
             <button
               onClick={() => {
                 clearUser();
+                clearFavorites();
                 navigate("/");
               }}
               className="bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px] flex items-center justify-center gap-2"
