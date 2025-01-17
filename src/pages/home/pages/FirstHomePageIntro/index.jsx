@@ -100,7 +100,7 @@ export default function FirstHomePageIntro() {
               <div className="flex items-center gap-4 mb-12" data-aos="fade-right" data-aos-offset="50">
                 <Link 
                   to={accessToken ? '/profile' : `/register`}
-                  className="flex-1 text-lg text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200 flex items-center justify-center gap-2"
+                  className="flex-1 text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full text-base font-medium transition duration-200 flex items-center justify-center gap-2"
                 >
                   <span>
                     {accessToken ? `${t('home.FirstIntroPage.signIn')} (${user?.firstName})` : t('home.FirstIntroPage.createProfile')}
