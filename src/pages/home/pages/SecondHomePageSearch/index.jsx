@@ -237,11 +237,11 @@ export default function SecondHomePageSearch() {
             {user && allUsers.length > 0 ? (
               allUsers.map((user, index) => (
                 <UserCard
-                  key={`${user.id}-${index}`}
+                  key={`${user?.id}-${index}`}
                   user={user}
                   gender={user.gender}
                   toggleFavorite={toggleFavorite}
-                  favorites={users.data}
+                  favorites={users?.data}
                 />
               ))
             ) : (

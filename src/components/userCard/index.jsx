@@ -83,7 +83,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
                 toggleFavorite(user);
               }}
               className={`text-[30px] cursor-pointer ${
-                favorites.some((fav) => fav.favourite.id === user.id)
+                favorites?.some((fav) => fav.favourite?.id === user?.id)
                   ? "text-red-500"
                   : "text-white"
               }`}
@@ -92,8 +92,8 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
         )}
 
         <img
-          src={user.imageUrl || (gender === "MALE" ? Male : Female)}
-          alt={user.lastName}
+          src={user?.imageUrl || (gender === "MALE" ? Male : Female)}
+          alt={user?.lastName}
           className={`
             w-full h-full object-cover
             transition-all duration-700 ease-out
