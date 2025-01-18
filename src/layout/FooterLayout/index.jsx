@@ -105,8 +105,7 @@ export default function FooterLayout() {
                 <a
                   target="_blank"
                   href="https://t.me/sovchilarnet_admin"
-                  data-aos="flip-up"
-                  data-aos-offset="50"
+               
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
                   <span
@@ -119,8 +118,6 @@ export default function FooterLayout() {
                 <a
                   target="_blank"
                   href="https://www.instagram.com/sovchilar.net_/"
-                  data-aos="flip-up"
-                  data-aos-offset="50"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
                   <span className="text-2xl" title={t("footer.social.phone")}>
@@ -155,7 +152,7 @@ export default function FooterLayout() {
                 {t("footer.navigation.title")}
               </h3>
               <ul className="space-y-4">
-                <li data-aos="fade-right" data-aos-offset="50">
+                <li >
                   <a
                     href="#search"
                     onClick={() => handleScrollTo("search")}
@@ -165,7 +162,7 @@ export default function FooterLayout() {
                     {t("footer.navigation.search")}
                   </a>
                 </li>
-                <li data-aos="fade-right" data-aos-offset="50">
+                <li>
                   <a
                     href="#anketa"
                     onClick={() => handleScrollTo("ankets")}
@@ -189,7 +186,7 @@ export default function FooterLayout() {
                 {t("footer.forUsers.title")}
               </h3>
               <ul className="space-y-4 ">
-                <li data-aos="fade-left" data-aos-offset="50">
+                <li>
                   <Link
                     to="/profile"
                     className="text-gray-200   hover:text-rose-400 transition-all duration-300 flex items-center group"
@@ -198,7 +195,7 @@ export default function FooterLayout() {
                     {t("footer.forUsers.createProfile")}
                   </Link>
                 </li>
-                <li data-aos="fade-left" data-aos-offset="50">
+                <li>
                   <button
                     onClick={() => setIsModalSetifiedOpen(true)}
                     to="/faq"
@@ -208,7 +205,7 @@ export default function FooterLayout() {
                     {t("footer.forUsers.sertified")}
                   </button>
                 </li>
-                <li data-aos="fade-left" data-aos-offset="50">
+                <li >
                   <button
                     onClick={() => setIsModalOpen(true)}
                     className="text-gray-200 text-center md:text-left  hover:text-rose-400 transition-all duration-300 flex items-center group"
@@ -217,7 +214,7 @@ export default function FooterLayout() {
                     {t("footer.forUsers.rules")}
                   </button>
                 </li>
-                <li data-aos="fade-left" data-aos-offset="50">
+                <li >
                   <a
                     href="https://t.me/sovchilarnet_admin"
                     className="text-gray-200 hover:text-rose-400 transition-all duration-300  flex items-center  group"
@@ -235,8 +232,8 @@ export default function FooterLayout() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <p
                 className="text-gray-300 text-center md:text-left"
-                data-aos="fade-up"
-                data-aos-offset="50"
+           
+                
               >
                 &copy; 2024-2025 Sovchilar.net. {t("footer.copyright")}
                 <span className="block md:inline md:ml-2">
@@ -247,8 +244,7 @@ export default function FooterLayout() {
               <div className="flex gap-8">
                 <a
                   href="https://www.limsa.uz/"
-                  data-aos="fade-up"
-                  data-aos-offset="50"
+                
                   className="text-gray-300 hover:text-rose-400 transition-all duration-300"
                 >
                   Created by Limsa
