@@ -297,7 +297,7 @@ function UserDetails() {
                     </div>
 
                     {/* Телефон*/}
-                    {userData?.phone && !userData?.numerIsVisible && (
+                    {userData?.phone && userData?.numerIsVisible && (
                       <a href={`tel:${userData?.phone}`} className="block">
                         <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-md hover:scale-[1.02]">
                           <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">

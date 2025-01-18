@@ -134,7 +134,7 @@
                     </div>
                     <div className="flex aa:flex-row flex-col border-t pt-5 items-center">
                       <div className="max-w-[200px] font-semibold">
-                        {!user?.numerIsVisible
+                        {user?.numerIsVisible
                           ? t("Profile.UserProfile.showPhone")
                           : t("Profile.UserProfile.hiddenPhone")}
                       </div>
@@ -143,17 +143,17 @@
                         className="flex items-center space-x-2 px-3 py-2 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-all duration-200"
                       >
                         <span className="text-sm text-gray-600">
-                          {user?.numerIsVisible ? t("Profile.UserProfile.hidden") : t("Profile.UserProfile.show")}{" "}
+                          {!user?.numerIsVisible ? t("Profile.UserProfile.hidden") : t("Profile.UserProfile.show")}{" "}
                           {t("UserDetails.phone")}
                         </span>
                         <div
                           className={`w-16 h-9 rounded-full transition-all duration-200 ${
-                            user?.numerIsVisible ? "bg-green-500" : "bg-gray-300"
+                            !user?.numerIsVisible ? "bg-green-500" : "bg-gray-300"
                           } relative`}
                         >
                           <div
                             className={`absolute w-8 h-8 bg-white rounded-full top-0.5 transition-all duration-200 ${
-                              user?.numerIsVisible ? "right-0.5" : "left-0.5"
+                              !user?.numerIsVisible ? "right-0.5" : "left-0.5"
                             }`}
                           ></div>
                         </div>
@@ -361,7 +361,7 @@
                               {t("UserDetails.phone")}
                             </h3>
                             <p className="text-lg font-semibold text-gray-800">
-                              {!user?.numerIsVisible
+                              {user?.numerIsVisible
                                 ? user?.phone || t("Profile.UserProfile.phone")
                                 : "*** ** *** ** **"}
                             </p>
