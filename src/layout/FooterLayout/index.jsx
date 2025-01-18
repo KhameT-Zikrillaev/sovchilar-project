@@ -152,7 +152,7 @@ export default function FooterLayout() {
                 {t("footer.navigation.title")}
               </h3>
               <ul className="space-y-4">
-                <li >
+                <li>
                   <a
                     href="#search"
                     onClick={() => handleScrollTo("search")}
