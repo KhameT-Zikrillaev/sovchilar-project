@@ -13,19 +13,22 @@ const CombinedForm = ({handleCloseModal}) => {
   const { register, handleSubmit, formState: { errors }, watch, setValue, reset} = useForm();
   const [previewImage, setPreviewImage] = useState( null);
   // const [showRules, setShowRules] = useState(false);
-  const [acceptRules, setAcceptRules] = useState(false);
   const {user, accessToken, setUserSingle} = useStore()
+  const [acceptRules, setAcceptRules] = useState(user?.status !== "PENDING" ? true : false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleStatusInactive = async (id) => {
     const newStatus = "INACTIVE";
     try {
-      await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {headers: {
+      const response = await axios.put(`https://back.sovchilar.net/api/users-uz/${id}`, { status: newStatus }, {headers: {
         'Authorization': `Bearer ${accessToken}`
       }});
+      setUserSingle(response?.data?.data);
     } catch (error) {
 
     }
   };
+  console.log(user);
+  
   
   
   const handleNameInput = (e) => {
@@ -366,34 +369,36 @@ const CombinedForm = ({handleCloseModal}) => {
         </div>
 
         {/* Rules Checkbox and Button */}
-        <div className="space-y-4">
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="acceptRules"
-              checked={acceptRules}
-              onChange={(e) => setAcceptRules(e.target.checked)}
-              className="w-4 h-4 text-rose-500 border-gray-300 rounded focus:ring-rose-500"
-            />
-            <label htmlFor="acceptRules" className="text-sm text-gray-700">
-            {t('auth.FormTwo.terms.label')}
-            </label>
-          </div>
-          
-          <button
-            type="button"
-            onClick={() => {
-              setIsModalOpen(true);
-              setTimeout(() => {
-                document.querySelector('form').scrollIntoView({ block: 'start', behavior: 'smooth' });
-              }, 100);
-            }}
-            className="flex items-center space-x-2 text-rose-500 hover:text-rose-600 transition-colors duration-300"
-          >
-            <FiBook size={20} />
-            <span>{t('auth.FormTwo.terms.button.text')}</span>
-          </button>
-        </div>
+        {
+          user?.status === 'PENDING' && (<div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="acceptRules"
+                checked={acceptRules}
+                onChange={(e) => setAcceptRules(e.target.checked)}
+                className="w-4 h-4 text-rose-500 border-gray-300 rounded focus:ring-rose-500"
+              />
+              <label htmlFor="acceptRules" className="text-sm text-gray-700">
+              {t('auth.FormTwo.terms.label')}
+              </label>
+            </div>
+            
+            <button
+              type="button"
+              onClick={() => {
+                setIsModalOpen(true);
+                setTimeout(() => {
+                  document.querySelector('form').scrollIntoView({ block: 'start', behavior: 'smooth' });
+                }, 100);
+              }}
+              className="flex items-center space-x-2 text-rose-500 hover:text-rose-600 transition-colors duration-300"
+            >
+              <FiBook size={20} />
+              <span>{t('auth.FormTwo.terms.button.text')}</span>
+            </button>
+          </div>)
+        }
       </div>
 
       <div className="flex justify-end">
