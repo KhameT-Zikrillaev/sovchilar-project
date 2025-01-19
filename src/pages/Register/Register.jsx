@@ -119,7 +119,6 @@ const Register = () => {
           firstName: firstName,
           password: password,
         });
-        console.log(res);
         if (res.statusCode === 201) {
           setUser(res.data);
           navigate("/profile");

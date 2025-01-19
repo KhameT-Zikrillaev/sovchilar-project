@@ -59,6 +59,7 @@ export default function SecondHomePageSearch() {
     ageTo: 100,
     address: "",
     maritalStatus: "",
+    status: "ACTIVE"
   });
 
   useEffect(() => {
