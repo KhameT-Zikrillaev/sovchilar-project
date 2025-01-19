@@ -101,6 +101,7 @@ export default function FooterLayout() {
               >
                 {t("footer.description")}
               </p> */}
+              
               <div className="flex gap-6">
                 <a
                   target="_blank"

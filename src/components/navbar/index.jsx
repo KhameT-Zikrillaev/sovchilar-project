@@ -30,17 +30,15 @@ const LanguageSelector = () => {
     <div className="flex items-center gap-2">
       <button
         onClick={() => i18n.changeLanguage("ru")}
-        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${
-          i18n.language === "ru" ? "border-rose-500" : "border-transparent"
-        }`}
+        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === "ru" ? "border-rose-500" : "border-transparent"
+          }`}
       >
         <img src={flagru} alt="RU" className="w-full h-full object-cover" />
       </button>
       <button
         onClick={() => i18n.changeLanguage("uz")}
-        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${
-          i18n.language === "uz" ? "border-rose-500" : "border-transparent"
-        }`}
+        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === "uz" ? "border-rose-500" : "border-transparent"
+          }`}
       >
         <img src={flaguz} alt="UZ" className="w-full h-full object-cover" />
       </button>
@@ -109,13 +107,13 @@ export default function Navbar() {
                 </a>
               </>
             )}
-
-            <a
+            {/* Aloqa qismi o'chirildi */}
+            {/* <a
               href="https://t.me/sovchilarnet_admin"
               className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all"
             >
               {t("navbar.contact")}
-            </a>
+            </a> */}
             {user && (
               <Link
                 to="/favourite"
@@ -124,8 +122,8 @@ export default function Navbar() {
                 {t("navbar.favourite")}
                 {favorites.length > 0 && (
                   <span className="text-red-500 absolute top-0 right-0 border rounded-[5px] px-1 flex items-center border-red-500">
-                  { favorites?.length}
-                </span>
+                    {favorites?.length}
+                  </span>
                 )}
               </Link>
             )}
@@ -209,13 +207,14 @@ export default function Navbar() {
               >
                 {t("navbar.profiles")}
               </a>
-              <a
-                href="https://t.me/sovchilarnet_admin"
+             {/* Aloqa qismi o'chirildi */}
+              {/* <a
+                href="tel:+998507193333"
                 onClick={() => setIsOpen(false)}
                 className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
               >
                 {t("navbar.contactmobile")}
-              </a>
+              </a> */}
               <Link
                 to="/favourite"
                 onClick={scrollToTop}
@@ -224,8 +223,8 @@ export default function Navbar() {
                 {t("navbar.favourite")}
                 {favorites.length > 0 && (
                   <span className="text-red-500 absolute top-0 left-[90px] border rounded-[5px] px-1 flex items-center border-red-500">
-                  { favorites?.length}
-                </span>)}
+                    {favorites?.length}
+                  </span>)}
               </Link>
               <Link
                 onClick={scrollToTop}
