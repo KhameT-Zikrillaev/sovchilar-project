@@ -261,7 +261,7 @@ const Register = () => {
                 ) : (
                   <input
                     type="email"
-                    placeholder={t("register.placeholders.email")}
+                    placeholder={t("register.placeholders.emailregister")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required

@@ -500,7 +500,8 @@
       "codeText": "Tasdiqlash kodi",
       "firstName": "Ismingizni kiriting",
       "password": "Parol yarating",
-      "email": "Telefon raqam yoki emailni kiriting"
+      "email": "Telefon raqam yoki emailni kiriting",
+      "emailregister": "Emailingizni kiriting"
     },
     "select": {
       "gender": "Jinsingizni tanlang",
