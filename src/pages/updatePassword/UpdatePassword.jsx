@@ -11,7 +11,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 const UpdatePassword = () => {
   const { t } = useTranslation();
   const [step, setStep] = useState(1); // 1: Telefon kiritish, 2: SMS tasdiqlash, 3:Ism familiya parol kiritish
-  const [phoneNumber, setPhoneNumber] = useState("+998 ");
+  const [phoneNumber, setPhoneNumber] = useState();
   const [smsCode, setSmsCode] = useState("");
   const [isCode, setIsCode] = useState(true);
   const [password, setPassword] = useState("");
@@ -24,6 +24,18 @@ const UpdatePassword = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  function formatPhoneNumber(phoneNumber) {
+    // Bo'sh joylarni olib tashlash
+    phoneNumber = phoneNumber.trim();
+
+    // Agar raqam oldida '+' bo'lmasa, uni qo'shish
+    if (!phoneNumber.startsWith("+")) {
+      phoneNumber = "+" + phoneNumber;
+    }
+
+    return phoneNumber;
+  }
 
   const handleInput = (e) => {
     const input = e.target;
@@ -42,66 +54,79 @@ const UpdatePassword = () => {
 
   const handlePhoneChange = (e) => {
     let input = e.target.value;
+    setPhoneNumber(input);
 
     // +998 oldindan mavjud ekanligiga ishonch hosil qilish
-    if (!input.startsWith("+998 ")) {
-      input = "+998 ";
-    }
+    // if (!input.startsWith("+998 ")) {
+    //   input = "+998 ";
+    // }
 
-    // Raqam va " " yoki "-" ni saqlash
-    input = input.replace(/[^+0-9- ]/g, "");
+    // // Raqam va " " yoki "-" ni saqlash
+    // input = input.replace(/[^+0-9- ]/g, "");
 
-    const numbers = input.slice(5).replace(/-/g, ""); // +998 ni olib tashlab, faqat raqamlarni olish
-    let formatted = "+998 ";
+    // const numbers = input.slice(5).replace(/-/g, ""); // +998 ni olib tashlab, faqat raqamlarni olish
+    // let formatted = "+998 ";
 
-    // Formatni saqlash (91-555-55-55)
-    if (numbers.length > 2) {
-      formatted += numbers.slice(0, 2) + "-";
-    } else {
-      formatted += numbers;
-    }
-    if (numbers.length > 5) {
-      formatted += numbers.slice(2, 5) + "-";
-    } else if (numbers.length > 2) {
-      formatted += numbers.slice(2);
-    }
-    if (numbers.length > 7) {
-      formatted += numbers.slice(5, 7) + "-";
-    } else if (numbers.length > 5) {
-      formatted += numbers.slice(5);
-    }
-    if (numbers.length > 9) {
-      formatted += numbers.slice(7, 9);
-    } else if (numbers.length > 7) {
-      formatted += numbers.slice(7);
-    }
+    // // Formatni saqlash (91-555-55-55)
+    // if (numbers.length > 2) {
+    //   formatted += numbers.slice(0, 2) + "-";
+    // } else {
+    //   formatted += numbers;
+    // }
+    // if (numbers.length > 5) {
+    //   formatted += numbers.slice(2, 5) + "-";
+    // } else if (numbers.length > 2) {
+    //   formatted += numbers.slice(2);
+    // }
+    // if (numbers.length > 7) {
+    //   formatted += numbers.slice(5, 7) + "-";
+    // } else if (numbers.length > 5) {
+    //   formatted += numbers.slice(5);
+    // }
+    // if (numbers.length > 9) {
+    //   formatted += numbers.slice(7, 9);
+    // } else if (numbers.length > 7) {
+    //   formatted += numbers.slice(7);
+    // }
 
-    // Maksimal uzunlikni cheklash
-    if (formatted.length <= 17) {
-      setPhoneNumber(formatted);
-    }
+    // // Maksimal uzunlikni cheklash
+    // if (formatted.length <= 17) {
+    //   setPhoneNumber(formatted);
+    // }
   };
 
   const handlePhoneSubmit = async (e) => {
     e.preventDefault();
+    const isPhoneNumber = /^\+?[0-9]+$/.test(phoneNumber); // Telefon raqamni tekshirish uchun regex
+      const loginData = isPhoneNumber
+        ? { phone: formatPhoneNumber(phoneNumber) }
+        : { email: phoneNumber };
     if (step === 1) {
-      const response = await postItem("/auth/send-sms", {
-        phone: phoneNumber.replace(/[\s-]/g, ""),
-      });
-      if (response.statusCode === 200) {
-        setStep(2);
+      const res = await getPhone(
+        isPhoneNumber ? "/users-uz/phone/" + phoneNumber.replace(/[\s-]/g, "") : `users-uz/find-by-email/${phoneNumber}`
+      );
+      
+      setOldUser(res?.data);
+      if(res.statusCode != 404){
+        const response = await postItem(
+          isPhoneNumber ? "/auth/send-sms" : "/auth/send-mail",
+          loginData
+        );
+        if (response.statusCode === 200) {
+          setStep(2);
+        }
+      }else{
+        toast.error(t("register.toasts.notUser"));
       }
     } else if (step === 2) {
-      const response = await postItem("/auth/verify-code", {
-        code: smsCode,
-        phone: phoneNumber.replace(/[\s-]/g, ""),
-      });
+      const response = await postItem(isPhoneNumber ? "/auth/verify-code" : "/auth/verify-email", isPhoneNumber
+        ? { phone: formatPhoneNumber(phoneNumber), code: smsCode }
+        : { email: phoneNumber, code: +smsCode });
 
-      const res = await getPhone(
-        "/users-uz/phone/" + phoneNumber.replace(/[\s-]/g, "")
-      );
-      console.log(res);
-      setOldUser(res.data);
+      
+
+      
+
       if (response.statusCode === 200) {
         setStep(3);
         toast.success(t("register.toasts.success"));
@@ -112,9 +137,8 @@ const UpdatePassword = () => {
       }
     } else if (step === 3) {
       const res = await UpdatePassword(
-        "/users-uz/update-password/" + oldUser.id,
+        "/users-uz/update-password/" + oldUser?.id,
         {
-          phone: phoneNumber.replace(/[\s-]/g, ""),
           password: password,
         }
       );
@@ -143,9 +167,8 @@ const UpdatePassword = () => {
                 type="tel"
                 value={phoneNumber}
                 onChange={handlePhoneChange}
-                onInput={handleInput}
                 required
-                minLength={17}
+                placeholder={t("register.placeholders.email")}
                 className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             )}

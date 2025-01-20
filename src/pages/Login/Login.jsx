@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
-  const [phoneNumber, setPhoneNumber] = useState("+998 ");
+  const [phoneNumber, setPhoneNumber] = useState();
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useStore();
@@ -35,60 +35,82 @@ const Login = () => {
     }
   };
 
+  function formatPhoneNumber(phoneNumber) {
+    // Bo'sh joylarni olib tashlash
+    phoneNumber = phoneNumber.trim();
+  
+    // Agar raqam oldida '+' bo'lmasa, uni qo'shish
+    if (!phoneNumber.startsWith('+')) {
+      phoneNumber = '+' + phoneNumber;
+    }
+  
+    return phoneNumber;
+  }
+
   const handlePhoneChange = (e) => {
-    let input = e.target.value;
+    let input = e.target.value
+
+  
+    setPhoneNumber(input);
 
     // +998 oldindan mavjud ekanligiga ishonch hosil qilish
-    if (!input.startsWith("+998 ")) {
-      input = "+998 ";
-    }
+    // if (!input.startsWith("+998 ")) {
+    //   input = "+998 ";
+    // }
 
     // Raqam va " " yoki "-" ni saqlash
-    input = input.replace(/[^+0-9- ]/g, "");
+    // input = input.replace(/[^+0-9- ]/g, "");
 
-    const numbers = input.slice(5).replace(/-/g, ""); // +998 ni olib tashlab, faqat raqamlarni olish
-    let formatted = "+998 ";
+    // const numbers = input.slice(5).replace(/-/g, ""); // +998 ni olib tashlab, faqat raqamlarni olish
+    // let formatted = "+998 ";
 
     // Formatni saqlash (91-555-55-55)
-    if (numbers.length > 2) {
-      formatted += numbers.slice(0, 2) + "-";
-    } else {
-      formatted += numbers;
-    }
-    if (numbers.length > 5) {
-      formatted += numbers.slice(2, 5) + "-";
-    } else if (numbers.length > 2) {
-      formatted += numbers.slice(2);
-    }
-    if (numbers.length > 7) {
-      formatted += numbers.slice(5, 7) + "-";
-    } else if (numbers.length > 5) {
-      formatted += numbers.slice(5);
-    }
-    if (numbers.length > 9) {
-      formatted += numbers.slice(7, 9);
-    } else if (numbers.length > 7) {
-      formatted += numbers.slice(7);
-    }
+    // if (numbers.length > 2) {
+    //   formatted += numbers.slice(0, 2) + "-";
+    // } else {
+    //   formatted += numbers;
+    // }
+    // if (numbers.length > 5) {
+    //   formatted += numbers.slice(2, 5) + "-";
+    // } else if (numbers.length > 2) {
+    //   formatted += numbers.slice(2);
+    // }
+    // if (numbers.length > 7) {
+    //   formatted += numbers.slice(5, 7) + "-";
+    // } else if (numbers.length > 5) {
+    //   formatted += numbers.slice(5);
+    // }
+    // if (numbers.length > 9) {
+    //   formatted += numbers.slice(7, 9);
+    // } else if (numbers.length > 7) {
+    //   formatted += numbers.slice(7);
+    // }
 
     // Maksimal uzunlikni cheklash
-    if (formatted.length <= 17) {
-      setPhoneNumber(formatted);
-    }
+    // if (formatted.length <= 17) {
+    //   setPhoneNumber(formatted);
+    // }
   };
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await LoginUser("/auth/login", {
-      phone: phoneNumber.replace(/[\s-]/g, ""),
-      password: password,
-    });
+    const isPhoneNumber = /^\+?[0-9]+$/.test(phoneNumber); // Telefon raqamni tekshirish uchun regex
+    const loginData = isPhoneNumber
+    ? { phone: formatPhoneNumber(phoneNumber), password }
+    : { email: phoneNumber, password };
+    const res = await LoginUser("/auth/login", loginData);
     if (res?.statusCode === 200) {
       setUser(res.data);
       navigate("/profile");
       toast.success(t("register.toasts.success"));
     } else {
-      toast.error(t("register.toasts.notUser"));
+      if(res?.response?.data?.message == "Invalid password"){
+        toast.error(t("login.toasts.invalidPassword"));
+      }else{
+        toast.error(t("register.toasts.notUser"));
+      }
+      
+      
     }
   };
 
@@ -100,12 +122,11 @@ const Login = () => {
             {t("login.title")}
           </h2>
           <input
-            type="tel"
+            type="text"
             value={phoneNumber}
             onChange={handlePhoneChange}
-            minLength={17}
             required
-            onInput={handleInput}
+            placeholder={t("register.placeholders.email")}
             className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 

@@ -480,7 +480,9 @@
       "smsError": "Sms kod xato",
       "notUser": "Foydalanuvchi topilmadi",
       "error": "Xatolik",
-      "numberError": "Raqam kiritishda xatolik"
+      "numberError": "Raqam kiritishda xatolik",
+      "haveNumber": "Bu raqam allaqachon ro'yxatdan o'tgan",
+      "haveEmail": "Bu email allaqachon ro'yxatdan o'tgan"
     },
     "title": {
       "number": "Telefon raqamingizni kiriting",
@@ -497,9 +499,18 @@
     "placeholders": {
       "codeText": "Tasdiqlash kodi",
       "firstName": "Ismingizni kiriting",
-      "password": "Parol yarating"
+      "password": "Parol yarating",
+      "email": "Telefon raqam yoki emailni kiriting"
     },
+    "select": {
+      "gender": "Jinsingizni tanlang",
+      "male": "Erkak",
+      "female": "Ayol"
+    },
+
     "button": {
+      "byNomer": "Telefon raqam bilan ro'yxatdan o'tish",
+      "byEmail": "Email bilan ro'yxatdan o'tish",
       "number": "Tasdiqlash kodini yuborish",
       "smsCode": "Tasdiqlash kodini kiriting",
       "confirmation": "Tasdiqlash",
@@ -521,7 +532,8 @@
     "title": "Tizimga kirish",
     "forgotPassword": "Parolni unutdingizmi?",
     "placeholders": {
-      "password": "Parolni kiriting"
+      "password": "Parolni kiriting",
+      "phone": "Telefon raqamingizni kiriting"
     },
     "button": {
       "text": "Kirish",
@@ -532,6 +544,9 @@
     "links": {
       "text": "Profilingiz yo'qmi?",
       "link": "Ro'yxatdan o'ting."
+    },
+    "toasts": {
+      "invalidPassword": "Login yoki parol xato"
     }
   },
   "Profile": {
