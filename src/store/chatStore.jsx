@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 export const useChatStore = create((set) => ({
-  userId: null,
-  addUserId: (id) =>
+  userChat: null,
+  addUserChat: (user) =>
     set(() => ({
-      userId: id, 
+      userChat: user, 
     })),
 }));

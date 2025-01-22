@@ -11,7 +11,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
   const [isHovered, setIsHovered] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {addUserId} = useChatStore()
+  const {addUserChat} = useChatStore()
 
   const accessToken = useStore((state) => state.accessToken);
 
@@ -221,7 +221,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
           <div
             onClick={(e) => {
               e.stopPropagation()
-              addUserId(user?.id)
+              addUserChat(user)
               navigate(`/chat`)
             }}
             className={`

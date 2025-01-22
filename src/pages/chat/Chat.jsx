@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
+import { io } from "socket.io-client";
 import { useChatStore } from "../../store/chatStore";
+import { useStore } from "../../store/store";
 
 const Chat = () => {
+  const { userChat, addUserChat } = useChatStore();
+  const { user } = useStore();
   const [messages, setMessages] = useState({});
   const [input, setInput] = useState("");
-  const [activeUser, setActiveUser] = useState("");
+  const [activeUser, setActiveUser] = useState(userChat?.id);
   const [showChat, setShowChat] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [socket, setSocket] = useState(null);
-  const {userId, addUserId} = useChatStore()
-  
-  const [users, setUsers] = useState([]); // Foydalanuvchilar dinamik
+
+  const [users, setUsers] = useState([userChat]);
 
   useEffect(() => {
     const socketInstance = io("http://back.sovchilar.net");
@@ -19,7 +21,7 @@ const Chat = () => {
 
     socketInstance.on("connect", () => {
       console.log("Connected to server");
-      socketInstance.emit("login", { userId: "currentUserId" }); // Foydalanuvchi ID'ni real foydalanuvchi ID bilan almashtiring
+      socketInstance.emit("login", { userId: user?.id });
     });
 
     socketInstance.on("loginSuccess", () => {
@@ -41,12 +43,12 @@ const Chat = () => {
     return () => {
       socketInstance.disconnect();
     };
-  }, []);
+  }, [user]);
 
   const sendMessage = () => {
     if (input.trim() && socket && activeUser) {
       const messageData = {
-        senderId: "currentUserId", // Bu foydalanuvchi ID real ID bilan almashtirilishi kerak
+        senderId: user?.id, // Foydalanuvchi ID real ID bilan almashtirilishi kerak
         conversationId: activeUser,
         message: input,
       };
@@ -62,14 +64,14 @@ const Chat = () => {
 
   const createConversation = (userId) => {
     if (socket) {
-      socket.emit("createConversation", { userId1: "currentUserId", userId2: userId });
+      socket.emit("createConversation", { userId1: user?.id, userId2: userId });
       setActiveUser(userId);
       setShowChat(true);
     }
   };
 
   const filteredUsers = users.filter((user) =>
-    user.toLowerCase().includes(searchTerm.toLowerCase())
+    user?.firstName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
 
   return (
@@ -93,12 +95,12 @@ const Chat = () => {
             <li
               key={index}
               className={`flex gap-3 items-center p-2 hover:bg-red-100 cursor-pointer rounded-md ${
-                activeUser === user ? "bg-red-200" : ""
+                activeUser === user?.id ? "bg-red-200" : ""
               }`}
-              onClick={() => createConversation(user)}
+              onClick={() => createConversation(user?.id)}
             >
               <div className="w-8 h-8 rounded-full bg-gray-300"></div>
-              <span className="text-gray-700">{user}</span>
+              <span className="text-gray-700">{user?.firstName}</span>
             </li>
           ))}
         </ul>
@@ -109,7 +111,7 @@ const Chat = () => {
             <button onClick={() => setShowChat(false)} className="text-white">
               Back
             </button>
-            <h2 className="text-lg font-semibold">{activeUser}</h2>
+            <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
             <div></div>
           </div>
           <div className="flex-1 p-4 overflow-y-auto bg-gray-100 overflow-x-hidden">
@@ -149,4 +151,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
