@@ -9,7 +9,7 @@ const Chat = () => {
   const [messages, setMessages] = useState({});
   const [input, setInput] = useState("");
   const [activeUser, setActiveUser] = useState(userChat?.id);
-  const [showChat, setShowChat] = useState(false);
+  const [showChat, setShowChat] = useState(userChat ? true : false);
   const [searchTerm, setSearchTerm] = useState("");
   const [socket, setSocket] = useState(null);
 
