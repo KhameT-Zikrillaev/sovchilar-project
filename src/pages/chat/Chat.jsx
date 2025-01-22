@@ -16,7 +16,7 @@ const Chat = () => {
   const [users, setUsers] = useState([userChat]);
 
   useEffect(() => {
-    const socketInstance = io("http://back.sovchilar.net");
+    const socketInstance = io("https://back.sovchilar.net");
     setSocket(socketInstance);
 
     socketInstance.on("connect", () => {
