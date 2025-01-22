@@ -55,6 +55,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
 
   return (
     <div
+      onClick={handleDetailsClick}
       id={`user-card-${user.id}`} // Добавляем id для карточки
       className={`
         bg-white rounded-2xl overflow-hidden
@@ -79,7 +80,8 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
         {accessToken && (
           <div className="absolute z-10 top-3 left-3">
             <FaHeart
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 toggleFavorite(user);
               }}
               className={`text-[30px] cursor-pointer ${
@@ -190,9 +192,10 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
           </div>
         </div>
 
-        <div
-          onClick={handleDetailsClick}
-          className={`
+        <div className="flex gap-2">
+          <div
+            onClick={handleDetailsClick}
+            className={`
           mt-6 w-full py-1.5 rounded-xl font-semibold text-white
           transform transition-all duration-300 block cursor-pointer
           ${
@@ -208,10 +211,37 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
           before:transition-transform before:duration-700
           uppercase tracking-wide text-sm text-center
         `}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {t("userCard.moreDetails")}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {t("userCard.moreDetails")}
+          </div>
+          <div
+            onClick={(e) => {
+              e.stopPropagation()
+              navigate(`/chat`)
+            }}
+            className={`
+          mt-6 w-full py-1.5 rounded-xl font-semibold text-white
+          transform transition-all duration-300 block cursor-pointer
+          ${
+            isHovered
+              ? "bg-gradient-to-r from-rose-500 via-red-500 to-rose-500 shadow-lg scale-105 shadow-rose-500/30"
+              : "bg-gradient-to-r from-rose-400 to-red-500"
+          }
+          hover:shadow-xl active:scale-95
+          relative overflow-hidden z-50
+          before:absolute before:inset-0
+          before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent
+          before:translate-x-[-200%] hover:before:translate-x-[200%]
+          before:transition-transform before:duration-700
+          uppercase tracking-wide text-sm text-center
+        `}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            Message
+          </div>
         </div>
       </div>
     </div>

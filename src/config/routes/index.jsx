@@ -9,6 +9,7 @@ import UpdatePassword from "../../pages/updatePassword/UpdatePassword";
 import Profile from "../../pages/profile/Profile";
 import Favourite from "../../pages/favourite/Favourite";
 import Language from "../../pages/language/Language";
+import Chat from "../../pages/chat/Chat";
 
 export const routes = [
   {
@@ -42,6 +43,10 @@ export const routes = [
   {
     path: "/favourite",
     element: <Favourite />,
+  },
+  {
+    path: "/chat",
+    element: <Chat />,
   },
 ];
 

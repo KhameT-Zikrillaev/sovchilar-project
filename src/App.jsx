@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { CardProvider } from "./context/CardContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import api from "./services/api";
 import { useStore } from "./store/store";
 
@@ -21,6 +21,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const { accessToken, clearUser, setUserSingleReload } = useStore();
   const navigate = useNavigate();
+  const location = useLocation()
+
+  console.log(location);
+  
 
   const token = async (token) => {
     try {
@@ -60,11 +64,11 @@ function App() {
         {loading ? (
           <SiteLoading />
         ) : (
-          <div className="wrapper overflow-x-hidden w-full">
+          <div className="wrapper overflow-x-hidden w-full overflow-y-hidden">
             <Reklama />
             <HeaderLayout />
             <MainLayout />
-            <FooterLayout />
+            {location?.pathname !== "/chat" && <FooterLayout />} 
           </div>
         )}
       </CardProvider>

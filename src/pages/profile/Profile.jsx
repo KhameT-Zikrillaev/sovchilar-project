@@ -24,6 +24,10 @@ const Profile = () => {
     setIsModalOpen(false);
   };
 
+  const goToChat = () => {
+    navigate('/chat'); // Navigate to the chat page
+};
+
   const handleStatusDone = async (id) => {
     const newStatus = "DONE";
     try {
@@ -84,6 +88,12 @@ const Profile = () => {
               disabled={user?.status !== "ACTIVE" ? true : false}
             >
               {t("Profile.btn.success")}
+            </button>
+            <button
+              className={`bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]`}
+              onClick={goToChat}
+            >
+              Chat
             </button>
             <button
               onClick={() => {
