@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
+import { useChatStore } from "../../store/chatStore";
 
 const Chat = () => {
   const [messages, setMessages] = useState({});
@@ -8,7 +9,8 @@ const Chat = () => {
   const [showChat, setShowChat] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [socket, setSocket] = useState(null);
-
+  const {userId, addUserId} = useChatStore()
+  
   const [users, setUsers] = useState([]); // Foydalanuvchilar dinamik
 
   useEffect(() => {

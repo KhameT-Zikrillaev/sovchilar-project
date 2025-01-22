@@ -23,9 +23,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation()
 
-  console.log(location);
-  
-
   const token = async (token) => {
     try {
       const response = await api.post("/auth/verify", {
