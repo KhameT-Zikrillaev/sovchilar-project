@@ -19,16 +19,16 @@ const Chat = () => {
   useEffect(() => {
     const socketInstance = io("wss://back.sovchilar.net");
     setSocket(socketInstance);
-  
+
     socketInstance.on("connect", () => {
       console.log("Connected to server");
       socketInstance.emit("login", { userId: user?.id });
     });
-  
+
     socketInstance.on("loginSuccess", () => {
       console.log("Login successful");
     });
-  
+
     // Muloqot yaratish hodisasi
     socketInstance.on("conversationCreated", (conversation) => {
       console.log("Conversation created:", conversation);
@@ -36,35 +36,42 @@ const Chat = () => {
       // Yangi conversation yaratildi, uni foydalanuvchilar ro'yxatiga qo'shish
       setUsers((prevUsers) => [...prevUsers, conversation]);
     });
-  
+
     socketInstance.on("newMessage", (data) => {
       const { conversationId, message } = data;
+      console.log("New message:", message);
+
       setMessages((prevMessages) => ({
         ...prevMessages,
         [conversationId]: [...(prevMessages[conversationId] || []), message],
       }));
     });
-  
+
     return () => {
       socketInstance.disconnect();
     };
   }, [user]);
-  
 
   const sendMessage = () => {
-    if (input.trim() && socket && activeUser) {
+    if (input.trim() && socket && consId) {
       const messageData = {
-        senderId: user?.id, // Foydalanuvchi ID real ID bilan almashtirilishi kerak
+        senderId: user?.id, // Foydalanuvchi ID
         conversationId: consId,
         message: input,
       };
+
+      // Serverga xabarni yuborish
       socket.emit("sendMessage", messageData);
 
+      // Mahalliy holatni yangilash
       setMessages((prevMessages) => ({
         ...prevMessages,
-        [activeUser]: [...(prevMessages[activeUser] || []), { text: input, sender: "user" }],
+        [consId]: [
+          ...(prevMessages[consId] || []),
+          { text: input, sender: "user" },
+        ],
       }));
-      setInput("");
+      setInput(""); // Inputni tozalash
     }
   };
 
@@ -75,7 +82,6 @@ const Chat = () => {
       setShowChat(true);
     }
   };
-  
 
   const filteredUsers = users.filter((user) =>
     user?.firstName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
@@ -122,7 +128,7 @@ const Chat = () => {
             <div></div>
           </div>
           <div className="flex-1 p-4 overflow-y-auto bg-gray-100 overflow-x-hidden">
-            {messages[activeUser]?.map((msg, index) => (
+            {messages[consId]?.map((msg, index) => (
               <div
                 key={index}
                 style={{ borderRadius: "10px 10px 10px 0" }}
