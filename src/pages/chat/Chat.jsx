@@ -37,15 +37,14 @@ const Chat = () => {
 
     socketInstance.on("newMessage", (data) => {
       const { conversationId, message } = data;
+      console.log(data);
+      
       console.log("New message:ss", message);
 
-   
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: message, sender: "other" }, // Foydalanuvchiga bog'liq format
+          {...data}, // Foydalanuvchiga bog'liq format
         ]);
-      
-
     });
 
     return () => {
@@ -54,6 +53,7 @@ const Chat = () => {
   }, [user]);
 
   console.log(messages);
+  
   
 
   const sendMessage = () => {
@@ -84,6 +84,13 @@ const Chat = () => {
   const filteredUsers = users.filter((user) =>
     user?.firstName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
+
+  function getHoursAndMinutesString(dateString) {
+    const date = new Date(dateString);
+    const hours = date.getHours().toString().padStart(2, "0"); // Soatni olish
+    const minutes = date.getMinutes().toString().padStart(2, "0"); // Minutni olish
+    return `${hours}:${minutes}`;
+  }
 
   return (
     <div className="flex h-screen bg-gray-50 pt-24">
@@ -125,21 +132,25 @@ const Chat = () => {
             <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
             <div></div>
           </div>
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-100 overflow-x-hidden">
+          <div className="flex flex-col p-4 overflow-y-auto bg-gray-100 overflow-x-hidden">
             {messages?.map((msg, index) => (
               <div
                 key={index}
-                style={{ borderRadius: "10px 10px 10px 0" }}
-                className={`my-2 p-3 rounded-lg max-w-xs ${
-                  msg.sender === "user"
-                    ? "bg-red-300 self-end"
-                    : "bg-white self-start border border-gray-300"
+                style={{ borderRadius: msg?.sender?.id !== user?.id ? "20px 20px 20px 0" : "20px 20px 0 20px" }}
+                className={`my-2 p-3 pb-[14px] bg-white  border border-gray-300 rounded-lg max-w-xs min-w-[100px] relative ${
+                  msg?.sender?.id === user?.id
+                    ? " self-end" // Foydalanuvchining o'zi yuborgan xabar
+                    : " self-start" // Boshqa foydalanuvchi yuborgan xabar
                 }`}
               >
-                {msg?.text}
+                {msg?.message}
+                <span className="absolute right-[4px] bottom-[2px] text-[12px] text-gray-600">
+                  {getHoursAndMinutesString(msg?.createdAt)}
+                </span>
               </div>
             ))}
           </div>
+
           <div className="flex p-2 bg-white border-t border-gray-300">
             <input
               type="text"
