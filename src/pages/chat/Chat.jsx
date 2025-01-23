@@ -12,26 +12,31 @@ const Chat = () => {
   const [showChat, setShowChat] = useState(userChat ? true : false);
   const [searchTerm, setSearchTerm] = useState("");
   const [socket, setSocket] = useState(null);
+  const [consId, setConsId] = useState(null);
 
   const [users, setUsers] = useState([userChat]);
 
   useEffect(() => {
-    const socketInstance = io("https://back.sovchilar.net");
+    const socketInstance = io("wss://back.sovchilar.net");
     setSocket(socketInstance);
-
+  
     socketInstance.on("connect", () => {
       console.log("Connected to server");
       socketInstance.emit("login", { userId: user?.id });
     });
-
+  
     socketInstance.on("loginSuccess", () => {
       console.log("Login successful");
     });
-
+  
+    // Muloqot yaratish hodisasi
     socketInstance.on("conversationCreated", (conversation) => {
       console.log("Conversation created:", conversation);
+      setConsId(conversation.id);
+      // Yangi conversation yaratildi, uni foydalanuvchilar ro'yxatiga qo'shish
+      setUsers((prevUsers) => [...prevUsers, conversation]);
     });
-
+  
     socketInstance.on("newMessage", (data) => {
       const { conversationId, message } = data;
       setMessages((prevMessages) => ({
@@ -39,17 +44,18 @@ const Chat = () => {
         [conversationId]: [...(prevMessages[conversationId] || []), message],
       }));
     });
-
+  
     return () => {
       socketInstance.disconnect();
     };
   }, [user]);
+  
 
   const sendMessage = () => {
     if (input.trim() && socket && activeUser) {
       const messageData = {
         senderId: user?.id, // Foydalanuvchi ID real ID bilan almashtirilishi kerak
-        conversationId: activeUser,
+        conversationId: consId,
         message: input,
       };
       socket.emit("sendMessage", messageData);
@@ -69,6 +75,7 @@ const Chat = () => {
       setShowChat(true);
     }
   };
+  
 
   const filteredUsers = users.filter((user) =>
     user?.firstName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
