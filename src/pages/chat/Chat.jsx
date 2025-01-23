@@ -6,7 +6,7 @@ import { useStore } from "../../store/store";
 const Chat = () => {
   const { userChat, addUserChat } = useChatStore();
   const { user } = useStore();
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [activeUser, setActiveUser] = useState(userChat?.id);
   const [showChat, setShowChat] = useState(userChat ? true : false);
@@ -21,12 +21,10 @@ const Chat = () => {
     setSocket(socketInstance);
 
     socketInstance.on("connect", () => {
-      console.log("Connected to server");
       socketInstance.emit("login", { userId: user?.id });
     });
 
     socketInstance.on("loginSuccess", () => {
-      console.log("Login successful");
     });
 
     // Muloqot yaratish hodisasi
@@ -39,18 +37,24 @@ const Chat = () => {
 
     socketInstance.on("newMessage", (data) => {
       const { conversationId, message } = data;
-      console.log("New message:", message);
+      console.log("New message:ss", message);
 
-      setMessages((prevMessages) => ({
-        ...prevMessages,
-        [conversationId]: [...(prevMessages[conversationId] || []), message],
-      }));
+   
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: message, sender: "other" }, // Foydalanuvchiga bog'liq format
+        ]);
+      
+
     });
 
     return () => {
       socketInstance.disconnect();
     };
   }, [user]);
+
+  console.log(messages);
+  
 
   const sendMessage = () => {
     if (input.trim() && socket && consId) {
@@ -64,13 +68,7 @@ const Chat = () => {
       socket.emit("sendMessage", messageData);
 
       // Mahalliy holatni yangilash
-      setMessages((prevMessages) => ({
-        ...prevMessages,
-        [consId]: [
-          ...(prevMessages[consId] || []),
-          { text: input, sender: "user" },
-        ],
-      }));
+      
       setInput(""); // Inputni tozalash
     }
   };
@@ -128,7 +126,7 @@ const Chat = () => {
             <div></div>
           </div>
           <div className="flex-1 p-4 overflow-y-auto bg-gray-100 overflow-x-hidden">
-            {messages[consId]?.map((msg, index) => (
+            {messages?.map((msg, index) => (
               <div
                 key={index}
                 style={{ borderRadius: "10px 10px 10px 0" }}
@@ -138,7 +136,7 @@ const Chat = () => {
                     : "bg-white self-start border border-gray-300"
                 }`}
               >
-                {msg.text}
+                {msg?.text}
               </div>
             ))}
           </div>
