@@ -124,7 +124,7 @@ const Chat = () => {
         </ul>
       </div>
       {showChat && (
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col justify-between">
           <div className="bg-red-600 text-white p-4 flex justify-between items-center shadow-md">
             <button onClick={() => setShowChat(false)} className="text-white">
               Back
@@ -132,7 +132,7 @@ const Chat = () => {
             <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
             <div></div>
           </div>
-          <div className="flex flex-col p-4 overflow-y-auto bg-gray-100 overflow-x-hidden">
+          <div className="flex flex-col p-4 overflow-y-auto h-full bg-gray-100 overflow-x-hidden">
             {messages?.map((msg, index) => (
               <div
                 key={index}
