@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import { io, Socket } from "socket.io-client";
 import { useChatStore } from "../../store/chatStore";
 import { useStore } from "../../store/store";
@@ -15,7 +15,23 @@ const Chat = () => {
   const [socket, setSocket] = useState(null);
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
+  const messagesContainerRef = useRef(null);
+  
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  
 
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  
   // Brauzer bildirishnomalariga ruxsat so'rash
   useEffect(() => {
     if ("Notification" in window) {
@@ -51,9 +67,8 @@ const Chat = () => {
 
     socketInstance.on("newMessage", (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
-
       // Notification ko'rsatish
-      if (Notification.permission === "granted") {
+      if (Notification.permission === "granted" && data?.sender?.id !== user.id) {
         new Notification("Yangi xabar", {
           body: `${data?.sender?.firstName}: ${data?.message}`,
         });
@@ -123,7 +138,7 @@ const Chat = () => {
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
-  };
+  };     
 
   return (
     <div className="flex h-screen bg-gray-50 pt-24">
@@ -137,7 +152,7 @@ const Chat = () => {
           <input
             type="text"
             placeholder="Search users..."
-            className="p-2 border border-gray-300 rounded-lg mb-2 w-full"
+            className="p-2 border border-gray-300 rounded-lg mb-2 w-full focus:outline-none focus:ring-1 focus:ring-red-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -176,10 +191,10 @@ const Chat = () => {
               Back
             </button>
             <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
-            <div className="flex flex-col gap-[5px]"> <div className="w-[6px] h-[6px] bg-white rounded-full"></div> <div className="w-[6px] h-[6px] bg-white rounded-full"></div><div className="w-[6px] h-[6px] bg-white rounded-full"></div> </div>
+            <div className="flex flex-col gap-[5px] cursor-pointer w-[20px]"> <div className="w-[6px] h-[6px] bg-white rounded-full"></div> <div className="w-[6px] h-[6px] bg-white rounded-full"></div><div className="w-[6px] h-[6px] bg-white rounded-full"></div> </div>
           </div>
-          <div className="flex flex-col p-4 overflow-y-auto h-full bg-gray-100">
-            {messages.map((msg, index) => (
+          <div ref={messagesContainerRef} className="flex flex-col p-4 overflow-y-auto h-full bg-gray-100">
+            {messages?.map((msg, index) => (
               <div
                 key={index}
                 style={{
@@ -203,7 +218,12 @@ const Chat = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type a message..."
-              className="flex-1 p-2 border border-gray-300 rounded-lg mr-2"
+              className="flex-1 p-2 border border-gray-300 rounded-lg mr-2 focus:outline-none focus:ring-1 focus:ring-red-500"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
             />
             <button
               onClick={sendMessage}
