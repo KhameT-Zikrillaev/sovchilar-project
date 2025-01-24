@@ -15,6 +15,7 @@ const Chat = () => {
   const [socket, setSocket] = useState(null);
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const messagesContainerRef = useRef(null);
   
   useEffect(() => {
@@ -77,6 +78,7 @@ const Chat = () => {
 
     socketInstance.on("conversation-messages", (data) => {
       setMessages(data?.data?.items?.reverse() || []);
+      setLoading(false);
     });
 
     socketInstance.emit("get-conversations", { userId: user.id });
@@ -93,6 +95,7 @@ const Chat = () => {
   // Suhbat xabarlarini olish
   useEffect(() => {
     if (socket && consId) {
+      setLoading(true);
       socket.emit("get-conversation-messages", { conversationId: consId, page: 1, limit: 20 });
     }
   }, [socket, consId]);
@@ -193,8 +196,8 @@ const Chat = () => {
             <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
             <div className="flex flex-col gap-[5px] cursor-pointer w-[20px]"> <div className="w-[6px] h-[6px] bg-white rounded-full"></div> <div className="w-[6px] h-[6px] bg-white rounded-full"></div><div className="w-[6px] h-[6px] bg-white rounded-full"></div> </div>
           </div>
-          <div ref={messagesContainerRef} className="flex flex-col p-4 overflow-y-auto h-full bg-gray-100">
-            {messages?.map((msg, index) => (
+          <div ref={messagesContainerRef} className={`flex flex-col p-4 overflow-y-auto h-full bg-gray-100 ${loading ? "justify-center items-center" : ""}`}>
+            {loading ? <div className="loader"></div> : messages?.map((msg, index) => (
               <div
                 key={index}
                 style={{

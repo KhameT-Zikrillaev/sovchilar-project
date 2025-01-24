@@ -122,3 +122,20 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #d32f2f; /* Color of the scrollbar thumb on hover */
 }
+
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side, #d32f2f 94%, #0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, #d32f2f);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+}
+
+@keyframes l13 { 
+  100% { transform: rotate(1turn); }
+}
+
