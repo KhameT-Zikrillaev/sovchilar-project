@@ -6,4 +6,9 @@ export const useChatStore = create((set) => ({
     set(() => ({
       userChat: user, 
     })),
+
+  removeUserChat: () =>
+    set(() => ({
+      userChat: null,
+    })),
 }));

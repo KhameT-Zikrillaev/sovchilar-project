@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
 import { useChatStore } from "../../store/chatStore";
 import { useStore } from "../../store/store";
 
 const Chat = () => {
-  const { userChat } = useChatStore();
+  const { userChat, addUserChat } = useChatStore();
   const { user } = useStore();
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [activeUser, setActiveUser] = useState(userChat?.id || null);
@@ -15,13 +16,29 @@ const Chat = () => {
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
 
-  // Socket ulanish
+  // Brauzer bildirishnomalariga ruxsat so'rash
+  useEffect(() => {
+    if ("Notification" in window) {
+      if (Notification.permission === "default") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            console.log("Notifications enabled");
+          } else {
+            console.log("Notifications denied");
+          }
+        });
+      }
+    }
+  }, []);
+
+  // Socket ulanish va hodisalarni sozlash
   useEffect(() => {
     if (!user?.id) return;
 
     const socketInstance = io("wss://back.sovchilar.net", {
       query: { userId: user.id },
     });
+
     setSocket(socketInstance);
 
     socketInstance.on("connect", () => {
@@ -30,11 +47,17 @@ const Chat = () => {
 
     socketInstance.on("conversationCreated", (conversation) => {
       setConsId(conversation.id);
-      // setUsers((prevUsers) => [...prevUsers, conversation]);
     });
 
     socketInstance.on("newMessage", (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
+
+      // Notification ko'rsatish
+      if (Notification.permission === "granted") {
+        new Notification("Yangi xabar", {
+          body: `${data?.sender?.firstName}: ${data?.message}`,
+        });
+      }
     });
 
     socketInstance.on("conversation-messages", (data) => {
@@ -59,28 +82,41 @@ const Chat = () => {
     }
   }, [socket, consId]);
 
-  const sendMessage = () => {
+  const createConversation = useCallback(
+    (userId) => {
+      if (socket) {
+        socket.emit("createConversation", { userId1: user?.id, userId2: userId });
+        setActiveUser(userId);
+        setShowChat(true);
+      }
+    },
+    [socket, user]
+  );
+
+  useEffect(() => {
+    if (userChat?.id && socket) {
+      createConversation(userChat?.id);
+    }
+  }, [userChat, socket, createConversation]);
+
+  const sendMessage = useCallback(() => {
     if (input.trim() && socket && consId) {
-      const messageData = {
+      socket.emit("sendMessage", {
         senderId: user?.id,
         conversationId: consId,
         message: input,
-      };
-      socket.emit("sendMessage", messageData);
+      });
       setInput("");
     }
-  };
+  }, [input, socket, consId, user]);
 
-  const createConversation = (userId) => {
-    if (socket) {
-      socket.emit("createConversation", { userId1: user?.id, userId2: userId });
-      setActiveUser(userId);
-      setShowChat(true);
-    }
-  };
-
-
-  const filteredUsers = users?.filter((u) => u?.participants[0]?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) );
+  const filteredUsers = useMemo(
+    () =>
+      users.filter((u) =>
+        u?.participants[0]?.firstName?.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    [users, searchTerm]
+  );
 
   const getHoursAndMinutesString = (dateString) => {
     const date = new Date(dateString);
@@ -113,9 +149,12 @@ const Chat = () => {
               className={`flex gap-3 items-center p-2 hover:bg-red-100 cursor-pointer rounded-md ${
                 activeUser === user?.participants[0]?.id ? "bg-red-200" : ""
               }`}
-              onClick={() => createConversation(user?.participants[0]?.id)}
+              onClick={() => {
+                createConversation(user?.participants[0]?.id);
+                addUserChat(user?.participants[0]);
+              }}
             >
-              <div className="w-8 h-8 rounded-full bg-gray-300"></div>
+              <div className="w-8 h-8 rounded-full bg-gray-300">{user?.participants[0]?.imageUrl && <img className="w-8 h-8 rounded-full object-cover" src={user?.participants[0]?.imageUrl} alt="userpic" />}</div>
               <span className="text-gray-700">{user?.participants[0]?.firstName}</span>
             </li>
           ))}
@@ -137,9 +176,9 @@ const Chat = () => {
               Back
             </button>
             <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
-            <div></div>
+            <div className="flex flex-col gap-[5px]"> <div className="w-[6px] h-[6px] bg-white rounded-full"></div> <div className="w-[6px] h-[6px] bg-white rounded-full"></div><div className="w-[6px] h-[6px] bg-white rounded-full"></div> </div>
           </div>
-          <div className="flex flex-col p-4 overflow-y-auto h-full bg-gray-100 overflow-x-hidden">
+          <div className="flex flex-col p-4 overflow-y-auto h-full bg-gray-100">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -157,6 +196,7 @@ const Chat = () => {
               </div>
             ))}
           </div>
+          
           <div className="flex p-2 bg-white border-t border-gray-300">
             <input
               type="text"
