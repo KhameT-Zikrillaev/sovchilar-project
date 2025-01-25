@@ -105,6 +105,8 @@ const UpdatePassword = () => {
       const res = await getPhone(
         isPhoneNumber ? "/users-uz/phone/" + phoneNumber.replace(/[\s-]/g, "") : `users-uz/find-by-email/${phoneNumber}`
       );
+      console.log(res);
+      
       
       setOldUser(res?.data);
       if(res.statusCode != 404){
@@ -122,10 +124,6 @@ const UpdatePassword = () => {
       const response = await postItem(isPhoneNumber ? "/auth/verify-code" : "/auth/verify-email", isPhoneNumber
         ? { phone: formatPhoneNumber(phoneNumber), code: smsCode }
         : { email: phoneNumber, code: +smsCode });
-
-      
-
-      
 
       if (response.statusCode === 200) {
         setStep(3);
