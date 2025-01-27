@@ -600,5 +600,13 @@
   },
   "comment": {
     "title": "Счастливчики"
-  }
+  },
+  "chat": {
+  "user-search": "Поиск",
+  "chat-delete": "Удалить чат",
+  "message-delete": "Удалить",
+  "type-message": "Написать сообщение ...",
+  "send-btn": "Отправить"
+}
+
 }

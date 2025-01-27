@@ -19,7 +19,7 @@ import { useStore } from "./store/store";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const { accessToken, clearUser, setUserSingleReload } = useStore();
+  const { accessToken, clearUser, setUserSingleReload, user } = useStore();
   const navigate = useNavigate();
   const location = useLocation()
 
@@ -69,6 +69,13 @@ function App() {
     AOS.init({ durationsetUserSingleReload: 1000, once: true }); // once: true - анимация срабатывает только один раз
     setUserSingleReload();
   }, []);
+
+  useEffect(() => {
+    if(!user){
+      
+    }
+  }, []);
+
   return (
     <>
       <CardProvider>

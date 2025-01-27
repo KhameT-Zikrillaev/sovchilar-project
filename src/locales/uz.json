@@ -598,5 +598,12 @@
   },
   "comment": {
     "title": "Baxtini topganlar"
+  },
+  "chat": {
+    "user-search": "Qidiruv",
+    "chat-delete": "Chatni o'chirish",
+    "message-delete": "O'chirish",
+    "type-message": "Xabar yozish ...",
+    "send-btn": "Yuborish"
   }
 }

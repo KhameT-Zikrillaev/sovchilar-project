@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Modal } from "antd";
 import { MdDeleteOutline } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const messagesContainerRef = useRef(null);
@@ -10,6 +11,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const [isMessageDeleted, setIsMessageDeleted] = useState(false);
   const holdTimeout = useRef(null);
+  const {t} = useTranslation()
 
   
 
@@ -145,7 +147,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               onClick={() => handleMenuOptionClick("delete")}
               className="p-2 hover:bg-gray-100 cursor-pointer text-red-600 font-medium flex items-center gap-1"
             >
-              O'chirish <MdDeleteOutline className="text-[20px]" />
+              {t("chat.message-delete")} <MdDeleteOutline className="text-[20px]" />
             </li>
             <li
               onClick={() => handleMenuOptionClick("edit")}

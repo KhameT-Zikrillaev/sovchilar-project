@@ -3,11 +3,22 @@ import { useCallback } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdDeleteOutline } from "react-icons/md";
 import { useChatStore } from "../../../store/chatStore";
+import { useTranslation } from "react-i18next";
+import { GrFormPreviousLink } from "react-icons/gr";
 
-const ChatHeader = ({ userChat, consId, setShowChat, setActiveUser, setConsId, socket, setUsers, setMessages }) => {
-  const {removeUserChat} = useChatStore()
-  
-  
+const ChatHeader = ({
+  userChat,
+  consId,
+  setShowChat,
+  setActiveUser,
+  setConsId,
+  socket,
+  setUsers,
+  setMessages,
+}) => {
+  const { t } = useTranslation();
+  const { removeUserChat } = useChatStore();
+
   const deleteConversation = useCallback(
     (conversationId, userId) => {
       if (socket) {
@@ -23,18 +34,22 @@ const ChatHeader = ({ userChat, consId, setShowChat, setActiveUser, setConsId, s
         setConsId(null);
         setMessages([]);
         setShowChat(false);
-        removeUserChat()
+        removeUserChat();
       }
     },
     [socket]
   );
-  
-  
-  
+
   const menu = (
-    <Menu >
-      <Menu.Item key="delete" onClick={() => deleteConversation(consId, userChat?.id)} >
-        <div className="flex items-center gap-1 text-[16px] text-red-600">Chatni o'chirish <MdDeleteOutline className="text-[20px]"/></div>
+    <Menu>
+      <Menu.Item
+        key="delete"
+        onClick={() => deleteConversation(consId, userChat?.id)}
+      >
+        <div className="flex items-center gap-1 text-[16px] text-red-600">
+          {t("chat.chat-delete")}
+          <MdDeleteOutline className="text-[20px]" />
+        </div>
       </Menu.Item>
     </Menu>
   );
@@ -49,7 +64,7 @@ const ChatHeader = ({ userChat, consId, setShowChat, setActiveUser, setConsId, s
         }}
         className="text-white"
       >
-        Back
+        <GrFormPreviousLink className="text-[35px]"/>
       </button>
       <h2 className="text-lg font-semibold">{userChat?.firstName}</h2>
       <Dropdown overlay={menu} trigger={["click"]}>

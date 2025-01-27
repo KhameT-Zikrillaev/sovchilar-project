@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "../../pages/home";
 import UserDetails from "../../pages/DetailesPages";
 import NotFound from "../../pages/NotFound";
@@ -11,6 +11,12 @@ import Favourite from "../../pages/favourite/Favourite";
 import Language from "../../pages/language/Language";
 import Chat from "../../pages/chat/Chat";
 
+// ProtectedRoute funksiyasi
+const ProtectedRoute = ({ isAuthenticated, children }) => {
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
+
+// routes array
 export const routes = [
   {
     path: "/language",
@@ -46,7 +52,11 @@ export const routes = [
   },
   {
     path: "/chat",
-    element: <Chat />,
+    element: (
+      <ProtectedRoute isAuthenticated={!!JSON?.parse(localStorage.getItem("user-sovchilar"))?.state?.user}>
+        <Chat />
+      </ProtectedRoute>
+    ),
   },
 ];
 
@@ -56,7 +66,7 @@ function RootRoute() {
       {routes.map((route, index) => (
         <Route key={index} path={route.path} element={route.element} />
       ))}
-      {/* Маршрут для 404 ошибки */}
+      {/* 404 sahifasi */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

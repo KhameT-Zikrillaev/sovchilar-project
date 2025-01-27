@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Avatar } from "antd";
+import { useTranslation } from "react-i18next";
 
 const ChatUsers = ({
   activeUser,
@@ -13,6 +14,7 @@ const ChatUsers = ({
   users,
   // unreadCounts
 }) => {
+  const {t} = useTranslation()
   const [searchTerm, setSearchTerm] = useState("");
 
   const createConversation = useCallback(
@@ -54,7 +56,7 @@ const ChatUsers = ({
       <div className="px-2">
         <input
           type="text"
-          placeholder="Search users..."
+          placeholder={t("chat.user-search")}
           className="p-2 border border-gray-300 rounded-lg mb-2 w-full focus:outline-none focus:ring-1 focus:ring-red-500"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

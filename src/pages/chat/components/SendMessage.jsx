@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SendMessage = ({ socket, user, consId }) => {
+  const {t} = useTranslation()
   const [input, setInput] = useState("");
 
   const sendMessage = useCallback(() => {
@@ -20,7 +22,7 @@ const SendMessage = ({ socket, user, consId }) => {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="Type a message..."
+        placeholder={t("chat.type-message")}
         className="flex-1 p-2 border border-gray-300 rounded-lg mr-2 focus:outline-none focus:ring-1 focus:ring-red-500"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -32,7 +34,7 @@ const SendMessage = ({ socket, user, consId }) => {
         onClick={sendMessage}
         className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
       >
-        Send
+        {t("chat.send-btn")}
       </button>
     </div>
   );

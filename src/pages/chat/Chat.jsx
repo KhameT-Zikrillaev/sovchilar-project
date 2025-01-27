@@ -20,6 +20,7 @@ const Chat = () => {
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  
   // const [unreadCounts, setUnreadCounts] = useState({});
 
   // Socket ulanish va hodisalarni sozlash
@@ -76,7 +77,6 @@ const Chat = () => {
       setMessages(data?.data || []);
       
       setLoading(false);
-      console.log(activeUser);
       
       // setUnreadCounts((prevCounts) => ({
       //   ...prevCounts,
@@ -155,7 +155,7 @@ const Chat = () => {
         const isAlreadyAdded = prevUsers.some(
           (u) => u?.participants[0]?.id === data?.sender?.id
         );
-        if (!isAlreadyAdded) {
+        if (!isAlreadyAdded && data?.sender?.id !== user?.id) {
           return [
             {
               participants: [
@@ -181,6 +181,9 @@ const Chat = () => {
       ) {
         setMessages((prevMessages) => [...prevMessages, data]);
       }
+
+      console.log(Notification.permission);
+
   
       if (
         Notification.permission === "granted" &&
