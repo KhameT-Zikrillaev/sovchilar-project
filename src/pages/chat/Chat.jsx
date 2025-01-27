@@ -20,8 +20,10 @@ const Chat = () => {
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  // const [unreadCounts, setUnreadCounts] = useState({});
 
   // Socket ulanish va hodisalarni sozlash
+  console.log(activeUser);
   
   useEffect(() => {
     if (!user?.id) return;
@@ -34,38 +36,61 @@ const Chat = () => {
 
     socketInstance.on("connect", () => {
       socketInstance.emit("login", { userId: user?.id });
+      
     });
+    // socketInstance.emit("getUnreadCounts", { userId: user?.id });
 
     socketInstance.on("conversationCreated", (conversation) => {
       setConsId(conversation?.id);
     });
 
-    socketInstance.on("newMessage", (data) => {
+    // socketInstance.on("newMessage", (data) => {
+      
+    //   if (data?.sender?.id === user?.id || data?.sender?.id === userChat?.id) {
+    //     setMessages((prevMessages) => [...prevMessages, data]);
 
-      if (data?.conversation?.id && data?.conversation?.id === consId) {
-        setMessages((prevMessages) => [...prevMessages, data]);
-      }
+    //   }
+    //   // const conversationId = data?.conversation?.id;
+    //   // if (conversationId && data?.sender?.id !== user?.id) {
+    //   //   setUnreadCounts((prevCounts) => ({
+    //   //     ...prevCounts,
+    //   //     [conversationId]: (prevCounts[conversationId] || 0) + 1,
+    //   //   }));
+    //   // }
+    //   // Notification ko'rsatish
+    //   if (
+    //     Notification.permission === "granted" &&
+    //     data?.sender?.id !== user.id
+    //   ) {
+    //     new Notification("Yangi xabar", {
+    //       body: `${data?.sender?.firstName}: ${data?.message}`,
+    //     });
+    //   }
 
-      // Notification ko'rsatish
-      if (
-        Notification.permission === "granted" &&
-        data?.sender?.id !== user.id
-      ) {
-        new Notification("Yangi xabar", {
-          body: `${data?.sender?.firstName}: ${data?.message}`,
-        });
-      }
+    // });
 
-    });
+    // socketInstance.on("unreadCounts", (data) => {
+    //   setUnreadCounts(data.counts || {});
+    // });
 
     socketInstance.on("conversation-messages", (data) => {
       setMessages(data?.data || []);
+      
       setLoading(false);
+      console.log(activeUser);
+      
+      // setUnreadCounts((prevCounts) => ({
+      //   ...prevCounts,
+      //   [consId]: 0, // Suhbat ochilganda o'qilmaganlarni 0 ga tushirish
+      // }));
     });
+    
 
     socketInstance.on('messagesDeleted', (data) => {
-      
-      console.log(data);
+
+      setMessages((prevMessages) =>
+        prevMessages.filter((msg) => msg.id !== data?.messageIds[0])
+      );
       
     });
 
@@ -97,6 +122,18 @@ const Chat = () => {
       }
     });
 
+    socketInstance.on('conversationDeleted', (data) => {
+
+      setUsers((prevUsers) =>
+        prevUsers?.filter((u) => u?.id !== data?.conversationId)  
+      );
+        setActiveUser(null);
+        setConsId(null);
+        setMessages([]);
+        setShowChat(false);
+      
+    });
+
     return () => {
       socketInstance.disconnect();
     };
@@ -109,6 +146,34 @@ const Chat = () => {
       socket.emit("get-conversation-messages", { conversationId: consId });
     }
   }, [socket, consId]);
+
+  useEffect(() => {
+    if (!socket) return;
+  
+    const handleNewMessage = (data) => {
+      if (
+        data?.sender?.id === user?.id ||
+        data?.sender?.id === userChat?.id
+      ) {
+        setMessages((prevMessages) => [...prevMessages, data]);
+      }
+  
+      if (
+        Notification.permission === "granted" &&
+        data?.sender?.id !== user?.id
+      ) {
+        new Notification("Yangi xabar", {
+          body: `${data?.sender?.firstName}: ${data?.message}`,
+        });
+      }
+    };
+  
+    socket.on("newMessage", handleNewMessage);
+  
+    return () => {
+      socket.off("newMessage", handleNewMessage);
+    };
+  }, [socket, userChat]);
 
   return (
     <div className="flex h-screen bg-gray-50 pt-24">
@@ -123,6 +188,7 @@ const Chat = () => {
         userChat={userChat}
         showChat={showChat}
         users={users}
+        // unreadCounts={unreadCounts}
       />
       {/* Chat bo'limi */}
       {showChat && (

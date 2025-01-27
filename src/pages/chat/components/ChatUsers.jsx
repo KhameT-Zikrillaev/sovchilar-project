@@ -11,6 +11,7 @@ const ChatUsers = ({
   addUserChat,
   showChat,
   users,
+  // unreadCounts
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
