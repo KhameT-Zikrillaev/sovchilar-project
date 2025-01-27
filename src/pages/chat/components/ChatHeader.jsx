@@ -2,8 +2,10 @@ import { Dropdown, Menu } from "antd";
 import { useCallback } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdDeleteOutline } from "react-icons/md";
+import { useChatStore } from "../../../store/chatStore";
 
 const ChatHeader = ({ userChat, consId, setShowChat, setActiveUser, setConsId, socket, setUsers, setMessages }) => {
+  const {removeUserChat} = useChatStore()
   
   
   const deleteConversation = useCallback(
@@ -21,6 +23,7 @@ const ChatHeader = ({ userChat, consId, setShowChat, setActiveUser, setConsId, s
         setConsId(null);
         setMessages([]);
         setShowChat(false);
+        removeUserChat()
       }
     },
     [socket]
