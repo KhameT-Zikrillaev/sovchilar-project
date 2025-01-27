@@ -11,6 +11,8 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const [isMessageDeleted, setIsMessageDeleted] = useState(false);
   const holdTimeout = useRef(null);
 
+  
+
   useEffect(() => {
     if (!isMessageDeleted) {
       scrollToBottom();

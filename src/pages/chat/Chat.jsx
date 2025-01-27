@@ -22,6 +22,7 @@ const Chat = () => {
   const [loading, setLoading] = useState(false);
 
   // Socket ulanish va hodisalarni sozlash
+  
   useEffect(() => {
     if (!user?.id) return;
 
@@ -37,13 +38,11 @@ const Chat = () => {
 
     socketInstance.on("conversationCreated", (conversation) => {
       setConsId(conversation?.id);
-      console.log("asdasda", consId);
     });
 
     socketInstance.on("newMessage", (data) => {
-      console.log(consId);
 
-      if (data?.conversation?.id == consId) {
+      if (data?.conversation?.id && data?.conversation?.id === consId) {
         setMessages((prevMessages) => [...prevMessages, data]);
       }
 
@@ -56,11 +55,18 @@ const Chat = () => {
           body: `${data?.sender?.firstName}: ${data?.message}`,
         });
       }
+
     });
 
     socketInstance.on("conversation-messages", (data) => {
       setMessages(data?.data || []);
       setLoading(false);
+    });
+
+    socketInstance.on('messagesDeleted', (data) => {
+      
+      console.log(data);
+      
     });
 
     socketInstance.emit("get-conversations", { userId: user?.id });
@@ -103,8 +109,6 @@ const Chat = () => {
       socket.emit("get-conversation-messages", { conversationId: consId });
     }
   }, [socket, consId]);
-
-  
 
   return (
     <div className="flex h-screen bg-gray-50 pt-24">
