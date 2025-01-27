@@ -23,7 +23,6 @@ const Chat = () => {
   // const [unreadCounts, setUnreadCounts] = useState({});
 
   // Socket ulanish va hodisalarni sozlash
-  console.log(activeUser);
   
   useEffect(() => {
     if (!user?.id) return;
@@ -151,6 +150,31 @@ const Chat = () => {
     if (!socket) return;
   
     const handleNewMessage = (data) => {
+
+      setUsers((prevUsers) => {
+        const isAlreadyAdded = prevUsers.some(
+          (u) => u?.participants[0]?.id === data?.sender?.id
+        );
+        if (!isAlreadyAdded) {
+          return [
+            {
+              participants: [
+                {
+                  id: data?.sender?.id,
+                  firstName: data?.sender?.firstName,
+                  imageUrl: data?.sender?.imageUrl,
+                },
+              ],
+            },     
+            ...prevUsers,
+            
+          ];
+        }
+        return prevUsers;
+      })
+      // addUserChat(data?.sender);
+      
+      
       if (
         data?.sender?.id === user?.id ||
         data?.sender?.id === userChat?.id
