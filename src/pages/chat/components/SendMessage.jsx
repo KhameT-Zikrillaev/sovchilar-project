@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const SendMessage = ({ socket, user, consId }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
 
-  const sendMessage = useCallback(() => {
+  const sendMessage = () => {
     if (input.trim() && socket && consId) {
       socket.emit("sendMessage", {
         senderId: user?.id,
@@ -14,7 +14,7 @@ const SendMessage = ({ socket, user, consId }) => {
       });
       setInput("");
     }
-  }, [input, socket, consId, user]);
+  };
 
   return (
     <div className="flex p-2 bg-white border-t border-gray-300">

@@ -46,10 +46,14 @@ const CombinedForm = ({ handleCloseModal }) => {
     e.target.value = value;
   };
 
-  useEffect(() => {
-    const telegramValue = user.telegram
-      ? user.telegram.replace("t.me/", "")
-      : "";
+  useEffect(()=>{
+    const telegramValue = user.telegram ? user.telegram.replace('t.me/', '') : "";
+  //   const telegramValue = user.telegram 
+  // ? (user.telegram.startsWith("@") 
+  //     ? user.telegram.slice(1) // Убираем @, если он есть
+  //     : user.telegram
+  //   ).replace(/^t\.me\//, "") // Убираем t.me/, если он есть
+  // : "";
     reset({
       firstName: user.firstName || "",
       lastName: user.lastName || "",

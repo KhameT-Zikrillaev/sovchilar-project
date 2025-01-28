@@ -50,7 +50,7 @@ const ChatUsers = ({
   return (
     <div
       className={`bg-white pt-4 border-r shadow-md ${
-        showChat ? "hidden md:block w-1/4" : "block md:w-1/4 w-full"
+        showChat ? "hidden md:block min-w-[350px] w-[350px]" : "block md:w-[350px] md:min-w-[350px] w-full"
       }`}
     >
       <div className="px-2">

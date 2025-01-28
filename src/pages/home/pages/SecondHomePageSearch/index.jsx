@@ -62,11 +62,11 @@ export default function SecondHomePageSearch() {
     status: "ACTIVE"
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //   }, 1000);
+  // }, []);
 
   const fetchUserPage = async ({ pageParam = 1 }) => {
     try {

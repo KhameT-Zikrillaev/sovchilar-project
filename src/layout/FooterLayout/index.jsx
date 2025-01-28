@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.png";
 import Modal from "../../components/customModal/Modal";
 import { FaTelegramPlane } from "react-icons/fa";
 import ModalSertified from "../../components/sertficatedmodal";
-import { FaInstagram } from "react-icons/fa6";
+import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa6";
 export default function FooterLayout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -106,7 +106,6 @@ export default function FooterLayout() {
                 <a
                   target="_blank"
                   href="https://t.me/sovchilarnet_admin"
-               
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
                   <span
@@ -125,16 +124,24 @@ export default function FooterLayout() {
                     <FaInstagram />
                   </span>
                 </a>
-                {/* <a
-                  href=""
-                  data-aos="flip-up"
-                  data-aos-offset="50"
+                <a
+                  target="_blank"
+                  href="https://www.tiktok.com/@sovchilar.net"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
-                  <span className="text-2xl" title={t("footer.social.email")}>
-                    ✉️
+                  <span className="text-2xl" title={t("footer.social.tiktok")}>
+                    <FaTiktok />
                   </span>
-                </a> */}
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.youtube.com/@sovchilar.net"
+                  className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
+                >
+                  <span className="text-2xl" title={t("footer.social.youtube")}>
+                    <FaYoutube />
+                  </span>
+                </a>
               </div>
             </div>
 

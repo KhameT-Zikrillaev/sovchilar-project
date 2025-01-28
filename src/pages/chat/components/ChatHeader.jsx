@@ -2,9 +2,9 @@ import { Dropdown, Menu } from "antd";
 import { useCallback } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdDeleteOutline } from "react-icons/md";
-import { useChatStore } from "../../../store/chatStore";
 import { useTranslation } from "react-i18next";
 import { GrFormPreviousLink } from "react-icons/gr";
+import { useChatStore } from "../../../store/chatStore";
 
 const ChatHeader = ({
   userChat,
@@ -17,7 +17,7 @@ const ChatHeader = ({
   setMessages,
 }) => {
   const { t } = useTranslation();
-  const { removeUserChat } = useChatStore();
+  const {removeUserChat} = useChatStore()
 
   const deleteConversation = useCallback(
     (conversationId, userId) => {
@@ -30,11 +30,11 @@ const ChatHeader = ({
         setUsers((prevUsers) =>
           prevUsers?.filter((u) => u?.participants[0]?.id !== userId)
         );
+        removeUserChat()
         setActiveUser(null);
         setConsId(null);
         setMessages([]);
         setShowChat(false);
-        removeUserChat();
       }
     },
     [socket]
@@ -61,6 +61,7 @@ const ChatHeader = ({
           setShowChat(false);
           setActiveUser(null);
           setConsId(null);
+          removeUserChat()
         }}
         className="text-white"
       >

@@ -9,6 +9,7 @@ import ChatHeader from "./components/ChatHeader";
 import ChatUsers from "./components/ChatUsers";
 import SendMessage from "./components/SendMessage";
 import ChatList from "./components/ChatList";
+import bgImg from "../../assets/images/left-bg.jpg"
 
 const Chat = () => {
   const { userChat, addUserChat } = useChatStore();
@@ -182,9 +183,6 @@ const Chat = () => {
         setMessages((prevMessages) => [...prevMessages, data]);
       }
 
-      console.log(Notification.permission);
-
-  
       if (
         Notification.permission === "granted" &&
         data?.sender?.id !== user?.id
@@ -201,6 +199,8 @@ const Chat = () => {
       socket.off("newMessage", handleNewMessage);
     };
   }, [socket, userChat]);
+  
+  
 
   return (
     <div className="flex h-screen bg-gray-50 pt-24">
@@ -218,8 +218,8 @@ const Chat = () => {
         // unreadCounts={unreadCounts}
       />
       {/* Chat bo'limi */}
-      {showChat && (
-        <div className="flex-1 flex flex-col justify-between">
+      {showChat ? (
+        <div className="flex-1 flex flex-col justify-between chat-bg-img">
           <ChatHeader
             userChat={userChat}
             setShowChat={setShowChat}
@@ -229,6 +229,7 @@ const Chat = () => {
             setUsers={setUsers}
             setMessages={setMessages}
             consId={consId}
+            activeUser={activeUser}
           />
           <ChatList
             messages={messages}
@@ -240,7 +241,7 @@ const Chat = () => {
           />
           <SendMessage consId={consId} socket={socket} user={user} />
         </div>
-      )}
+      ) : <div className="w-full h-full hidden md:block"><img src={bgImg} className="w-full h-full object-cover" alt="" /></div>}
     </div>
   );
 };

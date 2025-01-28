@@ -375,7 +375,7 @@
                         onClick={(e) => {
                           e.preventDefault();
                           if (user?.telegram) {
-                            window.open(`https://${user.telegram}`, "_blank");
+                            window.open(`https://${user?.telegram?.replace('@', '')}`, "_blank");
                           } else {
                             setIsModalOpen(true);
                           }
@@ -403,7 +403,7 @@
                                 {t("Profile.UserProfile.telegram")}
                               </span>
                             ) : (
-                              <span>{user?.telegram}</span>
+                              <span>{user?.telegram.replace("@", "")}</span>
                             )}
                           </p>
                         </div>

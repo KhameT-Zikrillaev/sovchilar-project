@@ -139,3 +139,9 @@ html {
   100% { transform: rotate(1turn); }
 }
 
+.chat-bg-img{
+  background-image: url("./assets/images/bg-chat-woman.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
