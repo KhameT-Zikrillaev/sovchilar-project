@@ -126,7 +126,7 @@ export default function FooterLayout() {
                 </a>
                 <a
                   target="_blank"
-                  href="https://www.tiktok.com/@sovchilar.net"
+                  href="https://www.tiktok.com/@sovchilar.net?_t=ZN-8tQv3bx0raw&_r=1"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
                   <span className="text-2xl" title={t("footer.social.tiktok")}>
@@ -135,7 +135,7 @@ export default function FooterLayout() {
                 </a>
                 <a
                   target="_blank"
-                  href="https://www.youtube.com/@sovchilar.net"
+                  href="https://www.youtube.com/@Sovchilar_net"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-rose-500/20 text-white/80 hover:text-rose-400 transition-all duration-300 backdrop-blur-sm hover:scale-110"
                 >
                   <span className="text-2xl" title={t("footer.social.youtube")}>

@@ -6,6 +6,7 @@
     "contactmobile": "Aloqa +(50) 719 33 33",
     "createProfile": "Anketa yaratish",
     "favourite": "Sevimlilar",
+    "home": "Bosh sahifa",
     "instruction": "Qo'llanma",
     "signIn": "Kirish",
     "signUp": "Ro'yxatdan o'tish"
@@ -33,7 +34,7 @@
         },
         "matchmakers": {
           "title": "Qulay qidiruv",
-          "description": "Juftlik topishda samarali va qulay vositalar"
+          "description": "Mos juftlikni topish uchun qulay imkoniyatlar"
         },
         "islamic": {
           "title": "Ishonch qadriyatlari",

@@ -1,11 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Female from "../../assets/images/Female.jpeg";
-import Male from "../../assets/images/Male.jpg";
+import Female1 from "../../assets/images/female-1.jpeg";
+import Female2 from "../../assets/images/female-2.jpg";
+import Female3 from "../../assets/images/female-3.webp";
+import Female4 from "../../assets/images/female-4.jpeg";
+import Female5 from "../../assets/images/female-5.jpg";
+
+import Male1 from "../../assets/images/male-2.jpg";
+import Male2 from "../../assets/images/male-2.jpg";
+import Male3 from "../../assets/images/male-3.jpg";
+import Male4 from "../../assets/images/male-4.jpg";
+import Male5 from "../../assets/images/male-5.webp";
 import { FaHeart } from "react-icons/fa";
 import { useStore } from "../../store/store";
 import { useChatStore } from "../../store/chatStore";
+
+const femaleImages = [Female1, Female2, Female3, Female4, Female5];
+const maleImages = [Male1, Male2, Male3, Male4, Male5];
+
+// Создаем счетчики для мужских и женских фото
+let maleCounter = 0;
+let femaleCounter = 0;
+
+const getNextImage = (gender) => {
+  if (gender === "MALE") {
+    const image = maleImages[maleCounter];
+    maleCounter = (maleCounter + 1) % maleImages.length;
+    return image;
+  } else {
+    const image = femaleImages[femaleCounter];
+    femaleCounter = (femaleCounter + 1) % femaleImages.length;
+    return image;
+  }
+};
 
 export default function UserCard({ user, gender, toggleFavorite, favorites }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -14,6 +42,8 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
   const {addUserChat} = useChatStore()
 
   const accessToken = useStore((state) => state.accessToken);
+
+  const defaultImage = useMemo(() => getNextImage(gender), [gender]);
 
   const getStatusText = () => {
     if (user.maritalStatus === "SINGLE") {
@@ -49,8 +79,9 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
   };
 
   const handleDetailsClick = () => {
-    // Сохраняем id карточки вместо позиции скролла
+    // Сохраняем id карточки и дефолтное изображение
     localStorage.setItem("lastViewedCardId", user.id.toString());
+    localStorage.setItem("defaultUserImage", user?.imageUrl || defaultImage);
     // Переходим на страницу деталей
     navigate(`/user/${user.id}`);
   };
@@ -96,7 +127,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
         )}
 
         <img
-          src={user?.imageUrl || (gender === "MALE" ? Male : Female)}
+          src={user?.imageUrl || defaultImage}
           alt={user?.lastName}
           className={`
             w-full h-full object-cover
