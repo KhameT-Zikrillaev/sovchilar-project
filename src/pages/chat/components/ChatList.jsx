@@ -86,7 +86,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
     <>
       <div
         ref={messagesContainerRef}
-        className={`flex flex-col p-4 overflow-y-auto h-full  ${
+        className={`flex flex-col p-4 overflow-y-scroll h-full  ${
           loading ? "justify-center items-center" : ""
         }`}
         onClick={() => setIsMenuVisible(false)}
