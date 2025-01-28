@@ -112,7 +112,7 @@ export default function Navbar() {
           {user && (
               <Link
                 to="/"
-                className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+                className="hidden md:flex md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
               >
                 {t("navbar.home")}
               </Link>
