@@ -604,6 +604,8 @@
     "chat-delete": "Chatni o'chirish",
     "message-delete": "O'chirish",
     "type-message": "Xabar yozish ...",
-    "send-btn": "Yuborish"
+    "send-btn": "Yuborish",
+    "chat-btn": "Chat",
+    "message-btn": "Xabar"
   }
 }

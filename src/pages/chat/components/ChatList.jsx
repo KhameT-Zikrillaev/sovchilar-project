@@ -149,18 +149,6 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
             >
               {t("chat.message-delete")} <MdDeleteOutline className="text-[20px]" />
             </li>
-            <li
-              onClick={() => handleMenuOptionClick("edit")}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
-            >
-              Tahrirlash
-            </li>
-            <li
-              onClick={() => handleMenuOptionClick("select")}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
-            >
-              Select
-            </li>
           </ul>
         </div>
       )}

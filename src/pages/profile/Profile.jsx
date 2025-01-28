@@ -93,7 +93,7 @@ const Profile = () => {
               className={`bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition font-medium flex-grow flex-basic-0 flex-shrink-[200px]`}
               onClick={goToChat}
             >
-              Chat
+              {t("chat.chat-btn")}
             </button>
             <button
               onClick={() => {

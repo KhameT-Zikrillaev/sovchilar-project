@@ -52,11 +52,8 @@ export const routes = [
   },
   {
     path: "/chat",
-    element: (
-      <ProtectedRoute isAuthenticated={!!JSON?.parse(localStorage.getItem("user-sovchilar"))?.state?.user}>
-        <Chat />
-      </ProtectedRoute>
-    ),
+    element: <Chat />
+    
   },
 ];
 

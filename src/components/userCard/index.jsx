@@ -243,7 +243,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            Message
+            {t("chat.message-btn")}
           </div>
         </div>
       </div>
