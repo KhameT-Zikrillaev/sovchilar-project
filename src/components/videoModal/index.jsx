@@ -1,5 +1,5 @@
 import React from "react";
-import video from '../../assets/images/movieInstruction.mp4';
+
 
 export default function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
