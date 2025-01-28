@@ -232,6 +232,13 @@ export default function Navbar() {
     <div className="flex flex-col space-y-2">
       {user && (
         <>
+          <Link
+            to="/"
+            onClick={scrollToTop}
+            className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+          >
+            {t("navbar.home")}
+          </Link>
           <button
             onClick={() => handleScrollTo("search")}
             className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg flex items-center gap-2"
