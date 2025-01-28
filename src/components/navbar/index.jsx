@@ -112,7 +112,7 @@ export default function Navbar() {
           {user && (
               <Link
                 to="/"
-                className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+                className="hidden md:flex md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
               >
                 {t("navbar.home")}
               </Link>
@@ -232,6 +232,13 @@ export default function Navbar() {
     <div className="flex flex-col space-y-2">
       {user && (
         <>
+          <Link
+            to="/"
+            onClick={scrollToTop}
+            className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+          >
+            {t("navbar.home")}
+          </Link>
           <button
             onClick={() => handleScrollTo("search")}
             className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg flex items-center gap-2"
