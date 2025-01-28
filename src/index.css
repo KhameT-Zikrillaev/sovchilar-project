@@ -163,3 +163,7 @@ html {
   position: relative; /* Ichidagi kontentni yuqori qatlamda ushlab turadi */
 }
 
+.chat-ios-scroll{
+  -webkit-overflow-scrolling: touch;
+}
+
