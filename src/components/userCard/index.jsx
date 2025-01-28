@@ -194,7 +194,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <div
             onClick={handleDetailsClick}
             className={`
@@ -243,8 +243,9 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            Message
+           {t("userCard.chat")}
           </div>
+
         </div>
       </div>
     </div>

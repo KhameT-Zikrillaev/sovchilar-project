@@ -123,7 +123,7 @@ const Profile = () => {
         </div>
       </div>
       <UserProfile />
-
+  
       {/* Form Modal */}
       <FormModal
         isOpen={isModalOpen}

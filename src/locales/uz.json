@@ -5,8 +5,10 @@
     "contact": "Aloqa",
     "contactmobile": "Aloqa +(50) 719 33 33",
     "createProfile": "Anketa yaratish",
-    "signIn": "Ro'yxatdan o'tish",
-    "favourite": "Sevimlilar"
+    "favourite": "Sevimlilar",
+    "instruction": "Qo'llanma",
+    "signIn": "Kirish",
+    "signUp": "Ro'yxatdan o'tish"
   },
   "home": {
     "FirstIntroPage": {
@@ -26,8 +28,8 @@
       },
       "features": {
         "serious": {
-          "title": "Jiddiy niyatlar",
-          "description": "Faqat nikoh uchun samimiy intilganlar"
+          "title": "Birga kelajak sari",
+          "description": "Yagona qalbingizni topish uchun ishonchli joy"
         },
         "matchmakers": {
           "title": "Qulay qidiruv",
@@ -40,7 +42,7 @@
       },
       "callToAction": {
         "title": "Baxtli oila qurish yo'liga tayormisiz?",
-        "description": "Bizning yordamimiz bilan o'z ikkinchi yarmini topgan minglab insonlarga qo'shiling",
+        "description": "Bizning Yordamimiz Bilan Oʻz juftini topgan Baxtlilar Qatoriga qoʻshiling!",
         "button": "Hoziroq boshlash"
       }
     },
@@ -407,7 +409,8 @@
     "nationality": "Millati",
     "education": "Ma'lumoti",
     "description": "Talablar:",
-    "moreDetails": "Batafsil"
+    "moreDetails": "Batafsil",
+    "chat": "Yozish"
   },
   "UserDetails": {
     "userNotFound": "Foydalanuvchi topilmadi",
