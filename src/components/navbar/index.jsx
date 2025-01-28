@@ -109,6 +109,14 @@ export default function Navbar() {
          
 
           {/* Основная навигация */}
+          {user && (
+              <Link
+                to="/"
+                className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+              >
+                {t("navbar.home")}
+              </Link>
+            )}
           <div className="hidden md:flex  items-center space-x-2">
             {user && (
               <>
@@ -148,7 +156,8 @@ export default function Navbar() {
                 )}
               </Link>
             )}
-
+            
+            
             {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~login~~~~~~~~~~~~~~~~~~~ */}
             {!user &&(
                <Link to="/login" className="px-6 py-1 sm:py-1 lg:py-2 text-rose-500 rounded-full border-2 hover:text-white border-rose-500 hover:bg-rose-500 transition-colors duration-300 flex items-center gap-2">{t("navbar.signIn")}</Link>
@@ -184,7 +193,7 @@ export default function Navbar() {
 
           {/* Language Selector - теперь виден всегда */}
           <LanguageSelector />
-
+           
           {/* Мобильное меню */}
           <div className="md:hidden">
             <button

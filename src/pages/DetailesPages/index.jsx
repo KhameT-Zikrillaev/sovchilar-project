@@ -4,8 +4,6 @@ import { ImCancelCircle } from "react-icons/im";
 import { useTranslation } from "react-i18next";
 import { useSingleUser } from "./hooks/useSingleuser";
 import Loading from "../../components/Loading/index";
-import Female from "../../assets/images/Female.jpeg";
-import Male from "../../assets/images/Male.jpg";
 import { useChatStore } from "../../store/chatStore";
 
 function UserDetails() {
@@ -16,13 +14,20 @@ function UserDetails() {
   const [isImg, setIsImg] = useState(false);
   const { addUserChat } = useChatStore();
   const navigate = useNavigate();
-  // console.log(id);
+  const [defaultImage, setDefaultImage] = useState(null);
+
+  useEffect(() => {
+    // Получаем сохраненное дефолтное изображение при монтировании компонента
+    const savedImage = localStorage.getItem("defaultUserImage");
+    if (savedImage) {
+      setDefaultImage(savedImage);
+    }
+  }, []);
+
   const fetchUser = async () => {
     const user = await getSingleUser(id);
     setUserData(user?.data);
-    // console.log(user.data.address);
   };
-  // console.log(userData);
 
   useEffect(() => {
     fetchUser();
@@ -45,7 +50,7 @@ function UserDetails() {
       </div>
     );
   }
- console.log(userData);
+
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8 mt-[99px]">
@@ -83,10 +88,7 @@ function UserDetails() {
                     onClick={() => {
                       userData.imageUrl ? setIsImg(true) : setIsImg(false);
                     }}
-                    src={
-                      userData?.imageUrl ||
-                      (userData?.gender === "MALE" ? Male : Female)
-                    }
+                    src={userData?.imageUrl || defaultImage}
                     alt={userData?.lastName}
                     className="w-full h-full object-cover cursor-pointer"
                   />
@@ -132,7 +134,7 @@ function UserDetails() {
               navigate(`/chat`)
             }}
             
-             className="px-2  w-[60%] flex justify-center gap-2  mx-auto px-8 py-2 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700">
+             className="px-2  w-[60%] flex justify-center gap-2  px-8 py-2 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700">
      
               {t('userCard.chat')}
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
