@@ -21,10 +21,33 @@ const Chat = () => {
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [device, setDevice] = useState(null);
   
   // const [unreadCounts, setUnreadCounts] = useState({});
 
   // Socket ulanish va hodisalarni sozlash
+
+  const getUserDevice = ()=> {
+    console.log(navigator.userAgent);
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+  
+    if (/iphone/.test(userAgent)) {
+      return "iPhone";
+    } else if (/android/.test(userAgent)) {
+      return "Android";
+    } else {
+      return "Kompyuter";
+    }
+  };
+  
+  // Foydalanish
+
+  useEffect(() => {
+    setDevice(getUserDevice());
+  }, [])
+  
+  
   
   useEffect(() => {
     if (!user?.id) return;
@@ -203,7 +226,7 @@ const Chat = () => {
   
 
   return (
-    <div className="flex h-screen bg-gray-50 pt-24">
+    <div className={`flex ${device === "iPhone" ? "h-[95vh]" : "h-screen"}  bg-gray-50 pt-24`}>
       {/* Foydalanuvchi ro'yxati */}
       <ChatUsers
         activeUser={activeUser}
