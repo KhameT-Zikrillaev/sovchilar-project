@@ -57,7 +57,7 @@ const Chat = () => {
 
     // Brauzerni aniqlash
     const isChrome =
-      /chrome/.test(userAgent) && !/edg|opr|brave/.test(userAgent);
+      /chrome/.test(userAgent) ;
     const isFirefox = /firefox/.test(userAgent);
     const isSafari = /safari/.test(userAgent) && !/chrome/.test(userAgent);
     const isEdge = /edg/.test(userAgent);
