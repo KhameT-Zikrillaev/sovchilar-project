@@ -102,10 +102,10 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
         ) : messages?.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-60 text-center bg-red-100/50 rounded-lg p-6 backdrop-blur-md shadow-lg">
             <p className="text-lg font-semibold text-red-600 drop-shadow-md">
-              📩 Hozircha xabarlar yo‘q
+              📩 {t("chat.not-message-1")}
             </p>
             <p className="text-sm text-red-500 mt-2 drop-shadow-md max-w-[260px]">
-              Muloqotni boshlash uchun birinchi bo‘lib xabar yuboring!
+            {t("chat.not-message-2")}
             </p>
           </div>
         ) : (

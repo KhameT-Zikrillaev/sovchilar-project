@@ -55,13 +55,13 @@ function UserDetails() {
     <>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8 mt-[99px]">
         <div className="max-w-7xl mx-auto">
-          <Link
-            to="/"
+          <div
             onClick={() => {
               // Сохраняем флаг, что нужно прокрутить к карточке после возврата
               localStorage.setItem('scrollToCard', 'true');
+              navigate(-1)
             }}
-            className="inline-flex items-center mb-8 text-gray-600 hover:text-gray-800 transition-colors"
+            className="inline-flex items-center mb-8 cursor-pointer text-gray-600 hover:text-gray-800 transition-colors"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -77,7 +77,7 @@ function UserDetails() {
               />
             </svg>
             {t("UserDetails.back")}
-          </Link>
+          </div>
 
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Верхняя секция с фото и основной информацией */}
