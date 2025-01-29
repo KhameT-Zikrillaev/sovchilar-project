@@ -261,7 +261,7 @@ const Chat = () => {
   return (
     <div
       className={`flex ${
-        device === "iPhone" ?"h-[90vh]"
+        device === "iPhone" || device === "Android" ?"h-[90vh]"
           : "h-screen"
       }  bg-gray-50 pt-24`}
     >
