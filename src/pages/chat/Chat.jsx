@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useState
-} from "react";
+import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useChatStore } from "../../store/chatStore";
 import { useStore } from "../../store/store";
@@ -9,7 +6,7 @@ import ChatHeader from "./components/ChatHeader";
 import ChatUsers from "./components/ChatUsers";
 import SendMessage from "./components/SendMessage";
 import ChatList from "./components/ChatList";
-import bgImg from "../../assets/images/left-bg.jpg"
+import bgImg from "../../assets/images/left-bg.jpg";
 
 const Chat = () => {
   const { userChat, addUserChat } = useChatStore();
@@ -21,11 +18,84 @@ const Chat = () => {
   const [consId, setConsId] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+  const [device, setDevice] = useState(null);
+  const [browserType, setBrowserType] = useState(null);
+
   // const [unreadCounts, setUnreadCounts] = useState({});
 
   // Socket ulanish va hodisalarni sozlash
-  
+
+  // const getUserDevice = ()=> {
+  //   console.log(navigator.userAgent);
+
+  //   const userAgent = navigator.userAgent.toLowerCase();
+
+  //   if (/iphone/.test(userAgent)) {
+  //     return "iPhone";
+  //   } else if (/android/.test(userAgent)) {
+  //     return "Android";
+  //   } else {
+  //     return "Kompyuter";
+  //   }
+  // };
+  const getUserDeviceAndBrowser = () => {
+    console.log(navigator.userAgent);
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    let device = "Kompyuter";
+    let browser = "Noma'lum brauzer";
+
+    // Qurilma turini aniqlash
+    const isIphone = /iphone/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+
+    if (isIphone) {
+      device = "iPhone";
+    } else if (isAndroid) {
+      device = "Android";
+    }
+
+    // Brauzerni aniqlash
+    const isChrome =
+      /chrome/.test(userAgent) ;
+    const isFirefox = /firefox/.test(userAgent);
+    const isSafari = /safari/.test(userAgent) && !/chrome/.test(userAgent);
+    const isEdge = /edg/.test(userAgent);
+    const isOpera = /opr/.test(userAgent) || /opera/.test(userAgent);
+    const isBrave = /brave/.test(userAgent);
+
+    if (isChrome) {
+      browser = "Google";
+    } else if (isFirefox) {
+      browser = "Mozilla Firefox";
+    } else if (isSafari) {
+      browser = "Safari";
+    } else if (isEdge) {
+      browser = "Microsoft Edge";
+    } else if (isOpera) {
+      browser = "Opera";
+    } else if (isBrave) {
+      browser = "Brave";
+    }
+
+    // iPhone + Chrome tekshirish
+    const isIphoneChrome = isIphone && isChrome;
+
+    return { device, browser, isIphoneChrome };
+  };
+
+  // Foydalanish
+
+  // Foydalanish
+
+  useEffect(() => {
+    setDevice(getUserDeviceAndBrowser().device);
+    setBrowserType(getUserDeviceAndBrowser().browser);
+  }, []);
+
+  console.log(device);
+  console.log(browserType);
+
   useEffect(() => {
     if (!user?.id) return;
 
@@ -37,7 +107,6 @@ const Chat = () => {
 
     socketInstance.on("connect", () => {
       socketInstance.emit("login", { userId: user?.id });
-      
     });
     // socketInstance.emit("getUnreadCounts", { userId: user?.id });
 
@@ -46,7 +115,7 @@ const Chat = () => {
     });
 
     // socketInstance.on("newMessage", (data) => {
-      
+
     //   if (data?.sender?.id === user?.id || data?.sender?.id === userChat?.id) {
     //     setMessages((prevMessages) => [...prevMessages, data]);
 
@@ -76,22 +145,19 @@ const Chat = () => {
 
     socketInstance.on("conversation-messages", (data) => {
       setMessages(data?.data || []);
-      
+
       setLoading(false);
-      
+
       // setUnreadCounts((prevCounts) => ({
       //   ...prevCounts,
       //   [consId]: 0, // Suhbat ochilganda o'qilmaganlarni 0 ga tushirish
       // }));
     });
-    
 
-    socketInstance.on('messagesDeleted', (data) => {
-
+    socketInstance.on("messagesDeleted", (data) => {
       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== data?.messageIds[0])
       );
-      
     });
 
     socketInstance.emit("get-conversations", { userId: user?.id });
@@ -122,16 +188,14 @@ const Chat = () => {
       }
     });
 
-    socketInstance.on('conversationDeleted', (data) => {
-
+    socketInstance.on("conversationDeleted", (data) => {
       setUsers((prevUsers) =>
-        prevUsers?.filter((u) => u?.id !== data?.conversationId)  
+        prevUsers?.filter((u) => u?.id !== data?.conversationId)
       );
-        setActiveUser(null);
-        setConsId(null);
-        setMessages([]);
-        setShowChat(false);
-      
+      setActiveUser(null);
+      setConsId(null);
+      setMessages([]);
+      setShowChat(false);
     });
 
     return () => {
@@ -149,9 +213,8 @@ const Chat = () => {
 
   useEffect(() => {
     if (!socket) return;
-  
-    const handleNewMessage = (data) => {
 
+    const handleNewMessage = (data) => {
       setUsers((prevUsers) => {
         const isAlreadyAdded = prevUsers.some(
           (u) => u?.participants[0]?.id === data?.sender?.id
@@ -166,20 +229,15 @@ const Chat = () => {
                   imageUrl: data?.sender?.imageUrl,
                 },
               ],
-            },     
+            },
             ...prevUsers,
-            
           ];
         }
         return prevUsers;
-      })
+      });
       // addUserChat(data?.sender);
-      
-      
-      if (
-        data?.sender?.id === user?.id ||
-        data?.sender?.id === userChat?.id
-      ) {
+
+      if (data?.sender?.id === user?.id || data?.sender?.id === userChat?.id) {
         setMessages((prevMessages) => [...prevMessages, data]);
       }
 
@@ -192,18 +250,21 @@ const Chat = () => {
         });
       }
     };
-  
+
     socket.on("newMessage", handleNewMessage);
-  
+
     return () => {
       socket.off("newMessage", handleNewMessage);
     };
   }, [socket, userChat]);
-  
-  
 
   return (
-    <div className="flex h-screen bg-gray-50 pt-24">
+    <div
+      className={`flex ${
+        device === "iPhone" || device === "Android" ?"h-[90vh]"
+          : "h-screen"
+      }  bg-gray-50 pt-24`}
+    >
       {/* Foydalanuvchi ro'yxati */}
       <ChatUsers
         activeUser={activeUser}
@@ -241,7 +302,11 @@ const Chat = () => {
           />
           <SendMessage consId={consId} socket={socket} user={user} />
         </div>
-      ) : <div className="w-full h-full hidden md:block"><img src={bgImg} className="w-full h-full object-cover" alt="" /></div>}
+      ) : (
+        <div className="w-full h-full hidden md:block">
+          <img src={bgImg} className="w-full h-full object-cover" alt="" />
+        </div>
+      )}
     </div>
   );
 };

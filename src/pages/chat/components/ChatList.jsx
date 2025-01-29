@@ -11,9 +11,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const [isMessageDeleted, setIsMessageDeleted] = useState(false);
   const holdTimeout = useRef(null);
-  const {t} = useTranslation()
-
-  
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!isMessageDeleted) {
@@ -38,18 +36,22 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const handleContextMenu = (e, messageId) => {
     e.preventDefault();
     setSelectedMessageId(messageId);
-    setMenuPosition({ x: e.clientX, y: e.clientY });
+    setMenuPosition({ x: e.clientX - 100, y: e.clientY - 100 });
     setIsMenuVisible(true);
   };
 
   const handleStartHold = (e, messageId) => {
     holdTimeout.current = setTimeout(() => {
       setSelectedMessageId(messageId);
-      const x = e.touches ? e.touches[0].clientX - 100: e.clientX - 100;
-      const y = e.touches ? e.touches[0].clientY - 100: e.clientY - 100;
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
       setMenuPosition({ x, y });
       setIsMenuVisible(true);
-    }, 500);
+    }, 3000); // 3 sekund
+  };
+
+  const handleEndHold = () => {
+    clearTimeout(holdTimeout.current); // Hold to'xtatildi
   };
 
   const handleMenuOptionClick = (option) => {
@@ -86,7 +88,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
     <>
       <div
         ref={messagesContainerRef}
-        className={`flex flex-col p-4 overflow-y-auto h-full  ${
+        className={`flex flex-col p-4 overflow-y-scroll h-full scroll-smooth relative chat-ios-scroll  ${
           loading ? "justify-center items-center" : ""
         }`}
         onClick={() => setIsMenuVisible(false)}
@@ -114,9 +116,11 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               onMouseDown={(e) =>
                 msg?.sender?.id === user?.id && handleStartHold(e, msg?.id)
               }
+              onMouseUp={handleEndHold}
               onTouchStart={(e) =>
                 msg?.sender?.id === user?.id && handleStartHold(e, msg?.id)
               }
+              onTouchEnd={handleEndHold}
             >
               <span>{msg?.message}</span>
               <span className="absolute right-[4px] bottom-[2px] text-[12px] text-gray-600">
@@ -147,7 +151,8 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               onClick={() => handleMenuOptionClick("delete")}
               className="p-2 hover:bg-gray-100 cursor-pointer text-red-600 font-medium flex items-center gap-1"
             >
-              {t("chat.message-delete")} <MdDeleteOutline className="text-[20px]" />
+              {t("chat.message-delete")}{" "}
+              <MdDeleteOutline className="text-[20px]" />
             </li>
           </ul>
         </div>
@@ -161,7 +166,9 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
         onCancel={cancelDeleteMessage}
         okText="O'chirish"
         cancelText="Bekor qilish"
-        okButtonProps={{ style: { backgroundColor: "#DC2626", borderColor: "#DC2626" } }}
+        okButtonProps={{
+          style: { backgroundColor: "#DC2626", borderColor: "#DC2626" },
+        }}
       >
         <p>Ushbu xabarni o‘chirishni xohlaysizmi?</p>
       </Modal>
