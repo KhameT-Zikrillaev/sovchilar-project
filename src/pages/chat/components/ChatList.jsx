@@ -89,12 +89,25 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
       <div
         ref={messagesContainerRef}
         className={`flex flex-col p-4 overflow-y-scroll h-full scroll-smooth relative chat-ios-scroll  ${
-          loading ? "justify-center items-center" : ""
+          loading
+            ? "justify-center items-center"
+            : messages?.length === 0
+            ? "justify-center items-center"
+            : ""
         }`}
         onClick={() => setIsMenuVisible(false)}
       >
         {loading ? (
           <div className="loader"></div>
+        ) : messages?.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-60 text-center bg-red-100/50 rounded-lg p-6 backdrop-blur-md shadow-lg">
+            <p className="text-lg font-semibold text-red-600 drop-shadow-md">
+              📩 Hozircha xabarlar yo‘q
+            </p>
+            <p className="text-sm text-red-500 mt-2 drop-shadow-md max-w-[260px]">
+              Muloqotni boshlash uchun birinchi bo‘lib xabar yuboring!
+            </p>
+          </div>
         ) : (
           messages?.map((msg, index) => (
             <div

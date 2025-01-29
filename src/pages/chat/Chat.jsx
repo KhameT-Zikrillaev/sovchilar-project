@@ -39,7 +39,6 @@ const Chat = () => {
   //   }
   // };
   const getUserDeviceAndBrowser = () => {
-    console.log(navigator.userAgent);
 
     const userAgent = navigator.userAgent.toLowerCase();
     let device = "Kompyuter";
@@ -92,9 +91,6 @@ const Chat = () => {
     setDevice(getUserDeviceAndBrowser().device);
     setBrowserType(getUserDeviceAndBrowser().browser);
   }, []);
-
-  console.log(device);
-  console.log(browserType);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -261,7 +257,7 @@ const Chat = () => {
   return (
     <div
       className={`flex ${
-        device === "iPhone" || device === "Android" ?"h-[90vh]"
+        device === "iPhone" || device === "Android" ? "h-[90vh]"
           : "h-screen"
       }  bg-gray-50 pt-24`}
     >

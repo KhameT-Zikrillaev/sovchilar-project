@@ -63,7 +63,7 @@ const ChatUsers = ({
         />
       </div>
       <ul className="h-full overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 pb-14 px-1">
-        {filteredUsers?.map((user, index) => (
+        {filteredUsers?.length > 0 ? filteredUsers?.map((user, index) => (
           <li
             key={index}
             className={`flex gap-3 items-center border-b justify-between p-2 hover:bg-red-100 cursor-pointer rounded-md ${
@@ -97,7 +97,7 @@ const ChatUsers = ({
               </span>
             </div>
           </li>
-        ))}
+        )) : <div style={{ padding: '20px', backgroundColor: '#f8d7da', color: '#721c24', border: '1px solid #f5c6cb', borderRadius: '5px', textAlign: 'center' }}>Chatlar mavjud emas</div>}
       </ul>
     </div>
   );
