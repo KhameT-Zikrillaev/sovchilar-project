@@ -173,17 +173,19 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
 
       {/* Modal oyna */}
       <Modal
-        title="Xabarni o'chirish"
+        centered
+        title={t("chat.delete-modal.title")}
         open={isModalVisible}
         onOk={handleDeleteMessage}
         onCancel={cancelDeleteMessage}
-        okText="O'chirish"
-        cancelText="Bekor qilish"
+        okText={t("chat.delete-modal.ok")}
+        cancelText={t("chat.delete-modal.cancel")}
+        width={300}
         okButtonProps={{
           style: { backgroundColor: "#DC2626", borderColor: "#DC2626" },
         }}
       >
-        <p>Ushbu xabarni o‘chirishni xohlaysizmi?</p>
+        <p>{t("chat.delete-modal.want-delete")}</p>
       </Modal>
     </>
   );

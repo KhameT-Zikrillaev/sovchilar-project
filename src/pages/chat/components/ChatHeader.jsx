@@ -54,6 +54,15 @@ const ChatHeader = ({
   const menu = (
     <Menu>
       <Menu.Item
+        key="profile"
+        onClick={handleDetailsClick}
+      >
+        <div className="flex items-center gap-1 text-[16px] text-sky-600">
+        <FaRegUser className="text-[20px]" />{t("chat.profile")}
+          
+        </div>
+      </Menu.Item>
+      <Menu.Item
         key="delete"
         onClick={() => deleteConversation(consId, userChat?.id)}
       >
@@ -63,15 +72,7 @@ const ChatHeader = ({
           
         </div>
       </Menu.Item>
-      <Menu.Item
-        key="profile"
-        onClick={handleDetailsClick}
-      >
-        <div className="flex items-center gap-1 text-[16px] text-sky-600">
-        <FaRegUser className="text-[20px]" />{t("chat.profile")}
-          
-        </div>
-      </Menu.Item>
+      
     </Menu>
   );
 

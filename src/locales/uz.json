@@ -614,6 +614,12 @@
     "type-message": "Xabar yozish ...",
     "send-btn": "Yuborish",
     "chat-btn": "Chat",
-    "message-btn": "Xabar"
+    "message-btn": "Xabar",
+    "delete-modal": {
+      "title": "Xabarni o'chirish",
+      "want-delete": "Ushbu xabarni o‘chirishni xohlaysizmi?",
+      "ok": "O'chirish",
+      "cancel": "Bekor qilish"
+    }
   }
 }
