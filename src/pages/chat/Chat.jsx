@@ -262,7 +262,7 @@ const Chat = () => {
     <div
       className={`flex ${
         device === "iPhone" && browserType === "Google"
-          ? "h-[95vh]"
+          ? "h-[93vh]"
           : device === "iPhone" && browserType === "Safari"
           ? "h-[90vh]"
           : "h-screen"
