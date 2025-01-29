@@ -112,17 +112,15 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
           messages?.map((msg, index) => (
             <div
               key={index}
-              style={{
-                borderRadius:
-                  msg?.sender?.id !== user?.id
-                    ? "20px 20px 20px 0"
-                    : "20px 20px 0 20px",
-              }}
-              className={`my-2 p-3 pb-[14px] bg-white border rounded-lg max-w-xs min-w-[100px] relative break-words overflow-clip ${
+              className={`my-2 p-3 pb-[14px] bg-white border rounded-[20px] w-fit max-w-[80%] md:max-w-[60%] relative break-words overflow-hidden ${
                 msg?.sender?.id === user?.id
-                  ? " self-end border-red-500"
-                  : " self-start border-gray-300"
+                  ? "self-end border-red-500"
+                  : "self-start border-gray-300"
               }`}
+              style={{
+                borderBottomLeftRadius: msg?.sender?.id !== user?.id ? "4px" : "20px",
+                borderBottomRightRadius: msg?.sender?.id === user?.id ? "4px" : "20px",
+              }}
               onContextMenu={(e) =>
                 msg?.sender?.id === user?.id && handleContextMenu(e, msg?.id)
               }
@@ -141,6 +139,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               </span>
             </div>
           ))
+          
         )}
       </div>
 
