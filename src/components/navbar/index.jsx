@@ -278,7 +278,7 @@ export default function Navbar() {
           {t("navbar.instruction")}
         </button>
       )}
-   {!user &&(
+      {!user &&(
                <Link to="/login"
                 onClick={scrollToTop}
                className="px-2 w-[120px] text-center text-rose-500 py-1 border-2 border-rose-500 hover:text-white  rounded-lg shadow hover:bg-red-700">{t("navbar.signIn")}</Link>
