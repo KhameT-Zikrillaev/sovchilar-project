@@ -30,15 +30,15 @@
       "features": {
         "serious": {
           "title": "Birga kelajak sari",
-          "description": "Yagona qalbingizni topish uchun ishonchli joy"
+          "description": "Yagona qalbingizni topish uchun ishonchli joy!"
         },
         "matchmakers": {
           "title": "Qulay qidiruv",
-          "description": "Mos juftlikni topish uchun qulay imkoniyatlar"
+          "description": "Mos juftlikni topish uchun qulay imkoniyatlar!"
         },
         "islamic": {
           "title": "Ishonch qadriyatlari",
-          "description": "Har bir muloqot bosqichida ochiqlik va hurmat"
+          "description": "Har bir muloqot bosqichida ochiqlik va hurmat!"
         }
       },
       "callToAction": {
@@ -326,7 +326,8 @@
       "requirementsPlaceholder": "O'zingiz haqingizda va qanday turmush o'rtog'i izlayotganingiz haqida yozing...",
       "toastMessages": {
         "profileCreatedSuccess": "Anketa muvaffaqiyatli yaratildi",
-        "profileCreationError": "Anketa yaratishda xatolik"
+        "profileCreationError": "Anketa yaratishda xatolik",
+        "fileSizeError": "Fayl hajmi 1MB dan oshmasligi kerak"
       }
     },
     "SuccessModal": {
@@ -564,7 +565,7 @@
     "btn": {
       "add": "Anketa to'ldirish",
       "edit": "Anketa o'zgartirish",
-      "success": "Bahtimni toptim",
+      "success": "Bahtimni topdim",
       "logout": "Profildan chiqish"
     },
     "UserProfile": {

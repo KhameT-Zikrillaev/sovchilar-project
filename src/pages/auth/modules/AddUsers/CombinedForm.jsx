@@ -75,12 +75,19 @@ const CombinedForm = ({ handleCloseModal }) => {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
+    
+    // Проверка размера файла (5MB = 5 * 1024 * 1024 bytes)
+    if (file.size > 1 * 1024 * 1024) {
+      toast.error(t("auth.CombinedForm.toastMessages.fileSizeError"));
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", file);
 
     const response = await api.post("/file/upload", formData, {
       headers: {
-        "Content-Type": "multipart/form-data", // Fayl yuborish uchun content type
+        "Content-Type": "multipart/form-data",
       },
     });
     if (response.status > 199 && response.status < 300) {
@@ -176,8 +183,9 @@ const CombinedForm = ({ handleCloseModal }) => {
               </div>
             </label>
           </div>
+          <span className="text-xs text-green-500!">{t("auth.CombinedForm.toastMessages.fileSizeError")}</span>
         </div>
-
+ 
         <div className="bg-gray-50 rounded-2xl space-y-6">
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
