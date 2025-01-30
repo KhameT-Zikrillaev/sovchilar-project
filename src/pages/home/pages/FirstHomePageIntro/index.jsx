@@ -117,9 +117,7 @@ export default function FirstHomePageIntro() {
                 >
                   <span>
                     {accessToken
-                      ? `${t("home.FirstIntroPage.signIn")} (${
-                          user?.firstName
-                        })`
+                      ? `${t("chat.profile")} `
                       : t("home.FirstIntroPage.createProfile")}
                   </span>
                   {!accessToken && (

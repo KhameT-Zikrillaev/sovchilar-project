@@ -266,7 +266,7 @@ const Chat = () => {
     <div
       className={`flex ${ device === "Linux" ? "h-screen" :
         device === "iPhone" || device === "Android" ? "h-[90vh]"
-          : ""
+          : "h-screen"
       }  bg-gray-50 pt-16`}
     >
       {/* Foydalanuvchi ro'yxati */}
