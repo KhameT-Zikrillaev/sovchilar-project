@@ -28,7 +28,7 @@ const LanguageSelector = () => {
   const { i18n } = useTranslation();
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 mx-2">
       <button
         onClick={() => i18n.changeLanguage("ru")}
         className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === "ru" ? "border-rose-500" : "border-transparent"
@@ -100,7 +100,7 @@ export default function Navbar() {
           {!user &&(
              <button
              onClick={handleOpenModal}
-             className="px-2  hidden md:block py-1 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
+             className="px-2  hidden lg:block py-1 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
            >
               {t("navbar.instruction")}
               </button>
@@ -112,12 +112,12 @@ export default function Navbar() {
           {user && (
               <Link
                 to="/"
-                className="hidden md:flex md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+                className="hidden lg:flex md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
               >
                 {t("navbar.home")}
               </Link>
             )}
-          <div className="hidden md:flex  items-center space-x-2">
+          <div className="hidden lg:flex  items-center space-x-2">
             {user && (
               <>
                 <button
@@ -195,7 +195,7 @@ export default function Navbar() {
           <LanguageSelector />
            
           {/* Мобильное меню */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-600 hover:text-rose-500 focus:outline-none"
@@ -228,7 +228,7 @@ export default function Navbar() {
 
         {/* Мобильное меню */}
         {isOpen && (
-  <div className="md:hidden py-4">
+  <div className="lg:hidden py-4">
     <div className="flex flex-col space-y-2">
       {user && (
         <>
