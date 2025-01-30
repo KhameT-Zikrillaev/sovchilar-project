@@ -15,8 +15,9 @@ export default function Home() {
         ko'rishda davom etasiz!
       </p> */}
       <Comments />
-      <Slidernext />
+      
       <Faq />
+      <Slidernext />
     </div>
   );
 }

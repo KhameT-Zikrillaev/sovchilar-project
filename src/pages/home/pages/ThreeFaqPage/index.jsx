@@ -86,7 +86,7 @@ export default function ThreeFaqPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-blue-50 py-16">
+    <div className="py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-center font-bold text-[24px]  md:text-[30px]   lg:text-[40px] mb-4 bg-gradient-to-r from-rose-700 to-rose-600 text-transparent bg-clip-text">
           {t(pageContent.titleKey)}

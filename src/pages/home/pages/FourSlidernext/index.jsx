@@ -10,7 +10,7 @@ import photo7 from "./../../../../assets/images/slide-7-sovchilar.png"
 export default function index() {
   return (
     <>
-    <div className=''>
+    <div className='py-12'>
     <Marquee className=''>
  
  <img className='w-[200px] mr-20' src={photo1} alt="" />
