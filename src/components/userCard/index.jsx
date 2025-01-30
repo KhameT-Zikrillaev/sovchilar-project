@@ -41,7 +41,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
   const navigate = useNavigate();
   const {addUserChat} = useChatStore()
 
-  const accessToken = useStore((state) => state.accessToken);
+  const accessToken = useStore((state) => state?.accessToken);
 
   const defaultImage = useMemo(() => getNextImage(gender), [gender]);
 
@@ -110,7 +110,7 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative h-80 overflow-hidden group">
-        {accessToken && (
+        
           <div className="absolute z-10 top-3 left-3">
             <FaHeart
               onClick={(e) => {
@@ -118,13 +118,13 @@ export default function UserCard({ user, gender, toggleFavorite, favorites }) {
                 toggleFavorite(user);
               }}
               className={`text-[30px] cursor-pointer ${
-                favorites?.some((fav) => fav.favourite?.id === user?.id)
+                favorites?.some((fav) => fav?.favourite?.id === user?.id)
                   ? "text-red-500"
                   : "text-white"
               }`}
             />
           </div>
-        )}
+        
 
         <img
           src={user?.imageUrl || defaultImage}

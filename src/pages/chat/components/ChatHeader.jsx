@@ -5,6 +5,8 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { GrFormPreviousLink } from "react-icons/gr";
 import { useChatStore } from "../../../store/chatStore";
+import { useNavigate } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa";
 
 const ChatHeader = ({
   userChat,
@@ -18,6 +20,7 @@ const ChatHeader = ({
 }) => {
   const { t } = useTranslation();
   const {removeUserChat} = useChatStore()
+  const navigate = useNavigate()
 
   const deleteConversation = useCallback(
     (conversationId, userId) => {
@@ -40,17 +43,36 @@ const ChatHeader = ({
     [socket]
   );
 
+  const handleDetailsClick = () => {
+    // Сохраняем id карточки и дефолтное изображение
+    // localStorage.setItem("lastViewedCardId", userChat?.id.toString());
+    // localStorage.setItem("defaultUserImage", userChat?.imageUrl || defaultImage);
+    // Переходим на страницу деталей
+    navigate(`/user/${userChat?.id}`);
+  };
+
   const menu = (
     <Menu>
+      <Menu.Item
+        key="profile"
+        onClick={handleDetailsClick}
+      >
+        <div className="flex items-center gap-1 text-[16px] text-sky-600">
+        <FaRegUser className="text-[20px]" />{t("chat.profile")}
+          
+        </div>
+      </Menu.Item>
       <Menu.Item
         key="delete"
         onClick={() => deleteConversation(consId, userChat?.id)}
       >
         <div className="flex items-center gap-1 text-[16px] text-red-600">
+        <MdDeleteOutline className="text-[20px]" />
           {t("chat.chat-delete")}
-          <MdDeleteOutline className="text-[20px]" />
+          
         </div>
       </Menu.Item>
+      
     </Menu>
   );
 

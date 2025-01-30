@@ -89,27 +89,38 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
       <div
         ref={messagesContainerRef}
         className={`flex flex-col p-4 overflow-y-scroll h-full scroll-smooth relative chat-ios-scroll  ${
-          loading ? "justify-center items-center" : ""
+          loading
+            ? "justify-center items-center"
+            : messages?.length === 0
+            ? "justify-center items-center"
+            : ""
         }`}
         onClick={() => setIsMenuVisible(false)}
       >
         {loading ? (
           <div className="loader"></div>
+        ) : messages?.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-60 text-center bg-red-100/50 rounded-lg p-6 backdrop-blur-md shadow-lg">
+            <p className="text-lg font-semibold text-red-600 drop-shadow-md">
+              📩 {t("chat.not-message-1")}
+            </p>
+            <p className="text-sm text-red-500 mt-2 drop-shadow-md max-w-[260px]">
+            {t("chat.not-message-2")}
+            </p>
+          </div>
         ) : (
           messages?.map((msg, index) => (
             <div
               key={index}
-              style={{
-                borderRadius:
-                  msg?.sender?.id !== user?.id
-                    ? "20px 20px 20px 0"
-                    : "20px 20px 0 20px",
-              }}
-              className={`my-2 p-3 pb-[14px] bg-white border rounded-lg max-w-xs min-w-[100px] relative break-words overflow-clip ${
+              className={`my-2 p-3 pb-[14px] bg-white border rounded-[20px] w-fit max-w-[80%] md:max-w-[60%] relative break-words overflow-hidden ${
                 msg?.sender?.id === user?.id
-                  ? " self-end border-red-500"
-                  : " self-start border-gray-300"
+                  ? "self-end border-red-500"
+                  : "self-start border-gray-300"
               }`}
+              style={{
+                borderBottomLeftRadius: msg?.sender?.id !== user?.id ? "4px" : "20px",
+                borderBottomRightRadius: msg?.sender?.id === user?.id ? "4px" : "20px",
+              }}
               onContextMenu={(e) =>
                 msg?.sender?.id === user?.id && handleContextMenu(e, msg?.id)
               }
@@ -128,6 +139,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               </span>
             </div>
           ))
+          
         )}
       </div>
 
@@ -160,17 +172,19 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
 
       {/* Modal oyna */}
       <Modal
-        title="Xabarni o'chirish"
+        centered
+        title={t("chat.delete-modal.title")}
         open={isModalVisible}
         onOk={handleDeleteMessage}
         onCancel={cancelDeleteMessage}
-        okText="O'chirish"
-        cancelText="Bekor qilish"
+        okText={t("chat.delete-modal.ok")}
+        cancelText={t("chat.delete-modal.cancel")}
+        width={300}
         okButtonProps={{
           style: { backgroundColor: "#DC2626", borderColor: "#DC2626" },
         }}
       >
-        <p>Ushbu xabarni o‘chirishni xohlaysizmi?</p>
+        <p>{t("chat.delete-modal.want-delete")}</p>
       </Modal>
     </>
   );

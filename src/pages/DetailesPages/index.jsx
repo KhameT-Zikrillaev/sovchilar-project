@@ -55,13 +55,13 @@ function UserDetails() {
     <>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8 mt-[99px]">
         <div className="max-w-7xl mx-auto">
-          <Link
-            to="/"
+          <div
             onClick={() => {
               // Сохраняем флаг, что нужно прокрутить к карточке после возврата
-              localStorage.setItem('scrollToCard', 'true');
+              localStorage.setItem("scrollToCard", "true");
+              navigate(-1);
             }}
-            className="inline-flex items-center mb-8 text-gray-600 hover:text-gray-800 transition-colors"
+            className="inline-flex items-center mb-8 cursor-pointer text-gray-600 hover:text-gray-800 transition-colors"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -77,7 +77,7 @@ function UserDetails() {
               />
             </svg>
             {t("UserDetails.back")}
-          </Link>
+          </div>
 
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             {/* Верхняя секция с фото и основной информацией */}
@@ -93,7 +93,6 @@ function UserDetails() {
                     className="w-full h-full object-cover cursor-pointer"
                   />
                 </div>
-                
               </div>
 
               <div className="flex flex-col justify-center">
@@ -127,22 +126,26 @@ function UserDetails() {
                   </span>
                 </div>
                 {/* ~~~~~~~~~~~~~~~~~~~~~chat~~~~~~~~~~~~~~~~~~~~~~~~ */}
-            <button
-            onClick={(e) => {
-              e.stopPropagation()
-              addUserChat(userData)
-              navigate(`/chat`)
-            }}
-            
-             className="px-2  w-[60%] flex justify-center gap-2  px-8 py-2 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700">
-     
-              {t('userCard.chat')}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-  <path d="M12 2C6.48 2 2 5.92 2 10.5c0 2.14 1.02 4.11 2.7 5.59-.13.78-.49 2.2-1.42 3.28-.3.34-.09.83.4.83 1.48 0 3.27-.56 4.47-1.2 1.23.4 2.58.62 3.85.62 5.52 0 10-3.92 10-8.5S17.52 2 12 2zm0 15c-1.1 0-2.17-.16-3.2-.48L8.11 16l-1.4.75c-.7.36-1.46.66-2.22.87.26-.39.57-.91.83-1.51l.63-1.43-.5-.43C4.1 13.92 3 12.26 3 10.5 3 6.91 7.03 4 12 4s9 2.91 9 6.5-4.03 6.5-9 6.5z"/>
-</svg>
-              </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addUserChat(userData);
+                    navigate(`/chat`);
+                  }}
+                  className="w-[60%] flex justify-center gap-2  px-8 py-2 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
+                >
+                  {t("userCard.chat")}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="24"
+                    height="24"
+                  >
+                    <path d="M12 2C6.48 2 2 5.92 2 10.5c0 2.14 1.02 4.11 2.7 5.59-.13.78-.49 2.2-1.42 3.28-.3.34-.09.83.4.83 1.48 0 3.27-.56 4.47-1.2 1.23.4 2.58.62 3.85.62 5.52 0 10-3.92 10-8.5S17.52 2 12 2zm0 15c-1.1 0-2.17-.16-3.2-.48L8.11 16l-1.4.75c-.7.36-1.46.66-2.22.87.26-.39.57-.91.83-1.51l.63-1.43-.5-.43C4.1 13.92 3 12.26 3 10.5 3 6.91 7.03 4 12 4s9 2.91 9 6.5-4.03 6.5-9 6.5z" />
+                  </svg>
+                </button>
               </div>
-              
             </div>
 
             {/* Основная информация */}
@@ -347,9 +350,9 @@ function UserDetails() {
                     {/* Telegram */}
                     {userData?.telegram && (
                       <a
-                      href={`https://${userData?.telegram?.replace('@', '')}`}
-                      className="block"
-                    >
+                        href={`https://${userData?.telegram?.replace("@", "")}`}
+                        className="block"
+                      >
                         <div className="flex items-center p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-orange-50 hover:shadow-md hover:scale-[1.02]">
                           <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-orange-100 rounded-lg">
                             <svg
@@ -365,7 +368,7 @@ function UserDetails() {
                               {t("UserDetails.telegram")}
                             </h3>
                             <p className="text-sm sm:text-lg font-semibold text-gray-800">
-                              {userData?.telegram.replace('@', '')}
+                              {userData?.telegram.replace("@", "")}
                             </p>
                           </div>
                         </div>
@@ -400,9 +403,6 @@ function UserDetails() {
                         </p>
                       </div>
                     </div>
-                    
-
-
                   </div>
                 </div>
               </div>
