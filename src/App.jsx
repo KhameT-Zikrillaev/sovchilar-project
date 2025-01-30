@@ -83,7 +83,7 @@ function App() {
           <SiteLoading />
         ) : (
           <div className="wrapper overflow-x-hidden w-full overflow-y-hidden">
-            <Reklama />
+            {/* <Reklama /> */}
             <HeaderLayout />
             <MainLayout />
             {location?.pathname !== "/chat" && <FooterLayout />} 

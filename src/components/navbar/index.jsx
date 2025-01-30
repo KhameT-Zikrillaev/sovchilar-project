@@ -31,15 +31,17 @@ const LanguageSelector = () => {
     <div className="flex items-center gap-2 mx-2">
       <button
         onClick={() => i18n.changeLanguage("ru")}
-        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === "ru" ? "border-rose-500" : "border-transparent"
-          }`}
+        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${
+          i18n.language === "ru" ? "border-rose-500" : "border-transparent"
+        }`}
       >
         <img src={flagru} alt="RU" className="w-full h-full object-cover" />
       </button>
       <button
         onClick={() => i18n.changeLanguage("uz")}
-        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${i18n.language === "uz" ? "border-rose-500" : "border-transparent"
-          }`}
+        className={`w-8 h-8 rounded-full overflow-hidden border-2 ${
+          i18n.language === "uz" ? "border-rose-500" : "border-transparent"
+        }`}
       >
         <img src={flaguz} alt="UZ" className="w-full h-full object-cover" />
       </button>
@@ -63,7 +65,7 @@ export default function Navbar() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  
+
   const handleScrollTo = (id) => {
     setIsOpen(false);
     if (location.pathname !== "/") {
@@ -91,32 +93,31 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-[35px] z-50">
+    <nav className="bg-white shadow-md fixed w-full z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Логотип */}
           <div className="flex items-center gap-12">
-          <NavbarLogo />
-          {!user &&(
-             <button
-             onClick={handleOpenModal}
-             className="px-2  hidden lg:block py-1 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
-           >
-              {t("navbar.instruction")}
+            <NavbarLogo />
+            {!user && (
+              <button
+                onClick={handleOpenModal}
+                className="px-2  hidden lg:block py-1 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
+              >
+                {t("navbar.instruction")}
               </button>
-          )}   
+            )}
           </div>
-         
 
           {/* Основная навигация */}
           {user && (
-              <Link
-                to="/"
-                className="hidden lg:flex md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
-              >
-                {t("navbar.home")}
-              </Link>
-            )}
+            <Link
+              to="/"
+              className="hidden lg:flex md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+            >
+              {t("navbar.home")}
+            </Link>
+          )}
           <div className="hidden lg:flex  items-center space-x-2">
             {user && (
               <>
@@ -156,14 +157,18 @@ export default function Navbar() {
                 )}
               </Link>
             )}
-            
-            
+
             {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~login~~~~~~~~~~~~~~~~~~~ */}
-            {!user &&(
-               <Link to="/login" className="px-6 py-1 sm:py-1 lg:py-2 text-rose-500 rounded-full border-2 hover:text-white border-rose-500 hover:bg-rose-500 transition-colors duration-300 flex items-center gap-2">{t("navbar.signIn")}</Link>
+            {!user && (
+              <Link
+                to="/login"
+                className="px-6 py-1 sm:py-1 lg:py-2 text-rose-500 rounded-full border-2 hover:text-white border-rose-500 hover:bg-rose-500 transition-colors duration-300 flex items-center gap-2"
+              >
+                {t("navbar.signIn")}
+              </Link>
             )}
-         
-         {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~profile-register~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
+
+            {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~profile-register~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
             <Link
               to={user ? "/profile" : "/register"}
               className="px-6 py-1 sm:py-1 lg:py-2 bg-rose-500 text-white rounded-full border-2 border-rose-500 hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
@@ -188,12 +193,11 @@ export default function Navbar() {
                 />
               </svg>
             </Link>
-        
           </div>
 
           {/* Language Selector - теперь виден всегда */}
           <LanguageSelector />
-           
+
           {/* Мобильное меню */}
           <div className="lg:hidden">
             <button
@@ -228,90 +232,93 @@ export default function Navbar() {
 
         {/* Мобильное меню */}
         {isOpen && (
-  <div className="lg:hidden py-4">
-    <div className="flex flex-col space-y-2">
-      {user && (
-        <>
-          <Link
-            to="/"
-            onClick={scrollToTop}
-            className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
-          >
-            {t("navbar.home")}
-          </Link>
-          <button
-            onClick={() => handleScrollTo("search")}
-            className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg flex items-center gap-2"
-          >
-            <span>{t("navbar.search")}</span>
-            <AnimatedHeart />
-          </button>
-          <a
-            href="#anketa"
-            onClick={() => handleScrollTo("ankets")}
-            className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
-          >
-            {t("navbar.profiles")}
-          </a>
-          <Link
-            to="/favourite"
-            onClick={scrollToTop}
-            className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg relative "
-          >
-            {t("navbar.favourite")}
-            {favorites.length > 0 && (
-              <span className="text-red-500 absolute top-0 left-[90px] border rounded-[5px] px-1 flex items-center border-red-500">
-                {favorites?.length}
-              </span>
-            )}
-          </Link>
-        </>
-      )}
-      {!user && (
-        <button
-          onClick={() => {
-            handleOpenModal();
-            setIsOpen(false);
-          }}
-          className="px-2 w-[120px] py-1 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
-        >
-          {t("navbar.instruction")}
-        </button>
-      )}
-      {!user &&(
-               <Link to="/login"
+          <div className="lg:hidden py-4">
+            <div className="flex flex-col space-y-2">
+              {user && (
+                <>
+                  <Link
+                    to="/"
+                    onClick={scrollToTop}
+                    className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+                  >
+                    {t("navbar.home")}
+                  </Link>
+                  <button
+                    onClick={() => handleScrollTo("search")}
+                    className="px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg flex items-center gap-2"
+                  >
+                    <span>{t("navbar.search")}</span>
+                    <AnimatedHeart />
+                  </button>
+                  <a
+                    href="#anketa"
+                    onClick={() => handleScrollTo("ankets")}
+                    className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg"
+                  >
+                    {t("navbar.profiles")}
+                  </a>
+                  <Link
+                    to="/favourite"
+                    onClick={scrollToTop}
+                    className="px-4 text-left py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-lg relative "
+                  >
+                    {t("navbar.favourite")}
+                    {favorites.length > 0 && (
+                      <span className="text-red-500 absolute top-0 left-[90px] border rounded-[5px] px-1 flex items-center border-red-500">
+                        {favorites?.length}
+                      </span>
+                    )}
+                  </Link>
+                </>
+              )}
+              {!user && (
+                <button
+                  onClick={() => {
+                    handleOpenModal();
+                    setIsOpen(false);
+                  }}
+                  className="px-2 w-[120px] py-1 bg-rose-500 text-white rounded-lg shadow hover:bg-red-700"
+                >
+                  {t("navbar.instruction")}
+                </button>
+              )}
+              {!user && (
+                <Link
+                  to="/login"
+                  onClick={scrollToTop}
+                  className="px-2 w-[120px] text-center text-rose-500 py-1 border-2 border-rose-500 hover:text-white  rounded-lg shadow hover:bg-red-700"
+                >
+                  {t("navbar.signIn")}
+                </Link>
+              )}
+              <Link
                 onClick={scrollToTop}
-               className="px-2 w-[120px] text-center text-rose-500 py-1 border-2 border-rose-500 hover:text-white  rounded-lg shadow hover:bg-red-700">{t("navbar.signIn")}</Link>
-            )}
-      <Link
-        onClick={scrollToTop}
-        to={user ? "/profile" : "/register"}
-        className="px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
-      >
-        <span>{user ? user.firstName : t("navbar.signUp")}</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-          stroke="currentColor"
-          className="w-5 h-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d={
-              user
-                ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-            }
-          />
-        </svg>
-      </Link>
-    </div>
-  </div>
-)}
-
+                to={user ? "/profile" : "/register"}
+                className="px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors duration-300 flex items-center gap-2"
+              >
+                <span>{user ? user.firstName : t("navbar.signUp")}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={
+                      user
+                        ? "M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                        : "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    }
+                  />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
       <Modal
         isOpen={isModalOpen}

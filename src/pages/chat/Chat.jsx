@@ -259,7 +259,7 @@ const Chat = () => {
       className={`flex ${
         device === "iPhone" || device === "Android" ? "h-[90vh]"
           : "h-screen"
-      }  bg-gray-50 pt-24`}
+      }  bg-gray-50 pt-16`}
     >
       {/* Foydalanuvchi ro'yxati */}
       <ChatUsers
