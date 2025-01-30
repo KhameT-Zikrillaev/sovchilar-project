@@ -18,12 +18,15 @@ export default function FirstHomePageIntro() {
   // Функция для открытия видео в полноэкранном режиме
   const handleVideoClick = (event) => {
     const video = event.target;
-    if (window.innerWidth < 640) { // Только для мобильных устройств
+    if (window.innerWidth < 640) {
+      // Только для мобильных устройств
       if (video.requestFullscreen) {
         video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) { // Safari
+      } else if (video.webkitRequestFullscreen) {
+        // Safari
         video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) { // IE11
+      } else if (video.msRequestFullscreen) {
+        // IE11
         video.msRequestFullscreen();
       }
     }
@@ -127,7 +130,7 @@ export default function FirstHomePageIntro() {
                     </svg>
                   )}
                 </Link>
-                <button
+                {/* <button
                   className="w-14 h-14 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition duration-200"
                   onClick={() => setIsModalOpen(true)}
                 >
@@ -144,7 +147,17 @@ export default function FirstHomePageIntro() {
                       d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </button>
+                </button> */}
+                {accessToken && (
+                  <Link
+                    to={"/chat"}
+                    className="flex-1 text-lg text-center bg-rose-500 hover:bg-rose-600 text-white px-8 py-4 rounded-full font-medium transition duration-200 flex items-center justify-center gap-2"
+                  >
+                    <span>
+                      {t("chat.chat-btn")} 
+                    </span>
+                  </Link>
+                )}
               </div>
 
               {!accessToken && (
@@ -183,15 +196,19 @@ export default function FirstHomePageIntro() {
 
           <div className="lg:w-1/2 relative">
             <div className="flex flex-col lg:flex-row gap-4">
-              <div className="w-full lg:w-1/2" data-aos="fade-right" data-aos-offset="50">
-                <video 
-                  src={movie} 
-                  autoPlay 
-                  loop 
-                  muted 
+              <div
+                className="w-full lg:w-1/2"
+                data-aos="fade-right"
+                data-aos-offset="50"
+              >
+                <video
+                  src={movie}
+                  autoPlay
+                  loop
+                  muted
                   onClick={handleVideoClick}
                   className="w-full h-[500px] lg:h-[700px] object-cover rounded-2xl shadow-xl hover-scale cursor-pointer sm:cursor-default"
-                  style={{ aspectRatio: '9/16' }}
+                  style={{ aspectRatio: "9/16" }}
                 />
               </div>
 
@@ -203,7 +220,11 @@ export default function FirstHomePageIntro() {
                     className="w-full h-[350px] object-cover rounded-2xl shadow-xl hover-scale"
                   />
                 </div>
-                <div data-aos="fade-left" data-aos-delay="500" data-aos-offset="50">
+                <div
+                  data-aos="fade-left"
+                  data-aos-delay="500"
+                  data-aos-offset="50"
+                >
                   <img
                     src={rightbg}
                     alt="Happy Family"
