@@ -2,6 +2,7 @@ import React from "react";
 import FirstHomePageIntro from "./pages/FirstHomePageIntro";
 import SecondHomePageSearch from "./pages/SecondHomePageSearch";
 import Comments from "./pages/Comments/Comments";
+import Slidernext from "./pages/FourSlidernext";
 import Faq from "./pages/ThreeFaqPage";
 export default function Home() {
   return (
@@ -14,7 +15,9 @@ export default function Home() {
         ko'rishda davom etasiz!
       </p> */}
       <Comments />
+      
       <Faq />
+      <Slidernext />
     </div>
   );
 }

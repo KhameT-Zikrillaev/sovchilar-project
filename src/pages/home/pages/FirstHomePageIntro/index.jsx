@@ -6,12 +6,28 @@ import Modal from "../../../../components/customModal/Modal";
 import leftbg from "../../../../assets/images/left-bg.jpg";
 import rightbg from "../../../../assets/images/right-bg.jpg";
 import centerbg from "../../../../assets/images/center-bg.jpeg";
+import movie from "../../../../../public/movie.mp4";
+
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState("men");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const accessToken = useStore((state) => state.accessToken);
   const user = useStore((state) => state.user);
+
+  // Функция для открытия видео в полноэкранном режиме
+  const handleVideoClick = (event) => {
+    const video = event.target;
+    if (window.innerWidth < 640) { // Только для мобильных устройств
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { // Safari
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // IE11
+        video.msRequestFullscreen();
+      }
+    }
+  };
 
   const stats = [
     {
@@ -24,11 +40,6 @@ export default function FirstHomePageIntro() {
       label: t("home.FirstIntroPage.stats.profiles"),
       icon: "📋",
     },
-    // {
-    //   number: "100%",
-    //   label: t("home.FirstIntroPage.stats.halal"),
-    //   icon: "🕌",
-    // },
     {
       number: "100%",
       label: t("home.FirstIntroPage.stats.serviceQuality"),
@@ -38,17 +49,17 @@ export default function FirstHomePageIntro() {
 
   const features = [
     {
-      icon: "💍", // обручальное кольцо для серьезных намерений
+      icon: "💍",
       title: t("home.FirstIntroPage.features.serious.title"),
       description: t("home.FirstIntroPage.features.serious.description"),
     },
     {
-      icon: "🔍", // лупа для удобного поиска
+      icon: "🔍",
       title: t("home.FirstIntroPage.features.matchmakers.title"),
       description: t("home.FirstIntroPage.features.matchmakers.description"),
     },
     {
-      icon: "🤝", // рукопожатие для ценностей доверия
+      icon: "🤝",
       title: t("home.FirstIntroPage.features.islamic.title"),
       description: t("home.FirstIntroPage.features.islamic.description"),
     },
@@ -56,7 +67,6 @@ export default function FirstHomePageIntro() {
 
   return (
     <section className="min-h-screen relative overflow-hidden">
-      {/* Фоновое изображение */}
       <div
         className="absolute inset-0 bg-cover bg-fixed"
         style={{
@@ -68,21 +78,11 @@ export default function FirstHomePageIntro() {
         }}
       />
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        {/* Главный контент */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div className="container mx-auto px-4 py-20 m relative z-10">
+        <div className="flex flex-col lg:flex-row items-center mt-8 justify-between gap-12">
           <div className="lg:w-1/2">
             <div className="backdrop-blur-md rounded-[40px] px-4 sm:px-14 py-10 bg-gradient-to-br from-black/80 to-black/60">
-              {/* Заголовок с подзаголовком */}
               <div className="mb-12">
-                {/* <div
-                  data-aos="zoom-out-up"
-                  data-aos-offset="50"
-                  data-aos-delay="500"
-                  className="inline-block px-6 py-2 rounded-full bg-rose-500/30 text-rose-200 text-sm font-medium mb-6"
-                >
-                  {t("home.FirstIntroPage.title")}
-                </div> */}
                 <h1
                   data-duration="1000"
                   data-aos="fade-right"
@@ -94,18 +94,8 @@ export default function FirstHomePageIntro() {
                     {t("home.FirstIntroPage.subtitle")}
                   </span>
                 </h1>
-                {/* <p
-                  data-duration="1000"
-                  data-aos="fade-left"
-                  data-aos-offset="50"
-                  data-aos-delay="500"
-                  className="text-xl text-gray-200 leading-relaxed"
-                >
-                  {t("home.FirstIntroPage.description")}
-                </p> */}
               </div>
 
-              {/* Кнопки */}
               <div
                 className="flex items-center gap-4 mb-12"
                 data-aos="fade-right"
@@ -154,27 +144,24 @@ export default function FirstHomePageIntro() {
                       d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </button> 
+                </button>
               </div>
 
-              {/* Поиск */}
               {!accessToken && (
                 <div
                   data-aos="fade-up"
                   data-aos-delay="500"
-                  className="bg-white/10 block  mx-auto lg:hidden backdrop-blur-lg p-2 rounded-full mb-10 flex items-center"
+                  className="bg-white/10 mx-auto lg:hidden backdrop-blur-lg p-2 rounded-full mb-10 flex items-center"
                 >
-                  <Link to="/login"
-                    className="flex-1 px-6   text-center py-3 rounded-full text-xl font-medium transition duration-200 bg-rose-500 text-white hover:bg-rose-600" 
+                  <Link
+                    to="/login"
+                    className="flex-1 px-6 text-center py-3 rounded-full text-xl font-medium transition duration-200 bg-rose-500 text-white hover:bg-rose-600"
                   >
-                  {t("navbar.signIn")}
+                    {t("navbar.signIn")}
                   </Link>
-                
                 </div>
               )}
-              {/* Кнопки */}
 
-              {/* Статистика */}
               <div className="grid grid-cols-3 gap-4">
                 {stats.map((stat, index) => (
                   <div
@@ -183,10 +170,8 @@ export default function FirstHomePageIntro() {
                     key={index}
                     className="text-center px-4 py-6 rounded-2xl bg-white/10 hover:bg-white/20 transition duration-200"
                   >
-                    <div className=" text-2xl  sm:text-3xl mb-2">
-                      {stat.icon}
-                    </div>
-                    <div className=" text-xl  sm:text-2xl font-bold text-white mb-1">
+                    <div className="text-2xl sm:text-3xl mb-2">{stat.icon}</div>
+                    <div className="text-xl sm:text-2xl font-bold text-white mb-1">
                       {stat.number}
                     </div>
                     <div className="text-base text-gray-200">{stat.label}</div>
@@ -196,96 +181,40 @@ export default function FirstHomePageIntro() {
             </div>
           </div>
 
-          {/* Правая часть с фотографиями */}
           <div className="lg:w-1/2 relative">
-            <div className="grid grid-cols-2 gap-4">
-              <div
-                className="col-span-2"
-                data-aos="fade-down"
-                data-aos-offset="50"
-              >
-                <img
-                  src={centerbg}
-                  alt="Islamic Wedding"
-                  className="w-full h-80 object-cover rounded-2xl shadow-xl hover-scale"
+            <div className="flex flex-col lg:flex-row gap-4">
+              <div className="w-full lg:w-1/2" data-aos="fade-right" data-aos-offset="50">
+                <video 
+                  src={movie} 
+                  autoPlay 
+                  loop 
+                  muted 
+                  onClick={handleVideoClick}
+                  className="w-full h-[500px] lg:h-[700px] object-cover rounded-2xl shadow-xl hover-scale cursor-pointer sm:cursor-default"
+                  style={{ aspectRatio: '9/16' }}
                 />
               </div>
-              <div
-                className="relative"
-                data-aos="fade-right"
-                data-aos-offset="50"
-              >
-                <img
-                  src={leftbg}
-                  alt="Muslim Family"
-                  className="w-full h-48 object-cover rounded-2xl shadow-xl hover-scale"
-                />
-              </div>
-              <div
-                className="relative"
-                data-aos="fade-left"
-                data-aos-delay="500"
-                data-aos-offset="50"
-              >
-                <img
-                  src={rightbg}
-                  alt="Happy Family"
-                  className="w-full h-48 object-cover rounded-2xl shadow-xl hover-scale"
-                />
+
+              <div className="w-full lg:w-1/2 flex flex-col gap-4">
+                <div data-aos="fade-left" data-aos-offset="50">
+                  <img
+                    src={leftbg}
+                    alt="Muslim Family"
+                    className="w-full h-[350px] object-cover rounded-2xl shadow-xl hover-scale"
+                  />
+                </div>
+                <div data-aos="fade-left" data-aos-delay="500" data-aos-offset="50">
+                  <img
+                    src={rightbg}
+                    alt="Happy Family"
+                    className="w-full h-[350px] object-cover rounded-2xl shadow-xl hover-scale"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Секция преимуществ */}
-        <div className="mt-24">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {features.map((feature, index) => (
-              <div
-                data-aos="flip-up"
-                data-aos-offset="50"
-                key={index}
-                className="bg-gradient-to-br from-black/80 to-black/60 backdrop-blur-md p-8 rounded-3xl hover:transform hover:scale-105 transition duration-300"
-              >
-                <div className="text-5xl mb-6">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-200 text-lg">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Призыв к действию */}
-          <div
-            data-aos="flip-up"
-            data-aos-offset="50"
-            className="max-w-3xl mx-auto text-center bg-gradient-to-r from-rose-500/20 to-black/60 backdrop-blur-md p-12 rounded-[2.5rem]"
-          >
-            <h2
-              data-aos="fade-right"
-              data-aos-offset="50"
-              data-duration="1000"
-              className="text-3xl font-bold text-white mb-4"
-            >
-              {t("home.FirstIntroPage.callToAction.title")}
-            </h2>
-            <p
-              data-aos="fade-left"
-              data-aos-offset="50"
-              data-duration="1000"
-              className="text-xl text-gray-200 mb-8 leading-relaxed"
-            >
-              {t("home.FirstIntroPage.callToAction.description")}
-            </p>
-            {/* <button  className="bg-rose-500 hover:bg-rose-600 text-white px-10 py-5 rounded-full text-xl font-semibold transition duration-300 transform hover:scale-105 group flex items-center mx-auto">
-              {t('home.FirstIntroPage.callToAction.button')}
-              <span className="ml-2 transform transition-all duration-300 group-hover:translate-x-2">🚀</span>
-            </button> */}
-          </div>
-        </div>
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

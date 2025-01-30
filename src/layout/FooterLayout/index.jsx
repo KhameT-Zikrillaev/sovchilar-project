@@ -224,11 +224,13 @@ export default function FooterLayout() {
                 </li>
                 <li >
                   <a
-                    href="https://t.me/sovchilarnet_admin"
+                    href="tel:+998507193333"
                     className="text-gray-200 hover:text-rose-400 transition-all duration-300  flex items-center  group"
                   >
-                    <span className="w-2 h-2  bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
-                    {t("footer.forUsers.contact")}
+                  
+                    <span className="w-2 h-2   bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
+                    {t("footer.forUsers.contact")} +99850 719 33 33
+                   
                   </a>
                 </li>
               </ul>
