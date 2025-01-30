@@ -88,13 +88,17 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
     <>
       <div
         ref={messagesContainerRef}
-        className={`flex flex-col p-4 overflow-y-scroll h-full scroll-smooth relative chat-ios-scroll  ${
+        className={`flex flex-col p-4 overflow-y-auto h-full scroll-smooth relative chat-ios-scroll  ${
           loading
             ? "justify-center items-center"
             : messages?.length === 0
             ? "justify-center items-center"
             : ""
         }`}
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          maxWidth: '100vw'
+        }}
         onClick={() => setIsMenuVisible(false)}
       >
         {loading ? (
@@ -112,12 +116,13 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
           messages?.map((msg, index) => (
             <div
               key={index}
-              className={`my-2 p-3 pb-[14px] bg-white border rounded-lg max-w-xs min-w-[100px] relative break-words overflow-clip ${
+              className={`my-2 p-3 pb-[14px] bg-white border rounded-lg max-w-[85%] min-w-[100px] relative break-words  ${
                 msg?.sender?.id === user?.id
                   ? "self-end border-red-500"
                   : "self-start border-gray-300"
               }`}
               style={{
+                wordBreak: 'break-word',
                 borderBottomLeftRadius: msg?.sender?.id !== user?.id ? "4px" : "20px",
                 borderBottomRightRadius: msg?.sender?.id === user?.id ? "4px" : "20px",
               }}
@@ -133,7 +138,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               }
               onTouchEnd={handleEndHold}
             >
-              <span>{msg?.message}</span>
+              <span className="whitespace-pre-wrap">{msg?.message}</span>
               <span className="absolute right-[4px] bottom-[2px] text-[12px] text-gray-600">
                 {getHoursAndMinutesString(msg?.createdAt)}
               </span>
