@@ -112,7 +112,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
           messages?.map((msg, index) => (
             <div
               key={index}
-              className={`my-2 p-3 pb-[14px] bg-white border rounded-[20px]  max-w-[80%] md:max-w-[60%] relative break-words overflow-hidden ${
+              className={`my-2 p-3 pb-[14px] bg-white border rounded-lg max-w-xs min-w-[100px] relative break-words overflow-clip ${
                 msg?.sender?.id === user?.id
                   ? "self-end border-red-500"
                   : "self-start border-gray-300"
