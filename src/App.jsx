@@ -46,6 +46,7 @@ function App() {
       if (!response?.data) {
         navigate("/");
         clearUser();
+        localStorage.removeItem('user-sovchilar')
       }
     } catch (error) {}
   };
