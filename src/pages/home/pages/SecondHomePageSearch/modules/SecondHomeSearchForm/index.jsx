@@ -272,7 +272,14 @@ const SecondHomeSearchForm = forwardRef(
         data-aos="flip-up"
         data-aos-offset="50"
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8 "
+        tabIndex="0"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSubmit(e);
+          }
+        }}
+        className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mb-8 focus:outline-none"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Gender Selection */}

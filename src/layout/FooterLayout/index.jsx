@@ -249,13 +249,14 @@ export default function FooterLayout() {
                   <span className="inline-block animate-pulse ml-1">💝</span>
                 </span>
               </p>
-              <div className="flex gap-8">
+              <div className="flex gap-2">
+              <span className="text-gray-300">Created by </span>
                 <a
                   href="https://www.limsa.uz/"
                 
                   className="text-gray-300 hover:text-rose-400 transition-all duration-300"
                 >
-                  Created by Limsa
+                   Limsa
                 </a>
               </div>
             </div>

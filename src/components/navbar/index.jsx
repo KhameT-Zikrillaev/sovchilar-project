@@ -146,11 +146,11 @@ export default function Navbar() {
             {user && (
               <Link
                 to="/favourite"
-                className="md:px-2 lg:px-4 py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
+                className="md:px-2 lg:px-4   py-2 text-gray-600 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all relative"
               >
                 {t("navbar.favourite")}
                 {favorites.length > 0 && (
-                  <span className="text-red-500 absolute top-0 right-0 border rounded-[5px] px-1 flex items-center border-red-500">
+                  <span className="text-red-500 absolute opacity-90 top-0 text-[14px] right-0 border rounded-[12px] px-[4px] bg-rose-500 text-white flex items-center border-red-500">
                     {favorites?.length}
                   </span>
                 )}
@@ -260,7 +260,7 @@ export default function Navbar() {
           >
             {t("navbar.favourite")}
             {favorites.length > 0 && (
-              <span className="text-red-500 absolute top-0 left-[90px] border rounded-[5px] px-1 flex items-center border-red-500">
+              <span className="text-red-500 absolute top-0 mt-2 left-[90px] border rounded-[5px] px-1 flex items-center border-red-500">
                 {favorites?.length}
               </span>
             )}
