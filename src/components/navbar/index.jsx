@@ -198,10 +198,10 @@ export default function Navbar() {
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-rose-500 focus:outline-none"
+              className="text-gray-600 mt-2 hover:text-rose-500 focus:outline-none"
             >
               <svg
-                className="h-6 w-6"
+                className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
