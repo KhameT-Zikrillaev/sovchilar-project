@@ -79,6 +79,7 @@ export default function FirstHomePageIntro() {
       />
 
       <div className="container mx-auto px-4 py-20 m relative z-10">
+
         <div className="flex flex-col lg:flex-row items-center mt-8 justify-between gap-12">
           <div className="lg:w-1/2">
             <div className="backdrop-blur-md rounded-[40px] px-4 sm:px-14 py-10 bg-gradient-to-br from-black/80 to-black/60">
@@ -213,7 +214,58 @@ export default function FirstHomePageIntro() {
               </div>
             </div>
           </div>
+        
         </div>
+        
+             {/* вторая секция */}
+             <div className="mt-24">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {features.map((feature, index) => (
+              <div
+                data-aos="flip-up"
+                data-aos-offset="50"
+                key={index}
+                className="bg-gradient-to-br from-black/80 to-black/60 backdrop-blur-md p-8 rounded-3xl hover:transform hover:scale-105 transition duration-300"
+              >
+                <div className="text-5xl mb-6">{feature.icon}</div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-200 text-lg">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Призыв к действию */}
+          <div
+            data-aos="flip-up"
+            data-aos-offset="50"
+            className="max-w-3xl mx-auto text-center bg-gradient-to-r from-rose-500/20 to-black/60 backdrop-blur-md p-12 rounded-[2.5rem]"
+          >
+            <h2
+              data-aos="fade-right"
+              data-aos-offset="50"
+              data-duration="1000"
+              className="text-3xl font-bold text-white mb-4"
+            >
+              {t("home.FirstIntroPage.callToAction.title")}
+            </h2>
+            <p
+              data-aos="fade-left"
+              data-aos-offset="50"
+              data-duration="1000"
+              className="text-xl text-gray-200 mb-8 leading-relaxed"
+            >
+              {t("home.FirstIntroPage.callToAction.description")}
+            </p>
+            {/* <button  className="bg-rose-500 hover:bg-rose-600 text-white px-10 py-5 rounded-full text-xl font-semibold transition duration-300 transform hover:scale-105 group flex items-center mx-auto">
+              {t('home.FirstIntroPage.callToAction.button')}
+              <span className="ml-2 transform transition-all duration-300 group-hover:translate-x-2">🚀</span>
+            </button> */}
+          </div>
+        </div>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
     </section>
   );
