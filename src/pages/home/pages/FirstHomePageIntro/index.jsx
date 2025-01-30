@@ -156,43 +156,24 @@ export default function FirstHomePageIntro() {
                       d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </button>
+                </button> 
               </div>
+
               {/* Поиск */}
-              {/* {!accessToken && (
+              {!accessToken && (
                 <div
                   data-aos="fade-up"
                   data-aos-delay="500"
-                  className="bg-white/10 backdrop-blur-lg p-2 rounded-full mb-10 flex items-center"
+                  className="bg-white/10 block  mx-auto lg:hidden backdrop-blur-lg p-2 rounded-full mb-10 flex items-center"
                 >
-                  <button
-                    className={
-                      "flex-1 px-6  py-3 rounded-full text-base font-medium transition duration-200 " +
-                      (activeTab === "men"
-                        ? "bg-rose-500 text-white"
-                        : "text-gray-200 hover:text-white hover:bg-white/10")
-                    }
-                    onClick={() => {
-                      setActiveTab("men");
-                    }}
+                  <Link to="/login"
+                    className="flex-1 px-6   text-center py-3 rounded-full text-xl font-medium transition duration-200 bg-rose-500 text-white hover:bg-rose-600" 
                   >
-                    {t("home.FirstIntroPage.search.men")}
-                  </button>
-                  <button
-                    className={
-                      "flex-1 px-6 py-3 rounded-full text-base font-medium transition duration-200 " +
-                      (activeTab === "women"
-                        ? "bg-rose-500 text-white"
-                        : "text-gray-200 hover:text-white hover:bg-white/10")
-                    }
-                    onClick={() => {
-                      setActiveTab("women");
-                    }}
-                  >
-                    {t("home.FirstIntroPage.search.women")}
-                  </button>
+                  {t("navbar.signIn")}
+                  </Link>
+                
                 </div>
-              )} */}
+              )}
               {/* Кнопки */}
 
               {/* Статистика */}

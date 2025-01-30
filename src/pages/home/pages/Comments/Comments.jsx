@@ -46,7 +46,7 @@ function Comments() {
   };
   return (
     <div className="my-16">
-      <div className="mb-5 text-center font-bold text-[24px]  md:text-[30px]   lg:text-[40px]">
+      <div className="mb-5 text-center font-bold text-[24px]  md:text-[30px]   lg:text-[40px] bg-gradient-to-r from-rose-700 to-rose-600 text-transparent bg-clip-text">
         {t('comment.title')}
       </div>
       <div className=" slider-container container overflow-hidden">
@@ -56,17 +56,6 @@ function Comments() {
               key={index}
               className="flex justify-center gap-0 md:gap-8 items-center p-1 "
             >
-              {/* <div className="flex gap-5">
-                <img
-                  className="w-[40px] h-[40px] rounded-full border border-black"
-                  src="https://via.placeholder.com/1200x600"
-                  alt="alt"
-                />
-                <div>
-                  <p className="font-bold">Salima Sheraliyeva</p>
-                  <p>★★★★★</p>
-                </div>
-              </div> */}
               <img
                 onClick={() => {
                   setIsImg(true);
@@ -85,15 +74,25 @@ function Comments() {
             </div>
           ))}
         </Slider>
+        
       </div>
 
       {isImg && (
         <div className="block">
-          <div className=" bg-black z-50 p-10 fixed top-0 left-0 bg-opacity-80 w-[100vw] h-[100vh] flex justify-center items-center">
+          
+          <div 
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setIsImg(false);
+              }
+            }}
+            className="bg-black  z-50 p-10 fixed top-0 left-0 bg-opacity-80 w-[100vw] h-[100vh] flex justify-center items-center"
+          >
             <ImCancelCircle
               onClick={() => setIsImg(false)}
               className="text-white text-[40px] absolute top-8 right-8 cursor-pointer"
             />
+            
             <img src={fikr[id]} alt={"image"} className="h-full rounded" />
           </div>
         </div>

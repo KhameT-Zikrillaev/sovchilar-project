@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ImCancelCircle } from "react-icons/im";
 
 export default function Modal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -18,19 +18,17 @@ export default function Modal({ isOpen, onClose }) {
       onClick={handleModalClick}
     >
       {/* Кнопка закрытия */}
-      <button
-        onClick={onClose}
-        className="fixed top-8 right-4 text-white hover:text-red-600 text-3xl font-bold bg-black/50 rounded-full w-10 h-10 flex items-center justify-center z-[60]"
-      >
-        &times;
-      </button>
-
+      <ImCancelCircle
+            onClick={onClose}
+              className="text-white text-[40px] absolute top-8 right-4 cursor-pointer"
+      />
+            
       <div className="rounded-2xl shadow-lg px-2 bg-black w-[500px] mx-auto">
         {/* Видео */}
         <div>
           <div className="relative ">
             <iframe 
-              className="w-full  aspect-[9/16] rounded-2xl" 
+              className="w-full  aspect-[10/16] rounded-2xl" 
               src="https://www.youtube.com/embed/yzfajJZsGG4" 
               title="Sovchilar.net" 
               frameborder="0" 
