@@ -565,7 +565,7 @@
     "btn": {
       "add": "Anketa to'ldirish",
       "edit": "Anketa o'zgartirish",
-      "success": "Bahtimni topdim",
+      "success": "Baxtimni topdim",
       "logout": "Profildan chiqish"
     },
     "UserProfile": {
@@ -590,9 +590,9 @@
       "showMessage": "Telefon raqamingiz hammaga ko'rinadi"
     },
     "modal": {
-      "happiness_found": "Baxtimni toptim",
+      "happiness_found": "Baxtimni topdim",
       "happiness_title": "Baxt",
-      "happiness_message": "Agar o‘z baxtingizni topgan bo‘lsangiz, bu haqida bizga xabar bering. Tasdiqlaganingizdan so‘ng, anketangiz saytimizdan o‘chirib tashlanadi."
+      "happiness_message": "Agar o‘z baxtingizni topgan bo‘lsangiz, bu haqida bizga xabar bering. Tasdiqlanganingizdan so‘ng, anketangiz saytimizdan o‘chirib tashlanadi."
     },
     "buttons": {
       "logout": "Выйти из профиля"
@@ -620,6 +620,28 @@
       "want-delete": "Ushbu xabarni o‘chirishni xohlaysizmi?",
       "ok": "O'chirish",
       "cancel": "Bekor qilish"
+    }
+  },
+  "faq": {
+    "page": {
+      "title": "Tez-tez so'raladigan savollar",
+      "description": "O'zingizni qiziqtirgan savollarga javob toping"
+    },
+    "addAccount": {
+      "question": "Qanday qilib anketa to'ldirish mumkin?",
+      "answer": "Video qo'llanmani ko'rish..."
+    },
+    "deleteAccount": {
+      "question": "Qanday qilib anketangizni o'chirish mumkin?",
+      "answer": "Akkauntingizga kirib, ~Baxtimni topdim~ tugmasini bosing va tasdiqlash tugmasini tanlang. Shundan so‘ng, saytda sizning anketangiz ko‘rinmas bo‘lib, uni hech kim ko‘ra olmaydi. Agar profilingizni to‘liq tarmoqdan o‘chirmoqchi bo‘lsangiz, administratorlarga murojaat qilishingiz kerak bo‘ladi."
+    },
+    "phonetoggle": {
+      "question": "Telefon qilib juda ko'p bezovta qilishvotimi?",
+      "answer": "Akkountingizga kirganingizdan so'ng, ismingiz va talablaringiz qatorlarida, ~Ochiq telefon~ so'zining yonida tugma bo'ladi. O'sha tugmani bosing va so'z ~Maxfiy telefon~ga o'zgaradi. Shundan so'ng, sizning telefon raqamingiz boshqalarga umuman ko'rinmaydi."
+    },
+    "support": {
+      "question": "Umuman tushunmayapsizmi? yoki savollaringiz bormi?",
+      "answer": "Bizga telegram orqali aloqaga chiqishingiz mumkin va biz qo'ldan kelgancha yordam berishga harakat qilamiz. [bog'lanish](https://t.me/your_channel)"
     }
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import FirstHomePageIntro from "./pages/FirstHomePageIntro";
 import SecondHomePageSearch from "./pages/SecondHomePageSearch";
 import Comments from "./pages/Comments/Comments";
-
+import Faq from "./pages/ThreeFaqPage";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 mt-[30px]">
@@ -14,6 +14,7 @@ export default function Home() {
         ko'rishda davom etasiz!
       </p> */}
       <Comments />
+      <Faq />
     </div>
   );
 }

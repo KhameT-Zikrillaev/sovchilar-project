@@ -39,9 +39,17 @@ const SecondHomeSearchForm = forwardRef(
     ref
   ) => {
     const { t } = useTranslation();
+    const { user } = useStore();
+
+    // Устанавливаем начальное значение gender на основе пола пользователя
     const [gender, setGender] = useState(() => {
-      return localStorage.getItem("searchFormGender") || "";
+      const savedGender = localStorage.getItem("searchFormGender");
+      if (savedGender) return savedGender;
+      
+      // Если нет сохраненного значения, устанавливаем противоположный пол
+      return user.gender === "FEMALE" ? "gender=MALE" : "gender=FEMALE";
     });
+
     const [minAge, setMinAge] = useState(() => {
       return parseInt(localStorage.getItem("searchFormMinAge")) || 18;
     });
@@ -55,7 +63,16 @@ const SecondHomeSearchForm = forwardRef(
       return localStorage.getItem("searchFormMaritalStatus") || "";
     });
 
-    const { user } = useStore();
+    const [ageError, setAgeError] = useState(false);
+
+    // При изменении пользователя обновляем gender
+    useEffect(() => {
+      if (user && !localStorage.getItem("searchFormGender")) {
+        const newGender = user.gender === "FEMALE" ? "gender=MALE" : "gender=FEMALE";
+        setGender(newGender);
+        localStorage.setItem("searchFormGender", newGender);
+      }
+    }, [user]);
 
     // Очищаем localStorage только при закрытии вкладки/сайта
     useEffect(() => {
@@ -81,13 +98,15 @@ const SecondHomeSearchForm = forwardRef(
 
     useImperativeHandle(ref, () => ({
       resetForm: () => {
-        setGender("");
+        const newGender = user.gender === "FEMALE" ? "gender=MALE" : "gender=FEMALE";
+        setGender(newGender);
+        localStorage.setItem("searchFormGender", newGender);
+        
         setMinAge(18);
         setMaxAge(90);
         setLocation("");
         setMaritalStatus("");
         // Очищаем localStorage при сбросе
-        localStorage.removeItem("searchFormGender");
         localStorage.removeItem("searchFormMinAge");
         localStorage.removeItem("searchFormMaxAge");
         localStorage.removeItem("searchFormLocation");
@@ -104,11 +123,13 @@ const SecondHomeSearchForm = forwardRef(
     const handleMinAgeChange = (value) => {
       setMinAge(value);
       localStorage.setItem("searchFormMinAge", value);
+      setAgeError(false);
     };
 
     const handleMaxAgeChange = (value) => {
       setMaxAge(value);
       localStorage.setItem("searchFormMaxAge", value);
+      setAgeError(false);
     };
 
     const handleLocationChange = (value) => {
@@ -224,17 +245,22 @@ const SecondHomeSearchForm = forwardRef(
     const handleSubmit = (e) => {
       e.preventDefault();
       setIsSubmitted(true);
-      setIsSubmittedAge(true);
 
       // Проверяем, выбран ли пол
       if (!gender) {
         return;
       }
 
-      if (!minAge || !maxAge || minAge > maxAge || minAge < 18 || maxAge > 90) {
+      const minAgeNum = Number(minAge);
+      const maxAgeNum = Number(maxAge);
+
+      // Проверяем возраст
+      if (minAgeNum < 18 || maxAgeNum > 99 || minAgeNum > maxAgeNum) {
+        setAgeError(true);
         return;
       }
 
+      setAgeError(false);
       // Вызываем функцию поиска, переданную из родителя
       onSearch(gender, minAge, maxAge, location, maritalStatus);
       setIsSearchActive(true);
@@ -325,16 +351,11 @@ const SecondHomeSearchForm = forwardRef(
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
               />
             </div>
-            {isSubmittedAge &&
-              (!minAge ||
-                !maxAge ||
-                minAge > maxAge ||
-                minAge < 18 ||
-                maxAge > 99) && (
+            {ageError && (
                 <p className="text-sm text-rose-500 text-center mt-2">
                   {t("auth.FormOne.Validation.age.default")}
                 </p>
-              )}
+            )}
           </div>
         </div>
 
