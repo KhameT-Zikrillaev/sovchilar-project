@@ -49,16 +49,12 @@ const Chat = () => {
     let browser = "Noma'lum brauzer";
 
     // Qurilma turini aniqlash
-    const isAndroidLinux = userAgent?.includes("android") && userAgent?.includes("linux");;
+    // const isAndroidLinux = userAgent?.includes("android") && userAgent?.includes("linux");;
     const isIphone = /iphone/.test(userAgent);
     const isAndroid = /android/.test(userAgent);
-    const isKomp = /windows/.test(userAgent);
+    // const isKomp = /windows/.test(userAgent);
 
-    if (isAndroidLinux) {
-      device = "Linux";
-    }else if (isKomp) {
-      device = "Kompyuter";
-    } else if (isAndroid) {
+    if (isAndroid) {
       device = "Android";
     }else if(isIphone){
       device = "iPhone";
@@ -271,9 +267,9 @@ const Chat = () => {
 
   return (
     <div
-      className={`flex ${ device === "Linux" ? "h-screen" :
+      className={`flex ${ 
         device === "iPhone" || device === "Android" ? "h-[90vh]"
-          : device === "Kompyuter" ? "h-screen" : "h-[90vh]"
+          : "h-screen" 
       }  bg-gray-50 pt-16`}
     >
       {/* Foydalanuvchi ro'yxati */}
