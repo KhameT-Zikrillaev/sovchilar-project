@@ -7,6 +7,7 @@ import ChatUsers from "./components/ChatUsers";
 import SendMessage from "./components/SendMessage";
 import ChatList from "./components/ChatList";
 import bgImg from "../../assets/images/left-bg.jpg";
+import Zvuk from '../../../public/zvukeffect.mp3';
 
 const Chat = () => {
   const { userChat, addUserChat } = useChatStore();
@@ -149,8 +150,11 @@ const Chat = () => {
     // });
 
     socketInstance.on("conversation-messages", (data) => {
+      if (data?.data?.length > messages.length) {
+        const audio = new Audio(Zvuk);
+        audio.play();
+      }
       setMessages(data?.data || []);
-
       setLoading(false);
 
       // setUnreadCounts((prevCounts) => ({

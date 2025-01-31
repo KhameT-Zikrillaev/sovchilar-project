@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import Zvuk from '../../../../public/zvukeffect.mp3'
 const SendMessage = ({ socket, user, consId }) => {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
 
   const sendMessage = () => {
     if (input.trim() && socket && consId) {
+      const audio = new Audio(Zvuk);
+      audio.play();
       socket.emit("sendMessage", {
         senderId: user?.id,
         conversationId: consId,
