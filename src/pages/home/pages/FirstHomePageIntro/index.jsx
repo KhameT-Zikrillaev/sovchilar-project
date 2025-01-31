@@ -92,7 +92,7 @@ export default function FirstHomePageIntro() {
                   data-aos="fade-right"
                   data-aos-offset="50"
                   data-aos-delay="500"
-                  className="text-5xl lg:text-6xl font-bold leading-[1.2] mb-6"
+                  className=" text-3xl text-center    md:text-5xl lg:text-6xl font-bold leading-[1.2] mb-6"
                 >
                   <span className="text-white">
                     {t("home.FirstIntroPage.subtitle")}
@@ -101,7 +101,7 @@ export default function FirstHomePageIntro() {
               </div>
 
               <div
-                className="flex items-center gap-4 mb-12"
+                className="flex items-center gap-4 mx-auto mb-4 sm:w-1/2 lg:w-full"
                 data-aos="fade-right"
                 data-aos-offset="50"
               >
@@ -165,7 +165,7 @@ export default function FirstHomePageIntro() {
                 <div
                   data-aos="fade-up"
                   data-aos-delay="500"
-                  className="bg-white/10 mx-auto lg:hidden backdrop-blur-lg p-2 rounded-full mb-10 flex items-center"
+                  className="bg-white/10 mx-auto  sm:w-1/2 lg:w-full lg:hidden backdrop-blur-lg p-1 rounded-full mb-10 flex items-center"
                 >
                   <Link
                     to="/login"

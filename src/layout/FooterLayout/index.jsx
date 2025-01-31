@@ -229,7 +229,7 @@ export default function FooterLayout() {
                   >
                   
                     <span className="w-2 h-2   bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transform scale-0 group-hover:scale-100 transition-all duration-300 mr-3"></span>
-                    {t("footer.forUsers.contact")} +99850 719 33 33
+                    {t("footer.forUsers.contact")} <br />  +99850 719 33 33
                    
                   </a>
                 </li>
