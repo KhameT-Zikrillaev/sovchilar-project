@@ -107,7 +107,7 @@ export default function FirstHomePageIntro() {
                   data-aos="fade-right"
                   data-aos-offset="50"
                   data-aos-delay="500"
-                  className=" text-3xl text-center    md:text-5xl lg:text-6xl font-bold leading-[1.2] mb-6"
+                  className=" text-3xl text-center    md:text-5xl font-bold leading-[1.2] mb-6"
                 >
                   <span className="text-white">
                     {t("home.FirstIntroPage.subtitle")}
