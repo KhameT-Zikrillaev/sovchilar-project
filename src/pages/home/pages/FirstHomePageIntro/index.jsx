@@ -6,7 +6,7 @@ import Modal from "../../../../components/customModal/Modal";
 import leftbg from "../../../../assets/images/left-bg.jpg";
 import rightbg from "../../../../assets/images/right-bg.jpg";
 import centerbg from "../../../../assets/images/center-bg.jpeg";
-import movie from "../../../../../public/movie.mp4";
+import movie from "../../../../assets/movie.mp4";
 import { useRecent } from "./hooks/useRecent";
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState("men");
@@ -96,7 +96,7 @@ export default function FirstHomePageIntro() {
         }}
       />
 
-      <div className="container mx-auto px-4 py-20 m relative z-10">
+      <div className="container mx-auto px-4 py-16 m relative z-10">
 
         <div className="flex flex-col lg:flex-row items-center mt-8 justify-between gap-12">
           <div className="lg:w-1/2">
@@ -209,7 +209,7 @@ export default function FirstHomePageIntro() {
               </div>
             </div>
           </div>
-
+                      {/* section photo and movie right */}
           <div className="lg:w-1/2 relative">
             <div className="flex flex-col lg:flex-row gap-4">
               <div
