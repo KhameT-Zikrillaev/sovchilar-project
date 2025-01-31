@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStore } from "../../../../store/store";
@@ -7,13 +7,28 @@ import leftbg from "../../../../assets/images/left-bg.jpg";
 import rightbg from "../../../../assets/images/right-bg.jpg";
 import centerbg from "../../../../assets/images/center-bg.jpeg";
 import movie from "../../../../../public/movie.mp4";
-
+import { useRecent } from "./hooks/useRecent";
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState("men");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
   const accessToken = useStore((state) => state.accessToken);
-  const user = useStore((state) => state.user);
+  const [userDataACTIVE, setUserDataACTIVE] = useState(null);
+  const [userDataDONE, setUserDataDONE] = useState(null);
+  const { getRecent , isLoading } = useRecent();
+  // const user = useStore((state) => state.user);
+
+  const fetchUser = async () => {
+    const user = await getRecent('ACTIVE');
+    const user2 = await getRecent('DONE');
+    console.log(user?.data)
+    setUserDataACTIVE(user?.data);
+    setUserDataDONE(user2?.data);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   // Функция для открытия видео в полноэкранном режиме
   const handleVideoClick = (event) => {
@@ -34,12 +49,12 @@ export default function FirstHomePageIntro() {
 
   const stats = [
     {
-      number: "507",
+      number: userDataDONE,
       label: t("home.FirstIntroPage.stats.weddings"),
       icon: "👰",
     },
     {
-      number: "10823",
+      number: userDataACTIVE,
       label: t("home.FirstIntroPage.stats.profiles"),
       icon: "📋",
     },
@@ -218,7 +233,7 @@ export default function FirstHomePageIntro() {
                   <img
                     src={leftbg}
                     alt="Muslim Family"
-                    className="w-full h-[350px] object-cover rounded-2xl shadow-xl hover-scale"
+                    className="w-full h-[350px] object-cover rounded-2xl shadow-xl"
                   />
                 </div>
                 <div
@@ -229,7 +244,7 @@ export default function FirstHomePageIntro() {
                   <img
                     src={rightbg}
                     alt="Happy Family"
-                    className="w-full h-[350px] object-cover rounded-2xl shadow-xl hover-scale"
+                    className="w-full h-[350px] object-cover rounded-2xl shadow-xl"
                   />
                 </div>
               </div>
