@@ -7,7 +7,7 @@ import ChatUsers from "./components/ChatUsers";
 import SendMessage from "./components/SendMessage";
 import ChatList from "./components/ChatList";
 import bgImg from "../../assets/images/left-bg.jpg";
-import Zvuk from '../../../public/zvukeffect.mp3';
+import Zvuk from '../../assets/zvukeffect.mp3';
 
 const Chat = () => {
   const { userChat, addUserChat } = useChatStore();

@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { HiDotsVertical } from "react-icons/hi";
 import { Dropdown, Menu } from "antd";
-
+import Zvuk from '../../../assets/deletezvukeffect.mp3'
 const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const messagesContainerRef = useRef(null);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -49,6 +49,8 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
       );
       setIsModalVisible(false);
       setIsMessageDeleted(true); // Xabar o'chirildi deb belgilash
+      const audio = new Audio(Zvuk);
+      audio.play();
     }
   };
 

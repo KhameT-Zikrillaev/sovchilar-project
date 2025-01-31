@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Zvuk from '../../../../public/zvukeffect.mp3'
+import Zvuk from '../../../assets/zvukeffect.mp3'
 const SendMessage = ({ socket, user, consId }) => {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
