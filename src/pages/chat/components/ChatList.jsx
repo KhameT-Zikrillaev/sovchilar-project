@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Modal } from "antd";
 import { MdDeleteOutline } from "react-icons/md";
 import { useTranslation } from "react-i18next";
+import { HiDotsVertical } from "react-icons/hi";
+import { Dropdown, Menu } from "antd";
 
 const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const messagesContainerRef = useRef(null);
@@ -10,8 +12,10 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
   const [selectedMessageId, setSelectedMessageId] = useState(null);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
   const [isMessageDeleted, setIsMessageDeleted] = useState(false);
-  const holdTimeout = useRef(null);
   const { t } = useTranslation();
+
+  
+
 
   useEffect(() => {
     if (!isMessageDeleted) {
@@ -33,37 +37,6 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
     return `${hours}:${minutes}`;
   };
 
-  const handleContextMenu = (e, messageId) => {
-    e.preventDefault();
-    setSelectedMessageId(messageId);
-    setMenuPosition({ x: e.clientX - 100, y: e.clientY - 100 });
-    setIsMenuVisible(true);
-  };
-
-  const handleStartHold = (e, messageId) => {
-    holdTimeout.current = setTimeout(() => {
-      setSelectedMessageId(messageId);
-      const x = e.touches ? e.touches[0].clientX : e.clientX;
-      const y = e.touches ? e.touches[0].clientY : e.clientY;
-      setMenuPosition({ x, y });
-      setIsMenuVisible(true);
-    }, 3000); // 3 sekund
-  };
-
-  const handleEndHold = () => {
-    clearTimeout(holdTimeout.current); // Hold to'xtatildi
-  };
-
-  const handleMenuOptionClick = (option) => {
-    if (option === "delete") {
-      setIsMenuVisible(false);
-      setIsModalVisible(true);
-    } else {
-      console.log(`${option} tanlandi`);
-      setIsMenuVisible(false);
-    }
-  };
-
   const handleDeleteMessage = () => {
     if (selectedMessageId) {
       socket.emit("deleteMessages", {
@@ -79,10 +52,20 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
     }
   };
 
-  const cancelDeleteMessage = () => {
-    setSelectedMessageId(null);
-    setIsModalVisible(false);
+  const handleMenuOptionClick = (option, id) => {
+    setSelectedMessageId(id);
+    if (option === "delete") {
+      setIsMenuVisible(false);
+      setIsModalVisible(true);
+    } else {
+      console.log(`${option} tanlandi`);
+      setIsMenuVisible(false);
+    }
   };
+
+  const cancelDeleteMessage = () =>  { 
+    setIsModalVisible(false);
+  }
 
   return (
     <>
@@ -96,8 +79,8 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
             : ""
         }`}
         style={{
-          WebkitOverflowScrolling: 'touch',
-          maxWidth: '100vw'
+          WebkitOverflowScrolling: "touch",
+          maxWidth: "100vw",
         }}
         onClick={() => setIsMenuVisible(false)}
       >
@@ -109,72 +92,54 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               📩 {t("chat.not-message-1")}
             </p>
             <p className="text-sm text-red-500 mt-2 drop-shadow-md max-w-[260px]">
-            {t("chat.not-message-2")}
+              {t("chat.not-message-2")}
             </p>
           </div>
         ) : (
           messages?.map((msg, index) => (
             <div
               key={index}
-              className={`my-2 p-3 pb-[14px] bg-white border rounded-lg max-w-[85%] min-w-[100px] relative break-words  ${
+              className={`my-2 p-3 pr-[30px] pb-[16px] bg-white border rounded-lg max-w-[85%] min-w-[100px] relative break-words  ${
                 msg?.sender?.id === user?.id
                   ? "self-end border-red-500"
                   : "self-start border-gray-300"
               }`}
               style={{
-                wordBreak: 'break-word',
-                borderBottomLeftRadius: msg?.sender?.id !== user?.id ? "4px" : "20px",
-                borderBottomRightRadius: msg?.sender?.id === user?.id ? "4px" : "20px",
+                wordBreak: "break-word",
+                borderBottomLeftRadius:
+                  msg?.sender?.id !== user?.id ? "4px" : "20px",
+                borderBottomRightRadius:
+                  msg?.sender?.id === user?.id ? "4px" : "20px",
               }}
-              onContextMenu={(e) =>
-                msg?.sender?.id === user?.id && handleContextMenu(e, msg?.id)
-              }
-              onMouseDown={(e) =>
-                msg?.sender?.id === user?.id && handleStartHold(e, msg?.id)
-              }
-              onMouseUp={handleEndHold}
-              onTouchStart={(e) =>
-                msg?.sender?.id === user?.id && handleStartHold(e, msg?.id)
-              }
-              onTouchEnd={handleEndHold}
+              
             >
               <span className="whitespace-pre-wrap">{msg?.message}</span>
+              <span className="absolute right-1 bottom-5 text-gray-600">
+                <Dropdown overlay={
+                  <Menu>
+                  <Menu.Item
+                    key="delete"
+                    onClick={() => handleMenuOptionClick("delete", msg?.id)}
+                  >
+                    <div className="flex items-center gap-1 text-[16px] text-red-600">
+                      <MdDeleteOutline className="text-[20px]" />
+                      {t("chat.delete-modal.ok")}
+                    </div>
+                  </Menu.Item>
+                </Menu>
+                } trigger={["click"]}>
+                  <div className="text-[22px] cursor-pointer">
+                    <HiDotsVertical />
+                  </div>
+                </Dropdown>
+              </span>
               <span className="absolute right-[4px] bottom-[2px] text-[12px] text-gray-600">
                 {getHoursAndMinutesString(msg?.createdAt)}
               </span>
             </div>
           ))
-          
         )}
       </div>
-
-      {/* Context Menu */}
-      {isMenuVisible && (
-        <div
-          style={{
-            position: "absolute",
-            top: `${menuPosition.y}px`,
-            left: `${menuPosition.x}px`,
-            zIndex: 1000,
-            background: "white",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "8px",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <ul>
-            <li
-              onClick={() => handleMenuOptionClick("delete")}
-              className="p-2 hover:bg-gray-100 cursor-pointer text-red-600 font-medium flex items-center gap-1"
-            >
-              {t("chat.message-delete")}{" "}
-              <MdDeleteOutline className="text-[20px]" />
-            </li>
-          </ul>
-        </div>
-      )}
-
       {/* Modal oyna */}
       <Modal
         centered
