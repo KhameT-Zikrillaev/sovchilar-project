@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useStore } from "../../../../store/store";
@@ -8,6 +8,37 @@ import rightbg from "../../../../assets/images/right-bg.jpg";
 import centerbg from "../../../../assets/images/center-bg.jpeg";
 import movie from "../../../../assets/movie.mp4";
 import { useRecent } from "./hooks/useRecent";
+
+// Custom hook for counter animation
+const useCounter = (end, duration = 2000) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (end === null || isNaN(end)) return;
+    
+    let startTime;
+    const startValue = 0;
+    const endValue = typeof end === 'string' ? parseInt(end) : end;
+
+    const animation = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+
+      const currentCount = Math.floor(startValue + (endValue - startValue) * progress);
+      setCount(currentCount);
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  }, [end, duration]);
+
+  return count;
+};
+
 export default function FirstHomePageIntro() {
   const [activeTab, setActiveTab] = useState("men");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +47,6 @@ export default function FirstHomePageIntro() {
   const [userDataACTIVE, setUserDataACTIVE] = useState(null);
   const [userDataDONE, setUserDataDONE] = useState(null);
   const { getRecent , isLoading } = useRecent();
-  // const user = useStore((state) => state.user);
 
   const fetchUser = async () => {
     const user = await getRecent('ACTIVE');
@@ -30,18 +60,14 @@ export default function FirstHomePageIntro() {
     fetchUser();
   }, []);
 
-  // Функция для открытия видео в полноэкранном режиме
   const handleVideoClick = (event) => {
     const video = event.target;
     if (window.innerWidth < 640) {
-      // Только для мобильных устройств
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.webkitRequestFullscreen) {
-        // Safari
         video.webkitRequestFullscreen();
       } else if (video.msRequestFullscreen) {
-        // IE11
         video.msRequestFullscreen();
       }
     }
@@ -49,17 +75,17 @@ export default function FirstHomePageIntro() {
 
   const stats = [
     {
-      number: userDataDONE,
+      number: useCounter(userDataDONE),
       label: t("home.FirstIntroPage.stats.weddings"),
       icon: "👰",
     },
     {
-      number: userDataACTIVE,
+      number: useCounter(userDataACTIVE),
       label: t("home.FirstIntroPage.stats.profiles"),
       icon: "📋",
     },
     {
-      number: "100%",
+      number: useCounter(100) + "%",
       label: t("home.FirstIntroPage.stats.serviceQuality"),
       icon: "😊",
     },
