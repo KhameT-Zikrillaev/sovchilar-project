@@ -48,7 +48,7 @@ const Chat = () => {
     let browser = "Noma'lum brauzer";
 
     // Qurilma turini aniqlash
-    const isAndroidLinux = /linux.*android/i.test(userAgent);
+    const isAndroidLinux = userAgent.includes("android") && userAgent.includes("linux");;
     const isIphone = /iphone/.test(userAgent);
     const isAndroid = /android/.test(userAgent);
 
