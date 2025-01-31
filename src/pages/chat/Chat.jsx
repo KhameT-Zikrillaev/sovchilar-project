@@ -20,39 +20,18 @@ const Chat = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [device, setDevice] = useState(null);
-  const [browserType, setBrowserType] = useState(null);
+  const [loadingUsers, setLoadingUsers] = useState(false);
 
-  // const [unreadCounts, setUnreadCounts] = useState({});
 
-  // Socket ulanish va hodisalarni sozlash
-
-  // const getUserDevice = ()=> {
-  //   console.log(navigator.userAgent);
-
-  //   const userAgent = navigator.userAgent.toLowerCase();
-
-  //   if (/iphone/.test(userAgent)) {
-  //     return "iPhone";
-  //   } else if (/android/.test(userAgent)) {
-  //     return "Android";
-  //   } else {
-  //     return "Kompyuter";
-  //   }
-  // };
   const getUserDeviceAndBrowser = () => {
 
     const userAgent = navigator.userAgent.toLowerCase();
-
-    console.log(userAgent);
     
     let device = "Kompyuter";
-    let browser = "Noma'lum brauzer";
 
     // Qurilma turini aniqlash
-    // const isAndroidLinux = userAgent?.includes("android") && userAgent?.includes("linux");;
     const isIphone = /iphone/.test(userAgent);
     const isAndroid = /android/.test(userAgent);
-    // const isKomp = /windows/.test(userAgent);
 
     if (isAndroid) {
       device = "Android";
@@ -60,42 +39,12 @@ const Chat = () => {
       device = "iPhone";
     }
 
-    // Brauzerni aniqlash
-    const isChrome =
-      /chrome/.test(userAgent) ;
-    const isFirefox = /firefox/.test(userAgent);
-    const isSafari = /safari/.test(userAgent) && !/chrome/.test(userAgent);
-    const isEdge = /edg/.test(userAgent);
-    const isOpera = /opr/.test(userAgent) || /opera/.test(userAgent);
-    const isBrave = /brave/.test(userAgent);
-
-    if (isChrome) {
-      browser = "Google";
-    } else if (isFirefox) {
-      browser = "Mozilla Firefox";
-    } else if (isSafari) {
-      browser = "Safari";
-    } else if (isEdge) {
-      browser = "Microsoft Edge";
-    } else if (isOpera) {
-      browser = "Opera";
-    } else if (isBrave) {
-      browser = "Brave";
-    }
-
-    // iPhone + Chrome tekshirish
-    const isIphoneChrome = isIphone && isChrome;
-
-    return { device, browser, isIphoneChrome };
+    return { device };
   };
 
-  // Foydalanish
-
-  // Foydalanish
 
   useEffect(() => {
     setDevice(getUserDeviceAndBrowser().device);
-    setBrowserType(getUserDeviceAndBrowser().browser);
   }, []);
 
   useEffect(() => {
@@ -110,40 +59,10 @@ const Chat = () => {
     socketInstance.on("connect", () => {
       socketInstance.emit("login", { userId: user?.id });
     });
-    // socketInstance.emit("getUnreadCounts", { userId: user?.id });
 
     socketInstance.on("conversationCreated", (conversation) => {
       setConsId(conversation?.id);
     });
-
-    // socketInstance.on("newMessage", (data) => {
-
-    //   if (data?.sender?.id === user?.id || data?.sender?.id === userChat?.id) {
-    //     setMessages((prevMessages) => [...prevMessages, data]);
-
-    //   }
-    //   // const conversationId = data?.conversation?.id;
-    //   // if (conversationId && data?.sender?.id !== user?.id) {
-    //   //   setUnreadCounts((prevCounts) => ({
-    //   //     ...prevCounts,
-    //   //     [conversationId]: (prevCounts[conversationId] || 0) + 1,
-    //   //   }));
-    //   // }
-    //   // Notification ko'rsatish
-    //   if (
-    //     Notification.permission === "granted" &&
-    //     data?.sender?.id !== user.id
-    //   ) {
-    //     new Notification("Yangi xabar", {
-    //       body: `${data?.sender?.firstName}: ${data?.message}`,
-    //     });
-    //   }
-
-    // });
-
-    // socketInstance.on("unreadCounts", (data) => {
-    //   setUnreadCounts(data.counts || {});
-    // });
 
     socketInstance.on("conversation-messages", (data) => {
       if (data?.data?.length > messages.length) {
@@ -153,10 +72,6 @@ const Chat = () => {
       setMessages(data?.data || []);
       setLoading(false);
 
-      // setUnreadCounts((prevCounts) => ({
-      //   ...prevCounts,
-      //   [consId]: 0, // Suhbat ochilganda o'qilmaganlarni 0 ga tushirish
-      // }));
     });
 
     socketInstance.on("messagesDeleted", (data) => {
@@ -164,11 +79,12 @@ const Chat = () => {
         prevMessages.filter((msg) => msg.id !== data?.messageIds[0])
       );
     });
-
+    setLoadingUsers(true);
     socketInstance.emit("get-conversations", { userId: user?.id });
 
     socketInstance.on("conversations", (response) => {
       setUsers(response?.data?.items || []);
+      setLoadingUsers(false);
       if (userChat) {
         setUsers((prevUsers) => {
           const isAlreadyAdded = prevUsers.some(
@@ -240,7 +156,6 @@ const Chat = () => {
         }
         return prevUsers;
       });
-      // addUserChat(data?.sender);
 
       if (data?.sender?.id === user?.id || data?.sender?.id === userChat?.id) {
         setMessages((prevMessages) => [...prevMessages, data]);
@@ -283,7 +198,7 @@ const Chat = () => {
         userChat={userChat}
         showChat={showChat}
         users={users}
-        // unreadCounts={unreadCounts}
+        loadingUsers={loadingUsers}
       />
       {/* Chat bo'limi */}
       {showChat ? (

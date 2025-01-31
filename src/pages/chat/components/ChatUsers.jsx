@@ -12,9 +12,9 @@ const ChatUsers = ({
   addUserChat,
   showChat,
   users,
-  // unreadCounts
+  loadingUsers,
 }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
 
   const createConversation = useCallback(
@@ -50,7 +50,9 @@ const ChatUsers = ({
   return (
     <div
       className={`bg-white pt-4 border-r shadow-md ${
-        showChat ? "hidden md:block min-w-[350px] w-[350px]" : "block md:w-[350px] md:min-w-[350px] w-full"
+        showChat
+          ? "hidden md:block min-w-[350px] w-[350px]"
+          : "block md:w-[350px] md:min-w-[350px] w-full"
       }`}
     >
       <div className="px-2">
@@ -62,43 +64,62 @@ const ChatUsers = ({
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <ul className="h-full overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 pb-14 px-1">
-        {filteredUsers?.length > 0 ? filteredUsers?.map((user, index) => (
-          <li
-            key={index}
-            className={`flex gap-3 items-center border-b justify-between p-2 hover:bg-red-100 cursor-pointer rounded-md ${
-              activeUser === user?.participants[0]?.id ? "bg-red-200" : ""
-            }`}
-          >
+      {loadingUsers ? (
+        <div className="h-[200px] flex justify-center items-center"><div className="loader"></div></div>
+      ) : (
+        <ul className="h-full overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 pb-14 px-1">
+          {filteredUsers?.length > 0 ? (
+            filteredUsers?.map((user, index) => (
+              <li
+                key={index}
+                className={`flex gap-3 items-center border-b justify-between p-2 hover:bg-red-100 cursor-pointer rounded-md ${
+                  activeUser === user?.participants[0]?.id ? "bg-red-200" : ""
+                }`}
+              >
+                <div
+                  className="flex items-center gap-3 w-full"
+                  onClick={() => {
+                    createConversation(user?.participants[0]?.id);
+                    addUserChat(user?.participants[0]);
+                  }}
+                >
+                  <div className="w-8 h-8 rounded-full bg-gray-300">
+                    {user?.participants[0]?.imageUrl ? (
+                      <img
+                        className="w-8 h-8 rounded-full object-cover"
+                        src={user?.participants[0]?.imageUrl}
+                        alt="userpic"
+                      />
+                    ) : (
+                      <Avatar
+                        style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
+                      >
+                        {user?.participants[0]?.firstName?.charAt(0)}
+                      </Avatar>
+                    )}
+                  </div>
+                  <span className="text-gray-700">
+                    {user?.participants[0]?.firstName}
+                  </span>
+                </div>
+              </li>
+            ))
+          ) : (
             <div
-              className="flex items-center gap-3 w-full"
-              onClick={() => {
-                createConversation(user?.participants[0]?.id);
-                addUserChat(user?.participants[0]);
+              style={{
+                padding: "20px",
+                backgroundColor: "#f8d7da",
+                color: "#721c24",
+                border: "1px solid #f5c6cb",
+                borderRadius: "5px",
+                textAlign: "center",
               }}
             >
-              <div className="w-8 h-8 rounded-full bg-gray-300">
-                {user?.participants[0]?.imageUrl ? (
-                  <img
-                    className="w-8 h-8 rounded-full object-cover"
-                    src={user?.participants[0]?.imageUrl}
-                    alt="userpic"
-                  />
-                ) : (
-                  <Avatar
-                    style={{ backgroundColor: "#fde3cf", color: "#f56a00" }}
-                  >
-                    {user?.participants[0]?.firstName?.charAt(0)}
-                  </Avatar>
-                )}
-              </div>
-              <span className="text-gray-700">
-                {user?.participants[0]?.firstName}
-              </span>
+              Chatlar mavjud emas
             </div>
-          </li>
-        )) : <div style={{ padding: '20px', backgroundColor: '#f8d7da', color: '#721c24', border: '1px solid #f5c6cb', borderRadius: '5px', textAlign: 'center' }}>Chatlar mavjud emas</div>}
-      </ul>
+          )}
+        </ul>
+      )}
     </div>
   );
 };
