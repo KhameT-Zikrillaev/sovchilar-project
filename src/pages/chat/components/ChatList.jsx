@@ -114,7 +114,8 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
               
             >
               <span className="whitespace-pre-wrap">{msg?.message}</span>
-              <span className="absolute right-1 bottom-5 text-gray-600">
+              {msg?.sender?.id === user?.id && (
+                <span className="absolute right-1 bottom-5 text-gray-600">
                 <Dropdown overlay={
                   <Menu>
                   <Menu.Item
@@ -133,6 +134,7 @@ const ChatList = ({ messages, user, loading, socket, consId, setMessages }) => {
                   </div>
                 </Dropdown>
               </span>
+              )}
               <span className="absolute right-[4px] bottom-[2px] text-[12px] text-gray-600">
                 {getHoursAndMinutesString(msg?.createdAt)}
               </span>
